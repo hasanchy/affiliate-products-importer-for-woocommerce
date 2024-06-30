@@ -1,5 +1,15 @@
-# Pixel Art
-A WordPress plugin that allows users to draw and display pixel art on their website.
+# Amazon Affiliate Product Importer for WooCommerce
+Elevate your WooCommerce store by seamlessly importing Amazon affiliate products with ease using the Amazon Affiliate Product Importer for WooCommerce plugin. Whether you're a seasoned affiliate marketer or just starting out, this plugin offers a robust set of features designed to streamline your product import process and boost your sales potential.
+
+### Key Features:
+
+#### 1. Copy/Paste Import:
+ Effortlessly import Amazon products by simply copying and pasting a list of Amazon Product ASINs. This feature ensures a quick and accurate import process, allowing you to expand your product catalog in no time. To utilize this feature, you'll need to set up your Amazon affiliate API keys, ensuring a smooth and automated import experience.
+
+#### 2. Manual Product Add:
+No API keys? No problem! Our plugin also allows you to manually add products to your WooCommerce store. This straightforward feature is perfect for users who prefer a hands-on approach or do not have access to Amazon's affiliate API keys. Simply input the product details, and you're ready to go.
+
+Transform your WooCommerce store into a comprehensive marketplace with a diverse range of Amazon products. With Amazon Affiliate Product Importer for WooCommerce, managing your affiliate products has never been easier. Download now and start boosting your affiliate revenue today!
 
 ## Available Scripts
 ### `npm install`

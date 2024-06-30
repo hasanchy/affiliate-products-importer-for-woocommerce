@@ -1,5 +1,5 @@
 {
-    "description": "A WordPress plugin that allows users to draw and display pixel art on their website.",
+    "description": "Easily import Amazon affiliate products into your WooCommerce store.",
     "license": "GPL-3.0-or-later",
     "config": {
         "sort-packages": true,
