@@ -16,8 +16,8 @@ namespace AFFIMPORTR\Core;
 use AFFIMPORTR\Core\Base;
 use AFFIMPORTR\App;
 
-// If this file is called directly, abort.
-defined( 'WPINC' ) || die;
+// Avoid direct file request
+defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
 final class Loader extends Base {
 	/**
@@ -94,7 +94,7 @@ final class Loader extends Base {
 	 */
 	private function init() {
 		App\Admin_Pages\AffiliateImporter::instance()->init();
-		// App\Admin_Pages\PixelArt::instance()->init();
+		App\Endpoints\V1\AmazonAPIConnection::instance();
 		App\Endpoints\V1\Settings::instance();
 	}
 }

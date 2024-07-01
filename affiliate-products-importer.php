@@ -15,7 +15,8 @@
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 
-defined( 'ABSPATH' ) || die( 'No direct access allowed!' ); // Avoid direct file request
+// Avoid direct file request
+defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
 // Support for site-level autoloading.
 if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
