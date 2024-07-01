@@ -65,7 +65,7 @@ class AmazonAPIConnection extends Endpoint {
 	 *
 	 * @since 1.0.0
 	 */
-	public function get_settings( \WP_REST_Request $request ) {
+	public function amazon_api_connection( \WP_REST_Request $request ) {
 		$nonce = $request->get_header( 'X-WP-NONCE' );
 		if ( ! wp_verify_nonce( $nonce, 'wp_rest' ) ) {
 			return new WP_REST_Response( 'Invalid nonce', 403 );

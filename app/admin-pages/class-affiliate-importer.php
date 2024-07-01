@@ -171,6 +171,7 @@ class AffiliateImporter extends Base {
 			'localize'  => array(
 				'dom_element_id'       => $this->unique_id,
 				'restEndpointSettings' => home_url( '/wp-json' ) . '/affiliateimporter/v1/settings',
+				'restEndpointAmazonApiConnection' => home_url( '/wp-json' ) . '/affiliateimporter/v1/amazon-api-connection',
 				'restNonce'            => wp_create_nonce( 'wp_rest' ),
 			),
 		);
@@ -221,7 +222,7 @@ class AffiliateImporter extends Base {
 				);
 
 				if ( ! empty( $page_script['localize'] ) ) {
-					wp_localize_script( $handle, 'affimportrPixelArt', $page_script['localize'] );
+					wp_localize_script( $handle, 'affimportrAffiliateImporter', $page_script['localize'] );
 				}
 
 				wp_enqueue_script( $handle );

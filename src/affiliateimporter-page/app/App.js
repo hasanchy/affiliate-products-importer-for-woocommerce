@@ -5,11 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { __ } from '@wordpress/i18n';
 import Header from "../components/Header";
 import FeatureTabs from "../components/FeatureTabs";
+import { fetchAmazonApiStatus } from "../services/apiService";
 
 const App = () => {
 
-	useEffect(() => {
+	const dispatch = useDispatch();
 
+	useEffect(() => {
+		dispatch(fetchAmazonApiStatus());
 	}, [])
 
 
