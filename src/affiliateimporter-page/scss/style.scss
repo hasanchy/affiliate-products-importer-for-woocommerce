@@ -1,0 +1,49 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(16, 20px);
+    grid-template-rows: repeat(16, 20px);
+    gap: 0; /* No gap between grid items */
+}
+
+.grid-item {
+    width: 20px;
+    height: 20px;
+    // background-color: transparent;
+	cursor: pointer;
+    border: 1px solid #ccc; /* Optional: to see the grid lines */
+}
+
+
+.pa-button {
+    width: 30px;
+    height: 30px;
+    border: 5px solid;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 20px 10px;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+    /* transition: all 0.3s ease; */
+  }
+
+.pa-button-transparent {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	display: inline-block;
+	margin: 20px 10px;
+	background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><rect width="5" height="5" fill="%23ccc"/><rect x="5" width="5" height="5" fill="%23fff"/><rect y="5" width="5" height="5" fill="%23fff"/><rect x="5" y="5" width="5" height="5" fill="%23ccc"/></svg>') repeat;
+	border: 5px solid #fff;
+	cursor: pointer;
+}
+
+.pa-button:hover, .pa-button-transparent:hover {
+	border-color: #00000052;
+}
+
+.pa-button.selected, .pa-button-transparent.selected{
+	border-color: #000;
+}

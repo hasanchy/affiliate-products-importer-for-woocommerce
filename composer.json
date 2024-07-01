@@ -1,0 +1,38 @@
+{
+    "description": "Easily import Amazon affiliate products into your WooCommerce store.",
+    "license": "GPL-3.0-or-later",
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "authors": [
+        {
+            "name": "Hasan Chowdhury"
+        }
+    ],
+    "require": {
+		"php": ">=7.4"
+	},
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^3.0",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+        "phpcompatibility/phpcompatibility-wp": "^2.1"
+    },
+    "scripts": {
+        "phpcs": "vendor/bin/phpcs --standard=phpcs.xml",
+        "phpcbf": "vendor/bin/phpcbf --standard=phpcs.xml"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "classmap": ["core/", "app/"]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AFFIMPORTR\\Test\\": [
+                "test/phpunit/"
+            ]
+        }
+    }
+}
