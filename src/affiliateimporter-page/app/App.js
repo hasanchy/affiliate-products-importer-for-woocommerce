@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { __ } from '@wordpress/i18n';
 import Header from "../components/Header";
+import FeatureTabs from "../components/FeatureTabs";
 
 const App = () => {
 
@@ -16,10 +17,7 @@ const App = () => {
 		<div className="wrap">
 			<Header />
 			<ErrorBoundary fallback={<div>Something went wrong</div>}>
-				<Card>
-
-					
-				</Card>
+				<FeatureTabs/>
 			</ErrorBoundary>
 		</div>
 	)
