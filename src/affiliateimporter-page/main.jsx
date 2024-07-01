@@ -1,9 +1,7 @@
-import React from "react";
-import ReactDOM from 'react-dom';
-import './scss/style.scss';
 import { Provider } from 'react-redux'
 import App from "./app/App";
 import store from './store/store';
+import './assets/styles/main.scss';
 
 const domElement = document.getElementById( window.affimportrPixelArt.dom_element_id );
 
