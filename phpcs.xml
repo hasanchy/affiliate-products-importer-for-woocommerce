@@ -51,7 +51,7 @@
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<!-- Value: replace the text domain used. -->
-			<property name="text_domain" type="array" value="affiliate-product-importer"/>
+			<property name="text_domain" type="array" value="affiliate-products-importer"/>
 		</properties>
 	</rule>
 	<rule ref="WordPress.WhiteSpace.ControlStructureSpacing">

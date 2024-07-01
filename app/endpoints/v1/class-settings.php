@@ -60,7 +60,7 @@ class Settings extends Endpoint {
 					'args'                => array(
 						'data' => array(
 							'required'    => true,
-							'description' => __( 'The client ID from Google API project.', 'affiliate-product-importer' ),
+							'description' => __( 'The client ID from Google API project.', 'affiliate-products-importer' ),
 							'type'        => 'object',
 						),
 					),

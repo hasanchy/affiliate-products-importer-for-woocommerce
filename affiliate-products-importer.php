@@ -3,12 +3,12 @@
  * Main file for WordPress.
  *
  * @wordpress-plugin
- * Plugin Name:     AffiliateImporter - Affiliate Product Importer for WooCommerce
- * Description:     A WordPress plugin that allows users to draw and display pixel art on their website.
+ * Plugin Name:     Affiliate Importer - Affiliate Products Importer for WooCommerce
+ * Description:     Easily import Amazon affiliate products into your WooCommerce store.
  * Author:          ThemeDyno
  * Author URI:      https://themedyno.com/
  * Version:         1.0.1
- * Text Domain:     affiliate-product-importer
+ * Text Domain:     affiliate-products-importer
  * Domain Path:     /languages
  *
  * License: GPLv2 or later
@@ -17,16 +17,13 @@
 
 defined( 'ABSPATH' ) || die( 'No direct access allowed!' ); // Avoid direct file request
 
-define( 'AFFIMPORTR_FILE', __FILE__ );
-define( 'AFFIMPORTR_PATH', dirname( AFFIMPORTR_FILE ) );
-
 // Support for site-level autoloading.
 if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 	require_once __DIR__ . '/vendor/autoload.php';
 }
 
 // Plugin version.
-if ( ! defined( 'APIWOOCOM_VERSION' ) ) {
+if ( ! defined( 'AFFIMPORTR_VERSION' ) ) {
 	define( 'AFFIMPORTR_VERSION', '1.0.0' );
 }
 
@@ -38,6 +35,11 @@ if ( ! defined( 'AFFIMPORTR_PLUGIN_FILE' ) ) {
 // Plugin directory.
 if ( ! defined( 'AFFIMPORTR_DIR' ) ) {
 	define( 'AFFIMPORTR_DIR', plugin_dir_path( __FILE__ ) );
+}
+
+// Plugin basename.
+if ( ! defined( 'AFFIMPORTR_PLUGIN_BASENAME' ) ) {
+	define( 'AFFIMPORTR_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 }
 
 // Languages directory.
@@ -55,25 +57,24 @@ if ( ! defined( 'AFFIMPORTR_ASSETS_URL' ) ) {
 	define( 'AFFIMPORTR_ASSETS_URL', AFFIMPORTR_URL . '/assets' );
 }
 
-
 /**
- * AFFIMPORTR_PluginTest class.
+ * AFFIMPORTR_AffiliateImporter class.
  */
-class AFFIMPORTR_WPPluginBoilerplate {
+class AFFIMPORTR_AffiliateImporter {
 
 	/**
 	 * Holds the class instance.
 	 *
-	 * @var AFFIMPORTR_PluginTest $instance
+	 * @var AFFIMPORTR_AffiliateImporter $instance
 	 */
 	private static $instance = null;
 
 	/**
 	 * Return an instance of the class
 	 *
-	 * Return an instance of the AFFIMPORTR_PluginTest Class.
+	 * Return an instance of the AFFIMPORTR_AffiliateImporter Class.
 	 *
-	 * @return AFFIMPORTR_PluginTest class instance.
+	 * @return AFFIMPORTR_AffiliateImporter class instance.
 	 * @since 1.0.0
 	 *
 	 */
@@ -90,7 +91,7 @@ class AFFIMPORTR_WPPluginBoilerplate {
 	 */
 	public function load() {
 		load_plugin_textdomain(
-			'affiliate-product-importer',
+			'affiliate-products-importer',
 			false,
 			dirname( plugin_basename( __FILE__ ) ) . '/languages'
 		);
@@ -103,6 +104,6 @@ class AFFIMPORTR_WPPluginBoilerplate {
 add_action(
 	'plugins_loaded',
 	function () {
-		AFFIMPORTR_WPPluginBoilerplate::get_instance()->load();
+		AFFIMPORTR_AffiliateImporter::get_instance()->load();
 	}
 );

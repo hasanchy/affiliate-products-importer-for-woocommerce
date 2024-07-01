@@ -93,7 +93,8 @@ final class Loader extends Base {
 	 * @return void
 	 */
 	private function init() {
-		App\Admin_Pages\PixelArt::instance()->init();
+		App\Admin_Pages\AffiliateImporter::instance()->init();
+		// App\Admin_Pages\PixelArt::instance()->init();
 		App\Endpoints\V1\Settings::instance();
 	}
 }
