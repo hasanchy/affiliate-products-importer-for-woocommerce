@@ -18,7 +18,7 @@ defined( 'WPINC' ) || die;
 
 use AFFIMPORTR\Core\Base;
 
-class PixelArt extends Base {
+class AffiliateImporter extends Base {
 	/**
 	 * The page title.
 	 *
@@ -79,16 +79,30 @@ class PixelArt extends Base {
 	 */
 	public function init() {
 		if ( is_admin() ) {
-			$this->page_title     = __( 'Pixel Art', 'affiliate-product-importer' );
+			$this->page_title     = __( 'Affiliate Importer', 'affiliate-products-importer' );
 			$this->creds          = get_option( $this->option_name, array() );
 			$this->assets_version = ! empty( $this->script_data( 'version' ) ) ? $this->script_data( 'version' ) : AFFIMPORTR_VERSION;
 			$this->unique_id      = "affimportr_pixelart_main_wrap-{$this->assets_version}";
 
 			add_action( 'admin_menu', array( $this, 'register_admin_page' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
+			add_filter( 'plugin_action_links_' . AFFIMPORTR_PLUGIN_BASENAME, array( $this, 'add_action_links' ) );
 		}
 	}
 
+	/**
+	 * Add action links to the plugin page.
+	 *
+	 * @param array $links
+	 * @return array
+	 */
+	public function add_action_links( $links ) {
+		$new_links = array(
+			'<a href="' . admin_url( 'admin.php?page=' . $this->page_slug ) . '">' . __( 'Import', 'affiliate-products-importer' ) . '</a>'
+		);
+		return array_merge( $new_links, $links );
+	}
+	
 	/**
      *
      * SVG icon for menu
@@ -105,7 +119,7 @@ class PixelArt extends Base {
 	public function register_admin_page() {
 		$page = add_menu_page(
 			$this->page_title,
-			__( 'Affiliate Importer', 'affiliate-product-importer' ),
+			__( 'Affiliate Importer', 'affiliate-products-importer' ),
 			'manage_options',
 			$this->page_slug,
 			array( $this, 'callback' ),
@@ -157,6 +171,7 @@ class PixelArt extends Base {
 			'localize'  => array(
 				'dom_element_id'       => $this->unique_id,
 				'restEndpointSettings' => home_url( '/wp-json' ) . '/affiliateimporter/v1/settings',
+				'restEndpointAmazonApiConnection' => home_url( '/wp-json' ) . '/affiliateimporter/v1/amazon-api-connection',
 				'restNonce'            => wp_create_nonce( 'wp_rest' ),
 			),
 		);
@@ -207,7 +222,7 @@ class PixelArt extends Base {
 				);
 
 				if ( ! empty( $page_script['localize'] ) ) {
-					wp_localize_script( $handle, 'affimportrPixelArt', $page_script['localize'] );
+					wp_localize_script( $handle, 'affimportrAffiliateImporter', $page_script['localize'] );
 				}
 
 				wp_enqueue_script( $handle );
@@ -216,7 +231,7 @@ class PixelArt extends Base {
 					wp_enqueue_style( $handle, $page_script['style_src'], array(), $this->assets_version );
 				}
 
-				wp_set_script_translations( $handle, 'affiliate-product-importer', AFFIMPORTR_LANGUAGES_DIR );
+				wp_set_script_translations( $handle, 'affiliate-products-importer', AFFIMPORTR_LANGUAGES_DIR );
 			}
 		}
 	}

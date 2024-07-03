@@ -7,7 +7,7 @@ module.exports = function (grunt) {
 		'core/**',
 		'languages/**',
 		'uninstall.php',
-		'affiliate-product-importer.php',
+		'affiliate-products-importer.php',
 		'composer.json',
 		'vendor/**',
 		'!**/*.map',
@@ -38,7 +38,7 @@ module.exports = function (grunt) {
 
 		checktextdomain: {
 			options: {
-				text_domain: 'affiliate-product-importer',
+				text_domain: 'affiliate-products-importer',
 				keywords: [
 					'__:1,2d',
 					'_e:1,2d',

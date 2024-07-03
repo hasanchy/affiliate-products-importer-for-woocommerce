@@ -25,10 +25,10 @@ const initialState = {
 
 export const fetchPixelData = createAsyncThunk('settings/fetchPixelData', async (data, {rejectWithValue}) => {
 	try{
-		const res = await axios.get(affimportrPixelArt.restEndpointSettings, {
+		const res = await axios.get(affimportrAffiliateImporter.restEndpointSettings, {
 			headers: {
 				'content-type': 'application/json',
-				'X-WP-NONCE': affimportrPixelArt.restNonce
+				'X-WP-NONCE': affimportrAffiliateImporter.restNonce
 			}
 		});
 		return res.data;
@@ -39,10 +39,10 @@ export const fetchPixelData = createAsyncThunk('settings/fetchPixelData', async 
 
 export const savePixelData = createAsyncThunk('settings/savePixelData', async (data, {rejectWithValue}) => {
 	try{
-		const res = await axios.post(affimportrPixelArt.restEndpointSettings, data, {
+		const res = await axios.post(affimportrAffiliateImporter.restEndpointSettings, data, {
 			headers: {
 				'content-type': 'application/json',
-				'X-WP-NONCE': affimportrPixelArt.restNonce
+				'X-WP-NONCE': affimportrAffiliateImporter.restNonce
 			}
 		});
 		return res.data;
