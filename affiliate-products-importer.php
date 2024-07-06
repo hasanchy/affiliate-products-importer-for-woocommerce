@@ -24,58 +24,58 @@ if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 }
 
 // Plugin version.
-if ( ! defined( 'AFFIMPORTR_VERSION' ) ) {
-	define( 'AFFIMPORTR_VERSION', '1.0.0' );
+if ( ! defined( 'AFLTIMPTR_VERSION' ) ) {
+	define( 'AFLTIMPTR_VERSION', '1.0.0' );
 }
 
-// Define AFFIMPORTR_PLUGIN_FILE.
-if ( ! defined( 'AFFIMPORTR_PLUGIN_FILE' ) ) {
-	define( 'AFFIMPORTR_PLUGIN_FILE', __FILE__ );
+// Define AFLTIMPTR_PLUGIN_FILE.
+if ( ! defined( 'AFLTIMPTR_PLUGIN_FILE' ) ) {
+	define( 'AFLTIMPTR_PLUGIN_FILE', __FILE__ );
 }
 
 // Plugin directory.
-if ( ! defined( 'AFFIMPORTR_DIR' ) ) {
-	define( 'AFFIMPORTR_DIR', plugin_dir_path( __FILE__ ) );
+if ( ! defined( 'AFLTIMPTR_DIR' ) ) {
+	define( 'AFLTIMPTR_DIR', plugin_dir_path( __FILE__ ) );
 }
 
 // Plugin basename.
-if ( ! defined( 'AFFIMPORTR_PLUGIN_BASENAME' ) ) {
-	define( 'AFFIMPORTR_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+if ( ! defined( 'AFLTIMPTR_PLUGIN_BASENAME' ) ) {
+	define( 'AFLTIMPTR_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 }
 
 // Languages directory.
-if ( ! defined( 'AFFIMPORTR_LANGUAGES_DIR' ) ) {
-	define( 'AFFIMPORTR_LANGUAGES_DIR', AFFIMPORTR_DIR . '/languages' );
+if ( ! defined( 'AFLTIMPTR_LANGUAGES_DIR' ) ) {
+	define( 'AFLTIMPTR_LANGUAGES_DIR', AFLTIMPTR_DIR . '/languages' );
 }
 
 // Plugin url.
-if ( ! defined( 'AFFIMPORTR_URL' ) ) {
-	define( 'AFFIMPORTR_URL', plugin_dir_url( __FILE__ ) );
+if ( ! defined( 'AFLTIMPTR_URL' ) ) {
+	define( 'AFLTIMPTR_URL', plugin_dir_url( __FILE__ ) );
 }
 
 // Assets url.
-if ( ! defined( 'AFFIMPORTR_ASSETS_URL' ) ) {
-	define( 'AFFIMPORTR_ASSETS_URL', AFFIMPORTR_URL . '/assets' );
+if ( ! defined( 'AFLTIMPTR_ASSETS_URL' ) ) {
+	define( 'AFLTIMPTR_ASSETS_URL', AFLTIMPTR_URL . '/assets' );
 }
 
 /**
- * AFFIMPORTR_AffiliateImporter class.
+ * AFLTIMPTR_AffiliateImporter class.
  */
-class AFFIMPORTR_AffiliateImporter {
+class AFLTIMPTR_AffiliateImporter {
 
 	/**
 	 * Holds the class instance.
 	 *
-	 * @var AFFIMPORTR_AffiliateImporter $instance
+	 * @var AFLTIMPTR_AffiliateImporter $instance
 	 */
 	private static $instance = null;
 
 	/**
 	 * Return an instance of the class
 	 *
-	 * Return an instance of the AFFIMPORTR_AffiliateImporter Class.
+	 * Return an instance of the AFLTIMPTR_AffiliateImporter Class.
 	 *
-	 * @return AFFIMPORTR_AffiliateImporter class instance.
+	 * @return AFLTIMPTR_AffiliateImporter class instance.
 	 * @since 1.0.0
 	 *
 	 */
@@ -97,7 +97,7 @@ class AFFIMPORTR_AffiliateImporter {
 			dirname( plugin_basename( __FILE__ ) ) . '/languages'
 		);
 
-		AFFIMPORTR\Core\Loader::instance();
+		AFLTIMPTR\Core\Loader::instance();
 	}
 }
 
@@ -105,6 +105,6 @@ class AFFIMPORTR_AffiliateImporter {
 add_action(
 	'plugins_loaded',
 	function () {
-		AFFIMPORTR_AffiliateImporter::get_instance()->load();
+		AFLTIMPTR_AffiliateImporter::get_instance()->load();
 	}
 );

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Tabs, ConfigProvider } from 'antd';
 import { DashboardOutlined, DownloadOutlined, ShoppingOutlined, SettingOutlined } from '@ant-design/icons';
+import Dashboard from '../features/dashboard/Dashboard';
 
 const FeatureTabs = () => {
 
@@ -10,7 +11,7 @@ const FeatureTabs = () => {
 		{
 			key: 'dashboard',
 			label: 'Dashboard',
-			children: 'Dashboard goes here...',
+			children: <Dashboard />,
 			icon: <DashboardOutlined />
 		},
 		{

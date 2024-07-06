@@ -25,10 +25,10 @@ const initialState = {
 
 export const fetchPixelData = createAsyncThunk('settings/fetchPixelData', async (data, {rejectWithValue}) => {
 	try{
-		const res = await axios.get(affimportrAffiliateImporter.restEndpointSettings, {
+		const res = await axios.get(afltimptrAffiliateImporter.restEndpointSettings, {
 			headers: {
 				'content-type': 'application/json',
-				'X-WP-NONCE': affimportrAffiliateImporter.restNonce
+				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
 			}
 		});
 		return res.data;
@@ -39,10 +39,10 @@ export const fetchPixelData = createAsyncThunk('settings/fetchPixelData', async 
 
 export const savePixelData = createAsyncThunk('settings/savePixelData', async (data, {rejectWithValue}) => {
 	try{
-		const res = await axios.post(affimportrAffiliateImporter.restEndpointSettings, data, {
+		const res = await axios.post(afltimptrAffiliateImporter.restEndpointSettings, data, {
 			headers: {
 				'content-type': 'application/json',
-				'X-WP-NONCE': affimportrAffiliateImporter.restNonce
+				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
 			}
 		});
 		return res.data;
@@ -74,9 +74,9 @@ export const gridSlice = createSlice({
 		}),
 		builder.addCase(fetchPixelData.fulfilled, (state, action) => {
 			state.isPixelDataFetching = false;
-            if(action.payload.affimportr_pixel_data){
-                state.pixelData = action.payload.affimportr_pixel_data
-                state.savedPixelData = action.payload.affimportr_pixel_data
+            if(action.payload.affiliateimporter_pixel_data){
+                state.pixelData = action.payload.affiliateimporter_pixel_data
+                state.savedPixelData = action.payload.affiliateimporter_pixel_data
             }
 		}),
 		builder.addCase(fetchPixelData.rejected, (state, action) => {

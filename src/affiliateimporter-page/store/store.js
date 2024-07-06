@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import gridReducer from "../features/grid/gridSlice";
+import dashboardReducer from "../features/dashboard/dashboardSlice";
+import productsSlice from '../features/products/productsSlice';
 
 const store = configureStore({
 	reducer: {
-		grid: gridReducer
+		dashboard: dashboardReducer,
+		products: productsSlice
 	},
 })
 
