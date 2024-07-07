@@ -123,8 +123,8 @@ class Products extends Endpoint {
 			$product->key = $post_id;
 
 			$thumbnail_id       = get_post_thumbnail_id( $post_id ) ? get_post_thumbnail_id( $post_id ) : $post_id;
-			$img_src            = wp_get_attachment_image_src( $thumbnail_id );
-			$product->image_src = $img_src[0];
+			$image_primary            = wp_get_attachment_image_src( $thumbnail_id );
+			$product->image_primary = $image_primary[0];
 
 			$sync_last_date          = get_post_meta( $post_id, '_wooazon_sync_last_date', true );
 			$product->sync_last_date = $sync_last_date ? $this->time_ago( $sync_last_date ) : $this->time_ago( strtotime( $product->product_import_date ) );

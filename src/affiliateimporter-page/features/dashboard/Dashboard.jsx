@@ -5,9 +5,6 @@ import RecentlyImportedProducts from "./widgets/RecentlyImportedProducts";
 const Dashboard = () => {
     return (
         <>
-            {/* <Card title="">
-                <AmazonApiConnection />
-            </Card> */}
             <Row>
 				<Col span={24}>
                     <AmazonApiConnection />
