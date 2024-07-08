@@ -5,16 +5,16 @@
  * @link    https://themedyno.com/
  * @since   1.0.0
  *
- * @author  AFFIMPORTR (https://themedyno.com)
- * @package AFFIMPORTR_Core
+ * @author  AFLTIMPTR (https://themedyno.com)
+ * @package AFLTIMPTR_Core
  *
  * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
  */
 
-namespace AFFIMPORTR\Core;
+namespace AFLTIMPTR\Core;
 
-use AFFIMPORTR\Core\Base;
-use AFFIMPORTR\App;
+use AFLTIMPTR\Core\Base;
+use AFLTIMPTR\App;
 
 // Avoid direct file request
 defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
@@ -96,5 +96,6 @@ final class Loader extends Base {
 		App\Admin_Pages\AffiliateImporter::instance()->init();
 		App\Endpoints\V1\AmazonAPIConnection::instance();
 		App\Endpoints\V1\Settings::instance();
+		App\Endpoints\V1\Products::instance();
 	}
 }

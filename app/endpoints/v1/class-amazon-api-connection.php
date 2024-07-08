@@ -5,18 +5,20 @@
  * @link          https://themedyno.com/
  * @since         1.0.0
  *
- * @author        AFFIMPORTR (https://themedyno.com)
- * @package       AFFIMPORTR\PluginTest
- *
- * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
+ * @package       AFLTIMPTR\PluginTest
  */
 
-namespace AFFIMPORTR\App\Endpoints\V1;
+namespace AFLTIMPTR\App\Endpoints\V1;
 
 // Avoid direct file request
 defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
-use AFFIMPORTR\Core\Endpoint;
+use AFLTIMPTR\Core\Endpoint;
+use AFLTIMPTR\Core\ProductAdvertisingApi;
+use AFLTIMPTR\Core\Settings;
+use WP_Error;
+use WP_REST_Request;
+use WP_REST_Response;
 
 class AmazonAPIConnection extends Endpoint {
 	/**
@@ -24,7 +26,7 @@ class AmazonAPIConnection extends Endpoint {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @var string $endpoint
+	 * @var string
 	 */
 	protected $endpoint = 'amazon-api-connection';
 
@@ -33,74 +35,64 @@ class AmazonAPIConnection extends Endpoint {
 	 *
 	 * @return void
 	 * @since 1.0.0
-	 *
 	 */
 	public function register_routes() {
-		// TODO
-		// Add a new Route to logout.
-
-		// Route to get auth url.
 		register_rest_route(
 			$this->get_namespace(),
 			$this->get_endpoint(),
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array(
-						$this,
-						'amazon_api_connection',
-					),
-					'permission_callback' => array(
-						$this,
-						'edit_permission',
-					),
-				)
+					'callback'            => array( $this, 'amazon_api_connection' ),
+					'permission_callback' => array( $this, 'edit_permission' ),
+				),
 			)
 		);
 	}
 
 	/**
-	 * Save the client id and secret.
+	 * Handle the Amazon API connection.
 	 *
-	 *
+	 * @param WP_REST_Request $request The request object.
+	 * @return WP_REST_Response|WP_Error
 	 * @since 1.0.0
 	 */
-	public function amazon_api_connection( \WP_REST_Request $request ) {
+	public function amazon_api_connection( WP_REST_Request $request ) {
 		$nonce = $request->get_header( 'X-WP-NONCE' );
 		if ( ! wp_verify_nonce( $nonce, 'wp_rest' ) ) {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
-		$access_key = get_option( 'azoncom_amazon_access_key' );
-        $secret_key  = get_option( 'azoncom_amazon_secret_key' );
-		$country_code  = get_option( 'azoncom_amazon_country_code' );
-		$affiliate_id  = get_option( 'azoncom_amazon_affiliate_id' );
+		$access_key   = get_option( 'azoncom_amazon_access_key' );
+		$secret_key   = get_option( 'azoncom_amazon_secret_key' );
+		$country_code = get_option( 'azoncom_amazon_country_code' );
+		$affiliate_id = get_option( 'azoncom_amazon_affiliate_id' );
 
-        if ( $access_key != "" && $secret_key != "" && $country_code != "" && $affiliate_id !="" ){
-            // $marketplace = \AZONCOM\Core::getAmazonMarketplace($country_code);
-            // $host = \AZONCOM\Core::getAmazonHost($country_code);
-            // $region = \AZONCOM\Core::getAmazonRegion($country_code);
-            
-            // try {
-            //     $ProductAdvertisingApi = new ProductAdvertisingApi($access_key, $secret_key, $marketplace, $affiliate_id, $host, $region);
-            //     $ProductAdvertisingApi->fetchProductsByKeywords("Pet Food", 1);
-            // }
-            // catch(\Exception $e){
-            //     $status = $e->getCode() ? $e->getCode() : 500;
-            //     return new WP_Error('rest_azoncom_amazon_api_status', $e->getMessage(), ['status' => $status]);
-            // }
-            $data = [
-                'status' => 'success',
-                'message' => 'The connection to your Amazon API was successful.'
-            ];
-        }else{
-            $data = [
-                'status' => 'incomplete',
-                'message' => 'Your Amazon API is not yet set up.'
-            ];
-        }
+		if ( ! empty( $access_key ) && ! empty( $secret_key ) && ! empty( $country_code ) && ! empty( $affiliate_id ) ) {
+			$marketplace = Settings::get_amazon_marketplace( $country_code );
+			$host        = Settings::get_amazon_host( $country_code );
+			$region      = Settings::get_amazon_region( $country_code );
 
-		return new \WP_REST_Response( $response_data, 200 );
+			try {
+				$api = new ProductAdvertisingApi( $access_key, $secret_key, $marketplace, $affiliate_id, $host, $region );
+				$api->fetchProductsByKeywords( 'Pet Food', 1 );
+				$response_data = array(
+					'status'  => 'success',
+					'message' => 'The connection to your Amazon API was successful.',
+				);
+				return new WP_REST_Response( $response_data, 200 );
+			} catch ( \Exception $e ) {
+				return new WP_Error( 'rest_azoncom_amazon_api_status', $e->getMessage(), array( 'status' => $e->getCode() ? $e->getCode() : 500 ) );
+			}
+		} else {
+			$response_data = array(
+				'status' => 'error',
+				'error'  => array(
+					'code'    => 'incomplete',
+					'message' => 'Your Amazon API is not yet set up.',
+				),
+			);
+			return new WP_REST_Response( $response_data, 400 );
+		}
 	}
-
 }

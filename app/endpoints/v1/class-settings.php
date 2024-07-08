@@ -5,18 +5,18 @@
  * @link          https://themedyno.com/
  * @since         1.0.0
  *
- * @author        AFFIMPORTR (https://themedyno.com)
- * @package       AFFIMPORTR\PluginTest
+ * @author        AFLTIMPTR (https://themedyno.com)
+ * @package       AFLTIMPTR\PluginTest
  *
  * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
  */
 
-namespace AFFIMPORTR\App\Endpoints\V1;
+namespace AFLTIMPTR\App\Endpoints\V1;
 
 // Abort if called directly.
 defined( 'WPINC' ) || die;
 
-use AFFIMPORTR\Core\Endpoint;
+use AFLTIMPTR\Core\Endpoint;
 
 class Settings extends Endpoint {
 	/**
@@ -89,10 +89,10 @@ class Settings extends Endpoint {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
-		$affimportr_pixel_data = get_option( 'affimportr_pixel_data' );
+		$affiliateimporter_pixel_data = get_option( 'affiliateimporter_pixel_data' );
 
 		// Decode the JSON data
-		$decoded_data = ( $affimportr_pixel_data ) ? json_decode( $affimportr_pixel_data, true ) : null;
+		$decoded_data = ( $affiliateimporter_pixel_data ) ? json_decode( $affiliateimporter_pixel_data, true ) : null;
 
 		// Escape each item in the decoded data
 		if ( is_array( $decoded_data ) ) {
@@ -102,7 +102,7 @@ class Settings extends Endpoint {
 		}
 
 		$response_data = array(
-			'affimportr_pixel_data' => $escaped_data,
+			'affiliateimporter_pixel_data' => $escaped_data,
 		);
 
 		return new \WP_REST_Response( $response_data, 200 );
@@ -125,8 +125,8 @@ class Settings extends Endpoint {
 		$sanitized_data = array_map( 'sanitize_text_field', $data ); // Sanitize each item in the data array
 
 		// Encode the sanitized data to JSON format
-		$affimportr_pixel_data = wp_json_encode( $sanitized_data );
-		update_option( 'affimportr_pixel_data', $affimportr_pixel_data );
+		$affiliateimporter_pixel_data = wp_json_encode( $sanitized_data );
+		update_option( 'affiliateimporter_pixel_data', $affiliateimporter_pixel_data );
 
 		return new \WP_REST_Response( array( 'message' => 'Settings saved' ), 200 );
 	}

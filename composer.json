@@ -30,7 +30,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "AFFIMPORTR\\Test\\": [
+            "AFLTIMPTR\\Test\\": [
                 "test/phpunit/"
             ]
         }
