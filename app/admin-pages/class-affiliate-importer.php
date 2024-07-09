@@ -176,9 +176,10 @@ class AffiliateImporter extends Base {
 					'settings'            => home_url( '/wp-json' ) . '/affiliateimporter/v1/settings',
 					'amazonAPIConnection' => home_url( '/wp-json' ) . '/affiliateimporter/v1/amazon-api-connection',
 					'products'            => home_url( '/wp-json' ) . '/affiliateimporter/v1/products',
+					'categories'          => home_url( '/wp-json' ) . '/affiliateimporter/v1/categories',
+					'asinVerification'    => home_url( '/wp-json' ) . '/affiliateimporter/v1/asin-verification',
+					'import'              => home_url( '/wp-json' ) . '/affiliateimporter/v1/import',
 				),
-				'restEndpointSettings'            => home_url( '/wp-json' ) . '/affiliateimporter/v1/settings',
-				'restEndpointAmazonApiConnection' => home_url( '/wp-json' ) . '/affiliateimporter/v1/amazon-api-connection',
 				'restNonce'                       => wp_create_nonce( 'wp_rest' ),
 			),
 		);

@@ -15,13 +15,55 @@ export const fetchAmazonApiStatus = createAsyncThunk('dashboard/amazonApiStatus'
 	}
 });
 
-export const fetchRecentlyImportedProducts = createAsyncThunk('products', async (params, { rejectWithValue }) => {
+export const fetchRecentlyImportedProducts = createAsyncThunk('products/fetch', async (params, { rejectWithValue }) => {
 	try{
 		const res = await axios.get(afltimptrAffiliateImporter.restEndpoint.products, {
 			params,
 			headers: {
 				'content-type': 'application/json',
 				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+			}
+		});
+		return res.data;
+	} catch (error) {
+		return rejectWithValue(error.response.data);
+	}
+});
+
+export const saveProducts = createAsyncThunk('products/save', async (data, { rejectWithValue }) => {
+	try{
+		const res = await axios.post(afltimptrAffiliateImporter.restEndpoint.products, data, {
+			headers: {
+				'content-type': 'application/json',
+				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+			}
+		});
+		return res.data;
+	} catch (error) {
+		return rejectWithValue(error.response.data);
+	}
+});
+
+export const fetchCategories = createAsyncThunk('categories/fetchCategories', async (params, { rejectWithValue }) => {
+	try{
+		const res = await axios.get(afltimptrAffiliateImporter.restEndpoint.categories, {
+			headers: {
+				'content-type': 'application/json',
+				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+			}
+		});
+		return res.data;
+	} catch (error) {
+		return rejectWithValue(error.response.data);
+	}
+});
+
+export const asinVerification = createAsyncThunk('asinVerification', async (data, {rejectWithValue}) => {
+	try{
+		const res = await axios.post(afltimptrAffiliateImporter.restEndpoint.asinVerification, data, {
+			headers: {
+				'content-type': 'application/json',
+				'X-WP-NONCE': appLocalizer.restNonce
 			}
 		});
 		return res.data;

@@ -1,31 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-
-export const bulkImport = createAsyncThunk('import/bulkImport', async (data) => {
-	const bulkImportURL = `${appLocalizer.restUrl}/azoncommerce/v1/import/bulk`;
-	const res = await axios.post(bulkImportURL, data, {
-		headers: {
-			'content-type': 'application/json',
-			'X-WP-NONCE': appLocalizer.restNonce
-		}
-	});
-	return res.data;
-});
-
-export const fetchAmazonProducts = createAsyncThunk('import/fetchAmazonProducts', async (data, {rejectWithValue}) => {
-	const apiURL = `${appLocalizer.restUrl}/azoncommerce/v1/amazon_product_fetch`;
-	try{
-		const res = await axios.post(apiURL, data, {
-			headers: {
-				'content-type': 'application/json',
-				'X-WP-NONCE': appLocalizer.restNonce
-			}
-		});
-		return res.data;
-	} catch (error) {
-		return rejectWithValue(error.response.data);
-	}
-});
+import { asinVerification, saveProducts } from '../../../services/apiService';
 
 export const importCopyPasteSlice = createSlice({
 	name: 'importCopyPaste',
@@ -303,10 +278,10 @@ B1BLN9TMLX`,
 		}
 	},
 	extraReducers: (builder) => {
-		builder.addCase(bulkImport.pending, (state) => {
+		builder.addCase(saveProducts.pending, (state) => {
 			state.isImportQueueAdding = true;
 		}),
-		builder.addCase(bulkImport.fulfilled, (state, action) => {
+		builder.addCase(saveProducts.fulfilled, (state, action) => {
 
 			state.importSuccessfulFetchItems = [...state.importSuccessfulFetchItems, ...action.payload.product_asins]
 
@@ -325,14 +300,14 @@ B1BLN9TMLX`,
 				state.importQueueError = [];
 			}
 		}),
-		builder.addCase(bulkImport.rejected, (state, action) => {
+		builder.addCase(saveProducts.rejected, (state, action) => {
 			state.error = action.error.message;
 		}),
-		builder.addCase(fetchAmazonProducts.pending, (state) => {
+		builder.addCase(asinVerification.pending, (state) => {
 			state.isImportFetchInProgress = true;
 			state.importFetchAlert = {};
 		}),
-		builder.addCase(fetchAmazonProducts.fulfilled, (state, action) => {
+		builder.addCase(asinVerification.fulfilled, (state, action) => {
 			state.isImportFetchInProgress = false;
 			if(action.payload?.fetch_result){
 				
@@ -351,7 +326,7 @@ B1BLN9TMLX`,
             }
             state.asinValueFetched = state.asinValue
 		}),
-		builder.addCase(fetchAmazonProducts.rejected, (state, action) => {
+		builder.addCase(asinVerification.rejected, (state, action) => {
 			state.isImportFetchInProgress = false;
 			state.importFetchAlert = {type:'error', message: action.payload.message}
 		})

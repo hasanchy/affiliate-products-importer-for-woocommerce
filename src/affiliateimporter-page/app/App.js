@@ -3,15 +3,16 @@ import { Alert, Button, Card, Col, Row, Space } from 'antd';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { __ } from '@wordpress/i18n';
-import Header from "../components/Header";
-import FeatureTabs from "../components/FeatureTabs";
-import { fetchAmazonApiStatus, fetchRecentlyImportedProducts } from "../services/apiService";
+import Header from "../components/header/Header";
+import FeatureTabs from "../components/feature-tabs/FeatureTabs";
+import { fetchAmazonApiStatus, fetchCategories, fetchRecentlyImportedProducts } from "../services/apiService";
 
 const App = () => {
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
+		dispatch(fetchCategories());
 		dispatch(fetchAmazonApiStatus());
 		dispatch(fetchRecentlyImportedProducts({per_page:20}));
 	}, [])

@@ -44,6 +44,11 @@ class Products extends Endpoint {
 					'callback'            => array( $this, 'get_products' ),
 					'permission_callback' => array( $this, 'edit_permission' ),
 				),
+				array(
+					'methods'             => 'POST',
+					'callback'            => array( $this, 'save_products' ),
+					'permission_callback' => array( $this, 'edit_permission' ),
+				),
 			)
 		);
 	}
@@ -181,4 +186,133 @@ class Products extends Endpoint {
 		$years = round( $diff / 31207680 );
 		return $years === 1 ? 'One year ago' : "$years years ago";
 	}
+
+	/**
+	 * Handle the request to get products.
+	 *
+	 * @param WP_REST_Request $request The request object.
+	 * @return WP_REST_Response|WP_Error
+	 * @since 1.0.0
+	 */
+	public function save_products( WP_REST_Request $request ) {
+		$nonce = $request->get_header( 'X-WP-NONCE' );
+		if ( ! wp_verify_nonce( $nonce, 'wp_rest' ) ) {
+			return new WP_REST_Response( 'Invalid nonce', 403 );
+		}
+
+		$products = $request['products'];
+        $categories = $request['categories'];
+
+        $product_ids = [];
+        $product_asins = [];
+        foreach ($products as $product) {
+            
+            $asin = $product['asin'];
+            $post_title = $product['post_title'];
+            $post_name = $product['post_name'];
+            $post_content = $product['post_content'];
+            $image_primary = $product['image_primary'];
+            $image_variants = $product['image_variants'];
+            $regular_price = $product['regular_price'];
+            $price = $product['price'];
+            $product_url = $product['product_url'];
+            $attributes = $product['attributes'];
+
+            $new_post = array(
+                'post_title' => $post_title,
+                'post_content' => $post_content,
+                'post_status' => 'publish',
+                'post_date' => current_time('mysql'),
+                'post_author' => '1',
+                'post_type' => 'product',
+                'post_name' => $post_name
+            );
+
+            $post_id = wp_insert_post($new_post);
+            $product_ids[] = $post_id;
+            $product_asins[] = $asin;
+
+            /*===================Update product categories=======================*/
+            wp_set_post_terms($post_id, $categories, 'product_cat');
+
+            /*===================Update product type=======================*/
+            wp_set_object_terms ($post_id, 'external', 'product_type');
+            
+            /*===================Update product Images=======================*/
+            $remore_image = get_option( 'azoncom_settings_remote_image' );
+
+            if($remore_image === 'yes'){
+                update_post_meta( $post_id, '_azoncom_product_img_url', $image_primary );
+
+                foreach ($image_variants as $image_variant) {
+                    $urls[] = $image_variant;
+                }
+                update_post_meta( $post_id, '_azoncom_product_gallery_url', $urls );
+            }else{
+                $thumbnail_image_id = \media_sideload_image($image_primary, $post_id, $post_title, 'id');
+                set_post_thumbnail($post_id, $thumbnail_image_id);
+
+                $image_variant_ids = [];
+                foreach ($image_variants as $image_variant) {
+                    $image_variant_ids[] = \media_sideload_image($image_variant, $post_id, $post_title, 'id');
+                }
+
+            
+                if(sizeof($image_variant_ids) > 1) { 
+                    update_post_meta($post_id, '_product_image_gallery', implode(',',$image_variant_ids));
+                }
+            }
+
+            /*===================Update product ASIN=======================*/
+            update_post_meta( $post_id, '_azoncom_amz_asin', $asin );
+
+            /*===================Update product price=======================*/
+            if($price){
+                update_post_meta( $post_id, '_price', $price );
+            }
+            if($regular_price){
+                update_post_meta( $post_id, '_regular_price', $regular_price );
+            }
+            if($sale_price){
+                update_post_meta( $post_id, '_sale_price', $sale_price );
+            }
+
+            $current_time = time();
+            update_post_meta( $post_id, '_wooazon_sync_last_date', $current_time );
+		    // $ret['_price_update_date'] = $current_time;
+
+            /*===================Update product url=======================*/
+            update_post_meta( $post_id, '_product_url', $product_url );
+
+            /*===================Update product Attributes=======================*/
+            $this->add_product_attribute( $post_id, $attributes );
+        }
+
+        $return = [
+            'product_ids' => $product_ids,
+            'product_asins' => $product_asins
+        ];
+
+        return new WP_REST_Response( $return );
+	}
+
+	public function add_product_attribute( $post_id, $attributes){
+
+		foreach ( $attributes as $key => $attribute ) {
+
+			$meta_value[ strtolower( $attribute['name'] ) ] = array (
+				'name' => $attribute['name'],
+				'value' => $attribute['value'],
+				'position' => $key,
+				'is_visible' => 1,
+				'is_variation' => 0,
+				'is_taxonomy' => 0,
+			);
+			
+		}
+		
+		update_post_meta( $post_id, '_product_attributes', $meta_value );
+		
+		/*====================================================*/
+    }
 }

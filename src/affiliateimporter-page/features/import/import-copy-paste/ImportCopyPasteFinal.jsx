@@ -1,14 +1,15 @@
 import React from 'react';
 import { Row, Col, Space, Flex, Button, Form, Result, Card, Typography } from 'antd';
-// import CategoriesCheckbox from '../../categories/CategoriesCheckbox';
+import CategoriesCheckbox from '../../../components/categories/CategoriesCheckbox';
 
 import { CloudDownloadOutlined, AndroidOutlined, AppleOutlined, ImportOutlined } from '@ant-design/icons';
 
 import { useSelector, useDispatch } from 'react-redux'
-import { setDisplayImportCounter, setSelectedCategories, setMessage, setImportStepIndex, bulkImport, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportSuccessMessage, setImportCancelledFetchItems, setImportableFetchItems, setImportFetchItems, setImportFetchProgress } from './importCopyPasteSlice';
+import { setDisplayImportCounter, setSelectedCategories, setMessage, setImportStepIndex, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportSuccessMessage, setImportCancelledFetchItems, setImportableFetchItems, setImportFetchItems, setImportFetchProgress } from './importCopyPasteSlice';
 // import { setActiveTab } from '../../tabs/tabsSlice';
 import ImportFetchCounter from './ImportFetchCounter';
 import { setImportStepBack } from '../importSlice';
+import { saveProducts } from '../../../services/apiService';
 
 const ImportCopyPasteFinal = () => {
 
@@ -25,9 +26,9 @@ const ImportCopyPasteFinal = () => {
         dispatch(setImportStepBack());
     }
 
-    const dispatchBulkImport = (importQueueChunk, i) => {
+    const dispatchSaveProducts = (importQueueChunk, i) => {
         setTimeout(function(){
-            dispatch(bulkImport(importQueueChunk));
+            dispatch(saveProducts(importQueueChunk));
 		}, 2000 * i);
     }
 
@@ -69,7 +70,7 @@ const ImportCopyPasteFinal = () => {
 				const categoryIds = selectedCategories.map(category => category.id);
 				let data = {products:importQueueChunk, categories: categoryIds}
 
-				await dispatch(bulkImport(data));
+				await dispatch(saveProducts(data));
 
 				totalCompleted += productsPerRequest;
 
@@ -118,7 +119,7 @@ const ImportCopyPasteFinal = () => {
 						</Flex>
 					</Col>
 					<Col span={10}>
-						{/* <CategoriesCheckbox disabled={isImporting} value={selectedCategories} onChange={handleCategoriesChange} /> */}
+						<CategoriesCheckbox disabled={isImporting} value={selectedCategories} onChange={handleCategoriesChange} />
 					</Col>
 				</Row>
 				<Row gutter={20}>

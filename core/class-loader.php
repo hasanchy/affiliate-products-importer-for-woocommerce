@@ -97,5 +97,7 @@ final class Loader extends Base {
 		App\Endpoints\V1\AmazonAPIConnection::instance();
 		App\Endpoints\V1\Settings::instance();
 		App\Endpoints\V1\Products::instance();
+		App\Endpoints\V1\AsinVerification::instance();
+		App\Endpoints\V1\Categories::instance();
 	}
 }

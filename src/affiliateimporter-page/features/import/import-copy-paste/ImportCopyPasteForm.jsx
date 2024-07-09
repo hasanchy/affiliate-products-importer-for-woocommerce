@@ -2,10 +2,11 @@ import React from 'react';
 import { Card, Input, Row, Col, Space, Flex, Button, Alert, Tag } from 'antd';
 
 import { useSelector, useDispatch } from 'react-redux'
-import { setAsinValue, setAsinCodes, setInvalidAsinCodes, setDuplicateAsinCodes, setImportStepIndex, fetchAmazonProducts, setImportFetchItems, setImportableFetchItems, setDisplayImportFetchCounter, setImportFetchErrors, setImportFetchProgress } from './importCopyPasteSlice';
+import { setAsinValue, setAsinCodes, setInvalidAsinCodes, setDuplicateAsinCodes, setImportStepIndex, setImportFetchItems, setImportableFetchItems, setDisplayImportFetchCounter, setImportFetchErrors, setImportFetchProgress } from './importCopyPasteSlice';
 import { CheckCircleOutlined } from '@ant-design/icons';
 import ImportFetchCounter from './ImportFetchCounter';
 import { setImportStepBack, setImportStepNext } from '../importSlice';
+import { asinVerification } from '../../../services/apiService';
 
 const { TextArea } = Input;
 
@@ -86,7 +87,7 @@ const ImportCopyPasteForm = () => {
 			let data={
 				asinCodes: asinCodesChunk
 			}
-			await dispatch(fetchAmazonProducts(data));
+			await dispatch(asinVerification(data));
 			
 			totalFetchCompleted += asinCodesChunk.length;
 
