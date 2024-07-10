@@ -5,10 +5,10 @@ import CategoriesCheckbox from '../../../components/categories/CategoriesCheckbo
 import { CloudDownloadOutlined, AndroidOutlined, AppleOutlined, ImportOutlined } from '@ant-design/icons';
 
 import { useSelector, useDispatch } from 'react-redux'
-import { setDisplayImportCounter, setSelectedCategories, setMessage, setImportStepIndex, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportSuccessMessage, setImportCancelledFetchItems, setImportableFetchItems, setImportFetchItems, setImportFetchProgress } from './importCopyPasteSlice';
+import { setDisplayImportCounter, setSelectedCategories, setMessage, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportSuccessMessage, setImportCancelledFetchItems, setImportableFetchItems, setImportFetchItems, setImportFetchProgress, setAsinValue } from './importCopyPasteSlice';
 // import { setActiveTab } from '../../tabs/tabsSlice';
 import ImportFetchCounter from './ImportFetchCounter';
-import { setImportStepBack } from '../importSlice';
+import { setImportStepBack, setImportStepIndex } from '../importSlice';
 import { saveProducts } from '../../../services/apiService';
 
 const ImportCopyPasteFinal = () => {
@@ -97,13 +97,14 @@ const ImportCopyPasteFinal = () => {
 	}
 
 	const handleImportAgain = () => {
-		dispatch(setImportQueuedFetchItems([]))
-		dispatch(setImportSuccessfulFetchItems([]))
-		dispatch(setImportCancelledFetchItems([]))
-		dispatch(setImportableFetchItems([]))
-		dispatch(setImportFetchItems([]))
-		dispatch(setDisplayImportSuccessMessage(false))
-		dispatch(setImportStepIndex(0))
+		dispatch(setAsinValue(''));
+		dispatch(setImportQueuedFetchItems([]));
+		dispatch(setImportSuccessfulFetchItems([]));
+		dispatch(setImportCancelledFetchItems([]));
+		dispatch(setImportableFetchItems([]));
+		dispatch(setImportFetchItems([]));
+		dispatch(setDisplayImportSuccessMessage(false));
+		dispatch(setImportStepIndex(0));
 	}
 
 	const renderAmazonTabContent = () => {
