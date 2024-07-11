@@ -1,8 +1,9 @@
 import React, {memo} from 'react';
 import { Card, Image, Typography, Tooltip, Button, Alert, Switch, Flex  } from 'antd';
 import {  UndoOutlined, CloseCircleTwoTone, DeleteOutlined } from '@ant-design/icons';
-import { bulkImport, setImportCancelledFetchItems, setImportQueuedFetchItems, setImportQueueDeletable } from './importCopyPasteSlice';
+import { setImportCancelledFetchItems, setImportQueuedFetchItems, setImportQueueDeletable } from './importCopyPasteSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { saveProducts } from '../../../services/apiService';
 
 const { Link } = Typography;
 
@@ -30,7 +31,7 @@ const ImportProductQueue = memo(() => {
 		let data = {products:[importFetchItem], categories: categoryIds}
 
 		dispatch(setImportQueuedFetchItems(newQueuedAsins));
-		dispatch(bulkImport(data));
+		dispatch(saveProducts(data));
 	}
 
 	const handleSwitchChange = (checked) => {

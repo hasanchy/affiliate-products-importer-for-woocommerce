@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Tabs, ConfigProvider } from 'antd';
 import { DashboardOutlined, DownloadOutlined, ShoppingOutlined, SettingOutlined } from '@ant-design/icons';
-import Dashboard from '../features/dashboard/Dashboard';
-import Import from '../features/import/Import';
+import Dashboard from '../../features/dashboard/Dashboard';
+import Import from '../../features/import/Import';
+import Products from '../../features/products/Products';
 
 const FeatureTabs = () => {
 
@@ -24,7 +25,7 @@ const FeatureTabs = () => {
 		{
 			key: 'products',
 			label: 'Products',
-			children: 'Product goes here...',
+			children: <Products/>,
 			icon: <ShoppingOutlined />
 		},
 		{

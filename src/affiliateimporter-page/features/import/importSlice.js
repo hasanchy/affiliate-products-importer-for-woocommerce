@@ -15,7 +15,10 @@ export const importSlice = createSlice({
 		},
 		setImportStepBack: (state, action) => {
 			state.importStepIndex -= 1;
-		}
+		},
+		setImportStepIndex: (state, action) => {
+			state.importStepIndex = action.payload;
+		},
 	},
 	extraReducers: (builder) => {
 		
@@ -23,6 +26,6 @@ export const importSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const {setImportType, setImportStepNext, setImportStepBack} = importSlice.actions
+export const {setImportType, setImportStepNext, setImportStepBack, setImportStepIndex} = importSlice.actions
 
 export default importSlice.reducer

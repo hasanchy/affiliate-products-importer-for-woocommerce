@@ -5,7 +5,7 @@ const { Link } = Typography;
 
 const RecentlyImportedProducts = memo(() => {
 
-	const { productList, isProductsLoading} = useSelector((state) => state.products);
+	const { productList, isProductsLoading} = useSelector((state) => state.dashboard);
 
 	const renderProductGallery = () => {
 		let gallery = [];
