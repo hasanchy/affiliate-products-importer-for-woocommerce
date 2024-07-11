@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { fetchAmazonApiStatus } from '../../services/apiService';
+import { fetchAmazonApiStatus, fetchRecentlyImportedProducts } from '../../services/apiService';
 
 const initialState = {
     IsAmazonApiConnectionLoading: false,
 	AmazonApiConnectionStatus: '',
-	AmazonApiConnectionMessage: ''
+	AmazonApiConnectionMessage: '',
+	isProductsLoading: false,
+	productList: '',
 }
 
 export const dashboardSlice = createSlice({
@@ -26,6 +28,19 @@ export const dashboardSlice = createSlice({
 			state.IsAmazonApiConnectionLoading = false;
 			state.AmazonApiConnectionStatus = 'error';
 			state.AmazonApiConnectionMessage = action.payload?.message ? action.payload.message : 'Unable to connect to the Amazon API. Please verify your Amazon API settings.';
+        }),
+		builder.addCase(fetchRecentlyImportedProducts.pending, (state) => {
+			state.isProductsLoading = true;
+		}),
+		builder.addCase(fetchRecentlyImportedProducts.fulfilled, (state, action) => {
+            state.isProductsLoading = false;
+			state.productList = action.payload.products;
+			state.totalProducts = action.payload.total;
+		}),
+		builder.addCase(fetchRecentlyImportedProducts.rejected, (state, action) => {
+			state.isProductsLoading = false;
+			state.AmazonApiConnectionStatus = 'error';
+			state.AmazonApiConnectionMessage = action.payload?.message ? action.payload.message : 'Unable to connect to the API.';
         })
 	}
 })

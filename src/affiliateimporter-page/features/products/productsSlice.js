@@ -1,28 +1,31 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchRecentlyImportedProducts } from '../../services/apiService';
+import { fetchProducts } from '../../services/apiService';
 
 const initialState = {
     isProductsLoading: false,
 	productList: '',
-	totalProducts: ''
+	totalProducts: '',
+	searchKeyword: '',
 }
 
 export const productsSlice = createSlice({
 	name: 'products',
 	initialState,
 	reducers: {
-        
+        setSearchKeyword: (state, action) => {
+			state.searchKeyword = action.payload
+		},
 	},
 	extraReducers: (builder) => {
-        builder.addCase(fetchRecentlyImportedProducts.pending, (state) => {
+        builder.addCase(fetchProducts.pending, (state) => {
 			state.isProductsLoading = true;
 		}),
-		builder.addCase(fetchRecentlyImportedProducts.fulfilled, (state, action) => {
+		builder.addCase(fetchProducts.fulfilled, (state, action) => {
             state.isProductsLoading = false;
 			state.productList = action.payload.products;
 			state.totalProducts = action.payload.total;
 		}),
-		builder.addCase(fetchRecentlyImportedProducts.rejected, (state, action) => {
+		builder.addCase(fetchProducts.rejected, (state, action) => {
 			state.isProductsLoading = false;
 			state.AmazonApiConnectionStatus = 'error';
 			state.AmazonApiConnectionMessage = action.payload?.message ? action.payload.message : 'Unable to connect to the API.';
@@ -30,5 +33,5 @@ export const productsSlice = createSlice({
 	}
 })
 
-export const { } = productsSlice.actions
+export const { setSearchKeyword } = productsSlice.actions
 export default productsSlice.reducer;

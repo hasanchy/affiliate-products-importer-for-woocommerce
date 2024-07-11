@@ -15,7 +15,22 @@ export const fetchAmazonApiStatus = createAsyncThunk('dashboard/amazonApiStatus'
 	}
 });
 
-export const fetchRecentlyImportedProducts = createAsyncThunk('products/fetch', async (params, { rejectWithValue }) => {
+export const fetchRecentlyImportedProducts = createAsyncThunk('products/recentlyImported', async (params, { rejectWithValue }) => {
+	try{
+		const res = await axios.get(afltimptrAffiliateImporter.restEndpoint.products, {
+			params,
+			headers: {
+				'content-type': 'application/json',
+				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+			}
+		});
+		return res.data;
+	} catch (error) {
+		return rejectWithValue(error.response.data);
+	}
+});
+
+export const fetchProducts = createAsyncThunk('products/fetch', async (params, { rejectWithValue }) => {
 	try{
 		const res = await axios.get(afltimptrAffiliateImporter.restEndpoint.products, {
 			params,
