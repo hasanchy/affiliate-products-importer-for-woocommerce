@@ -8,9 +8,9 @@ import { setSearchKeyword } from './productsSlice';
 const Products = () => {
     const { isProductsLoading, productList, totalProducts, searchKeyword  } = useSelector((state) => state.products);
     const dispatch = useDispatch();
-    useEffect(()=>{
-        dispatch(fetchProducts());
-    },[])
+    // useEffect(()=>{
+    //     dispatch(fetchProducts());
+    // },[])
 
     const reloadProductList = () => {
 		dispatch(setSearchKeyword(''))

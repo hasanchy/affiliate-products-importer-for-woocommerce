@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { __ } from '@wordpress/i18n';
 import Header from "../components/header/Header";
 import FeatureTabs from "../components/feature-tabs/FeatureTabs";
-import { fetchAmazonApiStatus, fetchCategories, fetchRecentlyImportedProducts } from "../services/apiService";
+import { fetchAmazonApiStatus, fetchCategories, fetchProducts, fetchRecentlyImportedProducts } from "../services/apiService";
 
 const App = () => {
 
@@ -15,6 +15,7 @@ const App = () => {
 		dispatch(fetchCategories());
 		dispatch(fetchAmazonApiStatus());
 		dispatch(fetchRecentlyImportedProducts({per_page:20}));
+		dispatch(fetchProducts());
 	}, [])
 
 

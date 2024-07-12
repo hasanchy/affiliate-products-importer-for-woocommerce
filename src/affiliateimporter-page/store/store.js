@@ -4,6 +4,7 @@ import productsSlice from '../features/products/productsSlice';
 import importSlice from '../features/import/importSlice';
 import importCopyPasteSlice from '../features/import/import-copy-paste/importCopyPasteSlice';
 import categoriesSlice from '../components/categories/categoriesSlice';
+import settingsSlice from '../features/settings/settingsSlice';
 
 const store = configureStore({
 	reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
 		categories: categoriesSlice,
 		products: productsSlice,
 		import: importSlice,
-		importCopyPaste: importCopyPasteSlice
+		importCopyPaste: importCopyPasteSlice,
+		settings: settingsSlice
 	},
 })
 
