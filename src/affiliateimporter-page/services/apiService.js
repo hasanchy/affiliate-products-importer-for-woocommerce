@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const fetchAmazonApiStatus = createAsyncThunk('dashboard/amazonApiStatus', async (data, { rejectWithValue }) => {
+export const fetchAmazonApiStatus = createAsyncThunk('dashboard/amazonApiStatus', async (params, { rejectWithValue }) => {
 	try{
 		const res = await axios.get(afltimptrAffiliateImporter.restEndpoint.amazonAPIConnection, {
 			headers: {
@@ -79,6 +79,20 @@ export const asinVerification = createAsyncThunk('asinVerification', async (data
 			headers: {
 				'content-type': 'application/json',
 				'X-WP-NONCE': appLocalizer.restNonce
+			}
+		});
+		return res.data;
+	} catch (error) {
+		return rejectWithValue(error.response.data);
+	}
+});
+
+export const fetchSettings = createAsyncThunk('settings', async (params, { rejectWithValue }) => {
+	try{
+		const res = await axios.get(afltimptrAffiliateImporter.restEndpoint.settings, {
+			headers: {
+				'content-type': 'application/json',
+				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
 			}
 		});
 		return res.data;

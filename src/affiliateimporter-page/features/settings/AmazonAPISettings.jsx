@@ -2,7 +2,7 @@ import { Alert, Button, Form, Input, Select } from 'antd';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AU, BE, BR, CA, CN, EG, FR, DE, IN, IT, JP, MX, NL, PL, SA, SG, ES, SE, TR, AE, US, GB } from 'country-flag-icons/react/3x2'
-// import { setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId, saveSettings, verifyAmazonAPISettings, saveSyncSettings } from './settingsSlice';
+import { setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId } from './settingsSlice';
 
 const affiliateCountries = [
     { 'countryFlag': <AU style={{width:'20px'}}/>,'countryCode': <AU />, 'countryName': 'Australia', 'countryMarketplace': 'www.amazon.com.au' }, 
@@ -48,17 +48,17 @@ const AmazonAPISettings = () => {
     }
 
     const onFieldsChange = (values) => {
-        // let fieldName = values[0].name[0];
-        // let fieldValue = values[0].value;
-        // if(fieldName == 'amazonAccessKey'){
-        //     dispatch(setAmazonAccessKey(fieldValue));
-        // }else if(fieldName == 'amazonSecretKey'){
-        //     dispatch(setAmazonSecretKey(fieldValue));
-        // }else if(fieldName == 'amazonAffiliateId'){
-        //     dispatch(setAmazonAffiliateId(fieldValue));
-        // }else if(fieldName == 'amazonCountryCode'){
-        //     dispatch(setAmazonCountryCode(fieldValue));
-        // }
+        let fieldName = values[0].name[0];
+        let fieldValue = values[0].value;
+        if(fieldName == 'amazonAccessKey'){
+            dispatch(setAmazonAccessKey(fieldValue));
+        }else if(fieldName == 'amazonSecretKey'){
+            dispatch(setAmazonSecretKey(fieldValue));
+        }else if(fieldName == 'amazonAffiliateId'){
+            dispatch(setAmazonAffiliateId(fieldValue));
+        }else if(fieldName == 'amazonCountryCode'){
+            dispatch(setAmazonCountryCode(fieldValue));
+        }
     }
 
     const onFinish = (values) => {
