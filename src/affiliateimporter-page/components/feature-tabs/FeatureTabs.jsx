@@ -4,10 +4,11 @@ import { DashboardOutlined, DownloadOutlined, ShoppingOutlined, SettingOutlined 
 import Dashboard from '../../features/dashboard/Dashboard';
 import Import from '../../features/import/Import';
 import Products from '../../features/products/Products';
+import Settings from '../../features/settings/Settings';
 
 const FeatureTabs = () => {
 
-	const [activeTab, setActiveTab] = useState('import')
+	const [activeTab, setActiveTab] = useState('settings')
 
 	const tabItems = [
 		{
@@ -31,7 +32,7 @@ const FeatureTabs = () => {
 		{
 			key: 'settings',
 			label: 'Settings',
-			children: 'Settings goes here...',
+			children: <Settings/>,
 			icon: <SettingOutlined />
 		}
 	];

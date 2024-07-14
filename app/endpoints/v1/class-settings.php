@@ -89,21 +89,17 @@ class Settings extends Endpoint {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
-		$affiliateimporter_pixel_data = get_option( 'affiliateimporter_pixel_data' );
+		$azoncom_amazon_access_key = get_option( 'azoncom_amazon_access_key' );
+        $azoncom_amazon_secret_key  = get_option( 'azoncom_amazon_secret_key' );
+		$azoncom_amazon_country_code  = get_option( 'azoncom_amazon_country_code' );
+		$azoncom_amazon_affiliate_id  = get_option( 'azoncom_amazon_affiliate_id' );
 
-		// Decode the JSON data
-		$decoded_data = ( $affiliateimporter_pixel_data ) ? json_decode( $affiliateimporter_pixel_data, true ) : null;
-
-		// Escape each item in the decoded data
-		if ( is_array( $decoded_data ) ) {
-			$escaped_data = array_map( 'esc_html', $decoded_data );
-		} else {
-			$escaped_data = null;
-		}
-
-		$response_data = array(
-			'affiliateimporter_pixel_data' => $escaped_data,
-		);
+        $response_data['amazon_api_settings'] = [
+            'access_key' => $azoncom_amazon_access_key ? $azoncom_amazon_access_key : "",
+            'secret_key'  => $azoncom_amazon_secret_key ? $azoncom_amazon_secret_key : "",
+			'country_code' => $azoncom_amazon_country_code ? $azoncom_amazon_country_code : "us",
+			'affiliate_id' => $azoncom_amazon_affiliate_id ? $azoncom_amazon_affiliate_id : ""
+        ];
 
 		return new \WP_REST_Response( $response_data, 200 );
 	}
