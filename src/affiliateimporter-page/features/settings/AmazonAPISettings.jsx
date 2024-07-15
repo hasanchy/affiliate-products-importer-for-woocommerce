@@ -1,8 +1,8 @@
-import { Alert, Button, Form, Input, Select } from 'antd';
-import React from 'react';
+import React, {useEffect} from 'react';
+import { Alert, Button, Form, Input, message, Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { AU, BE, BR, CA, CN, EG, FR, DE, IN, IT, JP, MX, NL, PL, SA, SG, ES, SE, TR, AE, US, GB } from 'country-flag-icons/react/3x2'
-import { setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId } from './settingsSlice';
+import { setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId, setSettingsToastMessage } from './settingsSlice';
 import { saveAmazonApiSettings, verifyAmazonApiSettings } from '../../services/apiService';
 
 const affiliateCountries = [
@@ -33,9 +33,20 @@ const affiliateCountries = [
 const AmazonAPISettings = () => {
 
 	const dispatch = useDispatch();
-	const { amazonAccessKey, amazonSecretKey, amazonCountryCode, amazonAffiliateId, isSettingsLoading, isAmazonAPISettingsSaving, isAmazonApiSettingsVerifying, error } = useSelector((state) => state.settings);
+	const { amazonAccessKey, amazonSecretKey, amazonCountryCode, amazonAffiliateId, isSettingsLoading, isAmazonAPISettingsSaving, isAmazonApiSettingsVerifying, error, settingsToastMessage } = useSelector((state) => state.settings);
 
     const [form] = Form.useForm();
+
+    useEffect(() => {
+		if(settingsToastMessage){
+			message.success({
+				style: {marginTop: '32px'},
+				content: settingsToastMessage,
+                duration: 3.5
+			})
+			dispatch(setSettingsToastMessage(''));
+		}
+	}, [settingsToastMessage])
 
     form.setFieldsValue({ 
         amazonAccessKey,
@@ -55,7 +66,7 @@ const AmazonAPISettings = () => {
         let response = await dispatch(verifyAmazonApiSettings(data));
 
         if (response.type.endsWith('/fulfilled')) {
-            dispatch(saveAmazonApiSettings(data));
+            await dispatch(saveAmazonApiSettings(data));
         }
     }
 

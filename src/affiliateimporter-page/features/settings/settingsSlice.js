@@ -48,7 +48,10 @@ export const settingsSlice = createSlice({
 		},
 		setAmazonAffiliateId: (state, action) => {
 			state.amazonAffiliateId = action.payload;
-		}
+		},
+		setSettingsToastMessage: (state, action) => {
+			state.settingsToastMessage = action.payload;
+		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(fetchAmazonApiSettings.pending, (state) => {
@@ -92,5 +95,5 @@ export const settingsSlice = createSlice({
 	}
 })
 
-export const { setSettingsActiveTab, setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId } = settingsSlice.actions
+export const { setSettingsActiveTab, setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId, setSettingsToastMessage } = settingsSlice.actions
 export default settingsSlice.reducer;
