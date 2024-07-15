@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchSettings } from '../../services/apiService';
+import { fetchAmazonApiSettings, saveAmazonApiSettings, verifyAmazonApiSettings } from '../../services/apiService';
 
 const initialState = {
     settingsActiveTab: 'amazonApiSettings',
@@ -23,7 +23,7 @@ const initialState = {
 	isSettingsLoading: false,
 	isAmazonAPISettingsSaving: false,
 	isImportSettingsSaving: false,
-	isAmazonAPISettingsVerifying: false,
+	isAmazonApiSettingsVerifying: false,
 	isSyncSettingsSaving: false,
 	error: null,
 	message: '',
@@ -51,20 +51,43 @@ export const settingsSlice = createSlice({
 		}
 	},
 	extraReducers: (builder) => {
-		builder.addCase(fetchSettings.pending, (state) => {
+		builder.addCase(fetchAmazonApiSettings.pending, (state) => {
 			state.isSettingsLoading = true;
 		}),
-		builder.addCase(fetchSettings.fulfilled, (state, action) => {
+		builder.addCase(fetchAmazonApiSettings.fulfilled, (state, action) => {
 			state.isSettingsLoading = false;
 			state.error = null;
-			state.amazonAccessKey = action.payload.amazon_api_settings.access_key;
-			state.amazonSecretKey = action.payload.amazon_api_settings.secret_key;
-			state.amazonCountryCode = action.payload.amazon_api_settings.country_code;
-			state.amazonAffiliateId = action.payload.amazon_api_settings.affiliate_id;
+			state.amazonAccessKey = action.payload.access_key;
+			state.amazonSecretKey = action.payload.secret_key;
+			state.amazonCountryCode = action.payload.country_code;
+			state.amazonAffiliateId = action.payload.affiliate_id;
 		}),
-		builder.addCase(fetchSettings.rejected, (state, action) => {
+		builder.addCase(fetchAmazonApiSettings.rejected, (state, action) => {
 			state.isSettingsLoading = false;
 			state.error = (action.error?.message) ? action.error.message : null;
+		}),
+		builder.addCase(saveAmazonApiSettings.pending, (state) => {
+			state.isAmazonAPISettingsSaving = true;
+		}),
+		builder.addCase(saveAmazonApiSettings.fulfilled, (state, action) => {
+			state.isAmazonAPISettingsSaving = false;
+			state.error = null;
+			state.settingsToastMessage = 'All the settings have been verified and saved successfully';
+		}),
+		builder.addCase(saveAmazonApiSettings.rejected, (state, action) => {
+			state.isAmazonAPISettingsSaving = false;
+			state.error = (action.error?.message) ? action.error.message : null;
+		}),
+		builder.addCase(verifyAmazonApiSettings.pending, (state) => {
+			state.isAmazonApiSettingsVerifying = true;
+		}),
+		builder.addCase(verifyAmazonApiSettings.fulfilled, (state, action) => {
+			state.isAmazonApiSettingsVerifying = false;
+			state.error = null;
+		}),
+		builder.addCase(verifyAmazonApiSettings.rejected, (state, action) => {
+			state.isAmazonApiSettingsVerifying = false;
+			state.error = (action.payload?.message) ? action.payload.message : 'Amazon API settings are not valid';
 		})
 	}
 })
