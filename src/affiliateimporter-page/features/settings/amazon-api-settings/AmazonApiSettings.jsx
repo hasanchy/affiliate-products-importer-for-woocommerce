@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import { Alert, Button, Form, Input, message, Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { AU, BE, BR, CA, CN, EG, FR, DE, IN, IT, JP, MX, NL, PL, SA, SG, ES, SE, TR, AE, US, GB } from 'country-flag-icons/react/3x2'
-import { setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId, setSettingsToastMessage } from './settingsSlice';
-import { saveAmazonApiSettings, verifyAmazonApiSettings } from '../../services/apiService';
+import { setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId, setSettingsToastMessage } from './amazonApiSettingsSlice';
+import { saveAmazonApiSettings, verifyAmazonApiSettings } from '../../../services/apiService';
 
 const affiliateCountries = [
     { 'countryFlag': <AU style={{width:'20px'}}/>,'countryCode': <AU />, 'countryName': 'Australia', 'countryMarketplace': 'www.amazon.com.au' }, 
@@ -30,10 +30,10 @@ const affiliateCountries = [
     { 'countryFlag': <GB style={{width:'20px'}}/>,'countryCode': 'gb', 'countryName': 'United Kingdom', 'countryMarketplace': 'www.amazon.co.uk' }
 ];
 
-const AmazonAPISettings = () => {
+const AmazonApiSettings = () => {
 
 	const dispatch = useDispatch();
-	const { amazonAccessKey, amazonSecretKey, amazonCountryCode, amazonAffiliateId, isSettingsLoading, isAmazonAPISettingsSaving, isAmazonApiSettingsVerifying, error, settingsToastMessage } = useSelector((state) => state.settings);
+	const { amazonAccessKey, amazonSecretKey, amazonCountryCode, amazonAffiliateId, isSettingsLoading, isAmazonAPISettingsSaving, isAmazonApiSettingsVerifying, error, settingsToastMessage } = useSelector((state) => state.amazonApiSettings);
 
     const [form] = Form.useForm();
 
@@ -206,4 +206,4 @@ const AmazonAPISettings = () => {
     )
 }
 
-export default AmazonAPISettings;
+export default AmazonApiSettings;

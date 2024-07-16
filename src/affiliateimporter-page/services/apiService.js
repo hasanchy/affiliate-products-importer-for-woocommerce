@@ -128,3 +128,31 @@ export const saveAmazonApiSettings = createAsyncThunk('saveAmazonApiSettings', a
 		return rejectWithValue(error.response.data);
 	}
 });
+
+export const fetchImportSettings = createAsyncThunk('fetchImportSettings', async (params, { rejectWithValue }) => {
+	try{
+		const res = await axios.get(afltimptrAffiliateImporter.restEndpoint.importSettings, {
+			headers: {
+				'content-type': 'application/json',
+				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+			}
+		});
+		return res.data;
+	} catch (error) {
+		return rejectWithValue(error.response.data);
+	}
+});
+
+export const saveImportSettings = createAsyncThunk('saveImportSettings', async (data, { rejectWithValue }) => {
+	try{
+		const res = await axios.post(afltimptrAffiliateImporter.restEndpoint.importSettings, data, {
+			headers: {
+				'content-type': 'application/json',
+				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+			}
+		});
+		return res.data;
+	} catch (error) {
+		return rejectWithValue(error.response.data);
+	}
+});

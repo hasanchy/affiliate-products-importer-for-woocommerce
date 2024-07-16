@@ -180,6 +180,7 @@ class AffiliateImporter extends Base {
 					'asinVerification'    => home_url( '/wp-json' ) . '/affiliateimporter/v1/asin-verification',
 					'import'              => home_url( '/wp-json' ) . '/affiliateimporter/v1/import',
 					'amazonApiSettings'   => home_url( '/wp-json' ) . '/affiliateimporter/v1/amazon-api-settings',
+					'importSettings'      => home_url( '/wp-json' ) . '/affiliateimporter/v1/import-settings',
 				),
 				'restNonce'               => wp_create_nonce( 'wp_rest' ),
 			),
