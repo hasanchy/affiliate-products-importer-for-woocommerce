@@ -3,11 +3,8 @@ import { Tabs, Card } from 'antd';
 import { DownloadOutlined, AmazonOutlined, ShoppingOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSettingsActiveTab } from './settingsSlice';
-import AmazonAPISettings from './AmazonAPISettings';
-// import { setSettingsActiveTab, setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId, saveSettings } from './settingsSlice';
-// import AmazonAPISettings from './AmazonAPISettings';
-// import ImportSettings from './ImportSettings';
-// import ProductSyncSettings from './ProductSyncSettings';
+import AmazonApiSettings from './amazon-api-settings/AmazonApiSettings';
+import ImportSettings from './import-settings/ImportSettings';
 
 
 const Settings = () => {
@@ -19,13 +16,13 @@ const Settings = () => {
 		{
 			key: 'amazonApiSettings',
 			label: 'Amazon API Settings',
-			children: <AmazonAPISettings />,
+			children: <AmazonApiSettings />,
 			icon: <AmazonOutlined/>
 		},
 		{
 			key: 'importSettings',
 			label: 'Import Settings',
-			children: 'Import settings goes here...',
+			children: <ImportSettings />,
 			icon: <DownloadOutlined/>
 		}
 	];

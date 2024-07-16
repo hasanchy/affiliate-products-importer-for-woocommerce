@@ -1,9 +1,23 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const fetchAmazonApiStatus = createAsyncThunk('dashboard/amazonApiStatus', async (params, { rejectWithValue }) => {
+export const verifyAmazonApiConnection = createAsyncThunk('dashboard/amazonApiStatus', async (params, { rejectWithValue }) => {
 	try{
 		const res = await axios.get(afltimptrAffiliateImporter.restEndpoint.amazonAPIConnection, {
+			headers: {
+				'content-type': 'application/json',
+				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+			}
+		});
+		return res.data;
+	} catch (error) {
+		return rejectWithValue(error.response.data);
+	}
+});
+
+export const verifyAmazonApiSettings = createAsyncThunk('settings/amazonApiSettings', async (data, { rejectWithValue }) => {
+	try{
+		const res = await axios.post(afltimptrAffiliateImporter.restEndpoint.amazonAPIConnection, data, {
 			headers: {
 				'content-type': 'application/json',
 				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
@@ -87,9 +101,51 @@ export const asinVerification = createAsyncThunk('asinVerification', async (data
 	}
 });
 
-export const fetchSettings = createAsyncThunk('settings', async (params, { rejectWithValue }) => {
+export const fetchAmazonApiSettings = createAsyncThunk('fetchAmazonApiSettings', async (params, { rejectWithValue }) => {
 	try{
-		const res = await axios.get(afltimptrAffiliateImporter.restEndpoint.settings, {
+		const res = await axios.get(afltimptrAffiliateImporter.restEndpoint.amazonApiSettings, {
+			headers: {
+				'content-type': 'application/json',
+				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+			}
+		});
+		return res.data;
+	} catch (error) {
+		return rejectWithValue(error.response.data);
+	}
+});
+
+export const saveAmazonApiSettings = createAsyncThunk('saveAmazonApiSettings', async (data, { rejectWithValue }) => {
+	try{
+		const res = await axios.post(afltimptrAffiliateImporter.restEndpoint.amazonApiSettings, data, {
+			headers: {
+				'content-type': 'application/json',
+				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+			}
+		});
+		return res.data;
+	} catch (error) {
+		return rejectWithValue(error.response.data);
+	}
+});
+
+export const fetchImportSettings = createAsyncThunk('fetchImportSettings', async (params, { rejectWithValue }) => {
+	try{
+		const res = await axios.get(afltimptrAffiliateImporter.restEndpoint.importSettings, {
+			headers: {
+				'content-type': 'application/json',
+				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+			}
+		});
+		return res.data;
+	} catch (error) {
+		return rejectWithValue(error.response.data);
+	}
+});
+
+export const saveImportSettings = createAsyncThunk('saveImportSettings', async (data, { rejectWithValue }) => {
+	try{
+		const res = await axios.post(afltimptrAffiliateImporter.restEndpoint.importSettings, data, {
 			headers: {
 				'content-type': 'application/json',
 				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce

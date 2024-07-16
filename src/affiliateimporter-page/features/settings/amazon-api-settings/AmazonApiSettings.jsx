@@ -1,8 +1,9 @@
-import { Alert, Button, Form, Input, Select } from 'antd';
-import React from 'react';
+import React, {useEffect} from 'react';
+import { Alert, Button, Form, Input, message, Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { AU, BE, BR, CA, CN, EG, FR, DE, IN, IT, JP, MX, NL, PL, SA, SG, ES, SE, TR, AE, US, GB } from 'country-flag-icons/react/3x2'
-import { setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId } from './settingsSlice';
+import { setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId, setSettingsToastMessage } from './amazonApiSettingsSlice';
+import { saveAmazonApiSettings, verifyAmazonApiSettings } from '../../../services/apiService';
 
 const affiliateCountries = [
     { 'countryFlag': <AU style={{width:'20px'}}/>,'countryCode': <AU />, 'countryName': 'Australia', 'countryMarketplace': 'www.amazon.com.au' }, 
@@ -29,12 +30,23 @@ const affiliateCountries = [
     { 'countryFlag': <GB style={{width:'20px'}}/>,'countryCode': 'gb', 'countryName': 'United Kingdom', 'countryMarketplace': 'www.amazon.co.uk' }
 ];
 
-const AmazonAPISettings = () => {
+const AmazonApiSettings = () => {
 
 	const dispatch = useDispatch();
-	const { amazonAccessKey, amazonSecretKey, amazonCountryCode, amazonAffiliateId, isSettingsLoading, isAmazonAPISettingsSaving, isAmazonAPISettingsVerifying, error } = useSelector((state) => state.settings);
+	const { amazonAccessKey, amazonSecretKey, amazonCountryCode, amazonAffiliateId, isSettingsLoading, isAmazonAPISettingsSaving, isAmazonApiSettingsVerifying, error, settingsToastMessage } = useSelector((state) => state.amazonApiSettings);
 
     const [form] = Form.useForm();
+
+    useEffect(() => {
+		if(settingsToastMessage){
+			message.success({
+				style: {marginTop: '32px'},
+				content: settingsToastMessage,
+                duration: 3.5
+			})
+			dispatch(setSettingsToastMessage(''));
+		}
+	}, [settingsToastMessage])
 
     form.setFieldsValue({ 
         amazonAccessKey,
@@ -43,8 +55,19 @@ const AmazonAPISettings = () => {
         amazonCountryCode
     });
 
-    const handleVerifyAmazonAPISettings = () => {
+    const handleVerifyAmazonAPISettings = async () => {
+        let data = {
+			access_key: amazonAccessKey,
+			secret_key: amazonSecretKey,
+			country_code: amazonCountryCode,
+			affiliate_id: amazonAffiliateId
+		}
 
+        let response = await dispatch(verifyAmazonApiSettings(data));
+
+        if (response.type.endsWith('/fulfilled')) {
+            await dispatch(saveAmazonApiSettings(data));
+        }
     }
 
     const onFieldsChange = (values) => {
@@ -71,7 +94,7 @@ const AmazonAPISettings = () => {
 
     const renderSaveButton = () => {
         let buttonText;
-        if(isAmazonAPISettingsVerifying){
+        if(isAmazonApiSettingsVerifying){
             buttonText = 'Verifying...'
         }else if(isAmazonAPISettingsSaving){
             buttonText = 'Saving...'
@@ -79,7 +102,7 @@ const AmazonAPISettings = () => {
             buttonText = 'Verify & Save'
         }
 
-        return <Button type="primary" disabled={amazonAccessKey=='' || amazonSecretKey=='' || amazonAffiliateId==''} onClick={handleVerifyAmazonAPISettings} loading={isAmazonAPISettingsVerifying || isAmazonAPISettingsSaving}>
+        return <Button type="primary" disabled={amazonAccessKey=='' || amazonSecretKey=='' || amazonAffiliateId==''} onClick={handleVerifyAmazonAPISettings} loading={isAmazonApiSettingsVerifying || isAmazonAPISettingsSaving}>
             {buttonText}
         </Button>
     }
@@ -183,4 +206,4 @@ const AmazonAPISettings = () => {
     )
 }
 
-export default AmazonAPISettings;
+export default AmazonApiSettings;
