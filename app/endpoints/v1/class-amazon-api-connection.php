@@ -49,12 +49,12 @@ class AmazonAPIConnection extends Endpoint {
 				array(
 					'methods'             => 'POST',
 					'args'                => array(
-						'access_key' => array(
+						'access_key'   => array(
 							'required'    => true,
 							'description' => __( 'Amazon Access Key is required.', 'affiliate-products-importer' ),
 							'type'        => 'string',
 						),
-						'secret_key' => array(
+						'secret_key'   => array(
 							'required'    => true,
 							'description' => __( 'Amazon AWS Secret Key is required.', 'affiliate-products-importer' ),
 							'type'        => 'string',
@@ -136,10 +136,10 @@ class AmazonAPIConnection extends Endpoint {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
-		$access_key = sanitize_text_field( $request[ 'access_key' ] );
-		$secret_key  = sanitize_text_field( $request[ 'secret_key' ] );
-		$country_code  = sanitize_text_field( $request[ 'country_code' ] );
-		$affiliate_id  = sanitize_text_field( $request[ 'affiliate_id' ] );
+		$access_key   = sanitize_text_field( $request['access_key'] );
+		$secret_key   = sanitize_text_field( $request['secret_key'] );
+		$country_code = sanitize_text_field( $request['country_code'] );
+		$affiliate_id = sanitize_text_field( $request['affiliate_id'] );
 
 		if ( ! empty( $access_key ) && ! empty( $secret_key ) && ! empty( $country_code ) && ! empty( $affiliate_id ) ) {
 			$marketplace = Settings::get_amazon_marketplace( $country_code );

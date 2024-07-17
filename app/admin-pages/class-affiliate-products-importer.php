@@ -171,8 +171,8 @@ class AffiliateProductsImporter extends Base {
 			'ver'       => $this->assets_version,
 			'strategy'  => true,
 			'localize'  => array(
-				'dom_element_id'          => $this->unique_id,
-				'restEndpoint'            => array(
+				'dom_element_id' => $this->unique_id,
+				'restEndpoint'   => array(
 					'settings'            => home_url( '/wp-json' ) . '/affiliateimporter/v1/settings',
 					'amazonAPIConnection' => home_url( '/wp-json' ) . '/affiliateimporter/v1/amazon-api-connection',
 					'products'            => home_url( '/wp-json' ) . '/affiliateimporter/v1/products',
@@ -182,7 +182,7 @@ class AffiliateProductsImporter extends Base {
 					'amazonApiSettings'   => home_url( '/wp-json' ) . '/affiliateimporter/v1/amazon-api-settings',
 					'importSettings'      => home_url( '/wp-json' ) . '/affiliateimporter/v1/import-settings',
 				),
-				'restNonce'               => wp_create_nonce( 'wp_rest' ),
+				'restNonce'      => wp_create_nonce( 'wp_rest' ),
 			),
 		);
 	}

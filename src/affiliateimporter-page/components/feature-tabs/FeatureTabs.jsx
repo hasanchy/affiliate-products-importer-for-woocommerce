@@ -8,7 +8,7 @@ import Settings from '../../features/settings/Settings';
 
 const FeatureTabs = () => {
 
-	const [activeTab, setActiveTab] = useState('settings')
+	const [activeTab, setActiveTab] = useState('dashboard')
 
 	const tabItems = [
 		{

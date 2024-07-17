@@ -67,13 +67,13 @@ class ImportSettings extends Endpoint {
 							'type'        => 'string',
 						),
 					),
-					'callback'            => array( 
-						$this, 
-						'save_settings' 
+					'callback'            => array(
+						$this,
+						'save_settings',
 					),
-					'permission_callback' => array( 
-						$this, 
-						'edit_permission' 
+					'permission_callback' => array(
+						$this,
+						'edit_permission',
 					),
 				),
 			)
@@ -94,9 +94,9 @@ class ImportSettings extends Endpoint {
 
 		$azoncom_settings_remote_image = get_option( 'azoncom_settings_remote_image' );
 
-        $response_data = [
-            'remote_image' => $azoncom_settings_remote_image ? $azoncom_settings_remote_image : "Yes"
-        ];
+		$response_data = array(
+			'remote_image' => $azoncom_settings_remote_image ? $azoncom_settings_remote_image : 'Yes',
+		);
 
 		return new WP_REST_Response( $response_data, 200 );
 	}
@@ -114,11 +114,11 @@ class ImportSettings extends Endpoint {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
-		$remote_image = sanitize_text_field( $request[ 'remote_image' ] );
+		$remote_image = sanitize_text_field( $request['remote_image'] );
 
 		if ( ! empty( $remote_image ) ) {
 			try {
-				update_option('azoncom_settings_remote_image', $remote_image );
+				update_option( 'azoncom_settings_remote_image', $remote_image );
 
 				$response_data = array(
 					'status'  => 'success',
