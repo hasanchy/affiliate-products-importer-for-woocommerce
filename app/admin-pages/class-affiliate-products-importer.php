@@ -18,7 +18,7 @@ defined( 'WPINC' ) || die;
 
 use AFLTIMPTR\Core\Base;
 
-class AffiliateImporter extends Base {
+class AffiliateProductsImporter extends Base {
 	/**
 	 * The page title.
 	 *
@@ -31,7 +31,7 @@ class AffiliateImporter extends Base {
 	 *
 	 * @var string
 	 */
-	private $page_slug = 'affiliate-importer-admin';
+	private $page_slug = 'affiliate-products-importer-admin';
 
 	/**
 	 * Google auth credentials.
@@ -79,7 +79,7 @@ class AffiliateImporter extends Base {
 	 */
 	public function init() {
 		if ( is_admin() ) {
-			$this->page_title     = __( 'Affiliate Importer', 'affiliate-products-importer' );
+			$this->page_title     = __( 'Affiliate Products Importer', 'affiliate-products-importer' );
 			$this->creds          = get_option( $this->option_name, array() );
 			$this->assets_version = ! empty( $this->script_data( 'version' ) ) ? $this->script_data( 'version' ) : AFLTIMPTR_VERSION;
 			$this->unique_id      = "affiliateimporter_pixelart_main_wrap-{$this->assets_version}";
@@ -121,7 +121,7 @@ class AffiliateImporter extends Base {
 	public function register_admin_page() {
 		$page = add_menu_page(
 			$this->page_title,
-			__( 'Affiliate Importer', 'affiliate-products-importer' ),
+			__( 'Affiliate Products Importer', 'affiliate-products-importer' ),
 			'manage_options',
 			$this->page_slug,
 			array( $this, 'callback' ),

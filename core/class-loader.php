@@ -93,7 +93,8 @@ final class Loader extends Base {
 	 * @return void
 	 */
 	private function init() {
-		App\Admin_Pages\AffiliateImporter::instance()->init();
+		App\Admin_Pages\AffiliateProductsImporter::instance()->init();
+		App\WooCommerce\WooCommerceIntegration::instance()->init();
 		App\Endpoints\V1\AmazonAPIConnection::instance();
 		App\Endpoints\V1\AmazonApiSettings::instance();
 		App\Endpoints\V1\ImportSettings::instance();
