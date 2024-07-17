@@ -46,7 +46,8 @@ const FeatureTabs = () => {
 			<ConfigProvider
 				theme={{
 					token: {
-						colorPrimary: '#672fb4'
+						colorPrimary: '#672fb4',
+						margin:"0"
 					},
 				}}
 			>
