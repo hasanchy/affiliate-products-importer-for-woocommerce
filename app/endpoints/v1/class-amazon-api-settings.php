@@ -5,18 +5,18 @@
  * @link          https://themedyno.com/
  * @since         1.0.0
  *
- * @author        AFLTIMPTR (https://themedyno.com)
- * @package       AFLTIMPTR\PluginTest
+ * @author        AFFPRODSIMP (https://themedyno.com)
+ * @package       AFFPRODSIMP\PluginTest
  *
  * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
  */
 
-namespace AFLTIMPTR\App\Endpoints\V1;
+namespace AFFPRODSIMP\App\Endpoints\V1;
 
 // Abort if called directly.
 defined( 'WPINC' ) || die;
 
-use AFLTIMPTR\Core\Endpoint;
+use AFFPRODSIMP\Core\Endpoint;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;

@@ -5,13 +5,13 @@
  * @link          https://themedyno.com/
  * @since         1.0.0
  *
- * @author        AFLTIMPTR (https://themedyno.com)
- * @package       AFLTIMPTR\PluginTest
+ * @author        AFFPRODSIMP (https://themedyno.com)
+ * @package       AFFPRODSIMP\PluginTest
  *
  * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
  */
 
-namespace AFLTIMPTR\Core;
+namespace AFFPRODSIMP\Core;
 
 use WP_REST_Response;
 use WP_REST_Controller;
@@ -114,7 +114,7 @@ class Endpoint extends WP_REST_Controller {
 		 * @since 1.0.0
 		 *
 		 */
-		return apply_filters( 'affiliateimporter_plugintest_rest_settings_permission', $capable, $request );
+		return apply_filters( 'affprodsimp_rest_settings_permission', $capable, $request );
 	}
 
 	/**

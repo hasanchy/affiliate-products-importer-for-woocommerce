@@ -5,17 +5,17 @@
  * @link          https://themedyno.com/
  * @since         1.0.0
  *
- * @package       AFLTIMPTR\PluginTest
+ * @package       AFFPRODSIMP\PluginTest
  */
 
-namespace AFLTIMPTR\App\Endpoints\V1;
+namespace AFFPRODSIMP\App\Endpoints\V1;
 
 // Avoid direct file request
 defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
-use AFLTIMPTR\Core\Endpoint;
-use AFLTIMPTR\Core\ProductAdvertisingApi;
-use AFLTIMPTR\Core\Settings;
+use AFFPRODSIMP\Core\Endpoint;
+use AFFPRODSIMP\Core\ProductAdvertisingApi;
+use AFFPRODSIMP\Core\Settings;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;

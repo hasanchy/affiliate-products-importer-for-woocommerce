@@ -5,18 +5,18 @@
  * @link          https://themedyno.com/
  * @since         1.0.0
  *
- * @author        AFLTIMPTR (https://themedyno.com)
- * @package       AFLTIMPTR\App
+ * @author        AFFPRODSIMP (https://themedyno.com)
+ * @package       AFFPRODSIMP\App
  *
  * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
  */
 
-namespace AFLTIMPTR\App\WooCommerce;
+namespace AFFPRODSIMP\App\WooCommerce;
 
 // Abort if called directly.
 defined( 'WPINC' ) || die;
 
-use AFLTIMPTR\Core\Base;
+use AFFPRODSIMP\Core\Base;
 
 class WooCommerceIntegration extends Base {
 

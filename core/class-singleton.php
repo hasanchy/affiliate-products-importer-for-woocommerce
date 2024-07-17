@@ -5,13 +5,13 @@
  * @link    https://themedyno.com/
  * @since   1.0.0
  *
- * @author  AFLTIMPTR (https://themedyno.com)
- * @package AFLTIMPTR_Core
+ * @author  AFFPRODSIMP (https://themedyno.com)
+ * @package AFFPRODSIMP_Core
  *
  * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
  */
 
-namespace AFLTIMPTR\Core;
+namespace AFFPRODSIMP\Core;
 
 // Abort if called directly.
 defined( 'WPINC' ) || die;
@@ -19,7 +19,7 @@ defined( 'WPINC' ) || die;
 /**
  * Class Singleton
  *
- * @package AFLTIMPTR\Core
+ * @package AFFPRODSIMP\Core
  */
 abstract class Singleton {
 
