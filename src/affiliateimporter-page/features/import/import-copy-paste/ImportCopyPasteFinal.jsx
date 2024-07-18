@@ -6,7 +6,7 @@ import { CloudDownloadOutlined, AndroidOutlined, AppleOutlined, ImportOutlined }
 
 import { useSelector, useDispatch } from 'react-redux'
 import { setDisplayImportCounter, setSelectedCategories, setMessage, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportSuccessMessage, setImportCancelledFetchItems, setImportableFetchItems, setImportFetchItems, setImportFetchProgress, setAsinValue } from './importCopyPasteSlice';
-// import { setActiveTab } from '../../tabs/tabsSlice';
+
 import ImportFetchCounter from './ImportFetchCounter';
 import { setImportStepBack, setImportStepIndex } from '../importSlice';
 import { saveProducts } from '../../../services/apiService';
@@ -91,11 +91,6 @@ const ImportCopyPasteFinal = () => {
 		}
 	}
 
-
-	const handleViewProducts = () => {
-		// dispatch(setActiveTab('products'))
-	}
-
 	const handleImportAgain = () => {
 		dispatch(setAsinValue(''));
 		dispatch(setImportQueuedFetchItems([]));
@@ -147,29 +142,13 @@ const ImportCopyPasteFinal = () => {
 						extra={[
 							<Button type="primary" key="console" onClick={handleImportAgain}>
 								Import Again
-							</Button>,
-							<Button key="buy" onClick={handleViewProducts}>
-								View Products
-							</Button>,
+							</Button>
 						]}
 					/>
 				</Col>
 			</Row>
 		}
 		return null;
-	}
-
-	const renderMessage = () => {
-		if (message) {
-			return <div id="setting-error-settings_updated" className="notice notice-success settings-error is-dismissible">
-				<p><strong>{message}</strong></p>
-				<button type="button" className="notice-dismiss" onClick={() => dispatch(setMessage(''))}>
-					<span className="screen-reader-text">Dismiss this notice.</span>
-				</button>
-			</div>
-		} else {
-			return null;
-		}
 	}
 
 	return (

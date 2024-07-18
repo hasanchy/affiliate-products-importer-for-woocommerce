@@ -27,12 +27,5 @@
     "minimum-stability": "dev",
     "autoload": {
         "classmap": ["core/", "app/"]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "AFFPRODSIMP\\Test\\": [
-                "test/phpunit/"
-            ]
-        }
     }
 }

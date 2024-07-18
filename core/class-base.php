@@ -17,7 +17,7 @@ namespace AFFPRODSIMP\Core;
 use AFFPRODSIMP\Core\Singleton;
 
 // Abort if called directly.
-defined( 'WPINC' ) || die;
+defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
 /**
  * Class Base

@@ -14,7 +14,7 @@
 namespace AFFPRODSIMP\App\WooCommerce;
 
 // Abort if called directly.
-defined( 'WPINC' ) || die;
+defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
 use AFFPRODSIMP\Core\Base;
 

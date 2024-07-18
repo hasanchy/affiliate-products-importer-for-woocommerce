@@ -11,7 +11,7 @@
 namespace AFFPRODSIMP\App\Endpoints\V1;
 
 // Avoid direct file request
-defined( 'ABSPATH' ) || exit;
+defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
 use AFFPRODSIMP\Core\Endpoint;
 use WP_Error;

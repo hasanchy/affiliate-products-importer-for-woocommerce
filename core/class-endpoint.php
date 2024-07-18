@@ -17,7 +17,7 @@ use WP_REST_Response;
 use WP_REST_Controller;
 
 // If this file is called directly, abort.
-defined( 'WPINC' ) || die;
+defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
 class Endpoint extends WP_REST_Controller {
 	/**
