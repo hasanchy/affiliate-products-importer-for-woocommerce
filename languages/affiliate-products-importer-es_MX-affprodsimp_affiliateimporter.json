@@ -1,0 +1,18 @@
+{
+    "translation-revision-date": "2024-07-19 00:29+0000",
+    "generator": "Loco https://localise.biz/",
+    "source": "E:/github/affiliate-products-importer/src/affiliateimporter-page/components/feature-tabs/FeatureTabs.jsx",
+    "domain": "affiliate-products-importer",
+    "locale_data": {
+        "affiliate-products-importer": {
+            "": {
+                "domain": "",
+                "lang": "es_MX",
+                "plural-forms": "nplurals=2; plural=n != 1;"
+            },
+            "Settings": [
+                "Ajustes"
+            ]
+        }
+    }
+}

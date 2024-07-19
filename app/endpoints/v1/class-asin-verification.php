@@ -70,7 +70,7 @@ class AsinVerification extends Endpoint {
 		$asin_codes   = isset( $request['asinCodes'] ) ? $request['asinCodes'] : '';
 
 		if ( $asin_codes == '' ) {
-			return new WP_Error( 'rest_azoncom_amazon_product_fetch', 'ASIN Codes parameter value can not be empty', array( 'status' => 500 ) );
+			return new WP_Error( 'rest_azoncom_amazon_product_fetch', __( 'ASIN Codes parameter value can not be empty', 'affiliate-products-importer' ), array( 'status' => 500 ) );
 		}
 
 		if ( ! empty( $access_key ) && ! empty( $secret_key ) && ! empty( $country_code ) && ! empty( $affiliate_id ) ) {
@@ -127,7 +127,7 @@ class AsinVerification extends Endpoint {
 				'status' => 'error',
 				'error'  => array(
 					'code'    => 'incomplete',
-					'message' => 'Your Amazon API is not yet set up.',
+					'message' => __( 'Your Amazon API is not yet set up.', 'affiliate-products-importer' ),
 				),
 			);
 			return new WP_REST_Response( $response_data, 400 );

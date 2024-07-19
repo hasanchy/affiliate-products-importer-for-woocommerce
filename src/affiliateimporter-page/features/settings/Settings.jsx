@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs, Card } from 'antd';
-import { DownloadOutlined, AmazonOutlined, ShoppingOutlined } from '@ant-design/icons';
+import { DownloadOutlined, AmazonOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSettingsActiveTab } from './settingsSlice';
 import AmazonApiSettings from './amazon-api-settings/AmazonApiSettings';
@@ -15,13 +15,13 @@ const Settings = () => {
 	const settingsTabItems = [
 		{
 			key: 'amazonApiSettings',
-			label: 'Amazon API Settings',
+			label: __( 'Amazon API Settings', 'affiliate-products-importer' ),
 			children: <AmazonApiSettings />,
 			icon: <AmazonOutlined/>
 		},
 		{
 			key: 'importSettings',
-			label: 'Import Settings',
+			label: __( 'Import Settings', 'affiliate-products-importer' ),
 			children: <ImportSettings />,
 			icon: <DownloadOutlined/>
 		}

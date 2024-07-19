@@ -122,7 +122,7 @@ class ImportSettings extends Endpoint {
 
 				$response_data = array(
 					'status'  => 'success',
-					'message' => 'Import Settings saved successfully.',
+					'message' => __( 'Import Settings saved successfully.', 'affiliate-products-importer' ),
 				);
 				return new WP_REST_Response( $response_data, 200 );
 			} catch ( \Exception $e ) {
@@ -133,7 +133,7 @@ class ImportSettings extends Endpoint {
 				'status' => 'error',
 				'error'  => array(
 					'code'    => 'incomplete',
-					'message' => 'Your Amazon API is not yet set up.',
+					'message' => __( 'Your Amazon API is not yet set up.', 'affiliate-products-importer' ),
 				),
 			);
 			return new WP_REST_Response( $response_data, 400 );

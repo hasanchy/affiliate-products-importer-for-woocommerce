@@ -5,6 +5,7 @@ import Dashboard from '../../features/dashboard/Dashboard';
 import Import from '../../features/import/Import';
 import Products from '../../features/products/Products';
 import Settings from '../../features/settings/Settings';
+import { __ } from '@wordpress/i18n';
 
 const FeatureTabs = () => {
 
@@ -13,25 +14,25 @@ const FeatureTabs = () => {
 	const tabItems = [
 		{
 			key: 'dashboard',
-			label: 'Dashboard',
+			label: __( 'Dashboard', 'affiliate-products-importer' ),
 			children: <Dashboard />,
 			icon: <DashboardOutlined />
 		},
 		{
 			key: 'import',
-			label: 'Import',
+			label: __( 'Import', 'affiliate-products-importer' ),
 			children: <Import/>,
 			icon: <DownloadOutlined />
 		},
 		{
 			key: 'products',
-			label: 'Products',
+			label: __( 'Products', 'affiliate-products-importer' ),
 			children: <Products/>,
 			icon: <ShoppingOutlined />
 		},
 		{
 			key: 'settings',
-			label: 'Settings',
+			label: __( 'Settings', 'affiliate-products-importer' ),
 			children: <Settings/>,
 			icon: <SettingOutlined />
 		}

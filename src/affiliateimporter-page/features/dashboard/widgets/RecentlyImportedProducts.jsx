@@ -2,6 +2,7 @@ import React, {memo} from 'react';
 import { Card, Image, Spin, Typography  } from 'antd';
 import { useSelector } from 'react-redux';
 const { Link } = Typography;
+import { __ } from '@wordpress/i18n';
 
 const RecentlyImportedProducts = memo(() => {
 
@@ -28,7 +29,7 @@ const RecentlyImportedProducts = memo(() => {
 	  
     return (
 		<>
-			<Card title="Recently Imported Products" bordered={true}>
+			<Card title={ __( 'Recently Imported Products', 'affiliate-products-importer' ) } bordered={true}>
 				{isProductsLoading && <Spin tip="" size="medium"> </Spin>}
 				{renderProductGallery()}
 			</Card>

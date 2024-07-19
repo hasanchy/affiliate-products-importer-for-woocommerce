@@ -7,6 +7,7 @@ import { CheckCircleOutlined } from '@ant-design/icons';
 import ImportFetchCounter from './ImportFetchCounter';
 import { setImportStepBack, setImportStepNext } from '../importSlice';
 import { asinVerification } from '../../../services/apiService';
+import { __ } from '@wordpress/i18n';
 
 const { TextArea } = Input;
 
@@ -118,16 +119,14 @@ const ImportCopyPasteForm = () => {
 			let codeTxt = duplicateAsinCodes.length === 1 ? 'code' : 'codes'
 			let wasTxt = duplicateAsinCodes.length === 1 ? 'was' : 'were'
 
-			// let warningMessage = <><div>The following ASIN {codeTxt} {wasTxt} detected multiple times in the list:</div><div><b>{duplicateAsinCodes.join(', ')}</b></div></>
 			let warningMessage = <>The following ASIN {codeTxt} {wasTxt} detected multiple times, and duplicates have been excluded: <Space>{duplicateAsinCodes.map(code=><Tag color='warning'>{code}</Tag>)}</Space></>
 			return <div style={{ marginTop: '10px' }}>
 				{warningMessage}
-				{/* <Alert type='warning' message={warningMessage}/> */}
 			</div>
 		}
 
 		return <div style={{ marginTop: '10px' }}>
-			Provide ASIN codes separated by commas, newlines, or spaces.
+			{ __( 'Provide ASIN codes separated by commas, newlines, or spaces.', 'affiliate-products-importer' ) }
 		</div>;
 	}
 
@@ -140,7 +139,7 @@ const ImportCopyPasteForm = () => {
 				<Row gutter={20}>
 					<Col span={4}>
 						<Flex style={{height:'100%'}} justify='flex-end' align='center'>
-							ASIN Codes
+							{ __( 'ASIN Codes', 'affiliate-products-importer' ) }
 						</Flex>
 					</Col>
 					<Col span={10}>
@@ -173,20 +172,19 @@ const ImportCopyPasteForm = () => {
         }else if(!isImportFetchInProgress && importFetchItems.length && !importableFetchItems.length){
             alert={
                 type:'warning',
-                message: 'No importable products were found from this fetch.'
+                message: __('No importable products were found from this fetch.', 'affiliate-products-importer' )
             }
         }
         
         if(alert.type){
-            return <><Row gutter={20}>
-			<Col span={4}></Col>
-			<Col span={10}>
-			<Alert type={alert.type} message={alert.message}/>
-				</Col>
-			</Row>
+            return <>
+				<Row gutter={20}>
+					<Col span={4}></Col>
+					<Col span={10}>
+						<Alert type={alert.type} message={alert.message}/>
+					</Col>
+				</Row>
 			</>
-			
-			
         }
 
         return null;
@@ -220,7 +218,7 @@ const ImportCopyPasteForm = () => {
                         </Row>
                     </Space>
                 </Card>
-                {displayImportFetchCounter && <ImportFetchCounter title='ASIN Verification In Progress' />}
+                {displayImportFetchCounter && <ImportFetchCounter title={ __('ASIN Verification In Progress', 'affiliate-products-importer' ) } />}
             </React.Fragment>
         )
     }else{

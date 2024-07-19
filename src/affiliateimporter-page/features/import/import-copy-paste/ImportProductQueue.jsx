@@ -4,6 +4,7 @@ import {  UndoOutlined, CloseCircleTwoTone, DeleteOutlined } from '@ant-design/i
 import { setImportCancelledFetchItems, setImportQueuedFetchItems, setImportQueueDeletable } from './importCopyPasteSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveProducts } from '../../../services/apiService';
+import { __ } from '@wordpress/i18n';
 
 const { Link } = Typography;
 
@@ -41,7 +42,7 @@ const ImportProductQueue = memo(() => {
 	const renderCardExtra = () => {
 		if(!displayImportSuccessMessage && !isImportInProgress){
 			return <Flex gap={'small'} align='center'>
-				<Tooltip placement="topLeft" title="Undo import queue delete" color={'purple'} key={'blue'}>
+				<Tooltip placement="topLeft" title={ __( 'Undo import queue delete', 'affiliate-products-importer' ) } color={'purple'} key={'blue'}>
 					<Button size='small' type="default" icon={<UndoOutlined/>} style={{display:displayUndoButton}} onClick={undoImportQueueDelete}></Button>
 				</Tooltip>
 				<Switch checkedChildren={<DeleteOutlined/>} unCheckedChildren={<DeleteOutlined />}  onChange={handleSwitchChange}/>
@@ -63,29 +64,29 @@ const ImportProductQueue = memo(() => {
 				
 				gallery.push(
 					<div className='azoncom-image-gallery'>
-							<Card>
-								<Image.PreviewGroup
-									items={previewImages}
-									>
-										{!isLoading && !isSuccessful && isImportQueueDeletable && (
-											<div style={{position:'absolute', insetInlineEnd:'0', top:'0', cursor:'pointer'}}>
-												<CloseCircleTwoTone style={{ fontSize: '20px', color: '#999' }} onClick={handleImportQueueDelete.bind(this, importFetchItems[i].asin)}/>
-											</div>
-										)}
-									<Image src={importFetchItems[i].image_primary} alt={importFetchItems[i].post_title} width='125px'/>
-								</Image.PreviewGroup>
-								<div style={{width:'125px'}}>
-									<Link href={importFetchItems[i].product_url} target="_blank">
-										{importFetchItems[i].post_title.substring(0, 55)}...
-									</Link>
-								</div>
-								{isSuccessful && (
-									<Alert message="Imported!" type="success" showIcon />
-								)}
-								{!isSuccessful && (
-									<Button type='default' disabled={!selectedCategories.length} loading={isLoading} onClick={handleSingleProductImport.bind(this, importFetchItems[i])}>Import</Button>
-								)}
-							</Card>
+						<Card>
+							<Image.PreviewGroup
+								items={previewImages}
+								>
+									{!isLoading && !isSuccessful && isImportQueueDeletable && (
+										<div style={{position:'absolute', insetInlineEnd:'0', top:'0', cursor:'pointer'}}>
+											<CloseCircleTwoTone style={{ fontSize: '20px', color: '#999' }} onClick={handleImportQueueDelete.bind(this, importFetchItems[i].asin)}/>
+										</div>
+									)}
+								<Image src={importFetchItems[i].image_primary} alt={importFetchItems[i].post_title} width='125px'/>
+							</Image.PreviewGroup>
+							<div style={{width:'125px'}}>
+								<Link href={importFetchItems[i].product_url} target="_blank">
+									{importFetchItems[i].post_title.substring(0, 55)}...
+								</Link>
+							</div>
+							{isSuccessful && (
+								<Alert message={ __( 'Imported!', 'affiliate-products-importer' ) } type="success" showIcon />
+							)}
+							{!isSuccessful && (
+								<Button type='default' disabled={!selectedCategories.length} loading={isLoading} onClick={handleSingleProductImport.bind(this, importFetchItems[i])}>{ __( 'Import', 'affiliate-products-importer' ) }</Button>
+							)}
+						</Card>
 					</div>
 				);
 			}
@@ -98,7 +99,7 @@ const ImportProductQueue = memo(() => {
     return (
 		<>
 			{importableFetchItems.length > 0 &&
-				<Card title={`Import Queue: ${totalImportQueue}`} bordered={true}  extra={renderCardExtra()}>
+				<Card title={`${ __( 'Import Queue', 'affiliate-products-importer' ) }: ${totalImportQueue}`} bordered={true}  extra={renderCardExtra()}>
 					{renderProductGallery()}
 				</Card>
 			}

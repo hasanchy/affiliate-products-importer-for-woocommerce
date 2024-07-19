@@ -151,7 +151,7 @@ class AffiliateProductsImporter extends Base {
 			$this->page_scripts = array();
 		}
 
-		$handle       = 'affiliateimporter_pixelart';
+		$handle       = 'affprodsimp_affiliateimporter';
 		$src          = AFFPRODSIMP_ASSETS_URL . '/js/affiliateimporterpage.min.js';
 		$style_src    = AFFPRODSIMP_ASSETS_URL . '/css/affiliateimporterpage.min.css';
 		$dependencies = ! empty( $this->script_data( 'dependencies' ) )

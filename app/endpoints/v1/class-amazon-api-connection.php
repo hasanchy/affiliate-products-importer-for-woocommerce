@@ -105,7 +105,7 @@ class AmazonAPIConnection extends Endpoint {
 				$api->fetchProductsByKeywords( 'Pet Food', 1 );
 				$response_data = array(
 					'status'  => 'success',
-					'message' => 'The connection to your Amazon API was successful.',
+					'message' => __( 'The connection to your Amazon API was successful.', 'affiliate-products-importer' ),
 				);
 				return new WP_REST_Response( $response_data, 200 );
 			} catch ( \Exception $e ) {
@@ -116,7 +116,7 @@ class AmazonAPIConnection extends Endpoint {
 				'status' => 'error',
 				'error'  => array(
 					'code'    => 'incomplete',
-					'message' => 'Your Amazon API is not yet set up.',
+					'message' => __( 'Your Amazon API is not yet set up.', 'affiliate-products-importer' ),
 				),
 			);
 			return new WP_REST_Response( $response_data, 400 );
@@ -151,7 +151,7 @@ class AmazonAPIConnection extends Endpoint {
 				$api->fetchProductsByKeywords( 'Pet Food', 1 );
 				$response_data = array(
 					'status'  => 'success',
-					'message' => 'The connection to your Amazon API was successful.',
+					'message' => __( 'The connection to your Amazon API was successful.', 'affiliate-products-importer' ),
 				);
 				return new WP_REST_Response( $response_data, 200 );
 			} catch ( \Exception $e ) {
@@ -162,7 +162,7 @@ class AmazonAPIConnection extends Endpoint {
 				'status' => 'error',
 				'error'  => array(
 					'code'    => 'incomplete',
-					'message' => 'Your Amazon API is not yet set up.',
+					'message' => __( 'Your Amazon API is not yet set up.', 'affiliate-products-importer' ),
 				),
 			);
 			return new WP_REST_Response( $response_data, 400 );

@@ -1,20 +1,18 @@
 import React from 'react';
-import { Row, Col, Space, Flex, Button, Form, Result, Card, Typography } from 'antd';
+import { Row, Col, Space, Flex, Button, Result, Card } from 'antd';
 import CategoriesCheckbox from '../../../components/categories/CategoriesCheckbox';
-
-import { CloudDownloadOutlined, AndroidOutlined, AppleOutlined, ImportOutlined } from '@ant-design/icons';
-
+import { ImportOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux'
-import { setDisplayImportCounter, setSelectedCategories, setMessage, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportSuccessMessage, setImportCancelledFetchItems, setImportableFetchItems, setImportFetchItems, setImportFetchProgress, setAsinValue } from './importCopyPasteSlice';
-
+import { setDisplayImportCounter, setSelectedCategories, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportSuccessMessage, setImportCancelledFetchItems, setImportableFetchItems, setImportFetchItems, setImportFetchProgress, setAsinValue } from './importCopyPasteSlice';
 import ImportFetchCounter from './ImportFetchCounter';
 import { setImportStepBack, setImportStepIndex } from '../importSlice';
 import { saveProducts } from '../../../services/apiService';
+import { __ } from '@wordpress/i18n';
 
 const ImportCopyPasteFinal = () => {
 
 	const dispatch = useDispatch();
-	const { displayImportCounter, importQueue, selectedCategories, message, isImporting, importFetchItems, importableFetchItems, importCancelledFetchItems, isImportInProgress, importSuccessfulFetchItems, importQueuedFetchItems, displayImportSuccessMessage } = useSelector((state) => state.importCopyPaste);
+	const { displayImportCounter, importQueue, selectedCategories, isImporting, importFetchItems, importableFetchItems, importCancelledFetchItems, isImportInProgress, importSuccessfulFetchItems, importQueuedFetchItems, displayImportSuccessMessage } = useSelector((state) => state.importCopyPaste);
 
 	let totalImportQueue = importableFetchItems.length - importCancelledFetchItems.length - importSuccessfulFetchItems.length;
 
@@ -24,12 +22,6 @@ const ImportCopyPasteFinal = () => {
 
     const handleImportStepBack = () => {
         dispatch(setImportStepBack());
-    }
-
-    const dispatchSaveProducts = (importQueueChunk, i) => {
-        setTimeout(function(){
-            dispatch(saveProducts(importQueueChunk));
-		}, 2000 * i);
     }
 
 	const importBulkProducts = async () => {
@@ -47,8 +39,6 @@ const ImportCopyPasteFinal = () => {
 		if(queuedFetchItems.length){
 			let newQueuedAsins = [...importQueuedFetchItems, ...queuedAsins]
 			dispatch(setImportQueuedFetchItems(newQueuedAsins));
-
-			
 
 			let productsPerRequest = 5;
 			let total = queuedFetchItems.length;
@@ -111,7 +101,7 @@ const ImportCopyPasteFinal = () => {
 				<Row gutter={20}>
 					<Col span={4}>
 						<Flex style={{height:'100%'}} justify='flex-end' align='center'>
-							Import in
+							{  __( 'Import in', 'affiliate-products-importer' ) }
 						</Flex>
 					</Col>
 					<Col span={10}>
@@ -121,7 +111,7 @@ const ImportCopyPasteFinal = () => {
 				<Row gutter={20}>
 					<Col span={4}></Col>
 					<Col span={10}>
-						<Button type="primary" icon={<ImportOutlined />} loading={isImportInProgress} disabled={!totalImportQueue || selectedCategories.length < 1} onClick={importBulkProducts}>Import {totalImportQueue} {productsLabel}</Button>
+						<Button type="primary" icon={<ImportOutlined />} loading={isImportInProgress} disabled={!totalImportQueue || selectedCategories.length < 1} onClick={importBulkProducts}>Import {totalImportQueue} productsLabel</Button>
 					</Col>
 				</Row>
 			</>
@@ -137,11 +127,11 @@ const ImportCopyPasteFinal = () => {
 				<Col span={24}>
 					<Result
 						status="success"
-						title={`Successfully Imported ${totalSuccessfulImports} ${productText}!`}
+						title={`${__( 'Successfully Imported', 'affiliate-products-importer' )} ${totalSuccessfulImports} ${productText}!`}
 						subTitle=""
 						extra={[
 							<Button type="primary" key="console" onClick={handleImportAgain}>
-								Import Again
+								{ __( 'Import Again', 'affiliate-products-importer' ) }
 							</Button>
 						]}
 					/>
@@ -166,18 +156,15 @@ const ImportCopyPasteFinal = () => {
                     <Row>
                         <Col span={12}> 
                             <Flex justify='flex-start'>
-                                {!displayImportSuccessMessage && <Button type="default" onClick={handleImportStepBack}>Back</Button>}
+                                {!displayImportSuccessMessage && <Button type="default" onClick={handleImportStepBack}>{ __( 'Back', 'affiliate-products-importer' ) }</Button>}
                             </Flex>
                         </Col>
                         <Col span={12}>
-                            {/* <Flex justify='flex-end'>
-                                <Button type="primary" onClick={handleImportQueue} disabled={disabled}>Fetch</Button>
-                            </Flex> */}
                         </Col>
                     </Row>
                 </Space>
             </Card>
-			{displayImportCounter && <ImportFetchCounter title='Products Import In Progress' />}
+			{displayImportCounter && <ImportFetchCounter title={ __( 'Products Import In Progress', 'affiliate-products-importer' ) } />}
 		</React.Fragment>
 	)
 }
