@@ -3,7 +3,7 @@ import App from "./app/App";
 import store from './store/store';
 import './assets/styles/main.scss';
 
-const domElement = document.getElementById( window.affprodsimpAffiliateImporter.dom_element_id );
+const domElement = document.getElementById( window.affprodimpAffiliateImporter.dom_element_id );
 
 if(domElement){
 	const root = ReactDOM.createRoot(domElement)

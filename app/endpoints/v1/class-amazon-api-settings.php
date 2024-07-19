@@ -5,18 +5,18 @@
  * @link          https://themedyno.com/
  * @since         1.0.0
  *
- * @author        AFFPRODSIMP (https://themedyno.com)
- * @package       AFFPRODSIMP\PluginTest
+ * @author        AFFPRODIMP (https://themedyno.com)
+ * @package       AFFPRODIMP\PluginTest
  *
  * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
  */
 
-namespace AFFPRODSIMP\App\Endpoints\V1;
+namespace AFFPRODIMP\App\Endpoints\V1;
 
 // Abort if called directly.
 defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
-use AFFPRODSIMP\Core\Endpoint;
+use AFFPRODIMP\Core\Endpoint;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;

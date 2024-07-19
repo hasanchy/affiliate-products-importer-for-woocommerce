@@ -5,10 +5,10 @@
  * @link    https://themedyno.com/
  * @since   1.0.0
  *
- * @package AFFPRODSIMP_Core
+ * @package AFFPRODIMP_Core
  */
 
-namespace AFFPRODSIMP\Core;
+namespace AFFPRODIMP\Core;
 
 // Avoid direct file request
 defined( 'ABSPATH' ) || exit;

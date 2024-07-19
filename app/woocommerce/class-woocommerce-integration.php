@@ -5,18 +5,18 @@
  * @link          https://themedyno.com/
  * @since         1.0.0
  *
- * @author        AFFPRODSIMP (https://themedyno.com)
- * @package       AFFPRODSIMP\App
+ * @author        AFFPRODIMP (https://themedyno.com)
+ * @package       AFFPRODIMP\App
  *
  * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
  */
 
-namespace AFFPRODSIMP\App\WooCommerce;
+namespace AFFPRODIMP\App\WooCommerce;
 
 // Abort if called directly.
 defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
-use AFFPRODSIMP\Core\Base;
+use AFFPRODIMP\Core\Base;
 
 class WooCommerceIntegration extends Base {
 

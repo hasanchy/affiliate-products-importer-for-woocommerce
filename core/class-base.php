@@ -6,15 +6,15 @@
  * @link    https://themedyno.com/
  * @since   1.0.0
  *
- * @author  AFFPRODSIMP (https://themedyno.com)
- * @package AFFPRODSIMP_Core
+ * @author  AFFPRODIMP (https://themedyno.com)
+ * @package AFFPRODIMP_Core
  *
  * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
  */
 
-namespace AFFPRODSIMP\Core;
+namespace AFFPRODIMP\Core;
 
-use AFFPRODSIMP\Core\Singleton;
+use AFFPRODIMP\Core\Singleton;
 
 // Abort if called directly.
 defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 /**
  * Class Base
  *
- * @package AFFPRODSIMP\Core
+ * @package AFFPRODIMP\Core
  */
 abstract class Base extends Singleton {
 	/**

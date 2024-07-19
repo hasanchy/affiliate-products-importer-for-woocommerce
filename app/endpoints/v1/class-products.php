@@ -5,15 +5,15 @@
  * @link          https://themedyno.com/
  * @since         1.0.0
  *
- * @package       AFFPRODSIMP\PluginTest
+ * @package       AFFPRODIMP\PluginTest
  */
 
-namespace AFFPRODSIMP\App\Endpoints\V1;
+namespace AFFPRODIMP\App\Endpoints\V1;
 
 // Avoid direct file request
 defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
-use AFFPRODSIMP\Core\Endpoint;
+use AFFPRODIMP\Core\Endpoint;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;

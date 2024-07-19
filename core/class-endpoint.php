@@ -5,13 +5,13 @@
  * @link          https://themedyno.com/
  * @since         1.0.0
  *
- * @author        AFFPRODSIMP (https://themedyno.com)
- * @package       AFFPRODSIMP\PluginTest
+ * @author        AFFPRODIMP (https://themedyno.com)
+ * @package       AFFPRODIMP\PluginTest
  *
  * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
  */
 
-namespace AFFPRODSIMP\Core;
+namespace AFFPRODIMP\Core;
 
 use WP_REST_Response;
 use WP_REST_Controller;
@@ -56,7 +56,7 @@ class Endpoint extends WP_REST_Controller {
 	 */
 	protected function __construct() {
 		// Setup namespace of the endpoint.
-		$this->namespace = 'affiliateimporter/v' . $this->version;
+		$this->namespace = 'affiliate-products-importer/v' . $this->version;
 
 		// If the single instance hasn't been set, set it now.
 		$this->register_hooks();
@@ -114,7 +114,7 @@ class Endpoint extends WP_REST_Controller {
 		 * @since 1.0.0
 		 *
 		 */
-		return apply_filters( 'affprodsimp_rest_settings_permission', $capable, $request );
+		return apply_filters( 'affprodimp_rest_settings_permission', $capable, $request );
 	}
 
 	/**

@@ -3,7 +3,7 @@
  * Main file for WordPress.
  *
  * @wordpress-plugin
- * Plugin Name:     Affiliate Products Importer - Affiliate Products Importer for WooCommerce
+ * Plugin Name:     Affiliate Products Importer for WooCommerce
  * Description:     Easily import Amazon affiliate products into your WooCommerce store.
  * Author:          ThemeDyno
  * Author URI:      https://themedyno.com/
@@ -24,58 +24,58 @@ if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 }
 
 // Plugin version.
-if ( ! defined( 'AFFPRODSIMP_VERSION' ) ) {
-	define( 'AFFPRODSIMP_VERSION', '1.0.0' );
+if ( ! defined( 'AFFPRODIMP_VERSION' ) ) {
+	define( 'AFFPRODIMP_VERSION', '1.0.0' );
 }
 
-// Define AFFPRODSIMP_PLUGIN_FILE.
-if ( ! defined( 'AFFPRODSIMP_PLUGIN_FILE' ) ) {
-	define( 'AFFPRODSIMP_PLUGIN_FILE', __FILE__ );
+// Define AFFPRODIMP_PLUGIN_FILE.
+if ( ! defined( 'AFFPRODIMP_PLUGIN_FILE' ) ) {
+	define( 'AFFPRODIMP_PLUGIN_FILE', __FILE__ );
 }
 
 // Plugin directory.
-if ( ! defined( 'AFFPRODSIMP_DIR' ) ) {
-	define( 'AFFPRODSIMP_DIR', plugin_dir_path( __FILE__ ) );
+if ( ! defined( 'AFFPRODIMP_DIR' ) ) {
+	define( 'AFFPRODIMP_DIR', plugin_dir_path( __FILE__ ) );
 }
 
 // Plugin basename.
-if ( ! defined( 'AFFPRODSIMP_PLUGIN_BASENAME' ) ) {
-	define( 'AFFPRODSIMP_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+if ( ! defined( 'AFFPRODIMP_PLUGIN_BASENAME' ) ) {
+	define( 'AFFPRODIMP_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 }
 
 // Languages directory.
-if ( ! defined( 'AFFPRODSIMP_LANGUAGES_DIR' ) ) {
-	define( 'AFFPRODSIMP_LANGUAGES_DIR', AFFPRODSIMP_DIR . '/languages' );
+if ( ! defined( 'AFFPRODIMP_LANGUAGES_DIR' ) ) {
+	define( 'AFFPRODIMP_LANGUAGES_DIR', AFFPRODIMP_DIR . '/languages' );
 }
 
 // Plugin url.
-if ( ! defined( 'AFFPRODSIMP_URL' ) ) {
-	define( 'AFFPRODSIMP_URL', plugin_dir_url( __FILE__ ) );
+if ( ! defined( 'AFFPRODIMP_URL' ) ) {
+	define( 'AFFPRODIMP_URL', plugin_dir_url( __FILE__ ) );
 }
 
 // Assets url.
-if ( ! defined( 'AFFPRODSIMP_ASSETS_URL' ) ) {
-	define( 'AFFPRODSIMP_ASSETS_URL', AFFPRODSIMP_URL . '/assets' );
+if ( ! defined( 'AFFPRODIMP_ASSETS_URL' ) ) {
+	define( 'AFFPRODIMP_ASSETS_URL', AFFPRODIMP_URL . '/assets' );
 }
 
 /**
- * AFFPRODSIMP_AffiliateImporter class.
+ * AFFPRODIMP_AffiliateImporter class.
  */
-class AFFPRODSIMP_AffiliateImporter {
+class AFFPRODIMP_AffiliateImporter {
 
 	/**
 	 * Holds the class instance.
 	 *
-	 * @var AFFPRODSIMP_AffiliateImporter $instance
+	 * @var AFFPRODIMP_AffiliateImporter $instance
 	 */
 	private static $instance = null;
 
 	/**
 	 * Return an instance of the class
 	 *
-	 * Return an instance of the AFFPRODSIMP_AffiliateImporter Class.
+	 * Return an instance of the AFFPRODIMP_AffiliateImporter Class.
 	 *
-	 * @return AFFPRODSIMP_AffiliateImporter class instance.
+	 * @return AFFPRODIMP_AffiliateImporter class instance.
 	 * @since 1.0.0
 	 *
 	 */
@@ -97,7 +97,7 @@ class AFFPRODSIMP_AffiliateImporter {
 			dirname( plugin_basename( __FILE__ ) ) . '/languages'
 		);
 
-		AFFPRODSIMP\Core\Loader::instance();
+		AFFPRODIMP\Core\Loader::instance();
 	}
 }
 
@@ -105,6 +105,6 @@ class AFFPRODSIMP_AffiliateImporter {
 add_action(
 	'plugins_loaded',
 	function () {
-		AFFPRODSIMP_AffiliateImporter::get_instance()->load();
+		AFFPRODIMP_AffiliateImporter::get_instance()->load();
 	}
 );
