@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSettingsActiveTab } from './settingsSlice';
 import AmazonApiSettings from './amazon-api-settings/AmazonApiSettings';
 import ImportSettings from './import-settings/ImportSettings';
+import { __ } from '@wordpress/i18n';
 
 
 const Settings = () => {
