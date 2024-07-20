@@ -64,59 +64,54 @@ class Products extends Endpoint {
 		global $wpdb;
 
 		$page    = $request->get_param( 'page' ) ? $request->get_param( 'page' ) : 1;
-		$keyword = $request->get_param( 'keyword' );
 		$limit   = $request->get_param( 'per_page' ) ? $request->get_param( 'per_page' ) : 50;
 		$start   = ( $page - 1 ) * $limit;
 
-		$search_sql = $keyword ? $wpdb->prepare( 'AND wp_posts.post_title LIKE %s', '%' . $wpdb->esc_like( $keyword ) . '%' ) : '';
-
-		$sql = $wpdb->prepare(
-			"
-            SELECT 
-                wp_posts.ID AS product_id,
-                wp_posts.guid AS product_url,
-                wp_posts.post_title AS product_title,
-                wp_posts.post_date AS product_import_date,
-                wp_postmeta.meta_value AS product_asin
-            FROM 
-                wp_posts
-            LEFT JOIN 
-                wp_postmeta ON (wp_posts.ID = wp_postmeta.post_id)
-            WHERE 
-                wp_posts.post_type = %s
-                AND wp_posts.post_status = %s
-                AND wp_postmeta.meta_key = %s
-                $search_sql
-            ORDER BY product_id DESC
-            LIMIT %d, %d",
-			'product',
-			'publish',
-			'_azoncom_amz_asin',
-			$start,
-			$limit
+		$products = $wpdb->get_results(
+			$wpdb->prepare(
+				"
+				SELECT 
+					wp_posts.ID AS product_id,
+					wp_posts.guid AS product_url,
+					wp_posts.post_title AS product_title,
+					wp_posts.post_date AS product_import_date,
+					wp_postmeta.meta_value AS product_asin
+				FROM 
+					wp_posts
+				LEFT JOIN 
+					wp_postmeta ON (wp_posts.ID = wp_postmeta.post_id)
+				WHERE 
+					wp_posts.post_type = %s
+					AND wp_posts.post_status = %s
+					AND wp_postmeta.meta_key = %s
+				ORDER BY product_id DESC
+				LIMIT %d, %d",
+				'product',
+				'publish',
+				'_azoncom_amz_asin',
+				$start,
+				$limit
+			)
 		);
 
-		$products = $wpdb->get_results( $sql );
-
-		$count_sql = $wpdb->prepare(
-			"
-            SELECT 
-                COUNT(*) AS total
-            FROM 
-                wp_posts
-            LEFT JOIN 
-                wp_postmeta ON (wp_posts.ID = wp_postmeta.post_id)
-            WHERE 
-                wp_posts.post_type = %s
-                AND wp_posts.post_status = %s
-                AND wp_postmeta.meta_key = %s
-                $search_sql",
-			'product',
-			'publish',
-			'_azoncom_amz_asin'
+		$total = $wpdb->get_var(
+			$wpdb->prepare(
+				"
+				SELECT 
+					COUNT(*) AS total
+				FROM 
+					wp_posts
+				LEFT JOIN 
+					wp_postmeta ON (wp_posts.ID = wp_postmeta.post_id)
+				WHERE 
+					wp_posts.post_type = %s
+					AND wp_posts.post_status = %s
+					AND wp_postmeta.meta_key = %s",
+				'product',
+				'publish',
+				'_azoncom_amz_asin'
+			)
 		);
-
-		$total = $wpdb->get_var( $count_sql );
 
 		foreach ( $products as $product ) {
 			$post_id      = $product->product_id;
