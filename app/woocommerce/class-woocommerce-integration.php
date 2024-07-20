@@ -1,14 +1,6 @@
 <?php
 /**
- * Google Auth block.
- *
- * @link          https://themedyno.com/
- * @since         1.0.0
- *
- * @author        AFFPRODIMP (https://themedyno.com)
- * @package       AFFPRODIMP\App
- *
- * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
+ * WooCommerce integration
  */
 
 namespace AFFPRODIMP\App\WooCommerce;

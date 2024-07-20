@@ -1,11 +1,6 @@
 <?php
 /**
  * Class to boot up plugin.
- *
- * @link    https://themedyno.com/
- * @since   1.0.0
- *
- * @package AFFPRODIMP_Core
  */
 
 namespace AFFPRODIMP\Core;

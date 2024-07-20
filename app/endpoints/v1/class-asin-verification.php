@@ -1,11 +1,6 @@
 <?php
 /**
- * Google Auth Shortcode.
- *
- * @link          https://themedyno.com/
- * @since         1.0.0
- *
- * @package       AFFPRODIMP\PluginTest
+ * API endpoint class for verifying ASINs and fetching products data from the Amazon
  */
 
 namespace AFFPRODIMP\App\Endpoints\V1;
@@ -31,7 +26,7 @@ class AsinVerification extends Endpoint {
 	protected $endpoint = 'asin-verification';
 
 	/**
-	 * Register the routes for handling auth functionality.
+	 * Register the routes for handling ASIN vefirication functionality.
 	 *
 	 * @return void
 	 * @since 1.0.0

@@ -1,14 +1,6 @@
 <?php
 /**
  * Base class for all endpoint classes.
- *
- * @link          https://themedyno.com/
- * @since         1.0.0
- *
- * @author        AFFPRODIMP (https://themedyno.com)
- * @package       AFFPRODIMP\PluginTest
- *
- * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
  */
 
 namespace AFFPRODIMP\Core;

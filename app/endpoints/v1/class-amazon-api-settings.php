@@ -1,14 +1,6 @@
 <?php
 /**
- * Google Auth Shortcode.
- *
- * @link          https://themedyno.com/
- * @since         1.0.0
- *
- * @author        AFFPRODIMP (https://themedyno.com)
- * @package       AFFPRODIMP\PluginTest
- *
- * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
+ * API endpoint class for saving and fetching the Amazon AWS Settings
  */
 
 namespace AFFPRODIMP\App\Endpoints\V1;
@@ -32,7 +24,7 @@ class AmazonApiSettings extends Endpoint {
 	protected $endpoint = 'amazon-api-settings';
 
 	/**
-	 * Register the routes for handling auth functionality.
+	 * Register the routes for handling Amazon API settings functionality.
 	 *
 	 * @return void
 	 * @since 1.0.0

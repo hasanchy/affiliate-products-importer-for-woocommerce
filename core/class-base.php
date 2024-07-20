@@ -2,14 +2,6 @@
 /**
  * File Description:
  * Base abstract class to be inherited by other classes
- *
- * @link    https://themedyno.com/
- * @since   1.0.0
- *
- * @author  AFFPRODIMP (https://themedyno.com)
- * @package AFFPRODIMP_Core
- *
- * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
  */
 
 namespace AFFPRODIMP\Core;

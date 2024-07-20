@@ -1,11 +1,6 @@
 <?php
 /**
- * Google Auth Shortcode.
- *
- * @link          https://themedyno.com/
- * @since         1.0.0
- *
- * @package       AFFPRODIMP\PluginTest
+ * API endpoint class for verifying the Amazon AWS settings.
  */
 
 namespace AFFPRODIMP\App\Endpoints\V1;
@@ -31,7 +26,7 @@ class AmazonAPIConnection extends Endpoint {
 	protected $endpoint = 'amazon-api-connection';
 
 	/**
-	 * Register the routes for handling auth functionality.
+	 * Register the routes for handling Amazon AWS API validation functionality.
 	 *
 	 * @return void
 	 * @since 1.0.0

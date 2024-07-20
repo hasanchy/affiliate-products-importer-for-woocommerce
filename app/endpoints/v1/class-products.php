@@ -1,11 +1,6 @@
 <?php
 /**
  * Products Endpoint.
- *
- * @link          https://themedyno.com/
- * @since         1.0.0
- *
- * @package       AFFPRODIMP\PluginTest
  */
 
 namespace AFFPRODIMP\App\Endpoints\V1;
@@ -29,7 +24,7 @@ class Products extends Endpoint {
 	protected $endpoint = 'products';
 
 	/**
-	 * Register the routes for handling auth functionality.
+	 * Register the routes for handling products functionality.
 	 *
 	 * @return void
 	 * @since 1.0.0

@@ -1,14 +1,6 @@
 <?php
 /**
- * Google Auth block.
- *
- * @link          https://themedyno.com/
- * @since         1.0.0
- *
- * @author        AFFPRODIMP (https://themedyno.com)
- * @package       AFFPRODIMP\App
- *
- * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
+ * Affiliate Products Import block.
  */
 
 namespace AFFPRODIMP\App\Admin_Pages;
@@ -156,7 +148,6 @@ class AffiliateProductsImporter extends Base {
 			'localize'  => array(
 				'dom_element_id' => $this->unique_id,
 				'restEndpoint'   => array(
-					'settings'            => home_url( '/wp-json' ) . '/affiliate-products-importer/v1/settings',
 					'amazonAPIConnection' => home_url( '/wp-json' ) . '/affiliate-products-importer/v1/amazon-api-connection',
 					'products'            => home_url( '/wp-json' ) . '/affiliate-products-importer/v1/products',
 					'categories'          => home_url( '/wp-json' ) . '/affiliate-products-importer/v1/categories',

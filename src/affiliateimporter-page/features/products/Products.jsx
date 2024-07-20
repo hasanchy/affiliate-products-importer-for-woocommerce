@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Col, Row, Space, Table, Tooltip, Image } from 'antd';
+import { Button, Card, Space, Table, Tooltip, Image } from 'antd';
 import { ReloadOutlined, EditOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../../services/apiService';
@@ -28,10 +28,13 @@ const Products = () => {
 			title: __( 'Image', 'affiliate-products-importer' ),
 			dataIndex: 'image_primary',
 			key: 'img',
-			render: (imagePrimary) => <Image
-				width={125}
-				src={imagePrimary}
-			/>,
+			render: (imagePrimary, productObj) => <a href={productObj.product_url} target='_blank'>
+				<Image
+					width={125}
+					src={imagePrimary}
+					preview={false}
+				/>
+			</a>,
 		},
 		{
 			title: __( 'Title', 'affiliate-products-importer' ),

@@ -1,11 +1,6 @@
 <?php
 /**
- * Google Auth Shortcode.
- *
- * @link          https://themedyno.com/
- * @since         1.0.0
- *
- * @package       AFFPRODIMP\PluginTest
+ * API endpoint class for fetching product categories.
  */
 
 namespace AFFPRODIMP\App\Endpoints\V1;
@@ -29,7 +24,7 @@ class Categories extends Endpoint {
 	protected $endpoint = 'categories';
 
 	/**
-	 * Register the routes for handling auth functionality.
+	 * Register the routes for handling categories functionality.
 	 *
 	 * @return void
 	 * @since 1.0.0

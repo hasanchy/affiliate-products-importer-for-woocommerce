@@ -1,14 +1,6 @@
 <?php
 /**
- * Google Auth Shortcode.
- *
- * @link          https://themedyno.com/
- * @since         1.0.0
- *
- * @author        AFFPRODIMP (https://themedyno.com)
- * @package       AFFPRODIMP\PluginTest
- *
- * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
+ * API endpoint class for the imort settings
  */
 
 namespace AFFPRODIMP\App\Endpoints\V1;
@@ -32,7 +24,7 @@ class ImportSettings extends Endpoint {
 	protected $endpoint = 'import-settings';
 
 	/**
-	 * Register the routes for handling auth functionality.
+	 * Register the routes for handling import settings functionality.
 	 *
 	 * @return void
 	 * @since 1.0.0
