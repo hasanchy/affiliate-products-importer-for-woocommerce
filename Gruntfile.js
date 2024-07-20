@@ -9,6 +9,7 @@ module.exports = function (grunt) {
 		'uninstall.php',
 		'affiliate-products-importer.php',
 		'composer.json',
+		'readme.txt',
 		'vendor/**',
 		'!**/*.map',
 	]
