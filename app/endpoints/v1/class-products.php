@@ -88,7 +88,7 @@ class Products extends Endpoint {
 				LIMIT %d, %d",
 				'product',
 				'publish',
-				'_azoncom_amz_asin',
+				'affprodimp_amz_asin',
 				$start,
 				$limit
 			)
@@ -109,7 +109,7 @@ class Products extends Endpoint {
 					AND wp_postmeta.meta_key = %s",
 				'product',
 				'publish',
-				'_azoncom_amz_asin'
+				'affprodimp_amz_asin'
 			)
 		);
 
@@ -228,15 +228,15 @@ class Products extends Endpoint {
 			wp_set_object_terms( $post_id, 'external', 'product_type' );
 
 			/*===================Update product Images=======================*/
-			$remore_image = get_option( 'azoncom_settings_remote_image' );
+			$remore_image = get_option( 'affprodimp_settings_remote_image' );
 
 			if ( $remore_image === 'yes' ) {
-				update_post_meta( $post_id, '_azoncom_product_img_url', $image_primary );
+				update_post_meta( $post_id, 'affprodimp_product_img_url', $image_primary );
 
 				foreach ( $image_variants as $image_variant ) {
 					$urls[] = $image_variant;
 				}
-				update_post_meta( $post_id, '_azoncom_product_gallery_url', $urls );
+				update_post_meta( $post_id, 'affprodimp_product_gallery_url', $urls );
 			} else {
 				$thumbnail_image_id = \media_sideload_image( $image_primary, $post_id, $post_title, 'id' );
 				set_post_thumbnail( $post_id, $thumbnail_image_id );
@@ -252,7 +252,7 @@ class Products extends Endpoint {
 			}
 
 			/*===================Update product ASIN=======================*/
-			update_post_meta( $post_id, '_azoncom_amz_asin', $asin );
+			update_post_meta( $post_id, 'affprodimp_amz_asin', $asin );
 
 			/*===================Update product price=======================*/
 			if ( $price ) {

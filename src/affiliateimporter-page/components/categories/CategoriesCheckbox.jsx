@@ -10,8 +10,6 @@ const CategoriesCheckbox = ({ value, onChange, disabled, displayError }) => {
 	const [selectedCategories, setSelectedCategories] = useState(value??[]);
 
 	const handleCheckboxChange = (category, e) => {
-		// console.log( e );
-		let id = category.id;
 		let checked = e.target.checked;
 		let newSelectedCategories;
 		if (checked) {
@@ -58,8 +56,7 @@ const CategoriesCheckbox = ({ value, onChange, disabled, displayError }) => {
 
 			categoryListHTML.push(
 				<li key={category.id}>
-					<Checkbox onChange={handleCheckboxChange.bind(this,category)} defaultChecked={defaultChecked}>{category.name}</Checkbox>
-					{/* <label><input type="checkbox" disabled={disabled} value={category.id} checked={isChecked} onChange={handleCheckboxChange.bind(this, { id: category.id, name: category.name })} /> {category.name}</label> */}
+					<Checkbox onChange={handleCheckboxChange.bind(this,category)} disabled={disabled} defaultChecked={defaultChecked}>{category.name}</Checkbox>
 					{children}
 				</li>
 			)
@@ -70,7 +67,7 @@ const CategoriesCheckbox = ({ value, onChange, disabled, displayError }) => {
 	return (
 		<div>
 			<Card>
-				<div className="azoncom-product-categories">
+				<div className="affprodimp-product-categories">
 					{isLoading ? (
 						<div>Loading categories...</div>
 					) : (

@@ -63,7 +63,7 @@ const ImportProductQueue = memo(() => {
 				let previewImages = [importFetchItems[i].image_primary, ...importFetchItems[i].image_variants]
 				
 				gallery.push(
-					<div className='azoncom-image-gallery'>
+					<div className='affprodimp-image-gallery'>
 						<Card>
 							<Image.PreviewGroup
 								items={previewImages}

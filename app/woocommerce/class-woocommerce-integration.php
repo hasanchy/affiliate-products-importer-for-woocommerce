@@ -12,8 +12,8 @@ use AFFPRODIMP\Core\Base;
 
 class WooCommerceIntegration extends Base {
 
-	public $image_meta_url   = '_azoncom_product_img_url';
-	public $gallery_meta_url = '_azoncom_product_gallery_url';
+	public $image_meta_url   = 'affprodimp_product_img_url';
+	public $gallery_meta_url = 'affprodimp_product_gallery_url';
 
 	/**
 	 * Initializes the page.
@@ -25,10 +25,10 @@ class WooCommerceIntegration extends Base {
 	public function init() {
 		\add_filter( 'woocommerce_get_price_html', array( $this, 'amz_disclaimer_price_html' ), 100, 2 );
 
-		\add_filter( 'wp_get_attachment_image_src', array( $this, 'azoncom_replace_attachment_image_src' ), 100, 2 );
+		\add_filter( 'wp_get_attachment_image_src', array( $this, 'affprodimp_replace_attachment_image_src' ), 100, 2 );
 
-		add_filter( 'woocommerce_product_get_gallery_image_ids', array( $this, 'azoncom_set_customized_gallary_ids' ), 99, 2 );
-		add_filter( 'woocommerce_product_get_image_id', array( $this, 'azoncom_woocommerce_product_get_image_id_support' ), 99, 2 );
+		add_filter( 'woocommerce_product_get_gallery_image_ids', array( $this, 'affprodimp_set_customized_gallary_ids' ), 99, 2 );
+		add_filter( 'woocommerce_product_get_image_id', array( $this, 'affprodimp_woocommerce_product_get_image_id_support' ), 99, 2 );
 	}
 
 	public function amz_disclaimer_price_html( $price, $product ) {
@@ -66,8 +66,8 @@ class WooCommerceIntegration extends Base {
 		return $price . " (as of $price_update_date)";
 	}
 
-	public function azoncom_replace_attachment_image_src( $image, $attachment_id, $size = '', $icon = '' ) {
-		if ( false !== strpos( $attachment_id, 'azoncom_gallery_images' ) ) {
+	public function affprodimp_replace_attachment_image_src( $image, $attachment_id, $size = '', $icon = '' ) {
+		if ( false !== strpos( $attachment_id, 'affprodimp_gallery_images' ) ) {
 			$attachment = explode( '__', $attachment_id );
 			$image_num  = $attachment[1];
 			$product_id = $attachment[2];
@@ -83,7 +83,7 @@ class WooCommerceIntegration extends Base {
 		}
 
 		if ( is_numeric( $attachment_id ) && $attachment_id > 0 ) {
-			$image_data = $this->azoncom_get_image_meta( $attachment_id, true );
+			$image_data = $this->affprodimp_get_image_meta( $attachment_id, true );
 			if ( isset( $image_data['img_url'] ) && $image_data['img_url'] != '' ) {
 				$image_url = $image_data['img_url'];
 				if ( $image_url ) {
@@ -96,7 +96,7 @@ class WooCommerceIntegration extends Base {
 		return $image;
 	}
 
-	function azoncom_set_customized_gallary_ids( $value, $product ) {
+	function affprodimp_set_customized_gallary_ids( $value, $product ) {
 
 		$product_id = $product->get_id();
 		if ( empty( $product_id ) ) {
@@ -106,7 +106,7 @@ class WooCommerceIntegration extends Base {
 		if ( ! empty( $gallery_images ) ) {
 			$i = 0;
 			foreach ( $gallery_images as $gallery_image ) {
-				$gallery_ids[] = 'azoncom_gallery_images__' . $i . '__' . $product_id;
+				$gallery_ids[] = 'affprodimp_gallery_images__' . $i . '__' . $product_id;
 				++$i;
 			}
 			return $gallery_ids;
@@ -114,7 +114,7 @@ class WooCommerceIntegration extends Base {
 		return $value;
 	}
 
-	function azoncom_woocommerce_product_get_image_id_support( $value, $product ) {
+	function affprodimp_woocommerce_product_get_image_id_support( $value, $product ) {
 		$product_id = $product->get_id();
 		$img_url    = ! empty( $product_id ) ? $this->get_product_img_url( $product_id ) : '';
 		if ( ! empty( $img_url ) ) {
@@ -124,7 +124,7 @@ class WooCommerceIntegration extends Base {
 	}
 
 	public function get_product_img_url( $id ) {
-		$value = get_post_meta( $id, '_azoncom_product_img_url', true );
+		$value = get_post_meta( $id, 'affprodimp_product_img_url', true );
 
 		if ( $value ) {
 			return $value;
@@ -134,7 +134,7 @@ class WooCommerceIntegration extends Base {
 	}
 
 	public function get_product_gallery_url( $id ) {
-		$value = get_post_meta( $id, '_azoncom_product_gallery_url', true );
+		$value = get_post_meta( $id, 'affprodimp_product_gallery_url', true );
 
 		if ( $value ) {
 			return $value;
@@ -143,7 +143,7 @@ class WooCommerceIntegration extends Base {
 		return array();
 	}
 
-	public function azoncom_get_image_meta( $post_id, $is_single_page = false ) {
+	public function affprodimp_get_image_meta( $post_id, $is_single_page = false ) {
 		$img_url               = get_post_meta( $post_id, $this->image_meta_url, true );
 		$image_meta['img_url'] = $img_url;
 		return $image_meta;

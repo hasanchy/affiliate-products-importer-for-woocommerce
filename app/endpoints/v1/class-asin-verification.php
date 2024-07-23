@@ -58,14 +58,14 @@ class AsinVerification extends Endpoint {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
-		$access_key   = get_option( 'azoncom_amazon_access_key' );
-		$secret_key   = get_option( 'azoncom_amazon_secret_key' );
-		$country_code = get_option( 'azoncom_amazon_country_code' );
-		$affiliate_id = get_option( 'azoncom_amazon_affiliate_id' );
+		$access_key   = get_option( 'affprodimp_amazon_access_key' );
+		$secret_key   = get_option( 'affprodimp_amazon_secret_key' );
+		$country_code = get_option( 'affprodimp_amazon_country_code' );
+		$affiliate_id = get_option( 'affprodimp_amazon_affiliate_id' );
 		$asin_codes   = isset( $request['asinCodes'] ) ? $request['asinCodes'] : '';
 
 		if ( $asin_codes == '' ) {
-			return new WP_Error( 'rest_azoncom_amazon_product_fetch', __( 'ASIN Codes parameter value can not be empty', 'affiliate-products-importer' ), array( 'status' => 500 ) );
+			return new WP_Error( 'rest_affprodimp_amazon_product_fetch', __( 'ASIN Codes parameter value can not be empty', 'affiliate-products-importer' ), array( 'status' => 500 ) );
 		}
 
 		if ( ! empty( $access_key ) && ! empty( $secret_key ) && ! empty( $country_code ) && ! empty( $affiliate_id ) ) {
@@ -115,7 +115,7 @@ class AsinVerification extends Endpoint {
 
 				return new WP_REST_Response( $response_data, 200 );
 			} catch ( \Exception $e ) {
-				return new WP_Error( 'rest_azoncom_amazon_api_status', $e->getMessage(), array( 'status' => $e->getCode() ? $e->getCode() : 500 ) );
+				return new WP_Error( 'rest_affprodimp_amazon_api_status', $e->getMessage(), array( 'status' => $e->getCode() ? $e->getCode() : 500 ) );
 			}
 		} else {
 			$response_data = array(
