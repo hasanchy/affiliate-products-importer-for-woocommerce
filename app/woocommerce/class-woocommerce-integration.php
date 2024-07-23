@@ -50,18 +50,16 @@ class WooCommerceIntegration extends Base {
 			return $price;
 		}
 
-		$price_update_date_db = get_post_meta( $post_id, '_azoncom_sync_last_date', true );
-		// product not synced at least once yet! - bug solved 2015-11-03
+		$price_update_date_db = get_post_meta( $post_id, 'affprodimp_sync_last_date', true );
 		if ( empty( $price_update_date_db ) ) {
 			global $post;
-			$price_update_date_db = strtotime( $post->post_date ); //$product->post->post_date
+			$price_update_date_db = strtotime( $post->post_date );
 		}
 		$price_update_date = $price_update_date_db;
 
-		// $price_update_date = date('Y-m-d', time());
 		$price_update_date = new \DateTime( "@$price_update_date" );
 		$price_update_date->setTimezone( new \DateTimeZone( 'America/Los_Angeles' ) );
-		$date_format        = isset( $this->amz_settings['asof_date_format'] ) && $this->amz_settings['asof_date_format'] != '' ? $this->amz_settings['asof_date_format'] : 'd/m/Y H:i';
+		$date_format        = 'd/m/Y H:i';
 		$price_update_date  = $price_update_date->format( $date_format );
 		$price_update_date .= ' PST';
 

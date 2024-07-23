@@ -121,7 +121,7 @@ class Products extends Endpoint {
 			$image_primary          = wp_get_attachment_image_src( $thumbnail_id );
 			$product->image_primary = $image_primary[0];
 
-			$sync_last_date          = get_post_meta( $post_id, '_wooazon_sync_last_date', true );
+			$sync_last_date          = get_post_meta( $post_id, 'affprodimp_sync_last_date', true );
 			$product->sync_last_date = $sync_last_date ? $this->time_ago( $sync_last_date ) : $this->time_ago( strtotime( $product->product_import_date ) );
 		}
 
@@ -266,8 +266,7 @@ class Products extends Endpoint {
 			}
 
 			$current_time = time();
-			update_post_meta( $post_id, '_wooazon_sync_last_date', $current_time );
-			// $ret['_price_update_date'] = $current_time;
+			update_post_meta( $post_id, 'affprodimp_sync_last_date', $current_time );
 
 			/*===================Update product url=======================*/
 			update_post_meta( $post_id, '_product_url', $product_url );
