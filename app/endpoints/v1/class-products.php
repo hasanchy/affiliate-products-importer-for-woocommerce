@@ -265,9 +265,6 @@ class Products extends Endpoint {
 				update_post_meta( $post_id, '_sale_price', $sale_price );
 			}
 
-			$current_time = time();
-			update_post_meta( $post_id, 'affprodimp_sync_last_date', $current_time );
-
 			/*===================Update product url=======================*/
 			update_post_meta( $post_id, '_product_url', $product_url );
 
