@@ -88,7 +88,7 @@ class AsinVerification extends Endpoint {
 				foreach ( $items as $index => $item ) {
 					$asin                           = $item->ASIN;
 					$fetch_result[ $index ]['asin'] = $item->ASIN;
-					$fetch_result[ $index ]['is_already_imported'] = \AZONCOM\Core::isProductAlreadyImported( $asin );
+					$fetch_result[ $index ]['is_already_imported'] = Settings::is_product_already_imported( $asin );
 					$post_title                                    = $item->ItemInfo->Title->DisplayValue;
 					$fetch_result[ $index ]['post_title']          = $post_title;
 					$fetch_result[ $index ]['post_name']           = sanitize_title( $post_title );
@@ -107,9 +107,12 @@ class AsinVerification extends Endpoint {
 						$fetch_result[ $index ]['regular_price'] = number_format( $item->Offers->Listings[0]->SavingBasis->Amount, 2 );
 						$fetch_result[ $index ]['sale_price']    = number_format( $item->Offers->Listings[0]->Price->Amount, 2 );
 					} else {
-						$fetch_result[ $index ]['regular_price'] = number_format( $item->Offers->Listings[0]->Price->Amount, 2 );
+						if (isset($item->Offers->Listings[0]->Price->Amount)) {
+							$fetch_result[ $index ]['regular_price'] = number_format((float)$item->Offers->Listings[0]->Price->Amount, 2, '.', '');
+						} else {
+							$fetch_result[ $index ]['regular_price'] = '0.00';
+						}
 					}
-					$fetch_result[ $index ]['price'] = number_format( $item->Offers->Listings[0]->Price->Amount, 2 );
 
 					$fetch_result[ $index ]['product_url'] = 'https://' . $marketplace . '/dp/' . $asin . '/';
 				}

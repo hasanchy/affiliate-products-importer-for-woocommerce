@@ -3,7 +3,7 @@ import { Row, Col, Space, Flex, Button, Result, Card } from 'antd';
 import CategoriesCheckbox from '../../../components/categories/CategoriesCheckbox';
 import { ImportOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux'
-import { setDisplayImportCounter, setSelectedCategories, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportSuccessMessage, setImportCancelledFetchItems, setImportableFetchItems, setImportFetchItems, setImportFetchProgress, setAsinValue } from './importCopyPasteSlice';
+import { setDisplayImportCounter, setSelectedCategories, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportSuccessMessage, setImportCancelledFetchItems, setImportableFetchItems, setImportFetchItems, setImportFetchProgress, setAsinValue, setInvalidAsinCodes, setDuplicateAsinCodes } from './importCopyPasteSlice';
 import ImportFetchCounter from './ImportFetchCounter';
 import { setImportStepBack, setImportStepIndex } from '../importSlice';
 import { saveProducts } from '../../../services/apiService';
@@ -83,6 +83,8 @@ const ImportCopyPasteFinal = () => {
 
 	const handleImportAgain = () => {
 		dispatch(setAsinValue(''));
+		dispatch(setInvalidAsinCodes([]));
+		dispatch(setDuplicateAsinCodes([]));
 		dispatch(setImportQueuedFetchItems([]));
 		dispatch(setImportSuccessfulFetchItems([]));
 		dispatch(setImportCancelledFetchItems([]));
@@ -111,7 +113,7 @@ const ImportCopyPasteFinal = () => {
 				<Row gutter={20}>
 					<Col span={4}></Col>
 					<Col span={10}>
-						<Button type="primary" icon={<ImportOutlined />} loading={isImportInProgress} disabled={!totalImportQueue || selectedCategories.length < 1} onClick={importBulkProducts}>Import {totalImportQueue} productsLabel</Button>
+						<Button type="primary" icon={<ImportOutlined />} loading={isImportInProgress} disabled={!totalImportQueue || selectedCategories.length < 1} onClick={importBulkProducts}>Import {totalImportQueue} {productsLabel}</Button>
 					</Col>
 				</Row>
 			</>

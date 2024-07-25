@@ -190,7 +190,7 @@ class Products extends Endpoint {
 			$image_primary  = $product['image_primary'];
 			$image_variants = $product['image_variants'];
 			$regular_price  = $product['regular_price'];
-			$price          = $product['price'];
+			$sale_price     = ( isset( $product['sale_price'] ) ) ? $product['sale_price'] : '';
 			$product_url    = $product['product_url'];
 			$attributes     = $product['attributes'];
 
@@ -242,13 +242,11 @@ class Products extends Endpoint {
 			update_post_meta( $post_id, 'affprodimp_amz_asin', $asin );
 
 			/*===================Update product price=======================*/
-			if ( $price ) {
-				update_post_meta( $post_id, '_price', $price );
-			}
-			if ( $regular_price ) {
-				update_post_meta( $post_id, '_regular_price', $regular_price );
-			}
-			if ( $sale_price ) {
+			$price = !empty( $sale_price ) ? $sale_price : $regular_price;
+			update_post_meta( $post_id, '_price', $price );
+			update_post_meta( $post_id, '_regular_price', $regular_price );
+
+			if ( !empty( $sale_price ) ) {
 				update_post_meta( $post_id, '_sale_price', $sale_price );
 			}
 

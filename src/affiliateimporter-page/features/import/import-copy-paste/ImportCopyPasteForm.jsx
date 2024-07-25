@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Input, Row, Col, Space, Flex, Button, Alert, Tag } from 'antd';
 
 import { useSelector, useDispatch } from 'react-redux'
-import { setAsinValue, setAsinCodes, setInvalidAsinCodes, setDuplicateAsinCodes, setImportStepIndex, setImportFetchItems, setImportableFetchItems, setDisplayImportFetchCounter, setImportFetchErrors, setImportFetchProgress } from './importCopyPasteSlice';
+import { setAsinValue, setAsinCodes, setInvalidAsinCodes, setDuplicateAsinCodes, setImportStepIndex, setImportFetchItems, setImportableFetchItems, setDisplayImportFetchCounter, setImportFetchErrors, setImportFetchProgress, setImportSuccessfulFetchItems, setImportQueue, setImportQueuedFetchItems } from './importCopyPasteSlice';
 import { CheckCircleOutlined } from '@ant-design/icons';
 import ImportFetchCounter from './ImportFetchCounter';
 import { setImportStepBack, setImportStepNext } from '../importSlice';
@@ -73,6 +73,8 @@ const ImportCopyPasteForm = () => {
         dispatch(setImportableFetchItems([]));
         dispatch(setImportFetchProgress(0));
         dispatch(setDisplayImportFetchCounter(true));
+		dispatch(setImportSuccessfulFetchItems([]));
+		dispatch(setImportQueuedFetchItems([]));
 
 		let productsPerRequest = 10;
 		let totalAsinCodes = asinCodes.length;
@@ -167,12 +169,12 @@ const ImportCopyPasteForm = () => {
             let productText = importableFetchItems.length > 1 ? 'products' : 'product'
             alert={
                 type:'success',
-                message: <>A total of <b>{importableFetchItems.length}</b> importable {productText} were found from this fetch.</>
+                message: <>A total of <b>{importableFetchItems.length}</b> importable {productText} were found from this list.</>
             }
         }else if(!isImportFetchInProgress && importFetchItems.length && !importableFetchItems.length){
             alert={
                 type:'warning',
-                message: __('No importable products were found from this fetch.', 'affiliate-products-importer' )
+                message: __('No importable products were found from this list.', 'affiliate-products-importer' )
             }
         }
         

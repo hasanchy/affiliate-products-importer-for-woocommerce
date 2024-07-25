@@ -223,6 +223,7 @@ class ProductAdvertisingApi {
 			'headers' => $headerString,
 			'method'  => 'POST',
 			'body'    => $payload_content,
+			'timeout' => 60
 		);
 
 		$request = wp_remote_request( 'https://' . $this->host . $this->path, $args );
@@ -263,6 +264,7 @@ class ProductAdvertisingApi {
 			'headers' => $headerString,
 			'method'  => 'POST',
 			'body'    => $payload_content,
+			'timeout' => 60
 		);
 
 		$request = wp_remote_request( 'https://' . $this->host . $this->path, $args );
