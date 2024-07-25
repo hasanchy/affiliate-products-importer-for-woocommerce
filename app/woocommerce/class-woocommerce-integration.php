@@ -84,7 +84,7 @@ class WooCommerceIntegration extends Base {
 
 		if ( is_numeric( $attachment_id ) && $attachment_id > 0 ) {
 			$image_data = $this->affprodimp_get_image_meta( $attachment_id, true );
-			if ( isset( $image_data['img_url'] ) && $image_data['img_url'] != '' ) {
+			if ( isset( $image_data['img_url'] ) && ! empty( $image_data['img_url'] ) ) {
 				$image_url = $image_data['img_url'];
 				if ( $image_url ) {
 					// Return the image array with URL and empty values for width, height, and icon.
@@ -96,7 +96,7 @@ class WooCommerceIntegration extends Base {
 		return $image;
 	}
 
-	function affprodimp_set_customized_gallary_ids( $value, $product ) {
+	public function affprodimp_set_customized_gallary_ids( $value, $product ) {
 
 		$product_id = $product->get_id();
 		if ( empty( $product_id ) ) {
@@ -114,7 +114,7 @@ class WooCommerceIntegration extends Base {
 		return $value;
 	}
 
-	function affprodimp_woocommerce_product_get_image_id_support( $value, $product ) {
+	public function affprodimp_woocommerce_product_get_image_id_support( $value, $product ) {
 		$product_id = $product->get_id();
 		$img_url    = ! empty( $product_id ) ? $this->get_product_img_url( $product_id ) : '';
 		if ( ! empty( $img_url ) ) {

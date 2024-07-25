@@ -133,23 +133,25 @@ class Settings {
 	 * @return bool True if the product is already imported, false otherwise.
 	 */
 	public static function is_product_already_imported( $asin ) {
-		$meta_query = new WP_Meta_Query(array(
+		$meta_query = new WP_Meta_Query(
 			array(
-				'key' => 'affprodimp_amz_asin',
-				'value' => $asin,
-				'compare' => '='
+				array(
+					'key'     => 'affprodimp_amz_asin',
+					'value'   => $asin,
+					'compare' => '=',
+				),
 			)
-		));
-		
+		);
+
 		// Get posts that match the meta query
 		$args = array(
-			'meta_query' => $meta_query,
+			'meta_query'     => $meta_query,
 			'posts_per_page' => -1,
-			'fields' => 'ids'
+			'fields'         => 'ids',
 		);
-		
-		$query = new WP_Query($args);
-		
+
+		$query = new WP_Query( $args );
+
 		// Get the count
 		$count = $query->found_posts;
 
