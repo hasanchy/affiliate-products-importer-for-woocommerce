@@ -110,7 +110,7 @@ class AsinVerification extends Endpoint {
 						if (isset($item->Offers->Listings[0]->Price->Amount)) {
 							$fetch_result[ $index ]['regular_price'] = number_format((float)$item->Offers->Listings[0]->Price->Amount, 2, '.', '');
 						} else {
-							$fetch_result[ $index ]['regular_price'] = '0.00';
+							$fetch_result[ $index ]['regular_price'] = '';
 						}
 					}
 

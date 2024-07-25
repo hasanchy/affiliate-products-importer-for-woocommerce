@@ -158,7 +158,7 @@ const ImportCopyPasteFinal = () => {
                     <Row>
                         <Col span={12}> 
                             <Flex justify='flex-start'>
-                                {!displayImportSuccessMessage && <Button type="default" onClick={handleImportStepBack}>{ __( 'Back', 'affiliate-products-importer' ) }</Button>}
+                                {!displayImportSuccessMessage && <Button type="default" disabled={isImportInProgress} onClick={handleImportStepBack}>{ __( 'Back', 'affiliate-products-importer' ) }</Button>}
                             </Flex>
                         </Col>
                         <Col span={12}>
