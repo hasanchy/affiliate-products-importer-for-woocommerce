@@ -12,6 +12,7 @@ use AFFPRODIMP\Core\Endpoint;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
+use WP_Query;
 
 class Products extends Endpoint {
 	/**
@@ -61,75 +62,61 @@ class Products extends Endpoint {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
-		global $wpdb;
+		// Get and sanitize request parameters
+		$paged = (int) $request->get_param('page') ?: 1;
+		$posts_per_page = (int) $request->get_param('per_page') ?: 50;
 
-		$page    = $request->get_param( 'page' ) ? $request->get_param( 'page' ) : 1;
-		$limit   = $request->get_param( 'per_page' ) ? $request->get_param( 'per_page' ) : 50;
-		$start   = ( $page - 1 ) * $limit;
+		// Set up query arguments
+		$args = [
+			'post_type'      => 'product',
+			'post_status'    => 'publish',
+			'meta_key'       => 'affprodimp_amz_asin',
+			'orderby'        => 'ID',
+			'order'          => 'DESC',
+			'posts_per_page' => $posts_per_page,
+			'paged'          => $paged,
+		];
 
-		$products = $wpdb->get_results(
-			$wpdb->prepare(
-				"
-				SELECT 
-					wp_posts.ID AS product_id,
-					wp_posts.guid AS product_url,
-					wp_posts.post_title AS product_title,
-					wp_posts.post_date AS product_import_date,
-					wp_postmeta.meta_value AS product_asin
-				FROM 
-					wp_posts
-				LEFT JOIN 
-					wp_postmeta ON (wp_posts.ID = wp_postmeta.post_id)
-				WHERE 
-					wp_posts.post_type = %s
-					AND wp_posts.post_status = %s
-					AND wp_postmeta.meta_key = %s
-				ORDER BY product_id DESC
-				LIMIT %d, %d",
-				'product',
-				'publish',
-				'affprodimp_amz_asin',
-				$start,
-				$limit
-			)
-		);
+		// Execute query
+		$query = new WP_Query($args);
+		$total_results = $query->found_posts;
 
-		$total = $wpdb->get_var(
-			$wpdb->prepare(
-				"
-				SELECT 
-					COUNT(*) AS total
-				FROM 
-					wp_posts
-				LEFT JOIN 
-					wp_postmeta ON (wp_posts.ID = wp_postmeta.post_id)
-				WHERE 
-					wp_posts.post_type = %s
-					AND wp_posts.post_status = %s
-					AND wp_postmeta.meta_key = %s",
-				'product',
-				'publish',
-				'affprodimp_amz_asin'
-			)
-		);
+		$products = [];
+		if ($query->have_posts()) {
+			while ($query->have_posts()) {
+				$query->the_post();
 
-		foreach ( $products as $product ) {
-			$post_id      = $product->product_id;
-			$product->key = $post_id;
+				$product = [];
+				$product_id = get_the_ID();
 
-			$thumbnail_id           = get_post_thumbnail_id( $post_id ) ? get_post_thumbnail_id( $post_id ) : $post_id;
-			$image_primary          = wp_get_attachment_image_src( $thumbnail_id );
-			$product->image_primary = $image_primary[0];
+				// Populate product data
+				$product['product_id'] = $product_id;
+				$product['product_url'] = esc_url(get_permalink($product_id));
+				$product['product_title'] = esc_html(get_the_title($product_id));
+				$product['product_import_date'] = esc_html(get_the_date('', $product_id));
+				$product['product_asin'] = esc_html(get_post_meta($product_id, 'affprodimp_amz_asin', true));
+				$product['key'] = $product_id;
 
-			$sync_last_date          = get_post_meta( $post_id, 'affprodimp_sync_last_date', true );
-			$product->sync_last_date = $sync_last_date ? $this->time_ago( $sync_last_date ) : $this->time_ago( strtotime( $product->product_import_date ) );
+				// Get product image
+				$thumbnail_id = get_post_thumbnail_id($product_id) ?: $product_id;
+				$image_primary = wp_get_attachment_image_src($thumbnail_id);
+				$product['image_primary'] = esc_url($image_primary[0]);
+
+				// Get sync last date
+				$sync_last_date = get_post_meta($product_id, 'affprodimp_sync_last_date', true);
+				$product['sync_last_date'] = $sync_last_date ? $this->time_ago($sync_last_date) : $this->time_ago(strtotime($product['product_import_date']));
+
+				$products[] = $product;
+			}
+			wp_reset_postdata();
 		}
 
-		$response = array(
+		// Prepare response
+		$response = [
 			'products' => $products,
-			'total'    => $total,
-			'page'     => (int) $page,
-		);
+			'total'    => $total_results,
+			'page'     => (int) $paged,
+		];
 
 		return new WP_REST_Response( $response );
 	}

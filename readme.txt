@@ -28,5 +28,5 @@ If you want to contribute to this project or just report a bug, you are more tha
 5. Navigate to "Affiliate Products Importer"
 
 == Changelog ==
-1.0.0 (2024-07-21)
+1.0.0 (2024-07-25)
 Initial Release
