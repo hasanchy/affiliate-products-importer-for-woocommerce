@@ -1,4 +1,4 @@
-import { Card, Col, Row } from "antd";
+import { Col, Row } from "antd";
 import AmazonApiConnection from "./widgets/AmazonApiConnection";
 import RecentlyImportedProducts from "./widgets/RecentlyImportedProducts";
 

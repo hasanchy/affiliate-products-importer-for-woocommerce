@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AU, BE, BR, CA, CN, EG, FR, DE, IN, IT, JP, MX, NL, PL, SA, SG, ES, SE, TR, AE, US, GB } from 'country-flag-icons/react/3x2'
 import { setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId, setSettingsToastMessage } from './amazonApiSettingsSlice';
 import { saveAmazonApiSettings, verifyAmazonApiSettings } from '../../../services/apiService';
+import { __ } from '@wordpress/i18n';
 
 const affiliateCountries = [
     { 'countryFlag': <AU style={{width:'20px'}}/>,'countryCode': <AU />, 'countryName': 'Australia', 'countryMarketplace': 'www.amazon.com.au' }, 
@@ -33,7 +34,7 @@ const affiliateCountries = [
 const AmazonApiSettings = () => {
 
 	const dispatch = useDispatch();
-	const { amazonAccessKey, amazonSecretKey, amazonCountryCode, amazonAffiliateId, isSettingsLoading, isAmazonAPISettingsSaving, isAmazonApiSettingsVerifying, error, settingsToastMessage } = useSelector((state) => state.amazonApiSettings);
+	const { amazonAccessKey, amazonSecretKey, amazonCountryCode, amazonAffiliateId, isAmazonAPISettingsSaving, isAmazonApiSettingsVerifying, error, settingsToastMessage } = useSelector((state) => state.amazonApiSettings);
 
     const [form] = Form.useForm();
 
@@ -84,22 +85,14 @@ const AmazonApiSettings = () => {
         }
     }
 
-    const onFinish = (values) => {
-        // dispatch(saveSettings(values));
-    };
-    
-    const onFinishFailed = (errorInfo) => {
-        // console.log('Failed:', errorInfo);
-    };
-
     const renderSaveButton = () => {
         let buttonText;
         if(isAmazonApiSettingsVerifying){
-            buttonText = 'Verifying...'
+            buttonText = __( 'Verifying...', 'affiliate-products-importer' )
         }else if(isAmazonAPISettingsSaving){
-            buttonText = 'Saving...'
+            buttonText = __( 'Saving...', 'affiliate-products-importer' )
         }else{
-            buttonText = 'Verify & Save'
+            buttonText = __( 'Verify & Save', 'affiliate-products-importer' )
         }
 
         return <Button type="primary" disabled={amazonAccessKey=='' || amazonSecretKey=='' || amazonAffiliateId==''} onClick={handleVerifyAmazonAPISettings} loading={isAmazonApiSettingsVerifying || isAmazonAPISettingsSaving}>
@@ -129,17 +122,15 @@ const AmazonApiSettings = () => {
                     remember: true,
                 }}
                 onFieldsChange={onFieldsChange}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
                 <Form.Item
-                    label="Amazon AWS Access Key"
+                    label={ __( 'Amazon AWS Access Key', 'affiliate-products-importer' ) }
                     name="amazonAccessKey"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input Access Key!',
+                            message: __( 'Please input Access Key!', 'affiliate-products-importer' ),
                         },
                     ]}
                 >
@@ -147,12 +138,12 @@ const AmazonApiSettings = () => {
                 </Form.Item>
 
                 <Form.Item
-                    label="Amazon AWS Secret Key"
+                    label={__( 'Amazon AWS Secret Key', 'affiliate-products-importer' ) }
                     name="amazonSecretKey"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input Secret Key!',
+                            message: __( 'Please input Secret Key!', 'affiliate-products-importer' ),
                         },
                     ]}
                 >
@@ -160,12 +151,12 @@ const AmazonApiSettings = () => {
                 </Form.Item>
 
                 <Form.Item
-                    label="Amazon Affiliate ID"
+                    label={ __( 'Amazon Affiliate ID', 'affiliate-products-importer' ) }
                     name="amazonAffiliateId"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your affiliate ID!',
+                            message: __( 'Please input your affiliate ID!', 'affiliate-products-importer' ),
                         },
                     ]}
                 >
@@ -174,11 +165,11 @@ const AmazonApiSettings = () => {
 
                 <Form.Item
                     name="amazonCountryCode"
-                    label="Amazon Country"
+                    label={ __( 'Amazon Country', 'affiliate-products-importer' ) }
                     rules={[
                         {
                             required: true,
-                            message: 'Please select Amazon Country!',
+                            message: __( 'Please select Amazon Country!', 'affiliate-products-importer' ),
                         },
                     ]}
                 >

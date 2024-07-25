@@ -1,7 +1,6 @@
 import { ErrorBoundary } from "react-error-boundary";
-import { Alert, Button, Card, Col, Row, Space } from 'antd';
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { __ } from '@wordpress/i18n';
 import Header from "../components/header/Header";
 import FeatureTabs from "../components/feature-tabs/FeatureTabs";
@@ -20,11 +19,10 @@ const App = () => {
 		dispatch(fetchImportSettings());
 	}, [])
 
-
 	return (
 		<div className="wrap">
 			<Header />
-			<ErrorBoundary fallback={<div>Something went wrong</div>}>
+			<ErrorBoundary fallback={<div>{ __( 'Something went wrong', 'affiliate-products-importer' ) }</div>}>
 				<FeatureTabs/>
 			</ErrorBoundary>
 		</div>

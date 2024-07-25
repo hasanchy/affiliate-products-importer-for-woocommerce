@@ -1,25 +1,17 @@
 <?php
 /**
  * Singleton class for all classes.
- *
- * @link    https://themedyno.com/
- * @since   1.0.0
- *
- * @author  AFLTIMPTR (https://themedyno.com)
- * @package AFLTIMPTR_Core
- *
- * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
  */
 
-namespace AFLTIMPTR\Core;
+namespace AFFPRODIMP\Core;
 
 // Abort if called directly.
-defined( 'WPINC' ) || die;
+defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
 /**
  * Class Singleton
  *
- * @package AFLTIMPTR\Core
+ * @package AFFPRODIMP\Core
  */
 abstract class Singleton {
 

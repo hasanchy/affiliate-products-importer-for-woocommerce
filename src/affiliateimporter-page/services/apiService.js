@@ -3,10 +3,10 @@ import axios from 'axios';
 
 export const verifyAmazonApiConnection = createAsyncThunk('dashboard/amazonApiStatus', async (params, { rejectWithValue }) => {
 	try{
-		const res = await axios.get(afltimptrAffiliateImporter.restEndpoint.amazonAPIConnection, {
+		const res = await axios.get(affprodimpAffiliateImporter.restEndpoint.amazonAPIConnection, {
 			headers: {
 				'content-type': 'application/json',
-				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+				'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
 			}
 		});
 		return res.data;
@@ -17,10 +17,10 @@ export const verifyAmazonApiConnection = createAsyncThunk('dashboard/amazonApiSt
 
 export const verifyAmazonApiSettings = createAsyncThunk('settings/amazonApiSettings', async (data, { rejectWithValue }) => {
 	try{
-		const res = await axios.post(afltimptrAffiliateImporter.restEndpoint.amazonAPIConnection, data, {
+		const res = await axios.post(affprodimpAffiliateImporter.restEndpoint.amazonAPIConnection, data, {
 			headers: {
 				'content-type': 'application/json',
-				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+				'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
 			}
 		});
 		return res.data;
@@ -31,11 +31,11 @@ export const verifyAmazonApiSettings = createAsyncThunk('settings/amazonApiSetti
 
 export const fetchRecentlyImportedProducts = createAsyncThunk('products/recentlyImported', async (params, { rejectWithValue }) => {
 	try{
-		const res = await axios.get(afltimptrAffiliateImporter.restEndpoint.products, {
+		const res = await axios.get(affprodimpAffiliateImporter.restEndpoint.products, {
 			params,
 			headers: {
 				'content-type': 'application/json',
-				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+				'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
 			}
 		});
 		return res.data;
@@ -46,11 +46,11 @@ export const fetchRecentlyImportedProducts = createAsyncThunk('products/recently
 
 export const fetchProducts = createAsyncThunk('products/fetch', async (params, { rejectWithValue }) => {
 	try{
-		const res = await axios.get(afltimptrAffiliateImporter.restEndpoint.products, {
+		const res = await axios.get(affprodimpAffiliateImporter.restEndpoint.products, {
 			params,
 			headers: {
 				'content-type': 'application/json',
-				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+				'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
 			}
 		});
 		return res.data;
@@ -61,10 +61,10 @@ export const fetchProducts = createAsyncThunk('products/fetch', async (params, {
 
 export const saveProducts = createAsyncThunk('products/save', async (data, { rejectWithValue }) => {
 	try{
-		const res = await axios.post(afltimptrAffiliateImporter.restEndpoint.products, data, {
+		const res = await axios.post(affprodimpAffiliateImporter.restEndpoint.products, data, {
 			headers: {
 				'content-type': 'application/json',
-				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+				'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
 			}
 		});
 		return res.data;
@@ -75,10 +75,10 @@ export const saveProducts = createAsyncThunk('products/save', async (data, { rej
 
 export const fetchCategories = createAsyncThunk('categories/fetchCategories', async (params, { rejectWithValue }) => {
 	try{
-		const res = await axios.get(afltimptrAffiliateImporter.restEndpoint.categories, {
+		const res = await axios.get(affprodimpAffiliateImporter.restEndpoint.categories, {
 			headers: {
 				'content-type': 'application/json',
-				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+				'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
 			}
 		});
 		return res.data;
@@ -89,7 +89,7 @@ export const fetchCategories = createAsyncThunk('categories/fetchCategories', as
 
 export const asinVerification = createAsyncThunk('asinVerification', async (data, {rejectWithValue}) => {
 	try{
-		const res = await axios.post(afltimptrAffiliateImporter.restEndpoint.asinVerification, data, {
+		const res = await axios.post(affprodimpAffiliateImporter.restEndpoint.asinVerification, data, {
 			headers: {
 				'content-type': 'application/json',
 				'X-WP-NONCE': appLocalizer.restNonce
@@ -103,10 +103,10 @@ export const asinVerification = createAsyncThunk('asinVerification', async (data
 
 export const fetchAmazonApiSettings = createAsyncThunk('fetchAmazonApiSettings', async (params, { rejectWithValue }) => {
 	try{
-		const res = await axios.get(afltimptrAffiliateImporter.restEndpoint.amazonApiSettings, {
+		const res = await axios.get(affprodimpAffiliateImporter.restEndpoint.amazonApiSettings, {
 			headers: {
 				'content-type': 'application/json',
-				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+				'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
 			}
 		});
 		return res.data;
@@ -117,10 +117,10 @@ export const fetchAmazonApiSettings = createAsyncThunk('fetchAmazonApiSettings',
 
 export const saveAmazonApiSettings = createAsyncThunk('saveAmazonApiSettings', async (data, { rejectWithValue }) => {
 	try{
-		const res = await axios.post(afltimptrAffiliateImporter.restEndpoint.amazonApiSettings, data, {
+		const res = await axios.post(affprodimpAffiliateImporter.restEndpoint.amazonApiSettings, data, {
 			headers: {
 				'content-type': 'application/json',
-				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+				'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
 			}
 		});
 		return res.data;
@@ -131,10 +131,10 @@ export const saveAmazonApiSettings = createAsyncThunk('saveAmazonApiSettings', a
 
 export const fetchImportSettings = createAsyncThunk('fetchImportSettings', async (params, { rejectWithValue }) => {
 	try{
-		const res = await axios.get(afltimptrAffiliateImporter.restEndpoint.importSettings, {
+		const res = await axios.get(affprodimpAffiliateImporter.restEndpoint.importSettings, {
 			headers: {
 				'content-type': 'application/json',
-				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+				'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
 			}
 		});
 		return res.data;
@@ -145,10 +145,10 @@ export const fetchImportSettings = createAsyncThunk('fetchImportSettings', async
 
 export const saveImportSettings = createAsyncThunk('saveImportSettings', async (data, { rejectWithValue }) => {
 	try{
-		const res = await axios.post(afltimptrAffiliateImporter.restEndpoint.importSettings, data, {
+		const res = await axios.post(affprodimpAffiliateImporter.restEndpoint.importSettings, data, {
 			headers: {
 				'content-type': 'application/json',
-				'X-WP-NONCE': afltimptrAffiliateImporter.restNonce
+				'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
 			}
 		});
 		return res.data;

@@ -2,27 +2,19 @@
 /**
  * File Description:
  * Base abstract class to be inherited by other classes
- *
- * @link    https://themedyno.com/
- * @since   1.0.0
- *
- * @author  AFLTIMPTR (https://themedyno.com)
- * @package AFLTIMPTR_Core
- *
- * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
  */
 
-namespace AFLTIMPTR\Core;
+namespace AFFPRODIMP\Core;
 
-use AFLTIMPTR\Core\Singleton;
+use AFFPRODIMP\Core\Singleton;
 
 // Abort if called directly.
-defined( 'WPINC' ) || die;
+defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
 /**
  * Class Base
  *
- * @package AFLTIMPTR\Core
+ * @package AFFPRODIMP\Core
  */
 abstract class Base extends Singleton {
 	/**

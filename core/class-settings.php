@@ -1,14 +1,9 @@
 <?php
 /**
  * Class to boot up plugin.
- *
- * @link    https://themedyno.com/
- * @since   1.0.0
- *
- * @package AFLTIMPTR_Core
  */
 
-namespace AFLTIMPTR\Core;
+namespace AFFPRODIMP\Core;
 
 // Avoid direct file request
 defined( 'ABSPATH' ) || exit;
@@ -139,7 +134,7 @@ class Settings {
 		$count = $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT COUNT(*) FROM {$wpdb->prefix}postmeta WHERE meta_key = %s AND meta_value = %s",
-				'_azoncom_amz_asin',
+				'affprodimp_amz_asin',
 				$asin
 			)
 		);

@@ -1,17 +1,9 @@
 <?php
 /**
- * Class to boot up plugin.
- *
- * @link    https://themedyno.com/
- * @since   1.0.0
- *
- * @author  AFLTIMPTR (https://themedyno.com)
- * @package AFLTIMPTR_Core
- *
- * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
+ * Class to handle the Amazon AWS Advertising API.
  */
 
-namespace AFLTIMPTR\Core;
+namespace AFFPRODIMP\Core;
 
 // Avoid direct file request
 defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
@@ -77,11 +69,6 @@ class ProductAdvertisingApi {
 		$this->addHeader( 'content-encoding', 'amz-1.0' );
 		$this->addHeader( 'content-type', 'application/json; charset=utf-8' );
 		$this->addHeader( 'host', $host );
-		// if($type == "searchItems"){
-		//     $this->addHeader ('x-amz-target', 'com.amazon.paapi5.v1.ProductAdvertisingAPIv1.SearchItems');
-		// }else{
-		//     $this->addHeader ('x-amz-target', 'com.amazon.paapi5.v1.ProductAdvertisingAPIv1.GetItems');
-		// }
 	}
 
 	function setPath( $path ) {
@@ -243,16 +230,8 @@ class ProductAdvertisingApi {
 			$error_message = $request->get_error_message();
 			throw new \Exception( $error_message ? $error_message : 'Unable to connect to the Amazon API. Please verify your Amazon API settings.' );
 		}
-		$respose_code = wp_remote_retrieve_response_code( $request );
 		$body         = wp_remote_retrieve_body( $request );
 		$body_data    = json_decode( $body );
-		// print_r($body_data);
-		// exit;
-
-		if ( isset( $body_data->Errors ) ) {
-			$message = $body_data->Errors[0]->Message;
-			// throw new \Exception ( $message, $respose_code );
-		}
 
 		return $body_data;
 	}

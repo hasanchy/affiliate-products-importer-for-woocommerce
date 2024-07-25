@@ -1,19 +1,14 @@
 <?php
 /**
- * Google Auth Shortcode.
- *
- * @link          https://themedyno.com/
- * @since         1.0.0
- *
- * @package       AFLTIMPTR\PluginTest
+ * API endpoint class for fetching product categories.
  */
 
-namespace AFLTIMPTR\App\Endpoints\V1;
+namespace AFFPRODIMP\App\Endpoints\V1;
 
 // Avoid direct file request
 defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
-use AFLTIMPTR\Core\Endpoint;
+use AFFPRODIMP\Core\Endpoint;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -29,7 +24,7 @@ class Categories extends Endpoint {
 	protected $endpoint = 'categories';
 
 	/**
-	 * Register the routes for handling auth functionality.
+	 * Register the routes for handling categories functionality.
 	 *
 	 * @return void
 	 * @since 1.0.0
@@ -62,36 +57,36 @@ class Categories extends Endpoint {
 		}
 
 		$categories = get_terms(
-            array(
-                'taxonomy'   => 'product_cat',
-                'orderby'    => 'name',
-                'hide_empty' => false,
-            )
-        );
+			array(
+				'taxonomy'   => 'product_cat',
+				'orderby'    => 'name',
+				'hide_empty' => false,
+			)
+		);
 
-        $categories = $this->treeify_terms($categories);
+		$categories = $this->treeify_terms( $categories );
 
-        return new WP_REST_Response( $categories, 200 );
-    }
+		return new WP_REST_Response( $categories, 200 );
+	}
 
-    public function treeify_terms($terms, $root_id = 0) {
-        $tree = array();
+	public function treeify_terms( $terms, $root_id = 0 ) {
+		$tree = array();
 
-        foreach ($terms as $term) {
-            if ($term->parent === $root_id) {
-                array_push(
-                    $tree,
-                    array(
-                        'name'     => $term->name,
-                        'slug'     => $term->slug,
-                        'id'       => $term->term_taxonomy_id,
-                        'count'    => $term->count,
-                        'children' => $this->treeify_terms($terms, $term->term_id),
-                    )
-                );
-            }
-        }
+		foreach ( $terms as $term ) {
+			if ( $term->parent === $root_id ) {
+				array_push(
+					$tree,
+					array(
+						'name'     => $term->name,
+						'slug'     => $term->slug,
+						'id'       => $term->term_taxonomy_id,
+						'count'    => $term->count,
+						'children' => $this->treeify_terms( $terms, $term->term_id ),
+					)
+				);
+			}
+		}
 
-        return $tree;
-    }
+		return $tree;
+	}
 }

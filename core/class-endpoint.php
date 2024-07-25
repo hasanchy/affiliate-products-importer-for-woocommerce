@@ -1,23 +1,15 @@
 <?php
 /**
  * Base class for all endpoint classes.
- *
- * @link          https://themedyno.com/
- * @since         1.0.0
- *
- * @author        AFLTIMPTR (https://themedyno.com)
- * @package       AFLTIMPTR\PluginTest
- *
- * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
  */
 
-namespace AFLTIMPTR\Core;
+namespace AFFPRODIMP\Core;
 
 use WP_REST_Response;
 use WP_REST_Controller;
 
 // If this file is called directly, abort.
-defined( 'WPINC' ) || die;
+defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
 class Endpoint extends WP_REST_Controller {
 	/**
@@ -56,7 +48,7 @@ class Endpoint extends WP_REST_Controller {
 	 */
 	protected function __construct() {
 		// Setup namespace of the endpoint.
-		$this->namespace = 'affiliateimporter/v' . $this->version;
+		$this->namespace = 'affiliate-products-importer/v' . $this->version;
 
 		// If the single instance hasn't been set, set it now.
 		$this->register_hooks();
@@ -114,7 +106,7 @@ class Endpoint extends WP_REST_Controller {
 		 * @since 1.0.0
 		 *
 		 */
-		return apply_filters( 'affiliateimporter_plugintest_rest_settings_permission', $capable, $request );
+		return apply_filters( 'affprodimp_rest_settings_permission', $capable, $request );
 	}
 
 	/**

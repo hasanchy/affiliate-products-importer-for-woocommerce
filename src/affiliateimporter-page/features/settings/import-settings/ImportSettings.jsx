@@ -3,6 +3,7 @@ import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRemoteAmazonImage, setSettingsToastMessage } from './importSettingsSlice';
 import { saveImportSettings } from '../../../services/apiService';
+import { __ } from '@wordpress/i18n';
 
 const ImportSettings = () => {
 	const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const ImportSettings = () => {
 
     const onFinish = () => {
         const data = {
-            'remote_image': importRemoteAmazonImage ? 'Yes': 'No'
+            'remote_image': importRemoteAmazonImage ? __( 'Yes', 'affiliate-products-importer' ): __( 'No', 'affiliate-products-importer' )
         }
         dispatch(saveImportSettings(data));
     };
@@ -57,7 +58,7 @@ const ImportSettings = () => {
             disabled={isImportSettingsLoading}
         >
             <Form.Item
-                label="Remote amazon images"
+                label={ __( 'Remote amazon images', 'affiliate-products-importer' ) }
                 name="importRemoteAmazonImage"
             >
                 <Switch
@@ -75,7 +76,7 @@ const ImportSettings = () => {
                 }}
             >
                 <Button type="primary" htmlType="submit" loading={isImportSettingsSaving}>
-                    Submit
+                    { __( 'Submit', 'affiliate-products-importer' ) }
                 </Button>
             </Form.Item>
         </Form>

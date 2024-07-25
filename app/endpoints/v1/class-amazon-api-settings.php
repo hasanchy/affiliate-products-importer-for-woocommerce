@@ -1,22 +1,14 @@
 <?php
 /**
- * Google Auth Shortcode.
- *
- * @link          https://themedyno.com/
- * @since         1.0.0
- *
- * @author        AFLTIMPTR (https://themedyno.com)
- * @package       AFLTIMPTR\PluginTest
- *
- * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
+ * API endpoint class for saving and fetching the Amazon AWS Settings
  */
 
-namespace AFLTIMPTR\App\Endpoints\V1;
+namespace AFFPRODIMP\App\Endpoints\V1;
 
 // Abort if called directly.
-defined( 'WPINC' ) || die;
+defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
-use AFLTIMPTR\Core\Endpoint;
+use AFFPRODIMP\Core\Endpoint;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -32,7 +24,7 @@ class AmazonApiSettings extends Endpoint {
 	protected $endpoint = 'amazon-api-settings';
 
 	/**
-	 * Register the routes for handling auth functionality.
+	 * Register the routes for handling Amazon API settings functionality.
 	 *
 	 * @return void
 	 * @since 1.0.0
@@ -61,12 +53,12 @@ class AmazonApiSettings extends Endpoint {
 				array(
 					'methods'             => 'POST',
 					'args'                => array(
-						'access_key' => array(
+						'access_key'   => array(
 							'required'    => true,
 							'description' => __( 'Amazon Access Key is required.', 'affiliate-products-importer' ),
 							'type'        => 'string',
 						),
-						'secret_key' => array(
+						'secret_key'   => array(
 							'required'    => true,
 							'description' => __( 'Amazon AWS Secret Key is required.', 'affiliate-products-importer' ),
 							'type'        => 'string',
@@ -101,17 +93,17 @@ class AmazonApiSettings extends Endpoint {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
-		$azoncom_amazon_access_key = get_option( 'azoncom_amazon_access_key' );
-        $azoncom_amazon_secret_key  = get_option( 'azoncom_amazon_secret_key' );
-		$azoncom_amazon_country_code  = get_option( 'azoncom_amazon_country_code' );
-		$azoncom_amazon_affiliate_id  = get_option( 'azoncom_amazon_affiliate_id' );
+		$affprodimp_amazon_access_key   = get_option( 'affprodimp_amazon_access_key' );
+		$affprodimp_amazon_secret_key   = get_option( 'affprodimp_amazon_secret_key' );
+		$affprodimp_amazon_country_code = get_option( 'affprodimp_amazon_country_code' );
+		$affprodimp_amazon_affiliate_id = get_option( 'affprodimp_amazon_affiliate_id' );
 
-        $response_data = [
-            'access_key' => $azoncom_amazon_access_key ? $azoncom_amazon_access_key : "",
-            'secret_key'  => $azoncom_amazon_secret_key ? $azoncom_amazon_secret_key : "",
-			'country_code' => $azoncom_amazon_country_code ? $azoncom_amazon_country_code : "us",
-			'affiliate_id' => $azoncom_amazon_affiliate_id ? $azoncom_amazon_affiliate_id : ""
-        ];
+		$response_data = array(
+			'access_key'   => $affprodimp_amazon_access_key ? $affprodimp_amazon_access_key : '',
+			'secret_key'   => $affprodimp_amazon_secret_key ? $affprodimp_amazon_secret_key : '',
+			'country_code' => $affprodimp_amazon_country_code ? $affprodimp_amazon_country_code : 'us',
+			'affiliate_id' => $affprodimp_amazon_affiliate_id ? $affprodimp_amazon_affiliate_id : '',
+		);
 
 		return new WP_REST_Response( $response_data, 200 );
 	}
@@ -129,32 +121,32 @@ class AmazonApiSettings extends Endpoint {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
-		$access_key = sanitize_text_field( $request[ 'access_key' ] );
-		$secret_key  = sanitize_text_field( $request[ 'secret_key' ] );
-		$country_code  = sanitize_text_field( $request[ 'country_code' ] );
-		$affiliate_id  = sanitize_text_field( $request[ 'affiliate_id' ] );
+		$access_key   = sanitize_text_field( $request['access_key'] );
+		$secret_key   = sanitize_text_field( $request['secret_key'] );
+		$country_code = sanitize_text_field( $request['country_code'] );
+		$affiliate_id = sanitize_text_field( $request['affiliate_id'] );
 
 		if ( ! empty( $access_key ) && ! empty( $secret_key ) && ! empty( $country_code ) && ! empty( $affiliate_id ) ) {
 			try {
-				update_option('azoncom_amazon_access_key', $access_key );
-                update_option('azoncom_amazon_secret_key', $secret_key );
-                update_option('azoncom_amazon_country_code', $country_code );
-                update_option('azoncom_amazon_affiliate_id', $affiliate_id );
+				update_option( 'affprodimp_amazon_access_key', $access_key );
+				update_option( 'affprodimp_amazon_secret_key', $secret_key );
+				update_option( 'affprodimp_amazon_country_code', $country_code );
+				update_option( 'affprodimp_amazon_affiliate_id', $affiliate_id );
 
 				$response_data = array(
 					'status'  => 'success',
-					'message' => 'Settings saved successfully.',
+					'message' => __( 'Settings saved successfully.', 'affiliate-products-importer' ),
 				);
 				return new WP_REST_Response( $response_data, 200 );
 			} catch ( \Exception $e ) {
-				return new WP_Error( 'rest_azoncom_amazon_api_status', $e->getMessage(), array( 'status' => $e->getCode() ? $e->getCode() : 500 ) );
+				return new WP_Error( 'rest_affprodimp_amazon_api_status', $e->getMessage(), array( 'status' => $e->getCode() ? $e->getCode() : 500 ) );
 			}
 		} else {
 			$response_data = array(
 				'status' => 'error',
 				'error'  => array(
 					'code'    => 'incomplete',
-					'message' => 'Your Amazon API is not yet set up.',
+					'message' => __( 'Your Amazon API is not yet set up.', 'affiliate-products-importer' ),
 				),
 			);
 			return new WP_REST_Response( $response_data, 400 );

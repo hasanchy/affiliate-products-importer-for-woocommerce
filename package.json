@@ -1,6 +1,6 @@
 {
 	"name": "affiliate-products-importer",
-	"version": "1.0.1",
+	"version": "1.0.0",
 	"description": "Easily import Amazon affiliate products into your WooCommerce store.",
 	"main": "index.js",
 	"scripts": {
@@ -12,15 +12,15 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://hasanchy@github.com/hasanchy/affiliateimporter.git"
+		"url": "git+https://hasanchy@github.com/hasanchy/affiliate-products-importer.git"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/hasanchy/affiliateimporter/issues"
+		"url": "https://github.com/hasanchy/affiliate-products-importer/issues"
 	},
-	"homepage": "https://github.com/hasanchy/affiliateimporter#readme",
+	"homepage": "https://github.com/hasanchy/affiliate-products-importer#readme",
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.9.5",
 		"@wordpress/i18n": "^5.1.0",

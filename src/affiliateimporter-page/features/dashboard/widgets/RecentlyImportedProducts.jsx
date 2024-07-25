@@ -2,6 +2,7 @@ import React, {memo} from 'react';
 import { Card, Image, Spin, Typography  } from 'antd';
 import { useSelector } from 'react-redux';
 const { Link } = Typography;
+import { __ } from '@wordpress/i18n';
 
 const RecentlyImportedProducts = memo(() => {
 
@@ -11,7 +12,7 @@ const RecentlyImportedProducts = memo(() => {
 		let gallery = [];
 
 		for(let i in productList){
-			gallery.push(<div className='azoncom-image-gallery'>
+			gallery.push(<div className='affprodimp-image-gallery'>
 				<Link href={productList[i].product_url} target="_blank">
 					<Card>
 						<Image preview={false} src={productList[i].image_primary} alt={productList[i].product_title} width='115px'/>
@@ -28,7 +29,7 @@ const RecentlyImportedProducts = memo(() => {
 	  
     return (
 		<>
-			<Card title="Recently Imported Products" bordered={true}>
+			<Card title={ __( 'Recently Imported Products', 'affiliate-products-importer' ) } bordered={true}>
 				{isProductsLoading && <Spin tip="" size="medium"> </Spin>}
 				{renderProductGallery()}
 			</Card>

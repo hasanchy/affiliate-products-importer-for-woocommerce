@@ -1,20 +1,12 @@
 <?php
 /**
  * Class to boot up plugin.
- *
- * @link    https://themedyno.com/
- * @since   1.0.0
- *
- * @author  AFLTIMPTR (https://themedyno.com)
- * @package AFLTIMPTR_Core
- *
- * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
  */
 
-namespace AFLTIMPTR\Core;
+namespace AFFPRODIMP\Core;
 
-use AFLTIMPTR\Core\Base;
-use AFLTIMPTR\App;
+use AFFPRODIMP\Core\Base;
+use AFFPRODIMP\App;
 
 // Avoid direct file request
 defined( 'ABSPATH' ) || die( 'No direct access allowed!' );

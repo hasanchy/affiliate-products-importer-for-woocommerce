@@ -1,22 +1,14 @@
 <?php
 /**
- * Google Auth block.
- *
- * @link          https://themedyno.com/
- * @since         1.0.0
- *
- * @author        AFLTIMPTR (https://themedyno.com)
- * @package       AFLTIMPTR\App
- *
- * @copyright (c) 2024, ThemeDyno (http://themedyno.com)
+ * Affiliate Products Import block.
  */
 
-namespace AFLTIMPTR\App\Admin_Pages;
+namespace AFFPRODIMP\App\Admin_Pages;
 
 // Abort if called directly.
-defined( 'WPINC' ) || die;
+defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
-use AFLTIMPTR\Core\Base;
+use AFFPRODIMP\Core\Base;
 
 class AffiliateProductsImporter extends Base {
 	/**
@@ -32,22 +24,6 @@ class AffiliateProductsImporter extends Base {
 	 * @var string
 	 */
 	private $page_slug = 'affiliate-products-importer-admin';
-
-	/**
-	 * Google auth credentials.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @var array
-	 */
-	private $creds = array();
-
-	/**
-	 * Option name.
-	 *
-	 * @var string
-	 */
-	private $option_name = 'affiliateimporter_plugin_tests_auth';
 
 	/**
 	 * Page Assets.
@@ -80,13 +56,12 @@ class AffiliateProductsImporter extends Base {
 	public function init() {
 		if ( is_admin() ) {
 			$this->page_title     = __( 'Affiliate Products Importer', 'affiliate-products-importer' );
-			$this->creds          = get_option( $this->option_name, array() );
-			$this->assets_version = ! empty( $this->script_data( 'version' ) ) ? $this->script_data( 'version' ) : AFLTIMPTR_VERSION;
-			$this->unique_id      = "affiliateimporter_pixelart_main_wrap-{$this->assets_version}";
+			$this->assets_version = ! empty( $this->script_data( 'version' ) ) ? $this->script_data( 'version' ) : AFFPRODIMP_VERSION;
+			$this->unique_id      = "affprodimp_affiliateimporter_main_wrap-{$this->assets_version}";
 
 			add_action( 'admin_menu', array( $this, 'register_admin_page' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
-			add_filter( 'plugin_action_links_' . AFLTIMPTR_PLUGIN_BASENAME, array( $this, 'add_action_links' ) );
+			add_filter( 'plugin_action_links_' . AFFPRODIMP_PLUGIN_BASENAME, array( $this, 'add_action_links' ) );
 		}
 	}
 
@@ -151,9 +126,9 @@ class AffiliateProductsImporter extends Base {
 			$this->page_scripts = array();
 		}
 
-		$handle       = 'affiliateimporter_pixelart';
-		$src          = AFLTIMPTR_ASSETS_URL . '/js/affiliateimporterpage.min.js';
-		$style_src    = AFLTIMPTR_ASSETS_URL . '/css/affiliateimporterpage.min.css';
+		$handle       = 'affprodimp_affiliateimporter';
+		$src          = AFFPRODIMP_ASSETS_URL . '/js/affiliateimporterpage.min.js';
+		$style_src    = AFFPRODIMP_ASSETS_URL . '/css/affiliateimporterpage.min.css';
 		$dependencies = ! empty( $this->script_data( 'dependencies' ) )
 			? $this->script_data( 'dependencies' )
 			: array(
@@ -171,18 +146,17 @@ class AffiliateProductsImporter extends Base {
 			'ver'       => $this->assets_version,
 			'strategy'  => true,
 			'localize'  => array(
-				'dom_element_id'          => $this->unique_id,
-				'restEndpoint'            => array(
-					'settings'            => home_url( '/wp-json' ) . '/affiliateimporter/v1/settings',
-					'amazonAPIConnection' => home_url( '/wp-json' ) . '/affiliateimporter/v1/amazon-api-connection',
-					'products'            => home_url( '/wp-json' ) . '/affiliateimporter/v1/products',
-					'categories'          => home_url( '/wp-json' ) . '/affiliateimporter/v1/categories',
-					'asinVerification'    => home_url( '/wp-json' ) . '/affiliateimporter/v1/asin-verification',
-					'import'              => home_url( '/wp-json' ) . '/affiliateimporter/v1/import',
-					'amazonApiSettings'   => home_url( '/wp-json' ) . '/affiliateimporter/v1/amazon-api-settings',
-					'importSettings'      => home_url( '/wp-json' ) . '/affiliateimporter/v1/import-settings',
+				'dom_element_id' => $this->unique_id,
+				'restEndpoint'   => array(
+					'amazonAPIConnection' => home_url( '/wp-json' ) . '/affiliate-products-importer/v1/amazon-api-connection',
+					'products'            => home_url( '/wp-json' ) . '/affiliate-products-importer/v1/products',
+					'categories'          => home_url( '/wp-json' ) . '/affiliate-products-importer/v1/categories',
+					'asinVerification'    => home_url( '/wp-json' ) . '/affiliate-products-importer/v1/asin-verification',
+					'import'              => home_url( '/wp-json' ) . '/affiliate-products-importer/v1/import',
+					'amazonApiSettings'   => home_url( '/wp-json' ) . '/affiliate-products-importer/v1/amazon-api-settings',
+					'importSettings'      => home_url( '/wp-json' ) . '/affiliate-products-importer/v1/import-settings',
 				),
-				'restNonce'               => wp_create_nonce( 'wp_rest' ),
+				'restNonce'      => wp_create_nonce( 'wp_rest' ),
 			),
 		);
 	}
@@ -208,8 +182,8 @@ class AffiliateProductsImporter extends Base {
 	protected function raw_script_data(): array {
 		static $script_data = null;
 
-		if ( is_null( $script_data ) && file_exists( AFLTIMPTR_DIR . 'assets/js/affiliateimporterpage.min.asset.php' ) ) {
-			$script_data = include AFLTIMPTR_DIR . 'assets/js/affiliateimporterpage.min.asset.php';
+		if ( is_null( $script_data ) && file_exists( AFFPRODIMP_DIR . 'assets/js/affiliateimporterpage.min.asset.php' ) ) {
+			$script_data = include AFFPRODIMP_DIR . 'assets/js/affiliateimporterpage.min.asset.php';
 		}
 
 		return (array) $script_data;
@@ -232,7 +206,7 @@ class AffiliateProductsImporter extends Base {
 				);
 
 				if ( ! empty( $page_script['localize'] ) ) {
-					wp_localize_script( $handle, 'afltimptrAffiliateImporter', $page_script['localize'] );
+					wp_localize_script( $handle, 'affprodimpAffiliateImporter', $page_script['localize'] );
 				}
 
 				wp_enqueue_script( $handle );
@@ -241,7 +215,7 @@ class AffiliateProductsImporter extends Base {
 					wp_enqueue_style( $handle, $page_script['style_src'], array(), $this->assets_version );
 				}
 
-				wp_set_script_translations( $handle, 'affiliate-products-importer', AFLTIMPTR_LANGUAGES_DIR );
+				wp_set_script_translations( $handle, 'affiliate-products-importer', AFFPRODIMP_LANGUAGES_DIR );
 			}
 		}
 	}

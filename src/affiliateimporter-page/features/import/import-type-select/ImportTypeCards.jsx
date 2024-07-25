@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Card, Typography, Row, Col, Flex } from 'antd';
 const {Title} = Typography;
-import { CheckCircleFilled, CopyOutlined, FileExcelOutlined, FileSearchOutlined, FileAddOutlined } from '@ant-design/icons';
+import { CheckCircleFilled } from '@ant-design/icons';
 
 const ImportTypeCard = (props) => {
     let iconColor = props.selected ? 'rgba(0,0,0, 0.75)' : 'rgba(0, 0, 0, 0.55)';

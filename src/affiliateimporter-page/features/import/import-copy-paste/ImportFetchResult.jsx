@@ -1,19 +1,20 @@
 import React, {memo} from 'react';
-import { Alert, Card, Image, List, Skeleton, Space, Table, Tag, Typography } from 'antd';
+import { Card, Image, Skeleton, Space, Table, Tag, Typography } from 'antd';
 import { useSelector } from 'react-redux';
+import { __ } from '@wordpress/i18n';
 
 const { Text } = Typography;
 
 const ImportFetchResult = memo(() => {
 
-	const { importableFetchItems, importFetchItems, importSuccessfulFetchItems, importFetchErrors } = useSelector((state) => state.importCopyPaste);
+	const { importFetchItems, importSuccessfulFetchItems, importFetchErrors } = useSelector((state) => state.importCopyPaste);
 
 	let dataSource = [...importFetchItems, ...importFetchErrors]
 
 	const renderProductTable = () => {
 		const columns = [
 			{
-				title: 'Image',
+				title: __( 'Image', 'affiliate-products-importer' ),
 				dataIndex: 'image_primary',
 				key: 'img',
 				render: (imageSrc, productObj) => {
@@ -28,7 +29,7 @@ const ImportFetchResult = memo(() => {
 				},
 			},
 			{
-				title: 'Title',
+				title: __( 'Title', 'affiliate-products-importer' ),
 				dataIndex: 'post_title',
 				key: 'title',
 				render: (title, productObj) => {
@@ -40,21 +41,19 @@ const ImportFetchResult = memo(() => {
 				}
 			},
 			{
-				title: 'Status',
+				title: __( 'Status', 'affiliate-products-importer' ),
 				dataIndex: 'is_already_imported',
 				key: 'title',
 				render: (isAlreadyImported, productObj) => {
 
 					let ribbonText = isAlreadyImported ? 'Previously Imported' : 'Importable';
-					// let ribbonColor = isAlreadyImported ? '#faad14' : '#4096ff';
 					let ribbonColor = isAlreadyImported ? 'orange' : 'blue';
 					if(importSuccessfulFetchItems.includes(productObj.asin)){
-						ribbonText = 'Recently Imported';
-						// ribbonColor = '#52c41a';
+						ribbonText = __( 'Recently Imported', 'affiliate-products-importer' );
 						ribbonColor = 'green';
 					}
 					if(productObj.Code){
-						ribbonText = 'Invalid ASIN';
+						ribbonText = __( 'Invalid ASIN', 'affiliate-products-importer' );
 						ribbonColor = 'red';
 					}
 
@@ -73,16 +72,6 @@ const ImportFetchResult = memo(() => {
 			pagination={false}
 		/>
 	}
-
-	const renderErrorList = () => {
-		let errorList = [];
-
-		importFetchErrors.forEach( (errorObj, i) => {
-			errorList.push(<Text type="danger">{errorObj.Message}</Text>)
-		})
-
-		return errorList;
-	}
 	  
     return (
 		<>
@@ -90,17 +79,10 @@ const ImportFetchResult = memo(() => {
                     display: 'flex',
                 }}>
 				{importFetchItems.length > 0 &&
-					<Card title={`ASIN Verification Result`} bordered={true}>
+					<Card title={ __( 'ASIN Verification Result', 'affiliate-products-importer' ) } bordered={true}>
 						{renderProductTable()}
 					</Card>
 				}
-				{/* {importFetchErrors.length > 0 &&
-					<Card title={`Import Fetch Errors: ${importFetchErrors.length}`} bordered={true}>
-						<Space size='middle' direction='vertical'>
-							{renderErrorList()}
-						</Space>
-					</Card>
-				} */}
 			</Space>
 		</>
 	)
