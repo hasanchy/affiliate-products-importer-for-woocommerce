@@ -8,6 +8,9 @@ namespace AFFPRODIMP\Core;
 // Avoid direct file request
 defined( 'ABSPATH' ) || exit;
 
+use WP_Meta_Query;
+use WP_Query;
+
 class Settings {
 
 	const AMAZON_MARKETPLACES = array(
@@ -130,16 +133,21 @@ class Settings {
 	 * @return bool True if the product is already imported, false otherwise.
 	 */
 	public static function is_product_already_imported( $asin ) {
-		global $wpdb;
-		$count = $wpdb->get_var(
-			$wpdb->prepare(
-				"SELECT COUNT(*) FROM {$wpdb->prefix}postmeta WHERE meta_key = %s AND meta_value = %s",
-				'affprodimp_amz_asin',
-				$asin
+		$args = array(
+			'post_type'  => 'product',
+			'post_status' => 'publish',
+			'meta_query' => array(
+				array(
+					'key'   => 'affprodimp_amz_asin',
+					'value' => $asin,
+					'compare' => '='
+				)
 			)
 		);
-
-		return $count > 0;
+	
+		$query = new WP_Query($args);
+	
+		return $query->have_posts();
 	}
 
 	/**

@@ -1,9 +1,9 @@
 import React, {memo} from 'react';
 import { Card, Image, Typography, Tooltip, Button, Alert, Switch, Flex  } from 'antd';
 import {  UndoOutlined, CloseCircleTwoTone, DeleteOutlined } from '@ant-design/icons';
-import { setImportCancelledFetchItems, setImportQueuedFetchItems, setImportQueueDeletable } from './importCopyPasteSlice';
+import { setImportCancelledFetchItems, setImportQueuedFetchItems, setImportQueueDeletable, setIsImportInProgress } from './importCopyPasteSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveProducts } from '../../../services/apiService';
+import { fetchProducts, fetchRecentlyImportedProducts, saveProducts } from '../../../services/apiService';
 import { __ } from '@wordpress/i18n';
 
 const { Link } = Typography;
@@ -25,14 +25,18 @@ const ImportProductQueue = memo(() => {
 		dispatch(setImportCancelledFetchItems(cancelledItems));
 	}
 
-	const handleSingleProductImport = (importFetchItem) => {
+	const handleSingleProductImport = async (importFetchItem) => {
 		let newQueuedAsins = [...importQueuedFetchItems, importFetchItem.asin]
 
 		const categoryIds = selectedCategories.map(category => category.id);
 		let data = {products:[importFetchItem], categories: categoryIds}
 
+		dispatch(setIsImportInProgress(true))
 		dispatch(setImportQueuedFetchItems(newQueuedAsins));
-		dispatch(saveProducts(data));
+		await dispatch(saveProducts(data));
+		dispatch(setIsImportInProgress(false));
+		dispatch(fetchProducts({page:1, per_page: 10}));
+		dispatch(fetchRecentlyImportedProducts({per_page:20}));
 	}
 
 	const handleSwitchChange = (checked) => {

@@ -23,6 +23,12 @@ const Products = () => {
 		return <Button type="default"  href={`post.php?post=${productId}&action=edit`} target='_blank'><EditOutlined /></Button>
 	}
 
+	const decodeString = ( rawString ) => {
+		const parser = new DOMParser();
+  		const decodedString = parser.parseFromString(rawString, 'text/html').body.textContent;
+		return decodedString;
+	}
+
     const columns = [
 		{
 			title: __( 'Image', 'affiliate-products-importer' ),
@@ -41,7 +47,7 @@ const Products = () => {
 			dataIndex: 'product_title',
 			key: 'title',
 			render: (title, productObj) => (
-				<a href={productObj.product_url} target='_blank'>{title}</a>
+				<a href={productObj.product_url} target='_blank'>{decodeString(title)}</a>
 			)
 		},
 		{

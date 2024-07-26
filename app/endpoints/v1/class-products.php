@@ -12,6 +12,7 @@ use AFFPRODIMP\Core\Endpoint;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
+use WP_Query;
 
 class Products extends Endpoint {
 	/**
@@ -61,74 +62,60 @@ class Products extends Endpoint {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
-		global $wpdb;
+		// Get and sanitize request parameters
+		$paged          = (int) $request->get_param( 'page' ) ? (int) $request->get_param( 'page' ) : 1;
+		$posts_per_page = (int) $request->get_param( 'per_page' ) ? (int) $request->get_param( 'per_page' ) : 50;
 
-		$page    = $request->get_param( 'page' ) ? $request->get_param( 'page' ) : 1;
-		$limit   = $request->get_param( 'per_page' ) ? $request->get_param( 'per_page' ) : 50;
-		$start   = ( $page - 1 ) * $limit;
-
-		$products = $wpdb->get_results(
-			$wpdb->prepare(
-				"
-				SELECT 
-					wp_posts.ID AS product_id,
-					wp_posts.guid AS product_url,
-					wp_posts.post_title AS product_title,
-					wp_posts.post_date AS product_import_date,
-					wp_postmeta.meta_value AS product_asin
-				FROM 
-					wp_posts
-				LEFT JOIN 
-					wp_postmeta ON (wp_posts.ID = wp_postmeta.post_id)
-				WHERE 
-					wp_posts.post_type = %s
-					AND wp_posts.post_status = %s
-					AND wp_postmeta.meta_key = %s
-				ORDER BY product_id DESC
-				LIMIT %d, %d",
-				'product',
-				'publish',
-				'affprodimp_amz_asin',
-				$start,
-				$limit
-			)
+		// Set up query arguments
+		$args = array(
+			'post_type'      => 'product',
+			'post_status'    => 'publish',
+			'meta_key'       => 'affprodimp_amz_asin',
+			'orderby'        => 'ID',
+			'order'          => 'DESC',
+			'posts_per_page' => $posts_per_page,
+			'paged'          => $paged,
 		);
 
-		$total = $wpdb->get_var(
-			$wpdb->prepare(
-				"
-				SELECT 
-					COUNT(*) AS total
-				FROM 
-					wp_posts
-				LEFT JOIN 
-					wp_postmeta ON (wp_posts.ID = wp_postmeta.post_id)
-				WHERE 
-					wp_posts.post_type = %s
-					AND wp_posts.post_status = %s
-					AND wp_postmeta.meta_key = %s",
-				'product',
-				'publish',
-				'affprodimp_amz_asin'
-			)
-		);
+		// Execute query
+		$query         = new WP_Query( $args );
+		$total_results = $query->found_posts;
 
-		foreach ( $products as $product ) {
-			$post_id      = $product->product_id;
-			$product->key = $post_id;
+		$products = array();
+		if ( $query->have_posts() ) {
+			while ( $query->have_posts() ) {
+				$query->the_post();
 
-			$thumbnail_id           = get_post_thumbnail_id( $post_id ) ? get_post_thumbnail_id( $post_id ) : $post_id;
-			$image_primary          = wp_get_attachment_image_src( $thumbnail_id );
-			$product->image_primary = $image_primary[0];
+				$product    = array();
+				$product_id = get_the_ID();
 
-			$sync_last_date          = get_post_meta( $post_id, 'affprodimp_sync_last_date', true );
-			$product->sync_last_date = $sync_last_date ? $this->time_ago( $sync_last_date ) : $this->time_ago( strtotime( $product->product_import_date ) );
+				// Populate product data
+				$product['product_id']          = $product_id;
+				$product['product_url']         = esc_url( get_permalink( $product_id ) );
+				$product['product_title']       = esc_html( get_the_title( $product_id ) );
+				$product['product_import_date'] = esc_html( get_the_date( '', $product_id ) );
+				$product['product_asin']        = esc_html( get_post_meta( $product_id, 'affprodimp_amz_asin', true ) );
+				$product['key']                 = $product_id;
+
+				// Get product image
+				$thumbnail_id             = get_post_thumbnail_id( $product_id ) ? get_post_thumbnail_id( $product_id ) : $product_id;
+				$image_primary            = wp_get_attachment_image_src( $thumbnail_id );
+				$product['image_primary'] = esc_url( $image_primary[0] );
+
+				// Get sync last date
+				$sync_last_date            = get_post_meta( $product_id, 'affprodimp_sync_last_date', true );
+				$product['sync_last_date'] = $sync_last_date ? $this->time_ago( $sync_last_date ) : $this->time_ago( strtotime( $product['product_import_date'] ) );
+
+				$products[] = $product;
+			}
+			wp_reset_postdata();
 		}
 
+		// Prepare response
 		$response = array(
 			'products' => $products,
-			'total'    => $total,
-			'page'     => (int) $page,
+			'total'    => $total_results,
+			'page'     => (int) $paged,
 		);
 
 		return new WP_REST_Response( $response );
@@ -150,31 +137,31 @@ class Products extends Endpoint {
 
 		$minutes = round( $diff / 60 );
 		if ( $minutes < 60 ) {
-			return $minutes === 1 ? 'One minute ago' : "$minutes minutes ago";
+			return 1 === $minutes ? 'One minute ago' : "$minutes minutes ago";
 		}
 
 		$hours = round( $diff / 3600 );
 		if ( $hours < 24 ) {
-			return $hours === 1 ? 'An hour ago' : "$hours hours ago";
+			return 1 === $hours ? 'An hour ago' : "$hours hours ago";
 		}
 
 		$days = round( $diff / 86400 );
 		if ( $days < 7 ) {
-			return $days === 1 ? 'Yesterday' : "$days days ago";
+			return 1 === $days ? 'Yesterday' : "$days days ago";
 		}
 
 		$weeks = round( $diff / 604800 );
 		if ( $weeks < 4.3 ) {
-			return $weeks === 1 ? 'A week ago' : "$weeks weeks ago";
+			return 1 === $weeks ? 'A week ago' : "$weeks weeks ago";
 		}
 
 		$months = round( $diff / 2600640 );
 		if ( $months < 12 ) {
-			return $months === 1 ? 'A month ago' : "$months months ago";
+			return 1 === $months ? 'A month ago' : "$months months ago";
 		}
 
 		$years = round( $diff / 31207680 );
-		return $years === 1 ? 'One year ago' : "$years years ago";
+		return 1 === $years ? 'One year ago' : "$years years ago";
 	}
 
 	/**
@@ -203,7 +190,7 @@ class Products extends Endpoint {
 			$image_primary  = $product['image_primary'];
 			$image_variants = $product['image_variants'];
 			$regular_price  = $product['regular_price'];
-			$price          = $product['price'];
+			$sale_price     = ( isset( $product['sale_price'] ) ) ? $product['sale_price'] : '';
 			$product_url    = $product['product_url'];
 			$attributes     = $product['attributes'];
 
@@ -230,7 +217,7 @@ class Products extends Endpoint {
 			/*===================Update product Images=======================*/
 			$remore_image = get_option( 'affprodimp_settings_remote_image' );
 
-			if ( $remore_image === 'yes' ) {
+			if ( 'Yes' === $remore_image ) {
 				update_post_meta( $post_id, 'affprodimp_product_img_url', $image_primary );
 
 				foreach ( $image_variants as $image_variant ) {
@@ -246,7 +233,7 @@ class Products extends Endpoint {
 					$image_variant_ids[] = \media_sideload_image( $image_variant, $post_id, $post_title, 'id' );
 				}
 
-				if ( sizeof( $image_variant_ids ) > 1 ) {
+				if ( count( $image_variant_ids ) > 1 ) {
 					update_post_meta( $post_id, '_product_image_gallery', implode( ',', $image_variant_ids ) );
 				}
 			}
@@ -255,13 +242,11 @@ class Products extends Endpoint {
 			update_post_meta( $post_id, 'affprodimp_amz_asin', $asin );
 
 			/*===================Update product price=======================*/
-			if ( $price ) {
-				update_post_meta( $post_id, '_price', $price );
-			}
-			if ( $regular_price ) {
-				update_post_meta( $post_id, '_regular_price', $regular_price );
-			}
-			if ( $sale_price ) {
+			$price = !empty( $sale_price ) ? $sale_price : $regular_price;
+			update_post_meta( $post_id, '_price', $price );
+			update_post_meta( $post_id, '_regular_price', $regular_price );
+
+			if ( !empty( $sale_price ) ) {
 				update_post_meta( $post_id, '_sale_price', $sale_price );
 			}
 

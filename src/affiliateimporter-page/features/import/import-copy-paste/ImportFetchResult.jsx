@@ -48,10 +48,6 @@ const ImportFetchResult = memo(() => {
 
 					let ribbonText = isAlreadyImported ? 'Previously Imported' : 'Importable';
 					let ribbonColor = isAlreadyImported ? 'orange' : 'blue';
-					if(importSuccessfulFetchItems.includes(productObj.asin)){
-						ribbonText = __( 'Recently Imported', 'affiliate-products-importer' );
-						ribbonColor = 'green';
-					}
 					if(productObj.Code){
 						ribbonText = __( 'Invalid ASIN', 'affiliate-products-importer' );
 						ribbonColor = 'red';
