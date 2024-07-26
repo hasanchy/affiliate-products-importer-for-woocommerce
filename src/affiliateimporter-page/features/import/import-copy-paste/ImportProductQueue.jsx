@@ -3,7 +3,7 @@ import { Card, Image, Typography, Tooltip, Button, Alert, Switch, Flex  } from '
 import {  UndoOutlined, CloseCircleTwoTone, DeleteOutlined } from '@ant-design/icons';
 import { setImportCancelledFetchItems, setImportQueuedFetchItems, setImportQueueDeletable, setIsImportInProgress } from './importCopyPasteSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts, saveProducts } from '../../../services/apiService';
+import { fetchProducts, fetchRecentlyImportedProducts, saveProducts } from '../../../services/apiService';
 import { __ } from '@wordpress/i18n';
 
 const { Link } = Typography;
@@ -36,6 +36,7 @@ const ImportProductQueue = memo(() => {
 		await dispatch(saveProducts(data));
 		dispatch(setIsImportInProgress(false));
 		dispatch(fetchProducts({page:1, per_page: 10}));
+		dispatch(fetchRecentlyImportedProducts({per_page:20}));
 	}
 
 	const handleSwitchChange = (checked) => {

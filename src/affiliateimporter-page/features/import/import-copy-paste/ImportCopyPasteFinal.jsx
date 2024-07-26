@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setDisplayImportCounter, setSelectedCategories, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportSuccessMessage, setImportCancelledFetchItems, setImportableFetchItems, setImportFetchItems, setImportFetchProgress, setAsinValue, setInvalidAsinCodes, setDuplicateAsinCodes } from './importCopyPasteSlice';
 import ImportFetchCounter from './ImportFetchCounter';
 import { setImportStepBack, setImportStepIndex } from '../importSlice';
-import { fetchProducts, saveProducts } from '../../../services/apiService';
+import { fetchProducts, fetchRecentlyImportedProducts, saveProducts } from '../../../services/apiService';
 import { __ } from '@wordpress/i18n';
 
 const ImportCopyPasteFinal = () => {
@@ -75,6 +75,7 @@ const ImportCopyPasteFinal = () => {
 			dispatch(setIsImportInProgress(false));
 			dispatch(setDisplayImportSuccessMessage(true));
 			dispatch(fetchProducts({page:1, per_page: 10}));
+			dispatch(fetchRecentlyImportedProducts({per_page:20}));
 
 			setTimeout(()=>{
 				dispatch(setDisplayImportCounter(false));
