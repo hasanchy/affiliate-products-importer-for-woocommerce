@@ -6,13 +6,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setDisplayImportCounter, setSelectedCategories, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportSuccessMessage, setImportCancelledFetchItems, setImportableFetchItems, setImportFetchItems, setImportFetchProgress, setAsinValue, setInvalidAsinCodes, setDuplicateAsinCodes } from './importCopyPasteSlice';
 import ImportFetchCounter from './ImportFetchCounter';
 import { setImportStepBack, setImportStepIndex } from '../importSlice';
-import { saveProducts } from '../../../services/apiService';
+import { fetchProducts, saveProducts } from '../../../services/apiService';
 import { __ } from '@wordpress/i18n';
 
 const ImportCopyPasteFinal = () => {
 
 	const dispatch = useDispatch();
-	const { displayImportCounter, importQueue, selectedCategories, isImporting, importFetchItems, importableFetchItems, importCancelledFetchItems, isImportInProgress, importSuccessfulFetchItems, importQueuedFetchItems, displayImportSuccessMessage } = useSelector((state) => state.importCopyPaste);
+	const { displayImportCounter, importQueue, selectedCategories, importFetchItems, importableFetchItems, importCancelledFetchItems, isImportInProgress, importSuccessfulFetchItems, importQueuedFetchItems, displayImportSuccessMessage } = useSelector((state) => state.importCopyPaste);
 
 	let totalImportQueue = importableFetchItems.length - importCancelledFetchItems.length - importSuccessfulFetchItems.length;
 
@@ -72,8 +72,9 @@ const ImportCopyPasteFinal = () => {
 
 			dispatch(setImportFetchProgress(100));
 
-			dispatch(setIsImportInProgress(false))
-			dispatch(setDisplayImportSuccessMessage(true))
+			dispatch(setIsImportInProgress(false));
+			dispatch(setDisplayImportSuccessMessage(true));
+			dispatch(fetchProducts({page:1, per_page: 10}));
 
 			setTimeout(()=>{
 				dispatch(setDisplayImportCounter(false));
@@ -107,7 +108,7 @@ const ImportCopyPasteFinal = () => {
 						</Flex>
 					</Col>
 					<Col span={10}>
-						<CategoriesCheckbox disabled={isImporting} value={selectedCategories} onChange={handleCategoriesChange} />
+						<CategoriesCheckbox disabled={isImportInProgress} value={selectedCategories} onChange={handleCategoriesChange} />
 					</Col>
 				</Row>
 				<Row gutter={20}>

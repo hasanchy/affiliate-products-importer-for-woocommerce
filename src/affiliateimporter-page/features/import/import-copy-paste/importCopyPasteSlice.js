@@ -6,7 +6,6 @@ export const importCopyPasteSlice = createSlice({
 	name: 'importCopyPaste',
 	initialState: {
 		selectedCategories: [],
-		isImporting: false,
 		asinsTofetch: [],
 		totalAsinsFetched: 0,
 		totalAsinsImported: 0,
@@ -83,9 +82,6 @@ export const importCopyPasteSlice = createSlice({
 		setMessage: (state, action) => {
 			state.message = action.payload;
 		},
-		setIsImporting: (state, action) => {
-			state.isImporting = action.payload;
-		},
 		setImportType: (state, action) => {
 			state.importType = action.payload;
 		},
@@ -154,7 +150,6 @@ export const importCopyPasteSlice = createSlice({
 			}
 
 			if(state.totalAsinsImported === state.importQueue.length){
-				state.isImporting = false;
 				state.importQueue = [];
 				state.importQueueDuplicate = [];
 				state.importQueueError = [];
@@ -194,6 +189,6 @@ export const importCopyPasteSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setDuplicateAsinCodes,setSelectedCategories, setAsinValue, setAsinCodes, setInvalidAsinCodes, setAwaitingProducts, setImportButtonText, setImportStatus, setImportResponse, setMessage, setAsinsToFetch, setIsImporting, setImportType, setImportQueue, setImportQueueDeleted, setDisplayImportFetchCounter, setImportFetchItems, setImportFetchErrors, setImportableFetchItems, setImportFetchAlert, setImportCancelledFetchItems, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportCounter, setDisplayImportSuccessMessage, setImportQueueDeletable, setImportFetchProgress } = importCopyPasteSlice.actions
+export const { setDuplicateAsinCodes,setSelectedCategories, setAsinValue, setAsinCodes, setInvalidAsinCodes, setAwaitingProducts, setImportButtonText, setImportStatus, setImportResponse, setMessage, setAsinsToFetch, setImportType, setImportQueue, setImportQueueDeleted, setDisplayImportFetchCounter, setImportFetchItems, setImportFetchErrors, setImportableFetchItems, setImportFetchAlert, setImportCancelledFetchItems, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportCounter, setDisplayImportSuccessMessage, setImportQueueDeletable, setImportFetchProgress } = importCopyPasteSlice.actions
 
 export default importCopyPasteSlice.reducer

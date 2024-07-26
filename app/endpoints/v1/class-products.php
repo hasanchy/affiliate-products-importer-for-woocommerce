@@ -217,7 +217,7 @@ class Products extends Endpoint {
 			/*===================Update product Images=======================*/
 			$remore_image = get_option( 'affprodimp_settings_remote_image' );
 
-			if ( 'yes' === $remore_image ) {
+			if ( 'Yes' === $remore_image ) {
 				update_post_meta( $post_id, 'affprodimp_product_img_url', $image_primary );
 
 				foreach ( $image_variants as $image_variant ) {
