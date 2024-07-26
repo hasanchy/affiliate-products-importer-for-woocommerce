@@ -8,6 +8,12 @@ const RecentlyImportedProducts = memo(() => {
 
 	const { productList, isProductsLoading} = useSelector((state) => state.dashboard);
 
+	const decodeString = ( rawString ) => {
+		const parser = new DOMParser();
+  		const decodedString = parser.parseFromString(rawString, 'text/html').body.textContent;
+		return decodedString;
+	}
+
 	const renderProductGallery = () => {
 		let gallery = [];
 
@@ -17,7 +23,7 @@ const RecentlyImportedProducts = memo(() => {
 					<Card>
 						<Image preview={false} src={productList[i].image_primary} alt={productList[i].product_title} width='115px'/>
 						<div style={{width:'115px'}}>
-							{productList[i].product_title.substring(0, 55)}...
+							{decodeString(productList[i].product_title.substring(0, 55))}...
 						</div>
 					</Card>
 				</Link>
