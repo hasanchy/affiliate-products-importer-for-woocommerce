@@ -80,10 +80,10 @@ const Products = () => {
                 columns={columns}
                 pagination={{
                     showSizeChanger: false,
-                    pageSize: 10,
+                    pageSize: 20,
                     total: totalProducts,
                     onChange: (page) => {
-                        dispatch(fetchProducts({page, keyword: searchKeyword}));
+                        dispatch(fetchProducts({page, per_page: 20}));
                     }
                 }}
                 size="middle"

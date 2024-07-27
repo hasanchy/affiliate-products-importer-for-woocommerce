@@ -51,7 +51,6 @@ const ImportCopyPasteForm = () => {
 
 		let uniqueCodes = validCodes.length ? validCodes.filter((value, index, self) => self.indexOf(value) === index) : [];
 		let duplicateCodes = findDuplicates(validCodes);
-		console.log(duplicateCodes);
 		
 		dispatch(setAsinCodes(uniqueCodes));
 		dispatch(setDuplicateAsinCodes(duplicateCodes));

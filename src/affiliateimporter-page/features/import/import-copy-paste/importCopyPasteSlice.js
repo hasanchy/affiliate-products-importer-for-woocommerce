@@ -80,8 +80,6 @@ export const importCopyPasteSlice = createSlice({
 		},
 		setImportSuccessfulFetchItems: (state, action) => {
 			state.importSuccessfulFetchItems = action.payload
-			console.log(action.payload);
-			
 		},
 		setIsImportInProgress: (state, action) => {
 			state.isImportInProgress = action.payload

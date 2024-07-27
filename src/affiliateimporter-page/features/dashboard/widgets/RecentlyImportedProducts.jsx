@@ -18,7 +18,7 @@ const RecentlyImportedProducts = memo(() => {
 		let gallery = [];
 
 		for(let i in productList){
-			gallery.push(<div className='affprodimp-image-gallery'>
+			gallery.push(<div key={i} className='affprodimp-image-gallery'>
 				<Link href={productList[i].product_url} target="_blank">
 					<Card>
 						<Image preview={false} src={productList[i].image_primary} alt={productList[i].product_title} width='115px'/>
