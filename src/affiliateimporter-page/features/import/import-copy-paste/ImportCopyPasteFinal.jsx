@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
 const ImportCopyPasteFinal = () => {
 
 	const dispatch = useDispatch();
-	const { displayImportCounter, importQueue, selectedCategories, importFetchItems, importableFetchItems, importCancelledFetchItems, isImportInProgress, importSuccessfulFetchItems, importQueuedFetchItems, displayImportSuccessMessage } = useSelector((state) => state.importCopyPaste);
+	const { displayImportCounter, selectedCategories, importFetchItems, importableFetchItems, importCancelledFetchItems, isImportInProgress, importSuccessfulFetchItems, importQueuedFetchItems, displayImportSuccessMessage } = useSelector((state) => state.importCopyPaste);
 
 	let totalImportQueue = importableFetchItems.length - importCancelledFetchItems.length - importSuccessfulFetchItems.length;
 
@@ -99,8 +99,6 @@ const ImportCopyPasteFinal = () => {
 	const renderAmazonTabContent = () => {
 
 		if(!displayImportSuccessMessage){
-			let productsLabel = (importQueue.length===1) ? 'Product' : 'Products';
-
 			return<>
 				<Row gutter={20}>
 					<Col span={4}>
@@ -115,7 +113,7 @@ const ImportCopyPasteFinal = () => {
 				<Row gutter={20}>
 					<Col span={4}></Col>
 					<Col span={10}>
-						<Button type="primary" icon={<ImportOutlined />} loading={isImportInProgress} disabled={!totalImportQueue || selectedCategories.length < 1} onClick={importBulkProducts}>Import {totalImportQueue} {productsLabel}</Button>
+						<Button type="primary" icon={<ImportOutlined />} loading={isImportInProgress} disabled={!totalImportQueue || selectedCategories.length < 1} onClick={importBulkProducts}>Import All {totalImportQueue} Product(s)</Button>
 					</Col>
 				</Row>
 			</>

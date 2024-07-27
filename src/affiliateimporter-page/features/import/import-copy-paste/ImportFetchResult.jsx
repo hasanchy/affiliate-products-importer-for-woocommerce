@@ -7,7 +7,7 @@ const { Text } = Typography;
 
 const ImportFetchResult = memo(() => {
 
-	const { importFetchItems, importSuccessfulFetchItems, importFetchErrors } = useSelector((state) => state.importCopyPaste);
+	const { importFetchItems, importFetchErrors } = useSelector((state) => state.importCopyPaste);
 
 	let dataSource = [...importFetchItems, ...importFetchErrors]
 
