@@ -114,7 +114,7 @@ class AsinVerification extends Endpoint {
 						}
 					}
 
-					$fetch_result[ $index ]['product_url'] = 'https://' . $marketplace . '/dp/' . $asin . '/';
+					$fetch_result[ $index ]['product_url'] = 'https://' . $marketplace . '/dp/' . $asin . '/?tag=' . $affiliate_id;
 				}
 				$response_data = array(
 					'fetch_result' => $fetch_result,
