@@ -218,23 +218,9 @@ class Products extends Endpoint {
 
 			if ( 'Yes' === $remore_image ) {
 				update_post_meta( $post_id, 'affprodimp_product_img_url', $image_primary );
-
-				foreach ( $image_variants as $image_variant ) {
-					$urls[] = $image_variant;
-				}
-				update_post_meta( $post_id, 'affprodimp_product_gallery_url', $urls );
 			} else {
 				$thumbnail_image_id = \media_sideload_image( $image_primary, $post_id, $post_title, 'id' );
 				set_post_thumbnail( $post_id, $thumbnail_image_id );
-
-				$image_variant_ids = array();
-				foreach ( $image_variants as $image_variant ) {
-					$image_variant_ids[] = \media_sideload_image( $image_variant, $post_id, $post_title, 'id' );
-				}
-
-				if ( count( $image_variant_ids ) > 1 ) {
-					update_post_meta( $post_id, '_product_image_gallery', implode( ',', $image_variant_ids ) );
-				}
 			}
 
 			/*===================Update product ASIN=======================*/

@@ -64,21 +64,16 @@ const ImportProductQueue = memo(() => {
 				
 				let isSuccessful = importSuccessfulFetchItems.includes(asin);
 				let isLoading = importQueuedFetchItems.includes(asin);
-				let previewImages = [importFetchItems[i].image_primary, ...importFetchItems[i].image_variants]
 				
 				gallery.push(
 					<div className='affprodimp-image-gallery'>
 						<Card>
-							<Image.PreviewGroup
-								items={previewImages}
-								>
-									{!isLoading && !isSuccessful && isImportQueueDeletable && (
-										<div style={{position:'absolute', insetInlineEnd:'0', top:'0', cursor:'pointer'}}>
-											<CloseCircleTwoTone style={{ fontSize: '20px', color: '#999' }} onClick={handleImportQueueDelete.bind(this, importFetchItems[i].asin)}/>
-										</div>
-									)}
-								<Image src={importFetchItems[i].image_primary} alt={importFetchItems[i].post_title} width='125px'/>
-							</Image.PreviewGroup>
+							{!isLoading && !isSuccessful && isImportQueueDeletable && (
+								<div style={{position:'absolute', insetInlineEnd:'0', top:'0', cursor:'pointer'}}>
+									<CloseCircleTwoTone style={{ fontSize: '20px', color: '#999' }} onClick={handleImportQueueDelete.bind(this, importFetchItems[i].asin)}/>
+								</div>
+							)}
+							<Image src={importFetchItems[i].image_primary} alt={importFetchItems[i].post_title} width='125px'/>
 							<div style={{width:'125px'}}>
 								<Link href={importFetchItems[i].product_url} target="_blank">
 									{importFetchItems[i].post_title.substring(0, 55)}...

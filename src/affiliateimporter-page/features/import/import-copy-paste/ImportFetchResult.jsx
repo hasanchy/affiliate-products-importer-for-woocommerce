@@ -19,10 +19,7 @@ const ImportFetchResult = memo(() => {
 				key: 'img',
 				render: (imageSrc, productObj) => {
 					if(imageSrc){
-						let previewImages = [imageSrc, ...productObj.image_variants]
-						return <Image.PreviewGroup items={previewImages} >
-							<Image src={imageSrc} alt={productObj.post_title} height='50px'/>
-						</Image.PreviewGroup>
+						return <Image src={imageSrc} alt={productObj.post_title} height='50px'/>
 					}else{
 						return <Skeleton.Image  style={{ width: 50, height: 50 }}/>
 					}
