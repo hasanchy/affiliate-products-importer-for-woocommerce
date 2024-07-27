@@ -188,7 +188,6 @@ class Products extends Endpoint {
 			$post_name      = $product['post_name'];
 			$post_content   = $product['post_content'];
 			$image_primary  = $product['image_primary'];
-			$image_variants = $product['image_variants'];
 			$regular_price  = $product['regular_price'];
 			$sale_price     = ( isset( $product['sale_price'] ) ) ? $product['sale_price'] : '';
 			$product_url    = $product['product_url'];
