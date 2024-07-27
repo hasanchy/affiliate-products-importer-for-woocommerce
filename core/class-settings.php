@@ -134,19 +134,19 @@ class Settings {
 	 */
 	public static function is_product_already_imported( $asin ) {
 		$args = array(
-			'post_type'  => 'product',
+			'post_type'   => 'product',
 			'post_status' => 'publish',
-			'meta_query' => array(
+			'meta_query'  => array(
 				array(
-					'key'   => 'affprodimp_amz_asin',
-					'value' => $asin,
-					'compare' => '='
-				)
-			)
+					'key'     => 'affprodimp_amz_asin',
+					'value'   => $asin,
+					'compare' => '=',
+				),
+			),
 		);
-	
-		$query = new WP_Query($args);
-	
+
+		$query = new WP_Query( $args );
+
 		return $query->have_posts();
 	}
 

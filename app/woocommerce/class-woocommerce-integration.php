@@ -23,7 +23,7 @@ class WooCommerceIntegration extends Base {
 	 *
 	 */
 	public function init() {
-		// \add_filter( 'woocommerce_get_price_html', array( $this, 'amz_disclaimer_price_html' ), 100, 2 );
+		\add_filter( 'woocommerce_get_price_html', array( $this, 'amz_disclaimer_price_html' ), 100, 2 );
 
 		\add_filter( 'wp_get_attachment_image_src', array( $this, 'affprodimp_replace_attachment_image_src' ), 100, 2 );
 

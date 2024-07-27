@@ -4,7 +4,7 @@ Tags: Amazon Affiliate, Products Importer for WooCommerce
 Requires at least: 5.2
 Tested up to: 6.6
 Requires PHP: 7.2.0
-Stable tag: 1.0.4
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.en.html
 
@@ -18,7 +18,7 @@ Key Features:
 Effortlessly import Amazon products by simply copying and pasting a list of Amazon Product ASINs. This feature ensures a quick and accurate import process, allowing you to expand your product catalog in no time. To utilize this feature, you'll need to set up your Amazon affiliate API keys, ensuring a smooth and automated import experience.
 
 == Contribute ==
-If you want to contribute to this project or just report a bug, you are more than welcome. Please check repository from <a href="https://github.com/hasanchy/affiliate-products-importer-lite/">Github</a>.
+If you want to contribute to this project or just report a bug, you are more than welcome. Please check repository from <a href="https://github.com/hasanchy/affiliate-products-importer/">Github</a>.
 
 == Installation ==
 1. Go to your WordPress backend
@@ -28,5 +28,5 @@ If you want to contribute to this project or just report a bug, you are more tha
 5. Navigate to "Affiliate Products Importer"
 
 == Changelog ==
-1.0.0 (2024-07-25)
+1.0.0 (2024-07-27)
 Initial Release
