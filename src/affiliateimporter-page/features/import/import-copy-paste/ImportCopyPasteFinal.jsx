@@ -3,7 +3,7 @@ import { Row, Col, Space, Flex, Button, Result, Card } from 'antd';
 import CategoriesCheckbox from '../../../components/categories/CategoriesCheckbox';
 import { ImportOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux'
-import { setDisplayImportCounter, setSelectedCategories, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportSuccessMessage, setImportCancelledFetchItems, setImportableFetchItems, setImportFetchItems, setImportFetchProgress, setAsinValue, setInvalidAsinCodes, setDuplicateAsinCodes } from './importCopyPasteSlice';
+import { setDisplayImportCounter, setSelectedCategories, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportSuccessMessage, setImportCancelledFetchItems, setImportableFetchItems, setImportFetchItems, setImportFetchProgress, setAsinValue, setInvalidAsinCodes, setDuplicateAsinCodes, setAsinCodes } from './importCopyPasteSlice';
 import ImportFetchCounter from './ImportFetchCounter';
 import { setImportStepBack, setImportStepIndex } from '../importSlice';
 import { fetchProducts, fetchRecentlyImportedProducts, saveProducts } from '../../../services/apiService';
@@ -85,6 +85,7 @@ const ImportCopyPasteFinal = () => {
 
 	const handleImportAgain = () => {
 		dispatch(setAsinValue(''));
+		dispatch(setAsinCodes([]));
 		dispatch(setInvalidAsinCodes([]));
 		dispatch(setDuplicateAsinCodes([]));
 		dispatch(setImportQueuedFetchItems([]));

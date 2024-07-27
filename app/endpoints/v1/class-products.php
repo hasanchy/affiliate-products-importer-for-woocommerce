@@ -192,7 +192,6 @@ class Products extends Endpoint {
 			$regular_price  = $product['regular_price'];
 			$sale_price     = ( isset( $product['sale_price'] ) ) ? $product['sale_price'] : '';
 			$product_url    = $product['product_url'];
-			$attributes     = $product['attributes'];
 
 			$new_post = array(
 				'post_title'   => $post_title,
@@ -252,9 +251,6 @@ class Products extends Endpoint {
 
 			/*===================Update product url=======================*/
 			update_post_meta( $post_id, '_product_url', $product_url );
-
-			/*===================Update product Attributes=======================*/
-			$this->add_product_attribute( $post_id, $attributes );
 		}
 
 		$return = array(
@@ -263,23 +259,5 @@ class Products extends Endpoint {
 		);
 
 		return new WP_REST_Response( $return );
-	}
-
-	public function add_product_attribute( $post_id, $attributes ) {
-
-		foreach ( $attributes as $key => $attribute ) {
-			$meta_value[ strtolower( $attribute['name'] ) ] = array(
-				'name'         => $attribute['name'],
-				'value'        => $attribute['value'],
-				'position'     => $key,
-				'is_visible'   => 1,
-				'is_variation' => 0,
-				'is_taxonomy'  => 0,
-			);
-		}
-
-		update_post_meta( $post_id, '_product_attributes', $meta_value );
-
-		/*====================================================*/
 	}
 }
