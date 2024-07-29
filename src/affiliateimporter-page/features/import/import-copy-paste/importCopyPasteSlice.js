@@ -6,27 +6,15 @@ export const importCopyPasteSlice = createSlice({
 	name: 'importCopyPaste',
 	initialState: {
 		selectedCategories: [],
-		asinsTofetch: [],
-		totalAsinsFetched: 0,
-		totalAsinsImported: 0,
-		isImportQueueAdding: false,
 		error: null,
 		asinValue: '',
         asinValueFetched:'',
 		asinCodes: [],
 		invalidAsinCodes: [],
 		duplicateAsinCodes: [],
-		awaitingProducts: [],
-		importButtonText: 'Import',
-		importStatus: '',
-		importResponse: [],
-		message: '',
-		importQueue:[],
+		
 		importQueueDuplicate:[],
 		importQueueError:[],
-		importQueueDeleted:[],
-		importType:'copy-paste',
-		importStepIndex:1,
 
 		isImportFetchInProgress: false,
 		displayImportFetchCounter: false,
@@ -54,42 +42,17 @@ export const importCopyPasteSlice = createSlice({
 		setAsinCodes: (state, action) => {
 			state.asinCodes = action.payload;
 		},
-		setAsinsToFetch: (state, action) => {
-			if(state.asinsTofetch.length){
-				state.asinsTofetch = [...state.asinsTofetch, ...action.payload];
-			}else{
-				state.asinsTofetch = action.payload;
-			}
-		},
 		setInvalidAsinCodes: (state, action) => {
 			state.invalidAsinCodes = action.payload;
 		},
 		setDuplicateAsinCodes: (state, action) => {
 			state.duplicateAsinCodes = action.payload;
 		},
-		setAwaitingProducts: (state, action) => {
-			state.awaitingProducts = action.payload;
-		},
-		setImportButtonText: (state, action) => {
-			state.importButtonText = action.payload;
-		},
-		setImportStatus: (state, action) => {
-			state.importStatus = action.payload;
-		},
-		setImportResponse: (state, action) => {
-			state.importResponse = action.payload;
-		},
-		setMessage: (state, action) => {
-			state.message = action.payload;
-		},
 		setImportType: (state, action) => {
 			state.importType = action.payload;
 		},
 		setImportQueue: (state, action) => {
 			state.importQueue = action.payload;
-		},
-		setImportQueueDeleted: (state, action) => {
-			state.importQueueDeleted = action.payload;
 		},
 		setDisplayImportFetchCounter: (state, action) => {
 			state.displayImportFetchCounter = action.payload
@@ -109,9 +72,6 @@ export const importCopyPasteSlice = createSlice({
 		setImportableFetchItems: (state, action) => {
 			state.importableFetchItems = action.payload;
 		},
-		setImportFetchAlert: (state, action) => {
-			state.importFetchAlert = action.payload
-		},
 		setImportCancelledFetchItems: (state, action) => {
 			state.importCancelledFetchItems = action.payload
 		},
@@ -120,8 +80,6 @@ export const importCopyPasteSlice = createSlice({
 		},
 		setImportSuccessfulFetchItems: (state, action) => {
 			state.importSuccessfulFetchItems = action.payload
-			console.log(action.payload);
-			
 		},
 		setIsImportInProgress: (state, action) => {
 			state.isImportInProgress = action.payload
@@ -135,25 +93,9 @@ export const importCopyPasteSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder.addCase(saveProducts.pending, (state) => {
-			state.isImportQueueAdding = true;
 		}),
 		builder.addCase(saveProducts.fulfilled, (state, action) => {
-
 			state.importSuccessfulFetchItems = [...state.importSuccessfulFetchItems, ...action.payload.product_asins]
-
-			let totalAsinsImported = action.payload.product_ids.length;
-			
-			if(state.totalAsinsImported){
-				state.totalAsinsImported += totalAsinsImported;
-			}else{
-				state.totalAsinsImported = totalAsinsImported;
-			}
-
-			if(state.totalAsinsImported === state.importQueue.length){
-				state.importQueue = [];
-				state.importQueueDuplicate = [];
-				state.importQueueError = [];
-			}
 		}),
 		builder.addCase(saveProducts.rejected, (state, action) => {
 			state.error = action.error.message;
@@ -189,6 +131,6 @@ export const importCopyPasteSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setDuplicateAsinCodes,setSelectedCategories, setAsinValue, setAsinCodes, setInvalidAsinCodes, setAwaitingProducts, setImportButtonText, setImportStatus, setImportResponse, setMessage, setAsinsToFetch, setImportType, setImportQueue, setImportQueueDeleted, setDisplayImportFetchCounter, setImportFetchItems, setImportFetchErrors, setImportableFetchItems, setImportFetchAlert, setImportCancelledFetchItems, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportCounter, setDisplayImportSuccessMessage, setImportQueueDeletable, setImportFetchProgress } = importCopyPasteSlice.actions
+export const { setDuplicateAsinCodes, setSelectedCategories, setAsinValue, setAsinCodes, setInvalidAsinCodes, setImportType, setImportQueue, setDisplayImportFetchCounter, setImportFetchItems, setImportFetchErrors, setImportableFetchItems, setImportCancelledFetchItems, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportCounter, setDisplayImportSuccessMessage, setImportQueueDeletable, setImportFetchProgress } = importCopyPasteSlice.actions
 
 export default importCopyPasteSlice.reducer

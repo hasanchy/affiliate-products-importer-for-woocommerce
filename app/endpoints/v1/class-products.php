@@ -183,16 +183,14 @@ class Products extends Endpoint {
 		$product_ids   = array();
 		$product_asins = array();
 		foreach ( $products as $product ) {
-			$asin           = $product['asin'];
-			$post_title     = $product['post_title'];
-			$post_name      = $product['post_name'];
-			$post_content   = $product['post_content'];
-			$image_primary  = $product['image_primary'];
-			$image_variants = $product['image_variants'];
-			$regular_price  = $product['regular_price'];
-			$sale_price     = ( isset( $product['sale_price'] ) ) ? $product['sale_price'] : '';
-			$product_url    = $product['product_url'];
-			$attributes     = $product['attributes'];
+			$asin          = $product['asin'];
+			$post_title    = $product['post_title'];
+			$post_name     = $product['post_name'];
+			$post_content  = $product['post_content'];
+			$image_primary = $product['image_primary'];
+			$regular_price = $product['regular_price'];
+			$sale_price    = ( isset( $product['sale_price'] ) ) ? $product['sale_price'] : '';
+			$product_url   = $product['product_url'];
 
 			$new_post = array(
 				'post_title'   => $post_title,
@@ -219,42 +217,25 @@ class Products extends Endpoint {
 
 			if ( 'Yes' === $remore_image ) {
 				update_post_meta( $post_id, 'affprodimp_product_img_url', $image_primary );
-
-				foreach ( $image_variants as $image_variant ) {
-					$urls[] = $image_variant;
-				}
-				update_post_meta( $post_id, 'affprodimp_product_gallery_url', $urls );
 			} else {
 				$thumbnail_image_id = \media_sideload_image( $image_primary, $post_id, $post_title, 'id' );
 				set_post_thumbnail( $post_id, $thumbnail_image_id );
-
-				$image_variant_ids = array();
-				foreach ( $image_variants as $image_variant ) {
-					$image_variant_ids[] = \media_sideload_image( $image_variant, $post_id, $post_title, 'id' );
-				}
-
-				if ( count( $image_variant_ids ) > 1 ) {
-					update_post_meta( $post_id, '_product_image_gallery', implode( ',', $image_variant_ids ) );
-				}
 			}
 
 			/*===================Update product ASIN=======================*/
 			update_post_meta( $post_id, 'affprodimp_amz_asin', $asin );
 
 			/*===================Update product price=======================*/
-			$price = !empty( $sale_price ) ? $sale_price : $regular_price;
+			$price = ! empty( $sale_price ) ? $sale_price : $regular_price;
 			update_post_meta( $post_id, '_price', $price );
 			update_post_meta( $post_id, '_regular_price', $regular_price );
 
-			if ( !empty( $sale_price ) ) {
+			if ( ! empty( $sale_price ) ) {
 				update_post_meta( $post_id, '_sale_price', $sale_price );
 			}
 
 			/*===================Update product url=======================*/
 			update_post_meta( $post_id, '_product_url', $product_url );
-
-			/*===================Update product Attributes=======================*/
-			$this->add_product_attribute( $post_id, $attributes );
 		}
 
 		$return = array(
@@ -263,23 +244,5 @@ class Products extends Endpoint {
 		);
 
 		return new WP_REST_Response( $return );
-	}
-
-	public function add_product_attribute( $post_id, $attributes ) {
-
-		foreach ( $attributes as $key => $attribute ) {
-			$meta_value[ strtolower( $attribute['name'] ) ] = array(
-				'name'         => $attribute['name'],
-				'value'        => $attribute['value'],
-				'position'     => $key,
-				'is_visible'   => 1,
-				'is_variation' => 0,
-				'is_taxonomy'  => 0,
-			);
-		}
-
-		update_post_meta( $post_id, '_product_attributes', $meta_value );
-
-		/*====================================================*/
 	}
 }

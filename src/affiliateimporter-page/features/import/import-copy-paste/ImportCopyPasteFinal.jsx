@@ -3,7 +3,7 @@ import { Row, Col, Space, Flex, Button, Result, Card } from 'antd';
 import CategoriesCheckbox from '../../../components/categories/CategoriesCheckbox';
 import { ImportOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux'
-import { setDisplayImportCounter, setSelectedCategories, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportSuccessMessage, setImportCancelledFetchItems, setImportableFetchItems, setImportFetchItems, setImportFetchProgress, setAsinValue, setInvalidAsinCodes, setDuplicateAsinCodes } from './importCopyPasteSlice';
+import { setDisplayImportCounter, setSelectedCategories, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportSuccessMessage, setImportCancelledFetchItems, setImportableFetchItems, setImportFetchItems, setImportFetchProgress, setAsinValue, setInvalidAsinCodes, setDuplicateAsinCodes, setAsinCodes } from './importCopyPasteSlice';
 import ImportFetchCounter from './ImportFetchCounter';
 import { setImportStepBack, setImportStepIndex } from '../importSlice';
 import { fetchProducts, fetchRecentlyImportedProducts, saveProducts } from '../../../services/apiService';
@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
 const ImportCopyPasteFinal = () => {
 
 	const dispatch = useDispatch();
-	const { displayImportCounter, importQueue, selectedCategories, importFetchItems, importableFetchItems, importCancelledFetchItems, isImportInProgress, importSuccessfulFetchItems, importQueuedFetchItems, displayImportSuccessMessage } = useSelector((state) => state.importCopyPaste);
+	const { displayImportCounter, selectedCategories, importFetchItems, importableFetchItems, importCancelledFetchItems, isImportInProgress, importSuccessfulFetchItems, importQueuedFetchItems, displayImportSuccessMessage } = useSelector((state) => state.importCopyPaste);
 
 	let totalImportQueue = importableFetchItems.length - importCancelledFetchItems.length - importSuccessfulFetchItems.length;
 
@@ -85,6 +85,7 @@ const ImportCopyPasteFinal = () => {
 
 	const handleImportAgain = () => {
 		dispatch(setAsinValue(''));
+		dispatch(setAsinCodes([]));
 		dispatch(setInvalidAsinCodes([]));
 		dispatch(setDuplicateAsinCodes([]));
 		dispatch(setImportQueuedFetchItems([]));
@@ -99,8 +100,6 @@ const ImportCopyPasteFinal = () => {
 	const renderAmazonTabContent = () => {
 
 		if(!displayImportSuccessMessage){
-			let productsLabel = (importQueue.length===1) ? 'Product' : 'Products';
-
 			return<>
 				<Row gutter={20}>
 					<Col span={4}>
@@ -115,7 +114,7 @@ const ImportCopyPasteFinal = () => {
 				<Row gutter={20}>
 					<Col span={4}></Col>
 					<Col span={10}>
-						<Button type="primary" icon={<ImportOutlined />} loading={isImportInProgress} disabled={!totalImportQueue || selectedCategories.length < 1} onClick={importBulkProducts}>Import {totalImportQueue} {productsLabel}</Button>
+						<Button type="primary" icon={<ImportOutlined />} loading={isImportInProgress} disabled={!totalImportQueue || selectedCategories.length < 1} onClick={importBulkProducts}>Import All {totalImportQueue} Product(s)</Button>
 					</Col>
 				</Row>
 			</>

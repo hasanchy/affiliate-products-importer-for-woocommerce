@@ -7,28 +7,28 @@ import { saveAmazonApiSettings, verifyAmazonApiSettings } from '../../../service
 import { __ } from '@wordpress/i18n';
 
 const affiliateCountries = [
-    { 'countryFlag': <AU style={{width:'20px'}}/>,'countryCode': <AU />, 'countryName': 'Australia', 'countryMarketplace': 'www.amazon.com.au' }, 
-    { 'countryFlag': <BE style={{width:'20px'}}/>,'countryCode': 'be', 'countryName': 'Belgium', 'countryMarketplace': 'www.amazon.com.be' }, 
-    { 'countryFlag': <BR style={{width:'20px'}}/>,'countryCode': 'br', 'countryName': 'Brazil', 'countryMarketplace': 'www.amazon.com.br' },
-    { 'countryFlag': <CA style={{width:'20px'}}/>,'countryCode': 'ca', 'countryName': 'Canada', 'countryMarketplace': 'www.amazon.ca' },
-    { 'countryFlag': <CN style={{width:'20px'}}/>,'countryCode': 'cn', 'countryName': 'China', 'countryMarketplace': 'www.amazon.cn' }, 
-    { 'countryFlag': <EG style={{width:'20px'}}/>,'countryCode': 'eg', 'countryName': 'Egypt', 'countryMarketplace': 'www.amazon.eg' }, 
-    { 'countryFlag': <FR style={{width:'20px'}}/>,'countryCode': 'fr', 'countryName': 'France', 'countryMarketplace': 'www.amazon.fr' }, 
-    { 'countryFlag': <DE style={{width:'20px'}}/>,'countryCode': 'de', 'countryName': 'Germany', 'countryMarketplace': 'www.amazon.de' }, 
-    { 'countryFlag': <IN style={{width:'20px'}}/>,'countryCode': 'in', 'countryName': 'India', 'countryMarketplace': 'www.amazon.in' }, 
-    { 'countryFlag': <IT style={{width:'20px'}}/>,'countryCode': 'it', 'countryName': 'Italy', 'countryMarketplace': 'www.amazon.it' }, 
-    { 'countryFlag': <JP style={{width:'20px'}}/>,'countryCode': 'jp', 'countryName': 'Japan', 'countryMarketplace': 'www.amazon.co.jp' }, 
-    { 'countryFlag': <MX style={{width:'20px'}}/>,'countryCode': 'mx', 'countryName': 'Mexico', 'countryMarketplace': 'www.amazon.com.mx' }, 
-    { 'countryFlag': <NL style={{width:'20px'}}/>,'countryCode': 'nl', 'countryName': 'Netherlands', 'countryMarketplace': 'www.amazon.nl' }, 
-    { 'countryFlag': <PL style={{width:'20px'}}/>,'countryCode': 'pl', 'countryName': 'Poland', 'countryMarketplace': 'www.amazon.pl' }, 
-    { 'countryFlag': <SA style={{width:'20px'}}/>,'countryCode': 'sa', 'countryName': 'Saudi Arabia', 'countryMarketplace': 'www.amazon.sa' }, 
-    { 'countryFlag': <SG style={{width:'20px'}}/>,'countryCode': 'sg', 'countryName': 'Singapore', 'countryMarketplace': 'www.amazon.sg' }, 
-    { 'countryFlag': <ES style={{width:'20px'}}/>,'countryCode': 'es', 'countryName': 'Spain', 'countryMarketplace': 'www.amazon.es' }, 
-    { 'countryFlag': <SE style={{width:'20px'}}/>,'countryCode': 'se', 'countryName': 'Sweden', 'countryMarketplace': 'www.amazon.se' }, 
-    { 'countryFlag': <TR style={{width:'20px'}}/>,'countryCode': 'tr', 'countryName': 'Turkey', 'countryMarketplace': 'www.amazon.com.tr' },
-    { 'countryFlag': <AE style={{width:'20px'}}/>,'countryCode': 'ae', 'countryName': 'United Arab Emirates', 'countryMarketplace': 'www.amazon.ae' }, 
-    { 'countryFlag': <US style={{width:'20px'}}/>,'countryCode': 'us', 'countryName': 'United States', 'countryMarketplace': 'www.amazon.com' }, 
-    { 'countryFlag': <GB style={{width:'20px'}}/>,'countryCode': 'gb', 'countryName': 'United Kingdom', 'countryMarketplace': 'www.amazon.co.uk' }
+    { 'flag': <AU style={{width:'20px'}}/>,'code': 'au', 'name': 'Australia' }, 
+    { 'flag': <BE style={{width:'20px'}}/>,'code': 'be', 'name': 'Belgium' }, 
+    { 'flag': <BR style={{width:'20px'}}/>,'code': 'br', 'name': 'Brazil' },
+    { 'flag': <CA style={{width:'20px'}}/>,'code': 'ca', 'name': 'Canada' },
+    { 'flag': <CN style={{width:'20px'}}/>,'code': 'cn', 'name': 'China' }, 
+    { 'flag': <EG style={{width:'20px'}}/>,'code': 'eg', 'name': 'Egypt' }, 
+    { 'flag': <FR style={{width:'20px'}}/>,'code': 'fr', 'name': 'France' }, 
+    { 'flag': <DE style={{width:'20px'}}/>,'code': 'de', 'name': 'Germany' }, 
+    { 'flag': <IN style={{width:'20px'}}/>,'code': 'in', 'name': 'India' }, 
+    { 'flag': <IT style={{width:'20px'}}/>,'code': 'it', 'name': 'Italy' }, 
+    { 'flag': <JP style={{width:'20px'}}/>,'code': 'jp', 'name': 'Japan' }, 
+    { 'flag': <MX style={{width:'20px'}}/>,'code': 'mx', 'name': 'Mexico' }, 
+    { 'flag': <NL style={{width:'20px'}}/>,'code': 'nl', 'name': 'Netherlands' }, 
+    { 'flag': <PL style={{width:'20px'}}/>,'code': 'pl', 'name': 'Poland' }, 
+    { 'flag': <SA style={{width:'20px'}}/>,'code': 'sa', 'name': 'Saudi Arabia' }, 
+    { 'flag': <SG style={{width:'20px'}}/>,'code': 'sg', 'name': 'Singapore' }, 
+    { 'flag': <ES style={{width:'20px'}}/>,'code': 'es', 'name': 'Spain' }, 
+    { 'flag': <SE style={{width:'20px'}}/>,'code': 'se', 'name': 'Sweden' }, 
+    { 'flag': <TR style={{width:'20px'}}/>,'code': 'tr', 'name': 'Turkey' },
+    { 'flag': <AE style={{width:'20px'}}/>,'code': 'ae', 'name': 'United Arab Emirates' }, 
+    { 'flag': <US style={{width:'20px'}}/>,'code': 'us', 'name': 'United States' }, 
+    { 'flag': <GB style={{width:'20px'}}/>,'code': 'gb', 'name': 'United Kingdom' }
 ];
 
 const AmazonApiSettings = () => {
@@ -174,11 +174,10 @@ const AmazonApiSettings = () => {
                     ]}
                 >
                     <Select
-                        defaultValue="us"
                     >
                         {affiliateCountries.map(countryObj => {
-                            return  <Select.Option value={countryObj.countryCode}> 
-                                {countryObj.countryFlag} {countryObj.countryName}
+                            return  <Select.Option key={countryObj.code} value={countryObj.code}> 
+                                {countryObj.flag} {countryObj.name}
                             </Select.Option>
                         })}
                     </Select>

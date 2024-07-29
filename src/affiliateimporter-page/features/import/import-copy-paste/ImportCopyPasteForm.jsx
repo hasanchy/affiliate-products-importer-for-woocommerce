@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Input, Row, Col, Space, Flex, Button, Alert, Tag } from 'antd';
 
 import { useSelector, useDispatch } from 'react-redux'
-import { setAsinValue, setAsinCodes, setInvalidAsinCodes, setDuplicateAsinCodes, setImportStepIndex, setImportFetchItems, setImportableFetchItems, setDisplayImportFetchCounter, setImportFetchErrors, setImportFetchProgress, setImportSuccessfulFetchItems, setImportQueue, setImportQueuedFetchItems } from './importCopyPasteSlice';
+import { setAsinValue, setAsinCodes, setInvalidAsinCodes, setDuplicateAsinCodes, setImportFetchItems, setImportableFetchItems, setDisplayImportFetchCounter, setImportFetchErrors, setImportFetchProgress, setImportSuccessfulFetchItems, setImportQueuedFetchItems } from './importCopyPasteSlice';
 import { CheckCircleOutlined } from '@ant-design/icons';
 import ImportFetchCounter from './ImportFetchCounter';
 import { setImportStepBack, setImportStepNext } from '../importSlice';
@@ -51,7 +51,6 @@ const ImportCopyPasteForm = () => {
 
 		let uniqueCodes = validCodes.length ? validCodes.filter((value, index, self) => self.indexOf(value) === index) : [];
 		let duplicateCodes = findDuplicates(validCodes);
-		console.log(duplicateCodes);
 		
 		dispatch(setAsinCodes(uniqueCodes));
 		dispatch(setDuplicateAsinCodes(duplicateCodes));

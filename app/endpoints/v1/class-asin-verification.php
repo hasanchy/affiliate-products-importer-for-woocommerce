@@ -95,14 +95,6 @@ class AsinVerification extends Endpoint {
 					$fetch_result[ $index ]['post_content']        = isset( $item->ItemInfo->Features->DisplayValues ) ? implode( '</br>', $item->ItemInfo->Features->DisplayValues ) : '';
 					$fetch_result[ $index ]['image_primary']       = $item->Images->Primary->Large->URL;
 
-					$image_variants = array();
-					if ( isset( $item->Images->Variants ) ) {
-						foreach ( $item->Images->Variants as $image ) {
-							$image_variants[] = $image->Large->URL;
-						}
-					}
-					$fetch_result[ $index ]['image_variants'] = $image_variants;
-
 					if ( isset( $item->Offers->Listings[0]->SavingBasis->Amount ) ) {
 						$fetch_result[ $index ]['regular_price'] = number_format( $item->Offers->Listings[0]->SavingBasis->Amount, 2 );
 						$fetch_result[ $index ]['sale_price']    = number_format( $item->Offers->Listings[0]->Price->Amount, 2 );
@@ -114,7 +106,7 @@ class AsinVerification extends Endpoint {
 						}
 					}
 
-					$fetch_result[ $index ]['product_url'] = 'https://' . $marketplace . '/dp/' . $asin . '/';
+					$fetch_result[ $index ]['product_url'] = 'https://' . $marketplace . '/dp/' . $asin . '/?tag=' . $affiliate_id;
 				}
 				$response_data = array(
 					'fetch_result' => $fetch_result,
