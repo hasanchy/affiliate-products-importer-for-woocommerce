@@ -7,7 +7,7 @@ import { setSearchKeyword } from './productsSlice';
 import { __ } from '@wordpress/i18n';
 
 const Products = () => {
-    const { isProductsLoading, productList, totalProducts, searchKeyword  } = useSelector((state) => state.products);
+    const { isProductsLoading, productList, totalProducts  } = useSelector((state) => state.products);
     const dispatch = useDispatch();
 
     const reloadProductList = () => {

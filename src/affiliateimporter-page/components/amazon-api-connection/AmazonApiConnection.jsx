@@ -1,14 +1,22 @@
 import React, {memo} from 'react';
-import { Alert, Card, Typography } from 'antd';
+import { Alert, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { SyncOutlined } from '@ant-design/icons';
 import { __ } from '@wordpress/i18n';
+import { setActiveTab } from '../../components/menu-tabs/manuTabsSlice';
+import { setSettingsActiveTab } from '../../features/settings/settingsSlice';
 
 const { Link } = Typography;
 
 const AmazonApiConnection = () => {
 
-    const {IsAmazonApiConnectionLoading, AmazonApiConnectionStatus, AmazonApiConnectionMessage } = useSelector((state) => state.dashboard);
+    const {isAmazonApiConnectionLoading, amazonApiConnectionStatus, amazonApiConnectionMessage } = useSelector((state) => state.amazonApiConnection);
+    const dispatch = useDispatch();
+
+    const handleAmazonApiSetup = () => {
+        dispatch( setActiveTab( 'settings' ) );
+        dispatch( setSettingsActiveTab ( 'amazonApiSettings' ) );
+    }
 
     const renderLoadingMessage = () => {
         return <Alert
@@ -42,20 +50,20 @@ const AmazonApiConnection = () => {
     const renderErrorMessage = () => {
         return <Alert
             message={ __( 'Amazon API Connection Error', 'affiliate-products-importer' )}
-            description={AmazonApiConnectionMessage}
+            description={amazonApiConnectionMessage}
             type="error"
             showIcon
         />
     }
 
     const renderApiStatus = () => {
-        if(IsAmazonApiConnectionLoading){
+        if(isAmazonApiConnectionLoading){
             return renderLoadingMessage();
-        }else if(AmazonApiConnectionStatus === 'success'){
+        }else if(amazonApiConnectionStatus === 'success'){
             return renderSuccessMessage();
-        }else if(AmazonApiConnectionStatus === 'incomplete'){
+        }else if(amazonApiConnectionStatus === 'incomplete'){
             return renderWarningMessage();
-        }else if(AmazonApiConnectionStatus === 'error'){
+        }else if(amazonApiConnectionStatus === 'error'){
             return renderErrorMessage();
         }
         
@@ -63,9 +71,9 @@ const AmazonApiConnection = () => {
     }
 
     return (
-        <Card title={ __( 'Amazon API Connection', 'affiliate-products-importer' )}>
+        <>
             {renderApiStatus()}
-        </Card>
+        </>
     );
 }
 

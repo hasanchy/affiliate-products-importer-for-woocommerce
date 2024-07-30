@@ -6,10 +6,13 @@ import Import from '../../features/import/Import';
 import Products from '../../features/products/Products';
 import Settings from '../../features/settings/Settings';
 import { __ } from '@wordpress/i18n';
+import { useDispatch, useSelector } from 'react-redux';
+import { setActiveTab } from './manuTabsSlice';
 
-const FeatureTabs = () => {
+const MenuTabs = () => {
 
-	const [activeTab, setActiveTab] = useState('dashboard')
+	const { activeTab  } = useSelector((state) => state.menuTabs);
+	const dispatch = useDispatch();
 
 	const tabItems = [
 		{
@@ -39,7 +42,7 @@ const FeatureTabs = () => {
 	];
 
 	const handleOnChange = (activeKey) => {
-		setActiveTab(activeKey);
+		dispatch( setActiveTab( activeKey ) );
 	}
 
 	return (
@@ -64,4 +67,4 @@ const FeatureTabs = () => {
 	)
 }
 
-export default FeatureTabs
+export default MenuTabs

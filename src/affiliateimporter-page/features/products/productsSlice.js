@@ -27,8 +27,8 @@ export const productsSlice = createSlice({
 		}),
 		builder.addCase(fetchProducts.rejected, (state, action) => {
 			state.isProductsLoading = false;
-			state.AmazonApiConnectionStatus = 'error';
-			state.AmazonApiConnectionMessage = action.payload?.message ? action.payload.message : 'Unable to connect to the API.';
+			state.amazonApiConnectionStatus = 'error';
+			state.amazonApiConnectionMessage = action.payload?.message ? action.payload.message : 'Unable to connect to the API.';
         })
 	}
 })

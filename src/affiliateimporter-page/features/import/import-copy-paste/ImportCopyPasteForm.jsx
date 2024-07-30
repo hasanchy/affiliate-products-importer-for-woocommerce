@@ -8,6 +8,7 @@ import ImportFetchCounter from './ImportFetchCounter';
 import { setImportStepBack, setImportStepNext } from '../importSlice';
 import { asinVerification } from '../../../services/apiService';
 import { __ } from '@wordpress/i18n';
+import AmazonApiConnection from '../../../components/amazon-api-connection/AmazonApiConnection';
 
 const { TextArea } = Input;
 
@@ -16,6 +17,7 @@ const ImportCopyPasteForm = () => {
 	const dispatch = useDispatch();
     const { importType, importStepIndex } = useSelector((state) => state.import);
 	const { displayImportFetchCounter, importFetchItems, importFetchAlert, asinCodes, invalidAsinCodes, duplicateAsinCodes, asinValue, asinValueFetched, isImportFetchInProgress, importableFetchItems } = useSelector((state) => state.importCopyPaste);
+	const { amazonApiConnectionStatus } = useSelector((state) => state.dashboard);
 
 	const findDuplicates = (arr) => {
 		
@@ -134,7 +136,7 @@ const ImportCopyPasteForm = () => {
 	const renderAmazonTabContent = () => {
 		let codeTxt = asinCodes.length === 1 ? 'code' : 'codes';
 		let fetchButtonTxt = (asinCodes.length > 0) ? `Verify ${asinCodes.length} ASIN ${codeTxt}` : 'Verify';
-		let isFetchButtonDisabled = (asinCodes.length < 1 || invalidAsinCodes.length > 0 || asinValue === asinValueFetched) ? true : false;
+		let isFetchButtonDisabled = (asinCodes.length < 1 || invalidAsinCodes.length > 0 || asinValue === asinValueFetched || amazonApiConnectionStatus !== 'success') ? true : false;
 
 		return<>
 				<Row gutter={20}>
@@ -191,6 +193,19 @@ const ImportCopyPasteForm = () => {
         return null;
     }
 
+	const renderAmazonApiConnectionAlert = () => {
+		if( amazonApiConnectionStatus !== 'success' ){
+			return <Row gutter={20}>
+				<Col span={4}></Col>
+				<Col span={10}>
+					<AmazonApiConnection />
+				</Col>
+			</Row>
+		}
+
+		return null;
+	}
+
     if(importStepIndex!==0 && importType === 'copy-paste'){
         let disableNextButton = (!isImportFetchInProgress && importableFetchItems.length) ? false : true;
         return (
@@ -203,6 +218,7 @@ const ImportCopyPasteForm = () => {
                             display: 'flex',
                         }}
                     >
+						{renderAmazonApiConnectionAlert()}
                         {renderAmazonTabContent()}
                         {renderImportFetchAlert()}
                         <Row>

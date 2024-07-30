@@ -1,11 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { verifyAmazonApiConnection, fetchRecentlyImportedProducts } from '../../services/apiService';
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchRecentlyImportedProducts } from '../../services/apiService';
 
 const initialState = {
-    IsAmazonApiConnectionLoading: false,
-	AmazonApiConnectionStatus: '',
-	AmazonApiConnectionMessage: '',
 	isProductsLoading: false,
 	productList: '',
 }
@@ -13,23 +9,8 @@ const initialState = {
 export const dashboardSlice = createSlice({
 	name: 'dashboard',
 	initialState,
-	reducers: {
-        
-	},
 	extraReducers: (builder) => {
-        builder.addCase(verifyAmazonApiConnection.pending, (state) => {
-			state.IsAmazonApiConnectionLoading = true;
-		}),
-		builder.addCase(verifyAmazonApiConnection.fulfilled, (state, action) => {
-            state.IsAmazonApiConnectionLoading = false;
-			state.AmazonApiConnectionStatus = action.payload.status;
-		}),
-		builder.addCase(verifyAmazonApiConnection.rejected, (state, action) => {
-			state.IsAmazonApiConnectionLoading = false;
-			state.AmazonApiConnectionStatus = 'error';
-			state.AmazonApiConnectionMessage = action.payload?.message ? action.payload.message : 'Unable to connect to the Amazon API. Please verify your Amazon API settings.';
-        }),
-		builder.addCase(fetchRecentlyImportedProducts.pending, (state) => {
+       builder.addCase(fetchRecentlyImportedProducts.pending, (state) => {
 			state.isProductsLoading = true;
 		}),
 		builder.addCase(fetchRecentlyImportedProducts.fulfilled, (state, action) => {
@@ -39,11 +20,10 @@ export const dashboardSlice = createSlice({
 		}),
 		builder.addCase(fetchRecentlyImportedProducts.rejected, (state, action) => {
 			state.isProductsLoading = false;
-			state.AmazonApiConnectionStatus = 'error';
-			state.AmazonApiConnectionMessage = action.payload?.message ? action.payload.message : 'Unable to connect to the API.';
+			state.amazonApiConnectionStatus = 'error';
+			state.amazonApiConnectionMessage = action.payload?.message ? action.payload.message : 'Unable to connect to the API.';
         })
 	}
 })
 
-export const { setPixels, resetPixels, setIsMouseDown, setSelectedColor } = dashboardSlice.actions
 export default dashboardSlice.reducer;
