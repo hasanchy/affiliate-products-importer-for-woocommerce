@@ -213,13 +213,18 @@ class Products extends Endpoint {
 			wp_set_object_terms( $post_id, 'external', 'product_type' );
 
 			/*===================Update product Images=======================*/
-			$remore_image = get_option( 'affprodimp_settings_remote_image' );
+			$remote_image = get_option( 'affprodimp_settings_remote_image' );
 
-			if ( 'Yes' === $remore_image ) {
-				update_post_meta( $post_id, 'affprodimp_product_img_url', $image_primary );
-			} else {
+			if ( 'No' === $remote_image ) {
+				if ( ! function_exists( 'media_sideload_image' ) ) {
+					require_once ABSPATH . 'wp-admin/includes/media.php';
+					require_once ABSPATH . 'wp-admin/includes/file.php';
+					require_once ABSPATH . 'wp-admin/includes/image.php';
+				}
 				$thumbnail_image_id = \media_sideload_image( $image_primary, $post_id, $post_title, 'id' );
 				set_post_thumbnail( $post_id, $thumbnail_image_id );
+			} else {
+				update_post_meta( $post_id, 'affprodimp_product_img_url', $image_primary );
 			}
 
 			/*===================Update product ASIN=======================*/
