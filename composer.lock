@@ -295,12 +295,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHPCSExtra.git",
-                "reference": "6dcc44351983b9dbddf9012a3533804768ca4bbb"
+                "reference": "de3789a59ee046291bb196c03862c871a692dc75"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSExtra/zipball/6dcc44351983b9dbddf9012a3533804768ca4bbb",
-                "reference": "6dcc44351983b9dbddf9012a3533804768ca4bbb",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSExtra/zipball/de3789a59ee046291bb196c03862c871a692dc75",
+                "reference": "de3789a59ee046291bb196c03862c871a692dc75",
                 "shasum": ""
             },
             "require": {
@@ -366,7 +366,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-04-24T13:22:43+00:00"
+            "time": "2024-07-23T06:25:32+00:00"
         },
         {
             "name": "phpcsstandards/phpcsutils",
@@ -374,12 +374,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHPCSUtils.git",
-                "reference": "4a305210f0dd5e6eeba775c4ffbeaefa19a37229"
+                "reference": "2616376fd8ae9a065a73808235f010d6c3f114b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/4a305210f0dd5e6eeba775c4ffbeaefa19a37229",
-                "reference": "4a305210f0dd5e6eeba775c4ffbeaefa19a37229",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/2616376fd8ae9a065a73808235f010d6c3f114b4",
+                "reference": "2616376fd8ae9a065a73808235f010d6c3f114b4",
                 "shasum": ""
             },
             "require": {
@@ -455,7 +455,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-06-09T12:33:11+00:00"
+            "time": "2024-07-27T08:14:47+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -463,12 +463,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "df258d47231f1ed86c59b4c51a95ec00b852f588"
+                "reference": "a3d11a96b68bb837e58e859f4376784d75aa2733"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/df258d47231f1ed86c59b4c51a95ec00b852f588",
-                "reference": "df258d47231f1ed86c59b4c51a95ec00b852f588",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/a3d11a96b68bb837e58e859f4376784d75aa2733",
+                "reference": "a3d11a96b68bb837e58e859f4376784d75aa2733",
                 "shasum": ""
             },
             "require": {
@@ -536,7 +536,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-06-05T17:35:20+00:00"
+            "time": "2024-07-27T09:41:13+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
