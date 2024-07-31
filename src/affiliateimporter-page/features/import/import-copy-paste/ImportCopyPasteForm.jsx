@@ -17,7 +17,7 @@ const ImportCopyPasteForm = () => {
 	const dispatch = useDispatch();
     const { importType, importStepIndex } = useSelector((state) => state.import);
 	const { displayImportFetchCounter, importFetchItems, importFetchAlert, asinCodes, invalidAsinCodes, duplicateAsinCodes, asinValue, asinValueFetched, isImportFetchInProgress, importableFetchItems } = useSelector((state) => state.importCopyPaste);
-	const { amazonApiConnectionStatus } = useSelector((state) => state.dashboard);
+	const { amazonApiConnectionStatus } = useSelector((state) => state.amazonApiConnection);
 
 	const findDuplicates = (arr) => {
 		
