@@ -5,6 +5,7 @@ import { AU, BE, BR, CA, CN, EG, FR, DE, IN, IT, JP, MX, NL, PL, SA, SG, ES, SE,
 import { setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId, setSettingsToastMessage } from './amazonApiSettingsSlice';
 import { saveAmazonApiSettings, verifyAmazonApiSettings } from '../../../services/apiService';
 import { __ } from '@wordpress/i18n';
+import { setAmazonApiConnectionStatus } from '../../../components/amazon-api-connection/amazonApiConnectionSlice';
 
 const affiliateCountries = [
     { 'flag': <AU style={{width:'20px'}}/>,'code': 'au', 'name': 'Australia' }, 
@@ -68,6 +69,7 @@ const AmazonApiSettings = () => {
 
         if (response.type.endsWith('/fulfilled')) {
             await dispatch(saveAmazonApiSettings(data));
+            dispatch( setAmazonApiConnectionStatus( 'success' ) );
         }
     }
 

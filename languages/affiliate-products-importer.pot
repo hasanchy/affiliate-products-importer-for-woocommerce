@@ -113,7 +113,7 @@ msgstr ""
 msgid "Copy/Paste Import"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/components/feature-tabs/FeatureTabs.jsx:17
+#: E:/github/affiliate-products-importer/src/affiliateimporter-page/components/menu-tabs/MenuTabs.jsx:17
 msgid "Dashboard"
 msgstr ""
 
@@ -135,7 +135,7 @@ msgid "Image"
 msgstr ""
 
 #: E:/github/affiliate-products-importer/app/admin-pages/class-affiliate-products-importer.php:76
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/components/feature-tabs/FeatureTabs.jsx:23
+#: E:/github/affiliate-products-importer/src/affiliateimporter-page/components/menu-tabs/MenuTabs.jsx:23
 #: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-copy-paste/ImportProductQueue.jsx:86
 msgid "Import"
 msgstr ""
@@ -214,7 +214,7 @@ msgstr ""
 msgid "Product Search"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/components/feature-tabs/FeatureTabs.jsx:29
+#: E:/github/affiliate-products-importer/src/affiliateimporter-page/components/menu-tabs/MenuTabs.jsx:29
 #: E:/github/affiliate-products-importer/src/affiliateimporter-page/components/header/Header.jsx:4
 msgid "Products"
 msgstr ""
@@ -247,7 +247,7 @@ msgstr ""
 msgid "Saving..."
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/components/feature-tabs/FeatureTabs.jsx:35
+#: E:/github/affiliate-products-importer/src/affiliateimporter-page/components/menu-tabs/MenuTabs.jsx:35
 msgid "Settings"
 msgstr ""
 
