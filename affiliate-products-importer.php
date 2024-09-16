@@ -7,7 +7,7 @@
  * Description:     Easily import Amazon affiliate products into your WooCommerce store.
  * Author:          ThemeDyno
  * Author URI:      https://themedyno.com/
- * Version:         1.0.0
+ * Version:         1.0.1
  * Text Domain:     affiliate-products-importer
  * Domain Path:     /languages
  *
