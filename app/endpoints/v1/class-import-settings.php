@@ -87,7 +87,7 @@ class ImportSettings extends Endpoint {
 		$affprodimp_settings_remote_image = get_option( 'affprodimp_settings_remote_image' );
 
 		$response_data = array(
-			'remote_image' => $affprodimp_settings_remote_image ? $affprodimp_settings_remote_image : 'Yes',
+			'remote_image' => $affprodimp_settings_remote_image ? esc_html( $affprodimp_settings_remote_image ) : 'Yes',
 		);
 
 		return new WP_REST_Response( $response_data, 200 );
@@ -118,7 +118,7 @@ class ImportSettings extends Endpoint {
 				);
 				return new WP_REST_Response( $response_data, 200 );
 			} catch ( \Exception $e ) {
-				return new WP_Error( 'rest_affprodimp_amazon_api_status', $e->getMessage(), array( 'status' => $e->getCode() ? $e->getCode() : 500 ) );
+				return new WP_Error( 'rest_affprodimp_amazon_api_status', esc_html( $e->getMessage() ), array( 'status' => $e->getCode() ? $e->getCode() : 500 ) );
 			}
 		} else {
 			$response_data = array(

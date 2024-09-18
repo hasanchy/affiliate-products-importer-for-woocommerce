@@ -104,7 +104,7 @@ class AmazonAPIConnection extends Endpoint {
 				);
 				return new WP_REST_Response( $response_data, 200 );
 			} catch ( \Exception $e ) {
-				return new WP_Error( 'rest_affprodimp_amazon_api_status', $e->getMessage(), array( 'status' => $e->getCode() ? $e->getCode() : 500 ) );
+				return new WP_Error( 'rest_affprodimp_amazon_api_status', esc_html( $e->getMessage() ), array( 'status' => $e->getCode() ? $e->getCode() : 500 ) );
 			}
 		} else {
 			$response_data = array(
@@ -150,7 +150,7 @@ class AmazonAPIConnection extends Endpoint {
 				);
 				return new WP_REST_Response( $response_data, 200 );
 			} catch ( \Exception $e ) {
-				return new WP_Error( 'rest_affprodimp_amazon_api_status', $e->getMessage(), array( 'status' => $e->getCode() ? $e->getCode() : 500 ) );
+				return new WP_Error( 'rest_affprodimp_amazon_api_status', esc_html( $e->getMessage() ), array( 'status' => $e->getCode() ? $e->getCode() : 500 ) );
 			}
 		} else {
 			$response_data = array(
