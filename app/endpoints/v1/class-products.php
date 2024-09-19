@@ -211,7 +211,7 @@ class Products extends Endpoint {
 				'post_content' => $post_content,
 				'post_status'  => 'publish',
 				'post_date'    => current_time( 'mysql' ),
-				'post_author'  => 1, // Consider changing this to a variable if the author ID should vary
+				'post_author'  => get_current_user_id(), // Consider changing this to a variable if the author ID should vary
 				'post_type'    => 'product',
 				'post_name'    => $post_name,
 			);

@@ -374,12 +374,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHPCSUtils.git",
-                "reference": "cc42cc8f44876ad6cdf3f0e3eee041d89027926f"
+                "reference": "dd8f54106f37cd8c6b681d5c659b76a1d309c67f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/cc42cc8f44876ad6cdf3f0e3eee041d89027926f",
-                "reference": "cc42cc8f44876ad6cdf3f0e3eee041d89027926f",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/dd8f54106f37cd8c6b681d5c659b76a1d309c67f",
+                "reference": "dd8f54106f37cd8c6b681d5c659b76a1d309c67f",
                 "shasum": ""
             },
             "require": {
@@ -455,7 +455,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-09-09T19:54:18+00:00"
+            "time": "2024-09-16T11:24:55+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -463,12 +463,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "16b6f3554b7f0a7604ef65474d3bbb17cbdf6c5e"
+                "reference": "92c8ef54357ea09d93f8efa043d7c9c0a71ae094"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/16b6f3554b7f0a7604ef65474d3bbb17cbdf6c5e",
-                "reference": "16b6f3554b7f0a7604ef65474d3bbb17cbdf6c5e",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/92c8ef54357ea09d93f8efa043d7c9c0a71ae094",
+                "reference": "92c8ef54357ea09d93f8efa043d7c9c0a71ae094",
                 "shasum": ""
             },
             "require": {
@@ -536,7 +536,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-09-14T10:32:46+00:00"
+            "time": "2024-09-18T16:46:38+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
