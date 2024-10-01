@@ -177,27 +177,41 @@ class Products extends Endpoint {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
-		$products   = $request['products'];
-		$categories = $request['categories'];
+		$products   = $request->get_param( 'products' );
+		$categories = $request->get_param( 'categories' );
+
+		// Sanitize categories
+		if ( ! is_array( $categories ) ) {
+			$categories = array();
+		} else {
+			$categories = array_map( 'intval', $categories ); // Make sure categories are integers
+		}
 
 		$product_ids   = array();
 		$product_asins = array();
+
 		foreach ( $products as $product ) {
-			$asin          = $product['asin'];
-			$post_title    = $product['post_title'];
-			$post_name     = $product['post_name'];
-			$post_content  = $product['post_content'];
-			$image_primary = $product['image_primary'];
-			$regular_price = $product['regular_price'];
-			$sale_price    = ( isset( $product['sale_price'] ) ) ? $product['sale_price'] : '';
-			$product_url   = $product['product_url'];
+			// Sanitize product fields
+			$asin          = isset( $product['asin'] ) ? sanitize_text_field( $product['asin'] ) : '';
+			$post_title    = isset( $product['post_title'] ) ? sanitize_text_field( $product['post_title'] ) : '';
+			$post_name     = isset( $product['post_name'] ) ? sanitize_title( $product['post_name'] ) : '';
+			$post_content  = isset( $product['post_content'] ) ? wp_kses_post( $product['post_content'] ) : '';
+			$image_primary = isset( $product['image_primary'] ) ? esc_url_raw( $product['image_primary'] ) : '';
+			$regular_price = isset( $product['regular_price'] ) ? floatval( $product['regular_price'] ) : 0;
+			$sale_price    = isset( $product['sale_price'] ) ? floatval( $product['sale_price'] ) : '';
+			$product_url   = isset( $product['product_url'] ) ? esc_url_raw( $product['product_url'] ) : '';
+
+			// Ensure essential fields are present
+			if ( empty( $asin ) || empty( $post_title ) || empty( $post_name ) ) {
+				continue; // Skip this product if essential data is missing
+			}
 
 			$new_post = array(
 				'post_title'   => $post_title,
 				'post_content' => $post_content,
 				'post_status'  => 'publish',
 				'post_date'    => current_time( 'mysql' ),
-				'post_author'  => '1',
+				'post_author'  => get_current_user_id(), // Consider changing this to a variable if the author ID should vary
 				'post_type'    => 'product',
 				'post_name'    => $post_name,
 			);
@@ -207,19 +221,30 @@ class Products extends Endpoint {
 			$product_asins[] = $asin;
 
 			/*===================Update product categories=======================*/
-			wp_set_post_terms( $post_id, $categories, 'product_cat' );
+			if ( ! empty( $categories ) ) {
+				wp_set_post_terms( $post_id, $categories, 'product_cat' );
+			}
 
 			/*===================Update product type=======================*/
 			wp_set_object_terms( $post_id, 'external', 'product_type' );
 
 			/*===================Update product Images=======================*/
-			$remore_image = get_option( 'affprodimp_settings_remote_image' );
+			$remote_image = get_option( 'affprodimp_settings_remote_image' );
 
-			if ( 'Yes' === $remore_image ) {
-				update_post_meta( $post_id, 'affprodimp_product_img_url', $image_primary );
-			} else {
-				$thumbnail_image_id = \media_sideload_image( $image_primary, $post_id, $post_title, 'id' );
-				set_post_thumbnail( $post_id, $thumbnail_image_id );
+			if ( 'No' === $remote_image ) {
+				if ( ! function_exists( 'media_sideload_image' ) ) {
+					require_once ABSPATH . 'wp-admin/includes/media.php';
+					require_once ABSPATH . 'wp-admin/includes/file.php';
+					require_once ABSPATH . 'wp-admin/includes/image.php';
+				}
+				if ( ! empty( $image_primary ) ) {
+					$thumbnail_image_id = media_sideload_image( $image_primary, $post_id, $post_title, 'id' );
+					if ( ! is_wp_error( $thumbnail_image_id ) ) {
+						set_post_thumbnail( $post_id, $thumbnail_image_id );
+					}
+				}
+			} elseif ( ! empty( $image_primary ) ) {
+					update_post_meta( $post_id, 'affprodimp_product_img_url', $image_primary );
 			}
 
 			/*===================Update product ASIN=======================*/
@@ -235,12 +260,14 @@ class Products extends Endpoint {
 			}
 
 			/*===================Update product url=======================*/
-			update_post_meta( $post_id, '_product_url', $product_url );
+			if ( ! empty( $product_url ) ) {
+				update_post_meta( $post_id, '_product_url', $product_url );
+			}
 		}
 
 		$return = array(
-			'product_ids'   => $product_ids,
-			'product_asins' => $product_asins,
+			'product_ids'   => array_map( 'intval', $product_ids ),
+			'product_asins' => array_map( 'sanitize_text_field', $product_asins ),
 		);
 
 		return new WP_REST_Response( $return );

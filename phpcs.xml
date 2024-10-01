@@ -8,6 +8,7 @@
 	<exclude-pattern>/node_modules/</exclude-pattern>
 	<exclude-pattern>/languages/</exclude-pattern>
 	<exclude-pattern>/build/</exclude-pattern>
+	<exclude-pattern>/svn/</exclude-pattern>
 
 	 <!-- Tests can do skip formatting, to achieve whatever needed to be a good tests. -->
     <exclude-pattern>./tests/*</exclude-pattern>

@@ -62,60 +62,60 @@ class AsinVerification extends Endpoint {
 		if ( ! wp_verify_nonce( $nonce, 'wp_rest' ) ) {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
-
+	
 		$access_key   = get_option( 'affprodimp_amazon_access_key' );
 		$secret_key   = get_option( 'affprodimp_amazon_secret_key' );
 		$country_code = get_option( 'affprodimp_amazon_country_code' );
 		$affiliate_id = get_option( 'affprodimp_amazon_affiliate_id' );
-		$asin_codes   = isset( $request['asinCodes'] ) ? $request['asinCodes'] : [];
-
+		$asin_codes   = isset( $request['asinCodes'] ) ? array_map( 'sanitize_text_field', (array) $request['asinCodes'] ) : [];
+	
 		if ( empty( $asin_codes ) ) {
-			return new WP_Error( 'rest_affprodimp_amazon_product_fetch', __( 'ASIN Codes parameter value can not be empty', 'affiliate-products-importer' ), array( 'status' => 500 ) );
+			return new WP_Error( 'rest_affprodimp_amazon_product_fetch', __( 'ASIN Codes parameter value cannot be empty', 'affiliate-products-importer' ), array( 'status' => 500 ) );
 		}
-
+	
 		if ( ! empty( $access_key ) && ! empty( $secret_key ) && ! empty( $country_code ) && ! empty( $affiliate_id ) ) {
-			$marketplace = Settings::get_amazon_marketplace( $country_code );
-			$host        = Settings::get_amazon_host( $country_code );
-			$region      = Settings::get_amazon_region( $country_code );
-
+			$marketplace = esc_html( Settings::get_amazon_marketplace( $country_code ) );
+			$host        = esc_html( Settings::get_amazon_host( $country_code ) );
+			$region      = esc_html( Settings::get_amazon_region( $country_code ) );
+	
 			try {
 				$api          = new ProductAdvertisingApi( $access_key, $secret_key, $marketplace, $affiliate_id, $host, $region );
 				$result       = $api->fetchProductsByItemIds( $asin_codes );
 				$items        = ( isset( $result->ItemsResult->Items ) ) ? $result->ItemsResult->Items : array();
 				$fetch_errors = ( isset( $result->Errors ) ) ? $result->Errors : array();
-
+	
 				$fetch_result = array();
 				foreach ( $items as $index => $item ) {
-					$asin                           = $item->ASIN;
-					$fetch_result[ $index ]['asin'] = $item->ASIN;
+					$asin = esc_html( $item->ASIN );
+					$fetch_result[ $index ]['asin'] = $asin;
 					$fetch_result[ $index ]['is_already_imported'] = Settings::is_product_already_imported( $asin );
-					$post_title                                    = $item->ItemInfo->Title->DisplayValue;
-					$fetch_result[ $index ]['post_title']          = $post_title;
-					$fetch_result[ $index ]['post_name']           = sanitize_title( $post_title );
-					$fetch_result[ $index ]['post_content']        = isset( $item->ItemInfo->Features->DisplayValues ) ? implode( '</br>', $item->ItemInfo->Features->DisplayValues ) : '';
-					$fetch_result[ $index ]['image_primary']       = $item->Images->Primary->Large->URL;
-
+					$post_title = esc_html( $item->ItemInfo->Title->DisplayValue );
+					$fetch_result[ $index ]['post_title'] = $post_title;
+					$fetch_result[ $index ]['post_name'] = sanitize_title( $post_title );
+					$fetch_result[ $index ]['post_content'] = isset( $item->ItemInfo->Features->DisplayValues ) ? implode( '</br>', array_map( 'esc_html', $item->ItemInfo->Features->DisplayValues ) ) : '';
+					$fetch_result[ $index ]['image_primary'] = esc_url( $item->Images->Primary->Large->URL );
+	
 					if ( isset( $item->Offers->Listings[0]->SavingBasis->Amount ) ) {
-						$fetch_result[ $index ]['regular_price'] = number_format( $item->Offers->Listings[0]->SavingBasis->Amount, 2 );
-						$fetch_result[ $index ]['sale_price']    = number_format( $item->Offers->Listings[0]->Price->Amount, 2 );
+						$fetch_result[ $index ]['regular_price'] = number_format( floatval( $item->Offers->Listings[0]->SavingBasis->Amount ), 2 );
+						$fetch_result[ $index ]['sale_price'] = number_format( floatval( $item->Offers->Listings[0]->Price->Amount ), 2 );
 					} else {
-						if (isset($item->Offers->Listings[0]->Price->Amount)) {
-							$fetch_result[ $index ]['regular_price'] = number_format((float)$item->Offers->Listings[0]->Price->Amount, 2, '.', '');
+						if ( isset( $item->Offers->Listings[0]->Price->Amount ) ) {
+							$fetch_result[ $index ]['regular_price'] = number_format( floatval( $item->Offers->Listings[0]->Price->Amount ), 2, '.', '' );
 						} else {
 							$fetch_result[ $index ]['regular_price'] = '';
 						}
 					}
-
-					$fetch_result[ $index ]['product_url'] = 'https://' . $marketplace . '/dp/' . $asin . '/?tag=' . $affiliate_id;
+	
+					$fetch_result[ $index ]['product_url'] = esc_url( 'https://' . $marketplace . '/dp/' . $asin . '/?tag=' . $affiliate_id );
 				}
 				$response_data = array(
 					'fetch_result' => $fetch_result,
 					'fetch_errors' => $fetch_errors,
 				);
-
+	
 				return new WP_REST_Response( $response_data, 200 );
 			} catch ( \Exception $e ) {
-				return new WP_Error( 'rest_affprodimp_amazon_api_status', $e->getMessage(), array( 'status' => $e->getCode() ? $e->getCode() : 500 ) );
+				return new WP_Error( 'rest_affprodimp_amazon_api_status', esc_html( $e->getMessage() ), array( 'status' => $e->getCode() ? $e->getCode() : 500 ) );
 			}
 		} else {
 			$response_data = array(

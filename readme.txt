@@ -4,7 +4,7 @@ Tags: Amazon Affiliate, Products Importer for WooCommerce
 Requires at least: 5.2
 Tested up to: 6.6
 Requires PHP: 7.2.0
-Stable tag: 1.0.0
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.en.html
 
@@ -13,12 +13,28 @@ Easily import Amazon affiliate products into your WooCommerce store.
 == Description ==
 Elevate your WooCommerce store by seamlessly importing Amazon affiliate products with ease using the Amazon Affiliate Products Importer for WooCommerce plugin. Whether you're a seasoned affiliate marketer or just starting out, this plugin offers a robust set of features designed to streamline your product import process and boost your sales potential.
 
-Key Features:
+**Key Features:**
 
 Effortlessly import Amazon products by simply copying and pasting a list of Amazon Product ASINs. This feature ensures a quick and accurate import process, allowing you to expand your product catalog in no time. To utilize this feature, you'll need to set up your Amazon affiliate API keys, ensuring a smooth and automated import experience.
 
-== Contribute ==
-If you want to contribute to this project or just report a bug, you are more than welcome. Please check repository from <a href="https://github.com/hasanchy/affiliate-products-importer/">Github</a>.
+== 3rd Party or External Service ==
+This plugin utilizes the Amazon Product Advertising API (PA API) to fetch products from Amazon into your WooCommerce store. To fully benefit from this plugin's features, you will need access to the Product Advertising API 5.0.
+
+When using this plugin, please be aware that it communicates with Amazon's external API service to retrieve product information. This may involve the transmission of certain data to Amazon's servers as part of the API interaction. For detailed information about how the Amazon Product Advertising API works, please refer to the official documentation: [Amazon Product Advertising API Documentation](https://webservices.amazon.com/paapi5/documentation/).
+
+**Important Links:**
+
+* Amazon Product Advertising API Documentation: [https://webservices.amazon.com/paapi5/documentation/](https://webservices.amazon.com/paapi5/documentation/)
+* Amazon Product Advertising API License Agreement: [https://webservices.amazon.com/paapi5/documentation/read-la.html](https://webservices.amazon.com/paapi5/documentation/read-la.html)
+
+Please review the terms of use and privacy policies provided by Amazon to understand how they manage and process the data. This documentation is crucial for ensuring that you comply with all legal requirements related to data transmission when using this plugin.
+
+== Source Code ==
+The full source code, including the non-compiled versions of JavaScript and CSS files for this plugin, is available on GitHub. You can access it at the following URL: [https://github.com/hasanchy/affiliate-products-importer/](https://github.com/hasanchy/affiliate-products-importer/).
+
+If you are a developer or a user interested in understanding how this plugin works, you are welcome to review the source code. We also encourage contributions from the community. Whether you want to enhance the plugin, suggest new features, or report bugs, please visit our GitHub repository. Detailed instructions on setting up the development environment and using build tools like npm or composer are provided within the repository to assist you in getting started.
+
+For more information or to contribute, visit the GitHub repository: [https://github.com/hasanchy/affiliate-products-importer/](https://github.com/hasanchy/affiliate-products-importer/).
 
 == Installation ==
 1. Go to your WordPress backend
