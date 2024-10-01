@@ -25,7 +25,7 @@ if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 
 // Plugin version.
 if ( ! defined( 'AFFPRODIMP_VERSION' ) ) {
-	define( 'AFFPRODIMP_VERSION', '1.0.0' );
+	define( 'AFFPRODIMP_VERSION', '1.0.2' );
 }
 
 // Define AFFPRODIMP_PLUGIN_FILE.
