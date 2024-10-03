@@ -48,7 +48,7 @@ class Endpoint extends WP_REST_Controller {
 	 */
 	protected function __construct() {
 		// Setup namespace of the endpoint.
-		$this->namespace = 'affiliate-products-importer/v' . $this->version;
+		$this->namespace = 'affiliate-products-importer-for-woocommerce/v' . $this->version;
 
 		// If the single instance hasn't been set, set it now.
 		$this->register_hooks();

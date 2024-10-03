@@ -46,7 +46,7 @@ const ImportProductQueue = memo(() => {
 	const renderCardExtra = () => {
 		if(!displayImportSuccessMessage && !isImportInProgress){
 			return <Flex gap={'small'} align='center'>
-				<Tooltip placement="topLeft" title={ __( 'Undo import queue delete', 'affiliate-products-importer' ) } color={'purple'} key={'blue'}>
+				<Tooltip placement="topLeft" title={ __( 'Undo import queue delete', 'affiliate-products-importer-for-woocommerce' ) } color={'purple'} key={'blue'}>
 					<Button size='small' type="default" icon={<UndoOutlined/>} style={{display:displayUndoButton}} onClick={undoImportQueueDelete}></Button>
 				</Tooltip>
 				<Switch checkedChildren={<DeleteOutlined/>} unCheckedChildren={<DeleteOutlined />}  onChange={handleSwitchChange}/>
@@ -80,10 +80,10 @@ const ImportProductQueue = memo(() => {
 								</Link>
 							</div>
 							{isSuccessful && (
-								<Alert message={ __( 'Imported!', 'affiliate-products-importer' ) } type="success" showIcon />
+								<Alert message={ __( 'Imported!', 'affiliate-products-importer-for-woocommerce' ) } type="success" showIcon />
 							)}
 							{!isSuccessful && (
-								<Button type='default' disabled={!selectedCategories.length} loading={isLoading} onClick={handleSingleProductImport.bind(this, importFetchItems[i])}>{ __( 'Import', 'affiliate-products-importer' ) }</Button>
+								<Button type='default' disabled={!selectedCategories.length} loading={isLoading} onClick={handleSingleProductImport.bind(this, importFetchItems[i])}>{ __( 'Import', 'affiliate-products-importer-for-woocommerce' ) }</Button>
 							)}
 						</Card>
 					</div>
@@ -98,7 +98,7 @@ const ImportProductQueue = memo(() => {
     return (
 		<>
 			{importableFetchItems.length > 0 &&
-				<Card title={`${ __( 'Import Queue', 'affiliate-products-importer' ) }: ${totalImportQueue}`} bordered={true}  extra={renderCardExtra()}>
+				<Card title={`${ __( 'Import Queue', 'affiliate-products-importer-for-woocommerce' ) }: ${totalImportQueue}`} bordered={true}  extra={renderCardExtra()}>
 					{renderProductGallery()}
 				</Card>
 			}

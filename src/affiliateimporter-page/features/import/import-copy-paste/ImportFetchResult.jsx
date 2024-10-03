@@ -14,7 +14,7 @@ const ImportFetchResult = memo(() => {
 	const renderProductTable = () => {
 		const columns = [
 			{
-				title: __( 'Image', 'affiliate-products-importer' ),
+				title: __( 'Image', 'affiliate-products-importer-for-woocommerce' ),
 				dataIndex: 'image_primary',
 				key: 'img',
 				render: (imageSrc, productObj) => {
@@ -26,7 +26,7 @@ const ImportFetchResult = memo(() => {
 				},
 			},
 			{
-				title: __( 'Title', 'affiliate-products-importer' ),
+				title: __( 'Title', 'affiliate-products-importer-for-woocommerce' ),
 				dataIndex: 'post_title',
 				key: 'title',
 				render: (title, productObj) => {
@@ -38,7 +38,7 @@ const ImportFetchResult = memo(() => {
 				}
 			},
 			{
-				title: __( 'Status', 'affiliate-products-importer' ),
+				title: __( 'Status', 'affiliate-products-importer-for-woocommerce' ),
 				dataIndex: 'is_already_imported',
 				key: 'title',
 				render: (isAlreadyImported, productObj) => {
@@ -46,7 +46,7 @@ const ImportFetchResult = memo(() => {
 					let ribbonText = isAlreadyImported ? 'Previously Imported' : 'Importable';
 					let ribbonColor = isAlreadyImported ? 'orange' : 'blue';
 					if(productObj.Code){
-						ribbonText = __( 'Invalid ASIN', 'affiliate-products-importer' );
+						ribbonText = __( 'Invalid ASIN', 'affiliate-products-importer-for-woocommerce' );
 						ribbonColor = 'red';
 					}
 
@@ -72,7 +72,7 @@ const ImportFetchResult = memo(() => {
                     display: 'flex',
                 }}>
 				{importFetchItems.length > 0 &&
-					<Card title={ __( 'ASIN Verification Result', 'affiliate-products-importer' ) } bordered={true}>
+					<Card title={ __( 'ASIN Verification Result', 'affiliate-products-importer-for-woocommerce' ) } bordered={true}>
 						{renderProductTable()}
 					</Card>
 				}

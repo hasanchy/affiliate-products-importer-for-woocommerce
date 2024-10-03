@@ -17,25 +17,25 @@ const MenuTabs = () => {
 	const tabItems = [
 		{
 			key: 'dashboard',
-			label: __( 'Dashboard', 'affiliate-products-importer' ),
+			label: __( 'Dashboard', 'affiliate-products-importer-for-woocommerce' ),
 			children: <Dashboard />,
 			icon: <DashboardOutlined />
 		},
 		{
 			key: 'import',
-			label: __( 'Import', 'affiliate-products-importer' ),
+			label: __( 'Import', 'affiliate-products-importer-for-woocommerce' ),
 			children: <Import/>,
 			icon: <DownloadOutlined />
 		},
 		{
 			key: 'products',
-			label: __( 'Products', 'affiliate-products-importer' ),
+			label: __( 'Products', 'affiliate-products-importer-for-woocommerce' ),
 			children: <Products/>,
 			icon: <ShoppingOutlined />
 		},
 		{
 			key: 'settings',
-			label: __( 'Settings', 'affiliate-products-importer' ),
+			label: __( 'Settings', 'affiliate-products-importer-for-woocommerce' ),
 			children: <Settings/>,
 			icon: <SettingOutlined />
 		}

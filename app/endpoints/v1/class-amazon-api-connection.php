@@ -46,22 +46,22 @@ class AmazonAPIConnection extends Endpoint {
 					'args'                => array(
 						'access_key'   => array(
 							'required'    => true,
-							'description' => __( 'Amazon Access Key is required.', 'affiliate-products-importer' ),
+							'description' => __( 'Amazon Access Key is required.', 'affiliate-products-importer-for-woocommerce' ),
 							'type'        => 'string',
 						),
 						'secret_key'   => array(
 							'required'    => true,
-							'description' => __( 'Amazon AWS Secret Key is required.', 'affiliate-products-importer' ),
+							'description' => __( 'Amazon AWS Secret Key is required.', 'affiliate-products-importer-for-woocommerce' ),
 							'type'        => 'string',
 						),
 						'country_code' => array(
 							'required'    => true,
-							'description' => __( 'Amazon Affiliate Country is required.', 'affiliate-products-importer' ),
+							'description' => __( 'Amazon Affiliate Country is required.', 'affiliate-products-importer-for-woocommerce' ),
 							'type'        => 'string',
 						),
 						'affiliate_id' => array(
 							'required'    => true,
-							'description' => __( 'Amazon Affiliate ID is required.', 'affiliate-products-importer' ),
+							'description' => __( 'Amazon Affiliate ID is required.', 'affiliate-products-importer-for-woocommerce' ),
 							'type'        => 'string',
 						),
 					),
@@ -100,7 +100,7 @@ class AmazonAPIConnection extends Endpoint {
 				$api->fetchProductsByKeywords( 'Pet Food', 1 );
 				$response_data = array(
 					'status'  => 'success',
-					'message' => __( 'The connection to your Amazon API was successful.', 'affiliate-products-importer' ),
+					'message' => __( 'The connection to your Amazon API was successful.', 'affiliate-products-importer-for-woocommerce' ),
 				);
 				return new WP_REST_Response( $response_data, 200 );
 			} catch ( \Exception $e ) {
@@ -111,7 +111,7 @@ class AmazonAPIConnection extends Endpoint {
 				'status' => 'error',
 				'error'  => array(
 					'code'    => 'incomplete',
-					'message' => __( 'Your Amazon API is not yet set up.', 'affiliate-products-importer' ),
+					'message' => __( 'Your Amazon API is not yet set up.', 'affiliate-products-importer-for-woocommerce' ),
 				),
 			);
 			return new WP_REST_Response( $response_data, 400 );
@@ -146,7 +146,7 @@ class AmazonAPIConnection extends Endpoint {
 				$api->fetchProductsByKeywords( 'Pet Food', 1 );
 				$response_data = array(
 					'status'  => 'success',
-					'message' => __( 'The connection to your Amazon API was successful.', 'affiliate-products-importer' ),
+					'message' => __( 'The connection to your Amazon API was successful.', 'affiliate-products-importer-for-woocommerce' ),
 				);
 				return new WP_REST_Response( $response_data, 200 );
 			} catch ( \Exception $e ) {
@@ -157,7 +157,7 @@ class AmazonAPIConnection extends Endpoint {
 				'status' => 'error',
 				'error'  => array(
 					'code'    => 'incomplete',
-					'message' => __( 'Your Amazon API is not yet set up.', 'affiliate-products-importer' ),
+					'message' => __( 'Your Amazon API is not yet set up.', 'affiliate-products-importer-for-woocommerce' ),
 				),
 			);
 			return new WP_REST_Response( $response_data, 400 );

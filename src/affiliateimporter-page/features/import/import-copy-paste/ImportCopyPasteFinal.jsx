@@ -104,7 +104,7 @@ const ImportCopyPasteFinal = () => {
 				<Row gutter={20}>
 					<Col span={4}>
 						<Flex style={{height:'100%'}} justify='flex-end' align='center'>
-							{  __( 'Import in', 'affiliate-products-importer' ) }
+							{  __( 'Import in', 'affiliate-products-importer-for-woocommerce' ) }
 						</Flex>
 					</Col>
 					<Col span={10}>
@@ -130,11 +130,11 @@ const ImportCopyPasteFinal = () => {
 				<Col span={24}>
 					<Result
 						status="success"
-						title={`${__( 'Successfully Imported', 'affiliate-products-importer' )} ${totalSuccessfulImports} ${productText}!`}
+						title={`${__( 'Successfully Imported', 'affiliate-products-importer-for-woocommerce' )} ${totalSuccessfulImports} ${productText}!`}
 						subTitle=""
 						extra={[
 							<Button type="primary" key="console" onClick={handleImportAgain}>
-								{ __( 'Import Again', 'affiliate-products-importer' ) }
+								{ __( 'Import Again', 'affiliate-products-importer-for-woocommerce' ) }
 							</Button>
 						]}
 					/>
@@ -159,7 +159,7 @@ const ImportCopyPasteFinal = () => {
                     <Row>
                         <Col span={12}> 
                             <Flex justify='flex-start'>
-                                {!displayImportSuccessMessage && <Button type="default" disabled={isImportInProgress} onClick={handleImportStepBack}>{ __( 'Back', 'affiliate-products-importer' ) }</Button>}
+                                {!displayImportSuccessMessage && <Button type="default" disabled={isImportInProgress} onClick={handleImportStepBack}>{ __( 'Back', 'affiliate-products-importer-for-woocommerce' ) }</Button>}
                             </Flex>
                         </Col>
                         <Col span={12}>
@@ -167,7 +167,7 @@ const ImportCopyPasteFinal = () => {
                     </Row>
                 </Space>
             </Card>
-			{displayImportCounter && <ImportFetchCounter title={ __( 'Products Import In Progress', 'affiliate-products-importer' ) } />}
+			{displayImportCounter && <ImportFetchCounter title={ __( 'Products Import In Progress', 'affiliate-products-importer-for-woocommerce' ) } />}
 		</React.Fragment>
 	)
 }

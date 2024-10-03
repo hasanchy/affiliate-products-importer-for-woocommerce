@@ -8,7 +8,7 @@ const Dashboard = () => {
         <>
             <Row>
 				<Col span={24}>
-                    <Card title={ __( 'Amazon API Connection', 'affiliate-products-importer' )}>
+                    <Card title={ __( 'Amazon API Connection', 'affiliate-products-importer-for-woocommerce' )}>
                         <AmazonApiConnection />
                     </Card>
 				</Col>

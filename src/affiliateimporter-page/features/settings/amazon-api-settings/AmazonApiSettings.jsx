@@ -90,11 +90,11 @@ const AmazonApiSettings = () => {
     const renderSaveButton = () => {
         let buttonText;
         if(isAmazonApiSettingsVerifying){
-            buttonText = __( 'Verifying...', 'affiliate-products-importer' )
+            buttonText = __( 'Verifying...', 'affiliate-products-importer-for-woocommerce' )
         }else if(isAmazonAPISettingsSaving){
-            buttonText = __( 'Saving...', 'affiliate-products-importer' )
+            buttonText = __( 'Saving...', 'affiliate-products-importer-for-woocommerce' )
         }else{
-            buttonText = __( 'Verify & Save', 'affiliate-products-importer' )
+            buttonText = __( 'Verify & Save', 'affiliate-products-importer-for-woocommerce' )
         }
 
         return <Button type="primary" disabled={amazonAccessKey=='' || amazonSecretKey=='' || amazonAffiliateId==''} onClick={handleVerifyAmazonAPISettings} loading={isAmazonApiSettingsVerifying || isAmazonAPISettingsSaving}>
@@ -127,12 +127,12 @@ const AmazonApiSettings = () => {
                 autoComplete="off"
             >
                 <Form.Item
-                    label={ __( 'Amazon AWS Access Key', 'affiliate-products-importer' ) }
+                    label={ __( 'Amazon AWS Access Key', 'affiliate-products-importer-for-woocommerce' ) }
                     name="amazonAccessKey"
                     rules={[
                         {
                             required: true,
-                            message: __( 'Please input Access Key!', 'affiliate-products-importer' ),
+                            message: __( 'Please input Access Key!', 'affiliate-products-importer-for-woocommerce' ),
                         },
                     ]}
                 >
@@ -140,12 +140,12 @@ const AmazonApiSettings = () => {
                 </Form.Item>
 
                 <Form.Item
-                    label={__( 'Amazon AWS Secret Key', 'affiliate-products-importer' ) }
+                    label={__( 'Amazon AWS Secret Key', 'affiliate-products-importer-for-woocommerce' ) }
                     name="amazonSecretKey"
                     rules={[
                         {
                             required: true,
-                            message: __( 'Please input Secret Key!', 'affiliate-products-importer' ),
+                            message: __( 'Please input Secret Key!', 'affiliate-products-importer-for-woocommerce' ),
                         },
                     ]}
                 >
@@ -153,12 +153,12 @@ const AmazonApiSettings = () => {
                 </Form.Item>
 
                 <Form.Item
-                    label={ __( 'Amazon Affiliate ID', 'affiliate-products-importer' ) }
+                    label={ __( 'Amazon Affiliate ID', 'affiliate-products-importer-for-woocommerce' ) }
                     name="amazonAffiliateId"
                     rules={[
                         {
                             required: true,
-                            message: __( 'Please input your affiliate ID!', 'affiliate-products-importer' ),
+                            message: __( 'Please input your affiliate ID!', 'affiliate-products-importer-for-woocommerce' ),
                         },
                     ]}
                 >
@@ -167,11 +167,11 @@ const AmazonApiSettings = () => {
 
                 <Form.Item
                     name="amazonCountryCode"
-                    label={ __( 'Amazon Country', 'affiliate-products-importer' ) }
+                    label={ __( 'Amazon Country', 'affiliate-products-importer-for-woocommerce' ) }
                     rules={[
                         {
                             required: true,
-                            message: __( 'Please select Amazon Country!', 'affiliate-products-importer' ),
+                            message: __( 'Please select Amazon Country!', 'affiliate-products-importer-for-woocommerce' ),
                         },
                     ]}
                 >

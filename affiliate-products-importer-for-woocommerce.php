@@ -8,7 +8,7 @@
  * Author:          ThemeDyno
  * Author URI:      https://themedyno.com/
  * Version:         1.0.2
- * Text Domain:     affiliate-products-importer
+ * Text Domain:     affiliate-products-importer-for-woocommerce
  * Domain Path:     /languages
  *
  * License: GPLv2 or later
@@ -92,7 +92,7 @@ class AFFPRODIMP_AffiliateImporter {
 	 */
 	public function load() {
 		load_plugin_textdomain(
-			'affiliate-products-importer',
+			'affiliate-products-importer-for-woocommerce',
 			false,
 			dirname( plugin_basename( __FILE__ ) ) . '/languages'
 		);

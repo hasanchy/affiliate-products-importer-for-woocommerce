@@ -55,7 +55,7 @@ class ImportSettings extends Endpoint {
 					'args'                => array(
 						'remote_image' => array(
 							'required'    => true,
-							'description' => __( 'Remore image setting is required.', 'affiliate-products-importer' ),
+							'description' => __( 'Remore image setting is required.', 'affiliate-products-importer-for-woocommerce' ),
 							'type'        => 'string',
 						),
 					),
@@ -114,7 +114,7 @@ class ImportSettings extends Endpoint {
 
 				$response_data = array(
 					'status'  => 'success',
-					'message' => __( 'Import Settings saved successfully.', 'affiliate-products-importer' ),
+					'message' => __( 'Import Settings saved successfully.', 'affiliate-products-importer-for-woocommerce' ),
 				);
 				return new WP_REST_Response( $response_data, 200 );
 			} catch ( \Exception $e ) {
@@ -125,7 +125,7 @@ class ImportSettings extends Endpoint {
 				'status' => 'error',
 				'error'  => array(
 					'code'    => 'incomplete',
-					'message' => __( 'Your Amazon API is not yet set up.', 'affiliate-products-importer' ),
+					'message' => __( 'Your Amazon API is not yet set up.', 'affiliate-products-importer-for-woocommerce' ),
 				),
 			);
 			return new WP_REST_Response( $response_data, 400 );

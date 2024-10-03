@@ -31,7 +31,7 @@ const Products = () => {
 
     const columns = [
 		{
-			title: __( 'Image', 'affiliate-products-importer' ),
+			title: __( 'Image', 'affiliate-products-importer-for-woocommerce' ),
 			dataIndex: 'image_primary',
 			key: 'img',
 			render: (imagePrimary, productObj) => <a href={productObj.product_url} target='_blank'>
@@ -43,7 +43,7 @@ const Products = () => {
 			</a>,
 		},
 		{
-			title: __( 'Title', 'affiliate-products-importer' ),
+			title: __( 'Title', 'affiliate-products-importer-for-woocommerce' ),
 			dataIndex: 'product_title',
 			key: 'title',
 			render: (title, productObj) => (
@@ -51,7 +51,7 @@ const Products = () => {
 			)
 		},
 		{
-			title: __( 'Date Imported', 'affiliate-products-importer' ),
+			title: __( 'Date Imported', 'affiliate-products-importer-for-woocommerce' ),
 			dataIndex: 'product_import_date',
 			key: 'sync',
 			width: 150,
@@ -60,7 +60,7 @@ const Products = () => {
 			)
 		},
 		{
-			title: __( 'Action', 'affiliate-products-importer' ),
+			title: __( 'Action', 'affiliate-products-importer-for-woocommerce' ),
 			dataIndex:'product_id',
 			key: 'action',
 			width: 130,
@@ -73,7 +73,7 @@ const Products = () => {
 	];
 
 	return (
-		<Card title={`${ __( 'Total Products', 'affiliate-products-importer' ) }: ${totalProducts}`} extra={<Tooltip placement="topLeft" title={ __( 'Reload Products List', 'affiliate-products-importer' ) } color={'purple'} key={'blue'}><Button type="default" icon={<ReloadOutlined/>} onClick={reloadProductList}></Button></Tooltip>}>
+		<Card title={`${ __( 'Total Products', 'affiliate-products-importer-for-woocommerce' ) }: ${totalProducts}`} extra={<Tooltip placement="topLeft" title={ __( 'Reload Products List', 'affiliate-products-importer-for-woocommerce' ) } color={'purple'} key={'blue'}><Button type="default" icon={<ReloadOutlined/>} onClick={reloadProductList}></Button></Tooltip>}>
             <Table
                 loading={isProductsLoading}
                 dataSource={productList}

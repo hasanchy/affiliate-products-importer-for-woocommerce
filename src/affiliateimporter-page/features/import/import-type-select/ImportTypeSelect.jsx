@@ -37,7 +37,7 @@ const ImportTypeSelect = () => {
                             items={[
                                 {
                                     key: 'copy-paste',
-                                    label: __( 'Copy/Paste Import', 'affiliate-products-importer' ),
+                                    label: __( 'Copy/Paste Import', 'affiliate-products-importer-for-woocommerce' ),
                                     icon: <CopyOutlined/>
                                 }
                             ]}
@@ -48,7 +48,7 @@ const ImportTypeSelect = () => {
                             </Col>
                             <Col span={12}>
                                 <Flex justify='flex-end'>
-                                    <Button type="primary" disabled={!importType} onClick={handleImportStep.bind(this,1)}>{ __( 'Next', 'affiliate-products-importer' ) }</Button>
+                                    <Button type="primary" disabled={!importType} onClick={handleImportStep.bind(this,1)}>{ __( 'Next', 'affiliate-products-importer-for-woocommerce' ) }</Button>
                                 </Flex>
                             </Col>
                         </Row>

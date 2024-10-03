@@ -129,7 +129,7 @@ const ImportCopyPasteForm = () => {
 		}
 
 		return <div style={{ marginTop: '10px' }}>
-			{ __( 'Provide ASIN codes separated by commas, newlines, or spaces.', 'affiliate-products-importer' ) }
+			{ __( 'Provide ASIN codes separated by commas, newlines, or spaces.', 'affiliate-products-importer-for-woocommerce' ) }
 		</div>;
 	}
 
@@ -142,7 +142,7 @@ const ImportCopyPasteForm = () => {
 				<Row gutter={20}>
 					<Col span={4}>
 						<Flex style={{height:'100%'}} justify='flex-end' align='center'>
-							{ __( 'ASIN Codes', 'affiliate-products-importer' ) }
+							{ __( 'ASIN Codes', 'affiliate-products-importer-for-woocommerce' ) }
 						</Flex>
 					</Col>
 					<Col span={10}>
@@ -175,7 +175,7 @@ const ImportCopyPasteForm = () => {
         }else if(!isImportFetchInProgress && importFetchItems.length && !importableFetchItems.length){
             alert={
                 type:'warning',
-                message: __('No importable products were found from this list.', 'affiliate-products-importer' )
+                message: __('No importable products were found from this list.', 'affiliate-products-importer-for-woocommerce' )
             }
         }
         
@@ -235,7 +235,7 @@ const ImportCopyPasteForm = () => {
                         </Row>
                     </Space>
                 </Card>
-                {displayImportFetchCounter && <ImportFetchCounter title={ __('ASIN Verification In Progress', 'affiliate-products-importer' ) } />}
+                {displayImportFetchCounter && <ImportFetchCounter title={ __('ASIN Verification In Progress', 'affiliate-products-importer-for-woocommerce' ) } />}
             </React.Fragment>
         )
     }else{

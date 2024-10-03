@@ -35,7 +35,7 @@ const RecentlyImportedProducts = memo(() => {
 	  
     return (
 		<>
-			<Card title={ __( 'Recently Imported Products', 'affiliate-products-importer' ) } bordered={true}>
+			<Card title={ __( 'Recently Imported Products', 'affiliate-products-importer-for-woocommerce' ) } bordered={true}>
 				{isProductsLoading && <Spin tip="" size="medium"> </Spin>}
 				{renderProductGallery()}
 			</Card>

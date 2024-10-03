@@ -30,11 +30,11 @@ When using this plugin, please be aware that it communicates with Amazon's exter
 Please review the terms of use and privacy policies provided by Amazon to understand how they manage and process the data. This documentation is crucial for ensuring that you comply with all legal requirements related to data transmission when using this plugin.
 
 == Source Code ==
-The full source code, including the non-compiled versions of JavaScript and CSS files for this plugin, is available on GitHub. You can access it at the following URL: [https://github.com/hasanchy/affiliate-products-importer/](https://github.com/hasanchy/affiliate-products-importer/).
+The full source code, including the non-compiled versions of JavaScript and CSS files for this plugin, is available on GitHub. You can access it at the following URL: [https://github.com/hasanchy/affiliate-products-importer-for-woocommerce/](https://github.com/hasanchy/affiliate-products-importer-for-woocommerce/).
 
 If you are a developer or a user interested in understanding how this plugin works, you are welcome to review the source code. We also encourage contributions from the community. Whether you want to enhance the plugin, suggest new features, or report bugs, please visit our GitHub repository. Detailed instructions on setting up the development environment and using build tools like npm or composer are provided within the repository to assist you in getting started.
 
-For more information or to contribute, visit the GitHub repository: [https://github.com/hasanchy/affiliate-products-importer/](https://github.com/hasanchy/affiliate-products-importer/).
+For more information or to contribute, visit the GitHub repository: [https://github.com/hasanchy/affiliate-products-importer-for-woocommerce/](https://github.com/hasanchy/affiliate-products-importer-for-woocommerce/).
 
 == Installation ==
 1. Go to your WordPress backend

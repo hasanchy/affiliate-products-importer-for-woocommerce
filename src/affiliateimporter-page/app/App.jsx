@@ -22,7 +22,7 @@ const App = () => {
 	return (
 		<div className="wrap">
 			<Header />
-			<ErrorBoundary fallback={<div>{ __( 'Something went wrong', 'affiliate-products-importer' ) }</div>}>
+			<ErrorBoundary fallback={<div>{ __( 'Something went wrong', 'affiliate-products-importer-for-woocommerce' ) }</div>}>
 				<MenuTabs/>
 			</ErrorBoundary>
 		</div>

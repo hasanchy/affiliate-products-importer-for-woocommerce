@@ -28,7 +28,7 @@ const ImportSettings = () => {
 
     const onFinish = () => {
         const data = {
-            'remote_image': importRemoteAmazonImage ? __( 'Yes', 'affiliate-products-importer' ): __( 'No', 'affiliate-products-importer' )
+            'remote_image': importRemoteAmazonImage ? __( 'Yes', 'affiliate-products-importer-for-woocommerce' ): __( 'No', 'affiliate-products-importer-for-woocommerce' )
         }
         dispatch(saveImportSettings(data));
     };
@@ -58,7 +58,7 @@ const ImportSettings = () => {
             disabled={isImportSettingsLoading}
         >
             <Form.Item
-                label={ __( 'Remote amazon images', 'affiliate-products-importer' ) }
+                label={ __( 'Remote amazon images', 'affiliate-products-importer-for-woocommerce' ) }
                 name="importRemoteAmazonImage"
             >
                 <Switch
@@ -76,7 +76,7 @@ const ImportSettings = () => {
                 }}
             >
                 <Button type="primary" htmlType="submit" loading={isImportSettingsSaving}>
-                    { __( 'Submit', 'affiliate-products-importer' ) }
+                    { __( 'Submit', 'affiliate-products-importer-for-woocommerce' ) }
                 </Button>
             </Form.Item>
         </Form>

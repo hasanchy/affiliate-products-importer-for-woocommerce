@@ -21,7 +21,7 @@ const AmazonApiConnection = () => {
     const renderLoadingMessage = () => {
         return <Alert
             message=""
-            description={ __( 'Your Amazon API connection is being verified.', 'affiliate-products-importer' )}
+            description={ __( 'Your Amazon API connection is being verified.', 'affiliate-products-importer-for-woocommerce' )}
             type="info"
             icon=<SyncOutlined spin />
             showIcon
@@ -31,7 +31,7 @@ const AmazonApiConnection = () => {
     const renderSuccessMessage = () => {
         return <Alert
             message=""
-            description={ __( 'Your Amazon API connection is valid.', 'affiliate-products-importer' )}
+            description={ __( 'Your Amazon API connection is valid.', 'affiliate-products-importer-for-woocommerce' )}
             type="success"
             showIcon
         />
@@ -40,7 +40,7 @@ const AmazonApiConnection = () => {
     const renderWarningMessage = () => {
         let description = <>Your Amazon API is not yet set up. You can set it up <Link onClick={handleAmazonApiSetup}>here</Link>.</>
         return <Alert
-            message={ __( 'Amazon API Connection Incomplete', 'affiliate-products-importer' )}
+            message={ __( 'Amazon API Connection Incomplete', 'affiliate-products-importer-for-woocommerce' )}
             description= {description}
             type="warning"
             showIcon
@@ -49,7 +49,7 @@ const AmazonApiConnection = () => {
 
     const renderErrorMessage = () => {
         return <Alert
-            message={ __( 'Amazon API Connection Error', 'affiliate-products-importer' )}
+            message={ __( 'Amazon API Connection Error', 'affiliate-products-importer-for-woocommerce' )}
             description={amazonApiConnectionMessage}
             type="error"
             showIcon
