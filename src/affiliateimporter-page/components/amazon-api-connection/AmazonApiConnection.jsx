@@ -1,10 +1,11 @@
 import React, {memo} from 'react';
-import { Alert, Typography } from 'antd';
+import { Alert, Space, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { SyncOutlined } from '@ant-design/icons';
 import { __ } from '@wordpress/i18n';
 import { setActiveTab } from '../../components/menu-tabs/manuTabsSlice';
 import { setSettingsActiveTab } from '../../features/settings/settingsSlice';
+import { setProductsScreen } from '../../features/products/productsSlice';
 
 const { Link } = Typography;
 
@@ -16,6 +17,11 @@ const AmazonApiConnection = () => {
     const handleAmazonApiSetup = () => {
         dispatch( setActiveTab( 'settings' ) );
         dispatch( setSettingsActiveTab ( 'amazonApiSettings' ) );
+    }
+
+    const handleProductAdd = () => {
+        dispatch( setActiveTab( 'products' ) );
+        dispatch( setProductsScreen('add-new-product') );
     }
 
     const renderLoadingMessage = () => {
@@ -38,7 +44,12 @@ const AmazonApiConnection = () => {
     }
 
     const renderWarningMessage = () => {
-        let description = <>Your Amazon API is not yet set up. You can set it up <Link onClick={handleAmazonApiSetup}>here</Link>.</>
+        let description = <Space size='small' direction='vertical' style={{
+            display: 'flex',
+        }}>
+            <div>Your Amazon API is not set up yet. You can configure it <Link onClick={handleAmazonApiSetup}>here</Link>.</div>
+            <div>Alternatively, you can manually add products from <Link onClick={handleProductAdd}>here</Link>.</div>
+        </Space>
         return <Alert
             message={ __( 'Amazon API Connection Incomplete', 'affiliate-products-importer-for-woocommerce' )}
             description= {description}
