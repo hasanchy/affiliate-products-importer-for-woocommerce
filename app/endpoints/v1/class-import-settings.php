@@ -53,10 +53,21 @@ class ImportSettings extends Endpoint {
 				array(
 					'methods'             => 'POST',
 					'args'                => array(
-						'remote_image' => array(
-							'required'    => true,
-							'description' => __( 'Remore image setting is required.', 'affiliate-products-importer-for-woocommerce' ),
-							'type'        => 'string',
+						'remote_image'       => array(
+							'required' => true,
+							'type'     => 'string',
+						),
+						'gallery_images'     => array(
+							'required' => true,
+							'type'     => 'string',
+						),
+						'product_price'      => array(
+							'required' => true,
+							'type'     => 'string',
+						),
+						'product_attributes' => array(
+							'required' => true,
+							'type'     => 'string',
 						),
 					),
 					'callback'            => array(
@@ -84,10 +95,16 @@ class ImportSettings extends Endpoint {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
-		$affprodimp_settings_remote_image = get_option( 'affprodimp_settings_remote_image' );
+		$affprodimp_settings_remote_image       = get_option( 'affprodimp_settings_remote_image' );
+		$affprodimp_settings_gallery_images     = get_option( 'affprodimp_settings_gallery_images' );
+		$affprodimp_settings_product_price      = get_option( 'affprodimp_settings_product_price' );
+		$affprodimp_settings_product_attributes = get_option( 'affprodimp_settings_product_attributes' );
 
 		$response_data = array(
-			'remote_image' => $affprodimp_settings_remote_image ? esc_html( $affprodimp_settings_remote_image ) : 'Yes',
+			'remote_image'       => $affprodimp_settings_remote_image ? esc_html( $affprodimp_settings_remote_image ) : 'yes',
+			'gallery_images'     => $affprodimp_settings_gallery_images ? esc_html( $affprodimp_settings_gallery_images ) : 'yes',
+			'product_price'      => $affprodimp_settings_product_price ? esc_html( $affprodimp_settings_product_price ) : 'yes',
+			'product_attributes' => $affprodimp_settings_product_attributes ? esc_html( $affprodimp_settings_product_attributes ) : 'yes',
 		);
 
 		return new WP_REST_Response( $response_data, 200 );
@@ -106,29 +123,24 @@ class ImportSettings extends Endpoint {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
-		$remote_image = sanitize_text_field( $request['remote_image'] );
+		$remote_image       = sanitize_text_field( $request['remote_image'] );
+		$gallery_images     = sanitize_text_field( $request['gallery_images'] );
+		$product_price      = sanitize_text_field( $request['product_price'] );
+		$product_attributes = sanitize_text_field( $request['product_attributes'] );
 
-		if ( ! empty( $remote_image ) ) {
-			try {
-				update_option( 'affprodimp_settings_remote_image', $remote_image );
+		try {
+			update_option( 'affprodimp_settings_remote_image', $remote_image );
+			update_option( 'affprodimp_settings_gallery_images', $gallery_images );
+			update_option( 'affprodimp_settings_product_price', $product_price );
+			update_option( 'affprodimp_settings_product_attributes', $product_attributes );
 
-				$response_data = array(
-					'status'  => 'success',
-					'message' => __( 'Import Settings saved successfully.', 'affiliate-products-importer-for-woocommerce' ),
-				);
-				return new WP_REST_Response( $response_data, 200 );
-			} catch ( \Exception $e ) {
-				return new WP_Error( 'rest_affprodimp_amazon_api_status', esc_html( $e->getMessage() ), array( 'status' => $e->getCode() ? $e->getCode() : 500 ) );
-			}
-		} else {
 			$response_data = array(
-				'status' => 'error',
-				'error'  => array(
-					'code'    => 'incomplete',
-					'message' => __( 'Your Amazon API is not yet set up.', 'affiliate-products-importer-for-woocommerce' ),
-				),
+				'status'  => 'success',
+				'message' => __( 'Import Settings saved successfully.', 'affiliate-products-importer-for-woocommerce' ),
 			);
-			return new WP_REST_Response( $response_data, 400 );
+			return new WP_REST_Response( $response_data, 200 );
+		} catch ( \Exception $e ) {
+			return new WP_Error( 'rest_affprodimp_amazon_api_status', esc_html( $e->getMessage() ), array( 'status' => $e->getCode() ? $e->getCode() : 500 ) );
 		}
 	}
 }

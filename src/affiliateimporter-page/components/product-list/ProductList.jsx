@@ -1,15 +1,10 @@
 import React, {memo} from 'react';
 import { Card, Image, Skeleton, Space, Table, Tag, Typography } from 'antd';
-import { useSelector } from 'react-redux';
 import { __ } from '@wordpress/i18n';
 
 const { Text } = Typography;
 
-const ImportFetchResult = memo(() => {
-
-	const { importFetchItems, importFetchErrors } = useSelector((state) => state.importCopyPaste);
-
-	let dataSource = [...importFetchItems, ...importFetchErrors]
+const ProductList = memo((props) => {
 
 	const renderProductTable = () => {
 		const columns = [
@@ -19,7 +14,15 @@ const ImportFetchResult = memo(() => {
 				key: 'img',
 				render: (imageSrc, productObj) => {
 					if(imageSrc){
-						return <Image src={imageSrc} alt={productObj.post_title} height='50px'/>
+						if(productObj.image_variants?.length){
+							let previewImages = [imageSrc, ...productObj.image_variants]
+							return <Image.PreviewGroup
+								items={previewImages}
+							>
+								<Image src={imageSrc} width='125px'/>
+							</Image.PreviewGroup>
+						}
+						return <Image src={imageSrc} alt={productObj.post_title} width='125px'/>
 					}else{
 						return <Skeleton.Image  style={{ width: 50, height: 50 }}/>
 					}
@@ -40,7 +43,7 @@ const ImportFetchResult = memo(() => {
 			{
 				title: __( 'Status', 'affiliate-products-importer-for-woocommerce' ),
 				dataIndex: 'is_already_imported',
-				key: 'title',
+				key: 'status',
 				render: (isAlreadyImported, productObj) => {
 
 					let ribbonText = isAlreadyImported ? 'Previously Imported' : 'Importable';
@@ -59,7 +62,7 @@ const ImportFetchResult = memo(() => {
 		
 		return <Table
 			loading={false}
-			dataSource={dataSource}
+			dataSource={props.data}
 			columns={columns}
 			size="middle"
 			pagination={false}
@@ -71,8 +74,8 @@ const ImportFetchResult = memo(() => {
 			<Space size='large' direction='vertical' style={{
                     display: 'flex',
                 }}>
-				{importFetchItems.length > 0 &&
-					<Card title={ __( 'ASIN Verification Result', 'affiliate-products-importer-for-woocommerce' ) } bordered={true}>
+				{props.data.length > 0 &&
+					<Card title={ __( props.title, 'affiliate-products-importer-for-woocommerce' ) } bordered={true}>
 						{renderProductTable()}
 					</Card>
 				}
@@ -81,4 +84,4 @@ const ImportFetchResult = memo(() => {
 	)
 })
 
-export default ImportFetchResult;
+export default ProductList;

@@ -73,6 +73,20 @@ export const saveProducts = createAsyncThunk('products/save', async (data, { rej
 	}
 });
 
+export const addProduct = createAsyncThunk('products/add', async (data, { rejectWithValue }) => {
+	try{
+		const res = await axios.post(affprodimpAffiliateImporter.restEndpoint.product, data, {
+			headers: {
+				'content-type': 'application/json',
+				'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
+			}
+		});
+		return res.data;
+	} catch (error) {
+		return rejectWithValue(error.response.data);
+	}
+});
+
 export const fetchCategories = createAsyncThunk('categories/fetchCategories', async (params, { rejectWithValue }) => {
 	try{
 		const res = await axios.get(affprodimpAffiliateImporter.restEndpoint.categories, {

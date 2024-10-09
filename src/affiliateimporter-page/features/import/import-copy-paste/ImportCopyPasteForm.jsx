@@ -2,21 +2,20 @@ import React from 'react';
 import { Card, Input, Row, Col, Space, Flex, Button, Alert, Tag } from 'antd';
 
 import { useSelector, useDispatch } from 'react-redux'
-import { setAsinValue, setAsinCodes, setInvalidAsinCodes, setDuplicateAsinCodes, setImportFetchItems, setImportableFetchItems, setDisplayImportFetchCounter, setImportFetchErrors, setImportFetchProgress, setImportSuccessfulFetchItems, setImportQueuedFetchItems } from './importCopyPasteSlice';
+import { setAsinValue, setAsinCodes, setInvalidAsinCodes, setDuplicateAsinCodes, setImportFetchItems, setImportableItems, setDisplayImportFetchCounter, setImportFetchErrors, setImportFetchProgress } from './importCopyPasteSlice';
 import { CheckCircleOutlined } from '@ant-design/icons';
-import ImportFetchCounter from './ImportFetchCounter';
 import { setImportStepBack, setImportStepNext } from '../importSlice';
 import { asinVerification } from '../../../services/apiService';
 import { __ } from '@wordpress/i18n';
 import AmazonApiConnection from '../../../components/amazon-api-connection/AmazonApiConnection';
+import ProgressCounter from '../../../components/counter/ProgressCounter';
 
 const { TextArea } = Input;
 
 const ImportCopyPasteForm = () => {
 
 	const dispatch = useDispatch();
-    const { importType, importStepIndex } = useSelector((state) => state.import);
-	const { displayImportFetchCounter, importFetchItems, importFetchAlert, asinCodes, invalidAsinCodes, duplicateAsinCodes, asinValue, asinValueFetched, isImportFetchInProgress, importableFetchItems } = useSelector((state) => state.importCopyPaste);
+	const { displayImportFetchCounter, importFetchItems, importFetchAlert, asinCodes, invalidAsinCodes, duplicateAsinCodes, asinValue, asinValueFetched, isImportFetchInProgress, importableItems, importFetchProgress } = useSelector((state) => state.importCopyPaste);
 	const { amazonApiConnectionStatus } = useSelector((state) => state.amazonApiConnection);
 
 	const findDuplicates = (arr) => {
@@ -71,11 +70,9 @@ const ImportCopyPasteForm = () => {
 
 		dispatch(setImportFetchItems([]));
 		dispatch(setImportFetchErrors([]));
-        dispatch(setImportableFetchItems([]));
+        dispatch(setImportableItems([]));
         dispatch(setImportFetchProgress(0));
         dispatch(setDisplayImportFetchCounter(true));
-		dispatch(setImportSuccessfulFetchItems([]));
-		dispatch(setImportQueuedFetchItems([]));
 
 		let productsPerRequest = 10;
 		let totalAsinCodes = asinCodes.length;
@@ -101,7 +98,7 @@ const ImportCopyPasteForm = () => {
 			i++;
 		}
 
-		if(importableFetchItems.length > 0){
+		if(importableItems.length > 0){
 			
 		}
 
@@ -166,13 +163,13 @@ const ImportCopyPasteForm = () => {
         let alert = {};
         if(importFetchAlert.message){
             alert=importFetchAlert
-        }else if(!isImportFetchInProgress && importableFetchItems.length){
-            let productText = importableFetchItems.length > 1 ? 'products' : 'product'
+        }else if(!isImportFetchInProgress && importableItems.length){
+            let productText = importableItems.length > 1 ? 'products' : 'product'
             alert={
                 type:'success',
-                message: <>A total of <b>{importableFetchItems.length}</b> importable {productText} were found from this list.</>
+                message: <>A total of <b>{importableItems.length}</b> importable {productText} were found from this list.</>
             }
-        }else if(!isImportFetchInProgress && importFetchItems.length && !importableFetchItems.length){
+        }else if(!isImportFetchInProgress && importFetchItems.length && !importableItems.length){
             alert={
                 type:'warning',
                 message: __('No importable products were found from this list.', 'affiliate-products-importer-for-woocommerce' )
@@ -206,41 +203,37 @@ const ImportCopyPasteForm = () => {
 		return null;
 	}
 
-    if(importStepIndex!==0 && importType === 'copy-paste'){
-        let disableNextButton = (!isImportFetchInProgress && importableFetchItems.length) ? false : true;
-        return (
-            <React.Fragment>
-                <Card>
-                    <Space
-                        direction='vertical'
-                        size="large"
-                        style={{
-                            display: 'flex',
-                        }}
-                    >
-						{renderAmazonApiConnectionAlert()}
-                        {renderAmazonTabContent()}
-                        {renderImportFetchAlert()}
-                        <Row>
-                            <Col span={12}> 
-                                <Flex justify='flex-start'>
-                                    <Button type="default" onClick={handleImportStepBack}>Back</Button>
-                                </Flex>
-                            </Col>
-                            <Col span={12}>
-                                <Flex justify='flex-end'>
-                                    <Button type="primary" onClick={handleImportStepNext} disabled={disableNextButton}>Next</Button>
-                                </Flex>
-                            </Col>
-                        </Row>
-                    </Space>
-                </Card>
-                {displayImportFetchCounter && <ImportFetchCounter title={ __('ASIN Verification In Progress', 'affiliate-products-importer-for-woocommerce' ) } />}
-            </React.Fragment>
-        )
-    }else{
-        return null;
-    }
+	let disableNextButton = (!isImportFetchInProgress && importableItems.length) ? false : true;
+	return (
+		<React.Fragment>
+			<Card>
+				<Space
+					direction='vertical'
+					size="large"
+					style={{
+						display: 'flex',
+					}}
+				>
+					{renderAmazonApiConnectionAlert()}
+					{renderAmazonTabContent()}
+					{renderImportFetchAlert()}
+					<Row>
+						<Col span={12}> 
+							<Flex justify='flex-start'>
+								<Button type="default" disabled={isImportFetchInProgress} onClick={handleImportStepBack}>Back</Button>
+							</Flex>
+						</Col>
+						<Col span={12}>
+							<Flex justify='flex-end'>
+								<Button type="primary" onClick={handleImportStepNext} disabled={disableNextButton}>Next</Button>
+							</Flex>
+						</Col>
+					</Row>
+				</Space>
+			</Card>
+			{displayImportFetchCounter && <ProgressCounter title={ __('ASIN Verification In Progress', 'affiliate-products-importer-for-woocommerce' ) } percent={importFetchProgress} />}
+		</React.Fragment>
+	)
 }
 
 export default ImportCopyPasteForm;

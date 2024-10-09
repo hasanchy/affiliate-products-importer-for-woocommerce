@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-	activeTab: 'dashboard',
+	activeTab: 'dashboard', // dashboard, import, products, settings
 }
 
 export const menuTabsSlice = createSlice({

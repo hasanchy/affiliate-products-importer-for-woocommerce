@@ -14,7 +14,7 @@ const App = () => {
 		dispatch(fetchCategories());
 		dispatch(verifyAmazonApiConnection());
 		dispatch(fetchRecentlyImportedProducts({per_page:20}));
-		dispatch(fetchProducts());
+		dispatch(fetchProducts({page:1, per_page: 50}));
 		dispatch(fetchAmazonApiSettings());
 		dispatch(fetchImportSettings());
 	}, [])

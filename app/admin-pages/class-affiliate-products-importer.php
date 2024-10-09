@@ -149,6 +149,7 @@ class AffiliateProductsImporter extends Base {
 				'dom_element_id' => $this->unique_id,
 				'restEndpoint'   => array(
 					'amazonAPIConnection' => rest_url() . 'affiliate-products-importer-for-woocommerce/v1/amazon-api-connection',
+					'product'             => rest_url() . 'affiliate-products-importer-for-woocommerce/v1/product',
 					'products'            => rest_url() . 'affiliate-products-importer-for-woocommerce/v1/products',
 					'categories'          => rest_url() . 'affiliate-products-importer-for-woocommerce/v1/categories',
 					'asinVerification'    => rest_url() . 'affiliate-products-importer-for-woocommerce/v1/asin-verification',

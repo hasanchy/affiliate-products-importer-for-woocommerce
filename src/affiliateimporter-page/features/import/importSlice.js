@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const importSlice = createSlice({
 	name: 'import',
 	initialState: {
-		importType: 'copy-paste',
+		importType: 'copy-paste', //copy-paste, search-keyword
 		importStepIndex: 0
 	},
 	reducers: {

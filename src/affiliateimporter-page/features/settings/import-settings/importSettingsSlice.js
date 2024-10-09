@@ -3,6 +3,9 @@ import { fetchAmazonApiSettings, fetchImportSettings, saveAmazonApiSettings, sav
 
 const initialState = {
 	importRemoteAmazonImage: true,
+	importGalleryImages: true,
+	importProductPrice: true,
+	importProductAttributes: true,
 	isImportSettingsLoading: false,
 	isImportSettingsSaving: false,
 
@@ -21,6 +24,15 @@ export const importSettingsSlice = createSlice({
 		setRemoteAmazonImage: (state, action) => {
 			state.importRemoteAmazonImage = action.payload;
 		},
+		setSettingsGalleryImages:(state, action) => {
+			state.importGalleryImages = action.payload;
+		},
+		setSettingsProductPrice:(state, action) => {
+			state.importProductPrice = action.payload;
+		},
+		setSettingsProductAttributes:(state, action) => {
+			state.importProductAttributes = action.payload;
+		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(fetchImportSettings.pending, (state) => {
@@ -28,7 +40,11 @@ export const importSettingsSlice = createSlice({
 		}),
 		builder.addCase(fetchImportSettings.fulfilled, (state, action) => {
 			state.isImportSettingsLoading = false;
-			state.importRemoteAmazonImage = action.payload.remote_image === 'Yes' ? true: false;
+			state.importRemoteAmazonImage = action.payload.remote_image === 'yes' ? true: false;
+			state.importGalleryImages = action.payload.gallery_images === 'yes' ? true: false;
+			state.importProductPrice = action.payload.product_price === 'yes' ? true: false;
+			state.importProductDescription = action.payload.product_description === 'yes' ? true: false;
+			state.importProductAttributes = action.payload.product_attributes === 'yes' ? true: false;
 			state.error = null;
 		}),
 		builder.addCase(fetchImportSettings.rejected, (state, action) => {
@@ -50,5 +66,5 @@ export const importSettingsSlice = createSlice({
 	}
 })
 
-export const { setSettingsToastMessage, setRemoteAmazonImage } = importSettingsSlice.actions
+export const { setSettingsToastMessage, setRemoteAmazonImage, setSettingsGalleryImages, setSettingsProductPrice, setSettingsProductAttributes } = importSettingsSlice.actions
 export default importSettingsSlice.reducer;

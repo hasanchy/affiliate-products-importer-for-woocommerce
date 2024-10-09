@@ -2,9 +2,9 @@
 Contributors: hasanchowdhury, themedyno
 Tags: Amazon Affiliate, Products Importer for WooCommerce
 Requires at least: 5.2
-Tested up to: 6.6
+Tested up to: 6.6.2
 Requires PHP: 7.2.0
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.en.html
 
@@ -39,7 +39,7 @@ For more information or to contribute, visit the GitHub repository: [https://git
 == Installation ==
 1. Go to your WordPress backend
 2. Navigate to "Plugins" > "Add New"
-3. Search for "Affiliate Products Importer for WooCommerce"
+3. Search for "Affiliate Products Importer by ThemeDyno"
 4. Install and activate the plugin
 5. Navigate to "Affiliate Products Importer"
 

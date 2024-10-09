@@ -1,11 +1,8 @@
 import React from 'react';
 import { Card, Flex, Progress } from 'antd';
 import { SyncOutlined } from '@ant-design/icons';
-import { useSelector } from 'react-redux';
 
-const ImportFetchCounter = ({title}) => {
-
-    const { importFetchProgress } = useSelector((state) => state.importCopyPaste);
+const ProgressCounter = ({title, percent}) => {
 
 	let cardTitle = <><SyncOutlined spin={true}/> {title}</>
 	return (
@@ -14,7 +11,7 @@ const ImportFetchCounter = ({title}) => {
 				<Flex gap="small" wrap="wrap">
 					<span style={{flex: 1}}>
 						<Progress
-							percent={importFetchProgress}
+							percent={percent}
 							status="active"
 							strokeColor={{
 								from: '#531dab',
@@ -29,4 +26,4 @@ const ImportFetchCounter = ({title}) => {
 	);
 };
 
-export default ImportFetchCounter;
+export default ProgressCounter;

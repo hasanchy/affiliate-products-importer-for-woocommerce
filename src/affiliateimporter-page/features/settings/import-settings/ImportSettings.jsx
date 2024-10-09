@@ -1,13 +1,13 @@
-import { Button, Form, message, Switch } from 'antd';
+import { Button, Checkbox, Form, message, Space, Switch } from 'antd';
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setRemoteAmazonImage, setSettingsToastMessage } from './importSettingsSlice';
+import { setRemoteAmazonImage, setSettingsGalleryImages, setSettingsProductAttributes, setSettingsProductPrice, setSettingsToastMessage } from './importSettingsSlice';
 import { saveImportSettings } from '../../../services/apiService';
 import { __ } from '@wordpress/i18n';
 
 const ImportSettings = () => {
 	const dispatch = useDispatch();
-	const { importRemoteAmazonImage, isImportSettingsSaving, isImportSettingsLoading, settingsToastMessage } = useSelector((state) => state.importSettings);
+	const { importRemoteAmazonImage, importGalleryImages, importProductPrice, importProductDescription, importProductAttributes, isImportSettingsSaving, isImportSettingsLoading, settingsToastMessage } = useSelector((state) => state.importSettings);
 
 	const [form] = Form.useForm();
 
@@ -28,13 +28,32 @@ const ImportSettings = () => {
 
     const onFinish = () => {
         const data = {
-            'remote_image': importRemoteAmazonImage ? __( 'Yes', 'affiliate-products-importer-for-woocommerce' ): __( 'No', 'affiliate-products-importer-for-woocommerce' )
+            'remote_image': importRemoteAmazonImage ? 'yes' : 'no',
+            'gallery_images': importGalleryImages ? 'yes' : 'no',
+            'product_price': importProductPrice ? 'yes' : 'no',
+            'product_description': importProductDescription ? 'yes' : 'no',
+            'product_attributes': importProductAttributes ? 'yes' : 'no',
         }
         dispatch(saveImportSettings(data));
     };
 
     const handleRemoteAmazonImage = (value) => {
         dispatch(setRemoteAmazonImage(value));
+    }
+
+    const handleGalleryImages = (e) => {
+        let value = e.target.checked;
+        dispatch(setSettingsGalleryImages(value));
+    }
+
+    const handleProductPrice = (e) =>{
+        let value = e.target.checked;
+        dispatch(setSettingsProductPrice(value));
+    }
+    
+    const handleProductAttributes = (e) =>{
+        let value = e.target.checked;
+        dispatch(setSettingsProductAttributes(value));
     }
 
 	return (
@@ -58,7 +77,7 @@ const ImportSettings = () => {
             disabled={isImportSettingsLoading}
         >
             <Form.Item
-                label={ __( 'Remote amazon images', 'affiliate-products-importer-for-woocommerce' ) }
+                label={ __( 'Remote Amazon images', 'affiliate-products-importer-for-woocommerce' ) }
                 name="importRemoteAmazonImage"
             >
                 <Switch
@@ -67,6 +86,26 @@ const ImportSettings = () => {
                     defaultChecked={importRemoteAmazonImage}
                     onChange={handleRemoteAmazonImage}
                 />
+            </Form.Item>
+
+            <Form.Item
+                label="Import data"
+                name="importData"
+            >
+                <Space
+                    direction="vertical"
+                    size="middle"
+                    style={{
+                        display: 'flex',
+                    }}
+                >
+                    <Checkbox name="productName" checked disabled>Product Name</Checkbox>
+                    <Checkbox name="productThumbnail" checked disabled>Product Thumbnail</Checkbox>
+                    <Checkbox name="productDescription" checked disabled>Product Description</Checkbox>
+                    <Checkbox name="productPrice" checked={importProductPrice} onChange={handleProductPrice}>Product Price</Checkbox>
+                    <Checkbox name="productGalleryImages" checked={importGalleryImages} onChange={handleGalleryImages}>Product Gallery Images</Checkbox>
+                    <Checkbox name="productAttributes" checked={importProductAttributes} onChange={handleProductAttributes}>Product Attributes</Checkbox>
+                </Space>        
             </Form.Item>
 
             <Form.Item

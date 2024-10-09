@@ -23,47 +23,11 @@ class WooCommerceIntegration extends Base {
 	 *
 	 */
 	public function init() {
-		\add_filter( 'woocommerce_get_price_html', array( $this, 'amz_disclaimer_price_html' ), 100, 2 );
 
 		\add_filter( 'wp_get_attachment_image_src', array( $this, 'affprodimp_replace_attachment_image_src' ), 100, 2 );
 
 		add_filter( 'woocommerce_product_get_gallery_image_ids', array( $this, 'affprodimp_set_customized_gallary_ids' ), 99, 2 );
 		add_filter( 'woocommerce_product_get_image_id', array( $this, 'affprodimp_woocommerce_product_get_image_id_support' ), 99, 2 );
-	}
-
-	public function amz_disclaimer_price_html( $price, $product ) {
-
-		if ( ! is_product() || ! $product->get_price() ) {
-			return $price;
-		}
-		$prod_id = 0;
-		if ( is_object( $product ) ) {
-			if ( method_exists( $product, 'get_id' ) ) {
-				$prod_id = (int) $product->get_id();
-			} elseif ( isset( $product->id ) && (int) $product->id > 0 ) {
-				$prod_id = (int) $product->id;
-			}
-		}
-
-		$post_id = $prod_id;
-		if ( $post_id <= 0 ) {
-			return $price;
-		}
-
-		$price_update_date_db = get_post_meta( $post_id, 'affprodimp_sync_last_date', true );
-		if ( empty( $price_update_date_db ) ) {
-			global $post;
-			$price_update_date_db = strtotime( $post->post_date );
-		}
-		$price_update_date = $price_update_date_db;
-
-		$price_update_date = new \DateTime( "@$price_update_date" );
-		$price_update_date->setTimezone( new \DateTimeZone( 'America/Los_Angeles' ) );
-		$date_format        = 'd/m/Y H:i';
-		$price_update_date  = $price_update_date->format( $date_format );
-		$price_update_date .= ' PST';
-
-		return $price . " (as of $price_update_date)";
 	}
 
 	public function affprodimp_replace_attachment_image_src( $image, $attachment_id, $size = '', $icon = '' ) {
