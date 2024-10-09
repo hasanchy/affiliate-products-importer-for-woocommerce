@@ -4,7 +4,7 @@ Tags: Amazon Affiliate, Products Importer for WooCommerce
 Requires at least: 5.2
 Tested up to: 6.6.2
 Requires PHP: 7.2.0
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.en.html
 
@@ -31,10 +31,6 @@ Please review the terms of use and privacy policies provided by Amazon to unders
 
 == Source Code ==
 The full source code, including the non-compiled versions of JavaScript and CSS files for this plugin, is available on GitHub. You can access it at the following URL: [https://github.com/hasanchy/affiliate-products-importer-for-woocommerce/](https://github.com/hasanchy/affiliate-products-importer-for-woocommerce/).
-
-If you are a developer or a user interested in understanding how this plugin works, you are welcome to review the source code. We also encourage contributions from the community. Whether you want to enhance the plugin, suggest new features, or report bugs, please visit our GitHub repository. Detailed instructions on setting up the development environment and using build tools like npm or composer are provided within the repository to assist you in getting started.
-
-For more information or to contribute, visit the GitHub repository: [https://github.com/hasanchy/affiliate-products-importer-for-woocommerce/](https://github.com/hasanchy/affiliate-products-importer-for-woocommerce/).
 
 == Installation ==
 1. Go to your WordPress backend

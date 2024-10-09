@@ -266,7 +266,7 @@ class Products extends Endpoint {
 				$thumbnail_image_id = \media_sideload_image( $image_primary, $post_id, $post_title, 'id' );
 				set_post_thumbnail( $post_id, $thumbnail_image_id );
 
-				if ( 'yes' === $gallery_images_setting && ! empty( $image_variants ) ) {
+				if ( 'no' !== $gallery_images_setting && ! empty( $image_variants ) ) {
 					$image_variant_ids = array();
 					foreach ( $image_variants as $image_variant ) {
 						$image_variant_ids[] = \media_sideload_image( $image_variant, $post_id, $post_title, 'id' );
@@ -278,7 +278,7 @@ class Products extends Endpoint {
 				}
 			} else {
 				update_post_meta( $post_id, 'affprodimp_product_img_url', $image_primary );
-				if ( 'yes' === $gallery_images_setting && ! empty( $image_variants ) ) {
+				if ( 'no' !== $gallery_images_setting && ! empty( $image_variants ) ) {
 					update_post_meta( $post_id, 'affprodimp_product_gallery_url', $image_variants );
 				}
 			}
@@ -287,7 +287,7 @@ class Products extends Endpoint {
 			update_post_meta( $post_id, 'affprodimp_product_asin', $asin );
 
 			/*===================Update product price=======================*/
-			if ( 'yes' === $product_price_setting ) {
+			if ( 'no' !== $product_price_setting ) {
 				$price = ! empty( $sale_price ) ? $sale_price : $regular_price;
 				update_post_meta( $post_id, '_price', $price );
 				update_post_meta( $post_id, '_regular_price', $regular_price );
@@ -301,7 +301,7 @@ class Products extends Endpoint {
 			update_post_meta( $post_id, '_product_url', $product_url );
 
 			/*===================Update product url=======================*/
-			if ( 'yes' === $product_attributes_setting && ! empty( $attributes ) ) {
+			if ( 'no' !== $product_attributes_setting && ! empty( $attributes ) ) {
 				$this->add_product_attribute( $post_id, $attributes );
 			}
 		}
