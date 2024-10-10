@@ -13,6 +13,8 @@ Easily import Amazon affiliate products into your WooCommerce store.
 == Description ==
 Elevate your WooCommerce store by seamlessly importing Amazon affiliate products with ease using the Amazon Affiliate Products Importer for WooCommerce plugin. Whether you're a seasoned affiliate marketer or just starting out, this plugin offers a robust set of features designed to streamline your product import process and boost your sales potential.
 
+[youtube https://www.youtube.com/watch?v=f1pePtsA7Fc]
+
 **Key Features:**
 
 Effortlessly import Amazon products by simply copying and pasting a list of Amazon Product ASINs. This feature ensures a quick and accurate import process, allowing you to expand your product catalog in no time. To utilize this feature, you'll need to set up your Amazon affiliate API keys, ensuring a smooth and automated import experience.
