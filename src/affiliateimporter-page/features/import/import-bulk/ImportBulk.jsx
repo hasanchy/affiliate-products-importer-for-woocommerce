@@ -8,6 +8,7 @@ import { fetchProducts, fetchRecentlyImportedProducts, saveProducts } from '../.
 import { __ } from '@wordpress/i18n';
 import ProgressCounter from '../../../components/counter/ProgressCounter';
 import AlertView from '../../../components/alert/AlertView';
+import { setActiveTab } from '../../../components/menu-tabs/manuTabsSlice';
 
 const { Link } = Typography;
 
@@ -101,6 +102,10 @@ const ImportBulk = ( {selectedCategories, importableItems, deletedAsins, onDelet
 		dispatch(setImportStepIndex(1));
 	}
 
+	const handleViewProducts = () => {
+		dispatch(setActiveTab( 'products' ));
+	}
+
     let displayUndoButton = deletedAsins.length && isImportQueueDeletable ? 'block' : 'none';
 
     const handleImportQueueDelete = (asin) => {
@@ -145,9 +150,14 @@ const ImportBulk = ( {selectedCategories, importableItems, deletedAsins, onDelet
 						title={`${__( 'Successfully Imported', 'affiliate-products-importer-for-woocommerce' )} ${totalSuccessfulImports} ${productText}!`}
 						subTitle=""
 						extra={[
-							<Button type="primary" key="console" onClick={handleImportAgain}>
-								{ __( 'Import Again', 'affiliate-products-importer-for-woocommerce' ) }
-							</Button>
+							<Space>
+								<Button type="primary" key="console" onClick={handleImportAgain}>
+									{ __( 'Import Again', 'affiliate-products-importer-for-woocommerce' ) }
+								</Button>
+								<Button type="default" key="console" onClick={handleViewProducts}>
+									{__('View Products', 'affiliate-products-importer-pro')}
+								</Button>
+							</Space>
 						]}
 					/>
 				</Col>

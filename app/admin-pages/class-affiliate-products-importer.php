@@ -73,7 +73,7 @@ class AffiliateProductsImporter extends Base {
 	 */
 	public function add_action_links( $links ) {
 		$new_links = array(
-			'<a href="' . admin_url( 'admin.php?page=' . $this->page_slug ) . '">' . __( 'Import', 'affiliate-products-importer-for-woocommerce' ) . '</a>',
+			'<a href="' . admin_url( 'admin.php?page=' . $this->page_slug ) . '">' . __( 'Import Products', 'affiliate-products-importer-for-woocommerce' ) . '</a>',
 		);
 		return array_merge( $new_links, $links );
 	}

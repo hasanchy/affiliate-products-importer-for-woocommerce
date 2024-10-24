@@ -196,7 +196,7 @@ class Products extends Endpoint {
 	public function save_products( WP_REST_Request $request ) {
 		$nonce = $request->get_header( 'X-WP-NONCE' );
 		if ( ! wp_verify_nonce( $nonce, 'wp_rest' ) ) {
-			return new WP_REST_Response( 'Invalid nonce', 403 );
+			return new WP_REST_Response( esc_html__( 'Invalid nonce', 'affiliate-products-importer-for-woocommerce' ), 403 );
 		}
 
 		$products   = $request->get_param( 'products' );
@@ -299,6 +299,9 @@ class Products extends Endpoint {
 
 			/*===================Update product url=======================*/
 			update_post_meta( $post_id, '_product_url', $product_url );
+
+			/*===================Update stock status=======================*/
+			update_post_meta( $post_id, '_stock_status', 'instock' );
 
 			/*===================Update product url=======================*/
 			if ( 'no' !== $product_attributes_setting && ! empty( $attributes ) ) {

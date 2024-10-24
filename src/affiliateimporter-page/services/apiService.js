@@ -98,7 +98,7 @@ export const fetchCategories = createAsyncThunk('categories/fetchCategories', as
 		});
 		return res.data;
 	} catch (error) {
-		console.error(__('Error fetching categories:', 'affiliate-products-importer-pro'), error); // Add this line for debugging
+		console.error(__('Error fetching categories:', 'affiliate-products-importer-for-woocommerce'), error); // Add this line for debugging
 		return rejectWithValue(error.response.data);
 	}
 });
@@ -109,20 +109,6 @@ export const asinVerification = createAsyncThunk('asinVerification', async (data
 			headers: {
 				'content-type': 'application/json',
 				'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
-			}
-		});
-		return res.data;
-	} catch (error) {
-		return rejectWithValue(error.response.data);
-	}
-});
-
-export const searchAmazonProducts = createAsyncThunk('searchAmazonProducts', async (data, { rejectWithValue }) => {
-	try {
-		const res = await axios.post(affprodimpAffiliateImporter.restEndpoint.productSearch, data, {
-			headers: {
-					'content-type': 'application/json',
-					'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
 			}
 		});
 		return res.data;
@@ -187,20 +173,16 @@ export const saveImportSettings = createAsyncThunk('saveImportSettings', async (
 	}
 });
 
-export const syncProducts = createAsyncThunk('products/sync', async (productIds, { rejectWithValue }) => {
+export const createCategory = async (categoryData) => {
 	try {
-		const res = await axios.post(
-			`${affprodimpAffiliateImporter.restEndpoint.products}/sync`,
-			{ product_ids: productIds },
-			{
-				headers: {
-					'content-type': 'application/json',
-					'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
-				}
+		const response = await axios.post(affprodimpAffiliateImporter.restEndpoint.categories, categoryData, {
+			headers: {
+				'Content-Type': 'application/json',
+				'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
 			}
-		);
-		return res.data;
+		});
+		return response.data;
 	} catch (error) {
-		return rejectWithValue(error.response.data);
+		throw new Error('Failed to create category');
 	}
-});
+};

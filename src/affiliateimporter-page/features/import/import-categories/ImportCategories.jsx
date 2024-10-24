@@ -37,7 +37,7 @@ const ImportCategories = ( {selectedCategories, onChange } ) => {
                                 {  __( 'Import in', 'affiliate-products-importer-for-woocommerce' ) }
                             </Flex>
                         </Col>
-                        <Col span={10}>
+                        <Col span={20}>
                             <CategoriesCheckbox value={selectedCategories} onChange={handleCategoriesChange} />
                         </Col>
                     </Row>
