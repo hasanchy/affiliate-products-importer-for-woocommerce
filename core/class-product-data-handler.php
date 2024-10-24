@@ -20,7 +20,10 @@ class ProductDataHandler {
 			$post_title                                    = esc_html( $item->ItemInfo->Title->DisplayValue );
 			$fetch_result[ $index ]['post_title']          = $post_title;
 			$fetch_result[ $index ]['post_name']           = sanitize_title( $post_title );
-			$fetch_result[ $index ]['post_content']        = isset( $item->ItemInfo->Features->DisplayValues ) ? implode( '</br>', array_map( 'esc_html', $item->ItemInfo->Features->DisplayValues ) ) : '';
+			$features                                      = isset( $item->ItemInfo->Features->DisplayValues ) ? $item->ItemInfo->Features->DisplayValues : array($post_title);
+			if( !empty( $features ) ){
+				$fetch_result[ $index ]['post_content']    = '<ul><li>' . implode( '</li><li>', array_map( array( __CLASS__, 'convert_to_plain_text' ), $features ) ) . '</li></ul>';
+			}
 			$fetch_result[ $index ]['image_primary']       = esc_url( $item->Images->Primary->Large->URL );
 
 			$image_variants = array();
@@ -130,6 +133,11 @@ class ProductDataHandler {
 		}
 
 		return $attributes;
+	}
+
+	public static function convert_to_plain_text( $text ) {
+		// Use iconv to convert special characters to plain ASCII
+		return iconv('UTF-8', 'ASCII//TRANSLIT', esc_html( $text ));
 	}
 }
 /**
