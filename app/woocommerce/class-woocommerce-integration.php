@@ -28,6 +28,28 @@ class WooCommerceIntegration extends Base {
 
 		add_filter( 'woocommerce_product_get_gallery_image_ids', array( $this, 'affprodimp_set_customized_gallary_ids' ), 99, 2 );
 		add_filter( 'woocommerce_product_get_image_id', array( $this, 'affprodimp_woocommerce_product_get_image_id_support' ), 99, 2 );
+	
+		add_action( 'wp', array( $this, 'remove_woo_image_effects' ) );
+	}
+
+	public function remove_woo_image_effects() {
+		if ( is_product() ) {
+			global $post;
+
+			// Check if the post is a product and get the product ID
+			if ( 'product' === $post->post_type ) {
+				$product_id = $post->ID;
+
+				// Get the thumbnail URL from the options table
+				$thumbnail_url = get_post_meta( $product_id, 'affprodimp_product_img_url', true );
+
+				// Ensure the URL exists for this specific product ID
+				if ( $thumbnail_url ) {
+					// Remove WooCommerce image effects
+					remove_theme_support( 'wc-product-gallery-zoom' );
+				}
+			}
+		}
 	}
 
 	public function affprodimp_replace_attachment_image_src( $image, $attachment_id, $size = '', $icon = '' ) {
