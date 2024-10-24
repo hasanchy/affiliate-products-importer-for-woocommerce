@@ -41,7 +41,8 @@ const ImportCopyPasteForm = () => {
 		let invalidCodes = [];
 		value.split(/,|\.|\n|\s/).forEach(element => {
 			let code = element.trim();
-			const regex = /^(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]{10}$/;
+			// Updated regex to match both alphanumeric and numeric 10-character codes
+			const regex = /^[A-Z0-9]{10}$/;
 
 			if (regex.test(code)) {
 				validCodes.push(code);
@@ -110,16 +111,16 @@ const ImportCopyPasteForm = () => {
 
 	const renderAsinCodes = () => {
 		if (invalidAsinCodes.length > 0) {
-			let codeTxt = invalidAsinCodes.length === 1 ? 'code' : 'codes'
-			let errorMessage = <><b>{invalidAsinCodes.length} invalid ASIN {codeTxt} detected:</b> {invalidAsinCodes.join(', ')}</>
+			let codeTxt = invalidAsinCodes.length === 1 ? __('code', 'affiliate-products-importer-for-woocommerce') : __('codes', 'affiliate-products-importer-for-woocommerce');
+			let errorMessage = <><b>{invalidAsinCodes.length} {__('invalid ASIN', 'affiliate-products-importer-for-woocommerce')} {codeTxt} {__('detected', 'affiliate-products-importer-for-woocommerce')}:</b> {invalidAsinCodes.join(', ')}</>
 			return <div style={{ marginTop: '10px' }}>
 				<Alert type='error' message={errorMessage}/>
 			</div>
 		}else if(duplicateAsinCodes.length > 0) {
-			let codeTxt = duplicateAsinCodes.length === 1 ? 'code' : 'codes'
-			let wasTxt = duplicateAsinCodes.length === 1 ? 'was' : 'were'
+			let codeTxt = duplicateAsinCodes.length === 1 ? __('code', 'affiliate-products-importer-for-woocommerce') : __('codes', 'affiliate-products-importer-for-woocommerce');
+			let wasTxt = duplicateAsinCodes.length === 1 ? __('was', 'affiliate-products-importer-for-woocommerce') : __('were', 'affiliate-products-importer-for-woocommerce');
 
-			let warningMessage = <>The following ASIN {codeTxt} {wasTxt} detected multiple times, and duplicates have been excluded: <Space>{duplicateAsinCodes.map(code=><Tag color='warning'>{code}</Tag>)}</Space></>
+			let warningMessage = <>{__('The following ASIN', 'affiliate-products-importer-for-woocommerce')} {codeTxt} {wasTxt} {__('detected multiple times, and duplicates have been excluded', 'affiliate-products-importer-for-woocommerce')}: <Space>{duplicateAsinCodes.map(code=><Tag color='warning'>{code}</Tag>)}</Space></>
 			return <div style={{ marginTop: '10px' }}>
 				{warningMessage}
 			</div>
@@ -131,8 +132,8 @@ const ImportCopyPasteForm = () => {
 	}
 
 	const renderAmazonTabContent = () => {
-		let codeTxt = asinCodes.length === 1 ? 'code' : 'codes';
-		let fetchButtonTxt = (asinCodes.length > 0) ? `Verify ${asinCodes.length} ASIN ${codeTxt}` : 'Verify';
+		let codeTxt = asinCodes.length === 1 ? __('code', 'affiliate-products-importer-for-woocommerce') : __('codes', 'affiliate-products-importer-for-woocommerce');
+		let fetchButtonTxt = (asinCodes.length > 0) ? `${__('Verify', 'affiliate-products-importer-for-woocommerce')} ${asinCodes.length} ASIN ${codeTxt}` : __('Verify', 'affiliate-products-importer-for-woocommerce');
 		let isFetchButtonDisabled = (asinCodes.length < 1 || invalidAsinCodes.length > 0 || asinValue === asinValueFetched || amazonApiConnectionStatus !== 'success') ? true : false;
 
 		return<>
@@ -142,7 +143,7 @@ const ImportCopyPasteForm = () => {
 							{ __( 'ASIN Codes', 'affiliate-products-importer-for-woocommerce' ) }
 						</Flex>
 					</Col>
-					<Col span={10}>
+					<Col span={20}>
 						<TextArea rows={8} defaultValue={asinValue} onChange={handleASINCodesChange}/>
 						{renderAsinCodes()}
 					</Col>
@@ -193,8 +194,7 @@ const ImportCopyPasteForm = () => {
 	const renderAmazonApiConnectionAlert = () => {
 		if( amazonApiConnectionStatus !== 'success' ){
 			return <Row gutter={20}>
-				<Col span={4}></Col>
-				<Col span={10}>
+				<Col span={24}>
 					<AmazonApiConnection />
 				</Col>
 			</Row>

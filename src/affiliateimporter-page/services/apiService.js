@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { __ } from '@wordpress/i18n';
 
 export const verifyAmazonApiConnection = createAsyncThunk('dashboard/amazonApiStatus', async (params, { rejectWithValue }) => {
 	try{
@@ -88,8 +89,23 @@ export const addProduct = createAsyncThunk('products/add', async (data, { reject
 });
 
 export const fetchCategories = createAsyncThunk('categories/fetchCategories', async (params, { rejectWithValue }) => {
-	try{
+	try {
 		const res = await axios.get(affprodimpAffiliateImporter.restEndpoint.categories, {
+			headers: {
+				'content-type': 'application/json',
+				'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
+			}
+		});
+		return res.data;
+	} catch (error) {
+		console.error(__('Error fetching categories:', 'affiliate-products-importer-pro'), error); // Add this line for debugging
+		return rejectWithValue(error.response.data);
+	}
+});
+
+export const asinVerification = createAsyncThunk('asinVerification', async (data, { rejectWithValue }) => {
+	try {
+		const res = await axios.post(affprodimpAffiliateImporter.restEndpoint.asinVerification, data, {
 			headers: {
 				'content-type': 'application/json',
 				'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
@@ -101,12 +117,12 @@ export const fetchCategories = createAsyncThunk('categories/fetchCategories', as
 	}
 });
 
-export const asinVerification = createAsyncThunk('asinVerification', async (data, {rejectWithValue}) => {
-	try{
-		const res = await axios.post(affprodimpAffiliateImporter.restEndpoint.asinVerification, data, {
+export const searchAmazonProducts = createAsyncThunk('searchAmazonProducts', async (data, { rejectWithValue }) => {
+	try {
+		const res = await axios.post(affprodimpAffiliateImporter.restEndpoint.productSearch, data, {
 			headers: {
-				'content-type': 'application/json',
-				'X-WP-NONCE': appLocalizer.restNonce
+					'content-type': 'application/json',
+					'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
 			}
 		});
 		return res.data;
@@ -165,6 +181,24 @@ export const saveImportSettings = createAsyncThunk('saveImportSettings', async (
 				'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
 			}
 		});
+		return res.data;
+	} catch (error) {
+		return rejectWithValue(error.response.data);
+	}
+});
+
+export const syncProducts = createAsyncThunk('products/sync', async (productIds, { rejectWithValue }) => {
+	try {
+		const res = await axios.post(
+			`${affprodimpAffiliateImporter.restEndpoint.products}/sync`,
+			{ product_ids: productIds },
+			{
+				headers: {
+					'content-type': 'application/json',
+					'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
+				}
+			}
+		);
 		return res.data;
 	} catch (error) {
 		return rejectWithValue(error.response.data);

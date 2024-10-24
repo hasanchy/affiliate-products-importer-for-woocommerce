@@ -1,6 +1,7 @@
 {
     "description": "Easily import Amazon affiliate products into your WooCommerce store.",
     "license": "GPL-3.0-or-later",
+    "version": "1.0.5",
     "config": {
         "sort-packages": true,
         "allow-plugins": {
@@ -9,7 +10,7 @@
     },
     "authors": [
         {
-            "name": "Hasan Chowdhury"
+            "name": "ThemeDyno"
         }
     ],
     "require": {

@@ -138,7 +138,7 @@ const ProductAdd = () => {
                 {lastSavedProduct &&
                     <Row>
                         <Col span={24} style={{ textAlign: 'center'}}>
-                            <div className='azoncom-image-gallery'>
+                            <div className='affprodimp-image-gallery'>
                                 <Card>
                                     <Image src={lastSavedProduct.image_primary} alt={lastSavedProduct.product_title} width='125px'/>
                                     <div style={{width:'125px'}}>

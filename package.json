@@ -8,7 +8,7 @@
 		"composer-update-no-dev": "composer update --no-dev",
 		"start": "cross-env NODE_ENV=development wp-scripts start src/affiliateimporter-page/main.jsx --hot",
 		"compile": "cross-env NODE_ENV=production wp-scripts build src/affiliateimporter-page/main.jsx",
-		"build": "npm run composer-update-no-dev && grunt preBuildClean && npm run compile && grunt build:pro && grunt finish && npm run composer-update"
+		"build": "grunt vendorClean && npm run composer-update-no-dev && grunt preBuildClean && npm run compile && grunt build:pro && grunt finish && npm run composer-update"
 	},
 	"repository": {
 		"type": "git",

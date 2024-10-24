@@ -6,6 +6,7 @@ import ProductList from '../../../components/product-list/ProductList';
 import ImportBulk from '../import-bulk/ImportBulk';
 import ImportCategories from '../import-categories/ImportCategories';
 import { setSelectedCategories, setDeletedAsins, resetState } from './importCopyPasteSlice';
+import { __ } from '@wordpress/i18n';
 
 const ImportCopyPaste = () => {
 
@@ -36,7 +37,7 @@ const ImportCopyPaste = () => {
                 {importStepIndex===1 && (
                     <>
                         <ImportCopyPasteForm />
-                        <ProductList data={importFetchList} title={`ASIN Verification Result`}/>
+                        <ProductList data={importFetchList} title={__('ASIN Verification Result', 'affiliate-products-importer-for-woocommerce')} />
                     </>
                 )}
                 {importStepIndex===2 && (

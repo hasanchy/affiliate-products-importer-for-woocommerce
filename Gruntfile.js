@@ -27,6 +27,7 @@ module.exports = function (grunt) {
 
 		// Clean temp folders and release copies.
 		clean: {
+			vendor: ['vendor/**'],
 			temp: {
 				src: ['**/*.tmp', '**/.afpDeleted*', '**/.DS_Store'],
 				dot: true,
@@ -106,6 +107,10 @@ module.exports = function (grunt) {
 		'copy:pro',
 		'compress:pro',
 		'clean:unzipped_folder'
+	])
+
+	grunt.registerTask('vendorClean', [
+		'clean:vendor'
 	])
 
 	grunt.registerTask('preBuildClean', [
