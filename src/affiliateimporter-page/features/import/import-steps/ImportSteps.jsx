@@ -11,15 +11,15 @@ const ImportSteps = () => {
 		
 		if(importType === 'copy-paste' ){
             items = [
-                {title: __( 'Import Option', 'affiliate-products-importer-for-woocommerce' ) },
+                {title: __( 'Import via ASIN', 'affiliate-products-importer-for-woocommerce' ) },
                 {title: __( 'ASIN Verification', 'affiliate-products-importer-for-woocommerce' ) },
                 {title: __( 'Product Categories', 'affiliate-products-importer-for-woocommerce' ) },
                 {title: __( 'Product Import', 'affiliate-products-importer-for-woocommerce' ) }
             ]
 		}else if(importType === 'manual-entry'){
             items = [
-                {title: __( 'Import Option', 'affiliate-products-importer-for-woocommerce' ) },
-                {title: __( 'Manual Product Entry', 'affiliate-products-importer-for-woocommerce' ) }
+                {title: __( 'Manual Product Entry', 'affiliate-products-importer-for-woocommerce' ) },
+                {title: __( 'Save Product', 'affiliate-products-importer-for-woocommerce' ) }
             ]
 		}
 
