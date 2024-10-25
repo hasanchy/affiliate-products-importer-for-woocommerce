@@ -235,7 +235,7 @@ const ImportBulk = ( {selectedCategories, importableItems, deletedAsins, onDelet
 			let values = Object.values(selectedCategories);
 			let categories = '';
 			if (values.length) {
-				let categoriesName = values.map(category => <Tag key={`tag${category.id}`} color='lime'>{category.name}</Tag>);
+				let categoriesName = values.map(category => <Tag key={`tag${category.id}`} color='lime'>{category.name.replace(/&amp;/g, "&")}</Tag>);
 				categories = <div style={{ marginTop: '10px' }}><b>Import in</b>: <Space>{categoriesName}</Space></div>
 			}
 

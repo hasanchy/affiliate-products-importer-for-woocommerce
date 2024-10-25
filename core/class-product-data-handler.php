@@ -136,8 +136,18 @@ class ProductDataHandler {
 	}
 
 	public static function convert_to_plain_text( $text ) {
-		// Use iconv to convert special characters to plain ASCII
-		return iconv('UTF-8', 'ASCII//TRANSLIT', esc_html( $text ));
+		// First, escape the text for safe HTML output
+		$escaped_text = esc_html( $text );
+	
+		// Use iconv to convert special characters to plain ASCII, if possible
+		$converted_text = iconv('UTF-8', 'ASCII//TRANSLIT', $escaped_text);
+	
+		// If iconv fails, return the original escaped text
+		if ($converted_text === false) {
+			return $escaped_text;
+		}
+	
+		return $converted_text;
 	}
 }
 /**

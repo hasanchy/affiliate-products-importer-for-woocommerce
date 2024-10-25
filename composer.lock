@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cea6349e3e5942259be049d78472dc99",
+    "content-hash": "19ce58a8c44a95c2a31eeabedf76ae08",
     "packages": [],
     "packages-dev": [
         {
@@ -463,12 +463,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "ddf5f72a1bcfd637e2ea5fd6aaa03fad3e0c1fbb"
+                "reference": "760c450e2e5d0b624e8779794070d81b5a5b8840"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/ddf5f72a1bcfd637e2ea5fd6aaa03fad3e0c1fbb",
-                "reference": "ddf5f72a1bcfd637e2ea5fd6aaa03fad3e0c1fbb",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/760c450e2e5d0b624e8779794070d81b5a5b8840",
+                "reference": "760c450e2e5d0b624e8779794070d81b5a5b8840",
                 "shasum": ""
             },
             "require": {
@@ -536,7 +536,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-10-24T21:08:07+00:00"
+            "time": "2024-10-24T22:22:57+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
