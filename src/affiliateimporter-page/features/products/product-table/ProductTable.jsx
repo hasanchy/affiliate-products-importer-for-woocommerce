@@ -1,11 +1,10 @@
 import React from 'react';
 import { Button, Card, Space, Table, Tooltip, Image, Row, Col } from 'antd';
-import { ReloadOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import { ReloadOutlined, EditOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../../../services/apiService';
 import { setSearchKeyword } from './productTableSlice';
 import { __ } from '@wordpress/i18n';
-import { setProductsScreen } from '../productsSlice';
 
 const ProductTable = () => {
     const { isProductsLoading, productList, totalProducts  } = useSelector((state) => state.productTable);
@@ -28,10 +27,6 @@ const ProductTable = () => {
 		const parser = new DOMParser();
   		const decodedString = parser.parseFromString(rawString, 'text/html').body.textContent;
 		return decodedString;
-	}
-
-	const handleAddNewProductClick = () => {
-		dispatch(setProductsScreen('add-new-product'))
 	}
 
     const columns = [
@@ -80,15 +75,6 @@ const ProductTable = () => {
 	return (
 		<Card title={`${ __( 'Total Products', 'affiliate-products-importer-for-woocommerce' ) }: ${totalProducts}`} extra={<Tooltip placement="topLeft" title={ __( 'Reload Products List', 'affiliate-products-importer-for-woocommerce' ) } color={'purple'} key={'blue'}><Button type="default" icon={<ReloadOutlined/>} onClick={reloadProductList}></Button></Tooltip>}>
             <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-				<Row>
-					<Col span={12}>
-					</Col>
-					<Col span={12}>
-						<Space direction="horizontal" style={{width: '100%', justifyContent: 'right'}}>
-							<Button type="default" icon={<PlusOutlined/>} onClick={handleAddNewProductClick}>Add New Product</Button>
-						</Space>
-					</Col>
-				</Row>
 				<Row>
 					<Col span={24}>
 						<Table

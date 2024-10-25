@@ -5,7 +5,7 @@ import { SyncOutlined } from '@ant-design/icons';
 import { __ } from '@wordpress/i18n';
 import { setActiveTab } from '../../components/menu-tabs/manuTabsSlice';
 import { setSettingsActiveTab } from '../../features/settings/settingsSlice';
-import { setProductsScreen } from '../../features/products/productsSlice';
+import { setImportType } from '../../features/import/importSlice';
 
 const { Link } = Typography;
 
@@ -20,8 +20,9 @@ const AmazonApiConnection = () => {
     }
 
     const handleProductAdd = () => {
-        dispatch( setActiveTab( 'products' ) );
-        dispatch( setProductsScreen('add-new-product') );
+        dispatch( setActiveTab( 'import' ) );
+        dispatch( setImportType( 'manual-entry' ) );
+        dispatch( setImportStepIndex( 1 ) );
     }
 
     const renderLoadingMessage = () => {

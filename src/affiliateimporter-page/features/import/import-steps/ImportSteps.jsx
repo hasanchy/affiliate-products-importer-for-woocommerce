@@ -16,6 +16,11 @@ const ImportSteps = () => {
                 {title: __( 'Product Categories', 'affiliate-products-importer-for-woocommerce' ) },
                 {title: __( 'Product Import', 'affiliate-products-importer-for-woocommerce' ) }
             ]
+		}else if(importType === 'manual-entry'){
+            items = [
+                {title: __( 'Import Option', 'affiliate-products-importer-for-woocommerce' ) },
+                {title: __( 'Manual Product Entry', 'affiliate-products-importer-for-woocommerce' ) }
+            ]
 		}
 
 		return items;
