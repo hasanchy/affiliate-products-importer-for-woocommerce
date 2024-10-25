@@ -155,7 +155,7 @@ const ImportBulk = ( {selectedCategories, importableItems, deletedAsins, onDelet
 									{ __( 'Import Again', 'affiliate-products-importer-for-woocommerce' ) }
 								</Button>
 								<Button type="default" key="console" onClick={handleViewProducts}>
-									{__('View Products', 'affiliate-products-importer-pro')}
+									{__('View Products', 'affiliate-products-importer-for-woocommerce')}
 								</Button>
 							</Space>
 						]}
