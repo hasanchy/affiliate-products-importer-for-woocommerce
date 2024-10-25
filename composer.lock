@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e8f201220fe5b432d722834298eefde5",
+    "content-hash": "19ce58a8c44a95c2a31eeabedf76ae08",
     "packages": [],
     "packages-dev": [
         {
@@ -295,12 +295,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHPCSExtra.git",
-                "reference": "de3789a59ee046291bb196c03862c871a692dc75"
+                "reference": "82c468b9d48dd814ff1ba795fe8d76bc631405b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSExtra/zipball/de3789a59ee046291bb196c03862c871a692dc75",
-                "reference": "de3789a59ee046291bb196c03862c871a692dc75",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSExtra/zipball/82c468b9d48dd814ff1ba795fe8d76bc631405b2",
+                "reference": "82c468b9d48dd814ff1ba795fe8d76bc631405b2",
                 "shasum": ""
             },
             "require": {
@@ -366,7 +366,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-07-23T06:25:32+00:00"
+            "time": "2024-10-23T04:01:15+00:00"
         },
         {
             "name": "phpcsstandards/phpcsutils",
@@ -374,18 +374,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHPCSUtils.git",
-                "reference": "dd8f54106f37cd8c6b681d5c659b76a1d309c67f"
+                "reference": "a6a0a723bc4efce5b8a12646f28bb83c4610dfac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/dd8f54106f37cd8c6b681d5c659b76a1d309c67f",
-                "reference": "dd8f54106f37cd8c6b681d5c659b76a1d309c67f",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/a6a0a723bc4efce5b8a12646f28bb83c4610dfac",
+                "reference": "a6a0a723bc4efce5b8a12646f28bb83c4610dfac",
                 "shasum": ""
             },
             "require": {
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.4.1 || ^0.5 || ^0.6.2 || ^0.7 || ^1.0",
                 "php": ">=5.4",
-                "squizlabs/php_codesniffer": "^3.10.0 || 4.0.x-dev@dev"
+                "squizlabs/php_codesniffer": "^3.10.1 || 4.0.x-dev@dev"
             },
             "require-dev": {
                 "ext-filter": "*",
@@ -455,7 +455,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-09-16T11:24:55+00:00"
+            "time": "2024-10-13T23:57:40+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -463,12 +463,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "92c8ef54357ea09d93f8efa043d7c9c0a71ae094"
+                "reference": "3a47cd6e64864ef39fa8430798a291333ac4f04f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/92c8ef54357ea09d93f8efa043d7c9c0a71ae094",
-                "reference": "92c8ef54357ea09d93f8efa043d7c9c0a71ae094",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/3a47cd6e64864ef39fa8430798a291333ac4f04f",
+                "reference": "3a47cd6e64864ef39fa8430798a291333ac4f04f",
                 "shasum": ""
             },
             "require": {
@@ -536,7 +536,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-09-18T16:46:38+00:00"
+            "time": "2024-10-24T23:59:10+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
@@ -607,12 +607,12 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.4"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

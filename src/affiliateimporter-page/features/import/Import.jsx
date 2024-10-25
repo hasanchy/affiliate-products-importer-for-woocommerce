@@ -1,10 +1,23 @@
 import React from 'react';
-import { Card, Space } from 'antd';
+import { Space } from 'antd';
 import ImportSteps from './import-steps/ImportSteps';
 import ImportTypeSelect from './import-type-select/ImportTypeSelect';
 import ImportCopyPaste from './import-copy-paste/ImportCopyPaste';
+import { useSelector } from 'react-redux';
 
 const Import = () => {
+
+    const { importType, importStepIndex } = useSelector((state) => state.import);
+
+    const renderImportStepContent = () => {
+        if(importStepIndex===0){
+            return <ImportTypeSelect />;
+        }else if(importType==='copy-paste'){
+            return <ImportCopyPaste />
+        }
+        return null;
+    }
+
 	return (
 		<React.Fragment>
 			<Space
@@ -14,8 +27,7 @@ const Import = () => {
                 }}
             >
                 <ImportSteps />
-                <ImportTypeSelect />
-                <ImportCopyPaste />
+                {renderImportStepContent()}
 			</Space>
 		</React.Fragment>
 	)

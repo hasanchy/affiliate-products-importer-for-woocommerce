@@ -14,18 +14,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.6.10; wp-6.6.1\n"
-"X-Domain: affiliate-products-importer"
+"X-Domain: affiliate-products-importer-for-woocommerce"
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/products/Products.jsx:63
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/products/Products.jsx:63
 msgid "Action"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/components/header/Header.jsx:4
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/components/header/Header.jsx:4
 msgid "Affiliate"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/app/admin-pages/class-affiliate-products-importer.php:58
-#: E:/github/affiliate-products-importer/app/admin-pages/class-affiliate-products-importer.php:99
+#: E:/github/affiliate-products-importer-for-woocommerce/app/admin-pages/class-affiliate-products-importer-for-woocommerce.php:58
+#: E:/github/affiliate-products-importer-for-woocommerce/app/admin-pages/class-affiliate-products-importer-for-woocommerce.php:99
 msgid "Affiliate Products Importer"
 msgstr ""
 
@@ -33,91 +33,91 @@ msgstr ""
 msgid "Affiliate Products Importer for WooCommerce"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/app/endpoints/v1/class-amazon-api-connection.php:49
-#: E:/github/affiliate-products-importer/app/endpoints/v1/class-amazon-api-settings.php:58
+#: E:/github/affiliate-products-importer-for-woocommerce/app/endpoints/v1/class-amazon-api-connection.php:49
+#: E:/github/affiliate-products-importer-for-woocommerce/app/endpoints/v1/class-amazon-api-settings.php:58
 msgid "Amazon Access Key is required."
 msgstr ""
 
-#: E:/github/affiliate-products-importer/app/endpoints/v1/class-amazon-api-connection.php:59
-#: E:/github/affiliate-products-importer/app/endpoints/v1/class-amazon-api-settings.php:68
+#: E:/github/affiliate-products-importer-for-woocommerce/app/endpoints/v1/class-amazon-api-connection.php:59
+#: E:/github/affiliate-products-importer-for-woocommerce/app/endpoints/v1/class-amazon-api-settings.php:68
 msgid "Amazon Affiliate Country is required."
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:154
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:154
 msgid "Amazon Affiliate ID"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/app/endpoints/v1/class-amazon-api-connection.php:64
-#: E:/github/affiliate-products-importer/app/endpoints/v1/class-amazon-api-settings.php:73
+#: E:/github/affiliate-products-importer-for-woocommerce/app/endpoints/v1/class-amazon-api-connection.php:64
+#: E:/github/affiliate-products-importer-for-woocommerce/app/endpoints/v1/class-amazon-api-settings.php:73
 msgid "Amazon Affiliate ID is required."
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/dashboard/widgets/AmazonApiConnection.jsx:66
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/dashboard/widgets/AmazonApiConnection.jsx:66
 msgid "Amazon API Connection"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/dashboard/widgets/AmazonApiConnection.jsx:44
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/dashboard/widgets/AmazonApiConnection.jsx:44
 msgid "Amazon API Connection Error"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/dashboard/widgets/AmazonApiConnection.jsx:35
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/dashboard/widgets/AmazonApiConnection.jsx:35
 msgid "Amazon API Connection Incomplete"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/settings/Settings.jsx:19
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/settings/Settings.jsx:19
 msgid "Amazon API Settings"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:128
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:128
 msgid "Amazon AWS Access Key"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:141
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:141
 msgid "Amazon AWS Secret Key"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/app/endpoints/v1/class-amazon-api-connection.php:54
-#: E:/github/affiliate-products-importer/app/endpoints/v1/class-amazon-api-settings.php:63
+#: E:/github/affiliate-products-importer-for-woocommerce/app/endpoints/v1/class-amazon-api-connection.php:54
+#: E:/github/affiliate-products-importer-for-woocommerce/app/endpoints/v1/class-amazon-api-settings.php:63
 msgid "Amazon AWS Secret Key is required."
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:168
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:168
 msgid "Amazon Country"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-copy-paste/ImportCopyPasteForm.jsx:143
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-copy-paste/ImportCopyPasteForm.jsx:143
 msgid "ASIN Codes"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/app/endpoints/v1/class-asin-verification.php:73
+#: E:/github/affiliate-products-importer-for-woocommerce/app/endpoints/v1/class-asin-verification.php:73
 msgid "ASIN Codes parameter value can not be empty"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-steps/ImportSteps.jsx:15
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-steps/ImportSteps.jsx:15
 msgid "ASIN Verification"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-copy-paste/ImportCopyPasteForm.jsx:222
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-copy-paste/ImportCopyPasteForm.jsx:222
 msgid "ASIN Verification In Progress"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-copy-paste/ImportFetchResult.jsx:75
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-copy-paste/ImportFetchResult.jsx:75
 msgid "ASIN Verification Result"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-copy-paste/ImportCopyPasteFinal.jsx:162
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-copy-paste/ImportCopyPasteFinal.jsx:162
 msgid "Back"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-type-select/ImportTypeSelect.jsx:40
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-type-select/ImportTypeSelect.jsx:40
 msgid "Copy/Paste Import"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/components/menu-tabs/MenuTabs.jsx:17
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/components/menu-tabs/MenuTabs.jsx:17
 msgid "Dashboard"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/products/Products.jsx:54
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/products/Products.jsx:54
 msgid "Date Imported"
 msgstr ""
 
@@ -129,150 +129,150 @@ msgstr ""
 msgid "https://themedyno.com/"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/products/Products.jsx:34
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-copy-paste/ImportFetchResult.jsx:17
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/products/Products.jsx:34
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-copy-paste/ImportFetchResult.jsx:17
 msgid "Image"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/app/admin-pages/class-affiliate-products-importer.php:76
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/components/menu-tabs/MenuTabs.jsx:23
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-copy-paste/ImportProductQueue.jsx:86
+#: E:/github/affiliate-products-importer-for-woocommerce/app/admin-pages/class-affiliate-products-importer-for-woocommerce.php:76
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/components/menu-tabs/MenuTabs.jsx:23
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-copy-paste/ImportProductQueue.jsx:86
 msgid "Import"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-copy-paste/ImportCopyPasteFinal.jsx:137
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-copy-paste/ImportCopyPasteFinal.jsx:137
 msgid "Import Again"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-copy-paste/ImportCopyPasteFinal.jsx:107
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-copy-paste/ImportCopyPasteFinal.jsx:107
 msgid "Import in"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-steps/ImportSteps.jsx:14
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-steps/ImportSteps.jsx:20
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-steps/ImportSteps.jsx:14
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-steps/ImportSteps.jsx:20
 msgid "Import Option"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-copy-paste/ImportProductQueue.jsx:101
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-copy-paste/ImportProductQueue.jsx:101
 msgid "Import Queue"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/settings/Settings.jsx:25
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/settings/Settings.jsx:25
 msgid "Import Settings"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/app/endpoints/v1/class-import-settings.php:117
+#: E:/github/affiliate-products-importer-for-woocommerce/app/endpoints/v1/class-import-settings.php:117
 msgid "Import Settings saved successfully."
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-copy-paste/ImportProductQueue.jsx:83
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-copy-paste/ImportProductQueue.jsx:83
 msgid "Imported!"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/components/header/Header.jsx:4
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/components/header/Header.jsx:4
 msgid "Importer"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-copy-paste/ImportFetchResult.jsx:49
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-copy-paste/ImportFetchResult.jsx:49
 msgid "Invalid ASIN"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-type-select/ImportTypeSelect.jsx:51
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-type-select/ImportTypeSelect.jsx:51
 msgid "Next"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/settings/import-settings/ImportSettings.jsx:31
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/settings/import-settings/ImportSettings.jsx:31
 msgid "No"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-copy-paste/ImportCopyPasteForm.jsx:176
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-copy-paste/ImportCopyPasteForm.jsx:176
 msgid "No importable products were found from this list."
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:133
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:133
 msgid "Please input Access Key!"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:146
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:146
 msgid "Please input Secret Key!"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:159
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:159
 msgid "Please input your affiliate ID!"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:172
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:172
 msgid "Please select Amazon Country!"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-steps/ImportSteps.jsx:16
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-steps/ImportSteps.jsx:22
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-steps/ImportSteps.jsx:16
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-steps/ImportSteps.jsx:22
 msgid "Product Import"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-steps/ImportSteps.jsx:21
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-steps/ImportSteps.jsx:21
 msgid "Product Search"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/components/menu-tabs/MenuTabs.jsx:29
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/components/header/Header.jsx:4
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/components/menu-tabs/MenuTabs.jsx:29
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/components/header/Header.jsx:4
 msgid "Products"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-copy-paste/ImportCopyPasteFinal.jsx:170
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-copy-paste/ImportCopyPasteFinal.jsx:170
 msgid "Products Import In Progress"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-copy-paste/ImportCopyPasteForm.jsx:130
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-copy-paste/ImportCopyPasteForm.jsx:130
 msgid "Provide ASIN codes separated by commas, newlines, or spaces."
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/dashboard/widgets/RecentlyImportedProducts.jsx:38
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/dashboard/widgets/RecentlyImportedProducts.jsx:38
 msgid "Recently Imported Products"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/products/Products.jsx:76
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/products/Products.jsx:76
 msgid "Reload Products List"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/app/endpoints/v1/class-import-settings.php:58
+#: E:/github/affiliate-products-importer-for-woocommerce/app/endpoints/v1/class-import-settings.php:58
 msgid "Remore image setting is required."
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/settings/import-settings/ImportSettings.jsx:61
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/settings/import-settings/ImportSettings.jsx:61
 msgid "Remote amazon images"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:93
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:93
 msgid "Saving..."
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/components/menu-tabs/MenuTabs.jsx:35
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/components/menu-tabs/MenuTabs.jsx:35
 msgid "Settings"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/app/endpoints/v1/class-amazon-api-settings.php:138
+#: E:/github/affiliate-products-importer-for-woocommerce/app/endpoints/v1/class-amazon-api-settings.php:138
 msgid "Settings saved successfully."
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/app/App.jsx:25
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/app/App.jsx:25
 msgid "Something went wrong"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-copy-paste/ImportFetchResult.jsx:41
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-copy-paste/ImportFetchResult.jsx:41
 msgid "Status"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/settings/import-settings/ImportSettings.jsx:79
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/settings/import-settings/ImportSettings.jsx:79
 msgid "Submit"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-copy-paste/ImportCopyPasteFinal.jsx:133
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-copy-paste/ImportCopyPasteFinal.jsx:133
 msgid "Successfully Imported"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/app/endpoints/v1/class-amazon-api-connection.php:103
-#: E:/github/affiliate-products-importer/app/endpoints/v1/class-amazon-api-connection.php:149
+#: E:/github/affiliate-products-importer-for-woocommerce/app/endpoints/v1/class-amazon-api-connection.php:103
+#: E:/github/affiliate-products-importer-for-woocommerce/app/endpoints/v1/class-amazon-api-connection.php:149
 msgid "The connection to your Amazon API was successful."
 msgstr ""
 
@@ -280,43 +280,43 @@ msgstr ""
 msgid "ThemeDyno"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/products/Products.jsx:46
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-copy-paste/ImportFetchResult.jsx:29
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/products/Products.jsx:46
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-copy-paste/ImportFetchResult.jsx:29
 msgid "Title"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/products/Products.jsx:76
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/products/Products.jsx:76
 msgid "Total Products"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/import/import-copy-paste/ImportProductQueue.jsx:49
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/import/import-copy-paste/ImportProductQueue.jsx:49
 msgid "Undo import queue delete"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:95
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:95
 msgid "Verify & Save"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:91
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/settings/amazon-api-settings/AmazonApiSettings.jsx:91
 msgid "Verifying..."
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/settings/import-settings/ImportSettings.jsx:31
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/settings/import-settings/ImportSettings.jsx:31
 msgid "Yes"
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/dashboard/widgets/AmazonApiConnection.jsx:16
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/dashboard/widgets/AmazonApiConnection.jsx:16
 msgid "Your Amazon API connection is being verified."
 msgstr ""
 
-#: E:/github/affiliate-products-importer/src/affiliateimporter-page/features/dashboard/widgets/AmazonApiConnection.jsx:26
+#: E:/github/affiliate-products-importer-for-woocommerce/src/affiliateimporter-page/features/dashboard/widgets/AmazonApiConnection.jsx:26
 msgid "Your Amazon API connection is valid."
 msgstr ""
 
-#: E:/github/affiliate-products-importer/app/endpoints/v1/class-amazon-api-connection.php:114
-#: E:/github/affiliate-products-importer/app/endpoints/v1/class-amazon-api-connection.php:160
-#: E:/github/affiliate-products-importer/app/endpoints/v1/class-amazon-api-settings.php:149
-#: E:/github/affiliate-products-importer/app/endpoints/v1/class-asin-verification.php:125
-#: E:/github/affiliate-products-importer/app/endpoints/v1/class-import-settings.php:128
+#: E:/github/affiliate-products-importer-for-woocommerce/app/endpoints/v1/class-amazon-api-connection.php:114
+#: E:/github/affiliate-products-importer-for-woocommerce/app/endpoints/v1/class-amazon-api-connection.php:160
+#: E:/github/affiliate-products-importer-for-woocommerce/app/endpoints/v1/class-amazon-api-settings.php:149
+#: E:/github/affiliate-products-importer-for-woocommerce/app/endpoints/v1/class-asin-verification.php:125
+#: E:/github/affiliate-products-importer-for-woocommerce/app/endpoints/v1/class-import-settings.php:128
 msgid "Your Amazon API is not yet set up."
 msgstr ""

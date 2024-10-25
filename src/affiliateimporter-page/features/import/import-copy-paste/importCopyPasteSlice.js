@@ -1,37 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { asinVerification, saveProducts } from '../../../services/apiService';
+import { asinVerification } from '../../../services/apiService';
+import { __ } from '@wordpress/i18n';
+
+const initialState = {
+	asinValue: '',
+	asinValueFetched: '',
+	asinCodes: [],
+	invalidAsinCodes: [],
+	duplicateAsinCodes: [],
+	displayImportFetchCounter: false,
+	isImportFetchInProgress: false,
+	importFetchAlert: {type:'',message:''},
+	selectedCategories: [],
+	importableItems:[],
+	deletedAsins:[],
+	importFetchItems: [],
+	importFetchErrors: [],
+};
 
 export const importCopyPasteSlice = createSlice({
 	name: 'importCopyPaste',
-	initialState: {
-		selectedCategories: [],
-		error: null,
-		asinValue: '',
-        asinValueFetched:'',
-		asinCodes: [],
-		invalidAsinCodes: [],
-		duplicateAsinCodes: [],
-		
-		importQueueDuplicate:[],
-		importQueueError:[],
-
-		isImportFetchInProgress: false,
-		displayImportFetchCounter: false,
-		displayImportCounter: false,
-		importFetchProgress: 0,
-		displayImportCounter: false,
-		isImportInProgress: false,
-		isImportQueueDeletable: false,
-		importFetchAlert: {type:'',message:''},
-		importCancelledFetchItems:[],
-		importQueuedFetchItems:[],
-		importSuccessfulFetchItems:[],
-		displayImportSuccessMessage: false,
-		importableFetchItems:[],
-		importFetchItems: [],
-		importFetchErrors: [],
-	},
+	initialState,
 	reducers: {
 		setSelectedCategories: (state, action) => {
 			state.selectedCategories = action.payload;
@@ -48,20 +37,11 @@ export const importCopyPasteSlice = createSlice({
 		setDuplicateAsinCodes: (state, action) => {
 			state.duplicateAsinCodes = action.payload;
 		},
-		setImportType: (state, action) => {
-			state.importType = action.payload;
-		},
-		setImportQueue: (state, action) => {
-			state.importQueue = action.payload;
-		},
 		setDisplayImportFetchCounter: (state, action) => {
 			state.displayImportFetchCounter = action.payload
 		},
 		setImportFetchProgress: (state, action) => {
 			state.importFetchProgress = action.payload
-		},
-		setDisplayImportCounter: (state, action) => {
-			state.displayImportCounter = action.payload
 		},
 		setImportFetchItems: (state, action) => {
 			state.importFetchItems = action.payload;
@@ -69,68 +49,45 @@ export const importCopyPasteSlice = createSlice({
 		setImportFetchErrors: (state, action) => {
 			state.importFetchErrors = action.payload;
 		},
-		setImportableFetchItems: (state, action) => {
-			state.importableFetchItems = action.payload;
+		setImportableItems: (state, action) => {
+			state.importableItems = action.payload;
 		},
-		setImportCancelledFetchItems: (state, action) => {
-			state.importCancelledFetchItems = action.payload
+		setDeletedAsins: (state, action) => {
+			state.deletedAsins = action.payload;
 		},
-		setImportQueuedFetchItems: (state, action) => {
-			state.importQueuedFetchItems = action.payload
-		},
-		setImportSuccessfulFetchItems: (state, action) => {
-			state.importSuccessfulFetchItems = action.payload
-		},
-		setIsImportInProgress: (state, action) => {
-			state.isImportInProgress = action.payload
-		},
-		setDisplayImportSuccessMessage: (state, action) => {
-			state.displayImportSuccessMessage = action.payload
-		},
-		setImportQueueDeletable: (state, action) => {
-			state.isImportQueueDeletable = action.payload
-		}
+		resetState: () => initialState
 	},
 	extraReducers: (builder) => {
-		builder.addCase(saveProducts.pending, (state) => {
-		}),
-		builder.addCase(saveProducts.fulfilled, (state, action) => {
-			state.importSuccessfulFetchItems = [...state.importSuccessfulFetchItems, ...action.payload.product_asins]
-		}),
-		builder.addCase(saveProducts.rejected, (state, action) => {
-			state.error = action.error.message;
-		}),
-		builder.addCase(asinVerification.pending, (state) => {
-			state.isImportFetchInProgress = true;
-			state.importFetchAlert = {};
-		}),
-		builder.addCase(asinVerification.fulfilled, (state, action) => {
-			state.isImportFetchInProgress = false;
-			if(action.payload?.fetch_result){
-				
-				let importableFetchItems = []
-				for(let i in action.payload.fetch_result){
-					if(!action.payload.fetch_result[i].is_already_imported){
-						importableFetchItems.push(action.payload.fetch_result[i].asin);
-					}
+		builder
+			.addCase(asinVerification.pending, (state) => {
+				state.isImportFetchInProgress = true;
+				state.importFetchAlert = {};
+			})
+			.addCase(asinVerification.fulfilled, (state, action) => {
+				state.isImportFetchInProgress = false;
+				if(action.payload?.fetch_result){
+					let newImportableItems = action.payload.fetch_result.filter(item => !item.is_already_imported);
+					state.importFetchItems = [ ...state.importFetchItems, ...action.payload.fetch_result];
+					state.importFetchErrors = [ ...state.importFetchErrors, ...action.payload.fetch_errors];
+					state.importableItems = [ ...state.importableItems, ...newImportableItems];
+				} else if(action.payload?.message){
+					state.importFetchAlert = { type: 'warning', message: __(action.payload.message, 'affiliate-products-importer-for-woocommerce') };
+				} else {
+					state.importFetchAlert = { type: 'warning', message: __('No results found or unexpected response format', 'affiliate-products-importer-for-woocommerce') };
 				}
-
-				state.importFetchItems = [ ...state.importFetchItems, ...action.payload.fetch_result];
-				state.importFetchErrors = [ ...state.importFetchErrors, ...action.payload.fetch_errors];
-				state.importableFetchItems = [ ...state.importableFetchItems, ...importableFetchItems];
-			}else if(action.payload?.message){
-				state.importFetchAlert = {type:'warning', message: action.payload.message}
-            }
-            state.asinValueFetched = state.asinValue
-		}),
-		builder.addCase(asinVerification.rejected, (state, action) => {
-			state.isImportFetchInProgress = false;
-			state.importFetchAlert = {type:'error', message: action.payload.message}
-		})
+				state.asinValueFetched = state.asinValue;
+			})
+			.addCase(asinVerification.rejected, (state, action) => {
+				state.isImportFetchInProgress = false;
+				state.importFetchAlert = {
+					type: 'error',
+					message: action.payload?.message ? __(action.payload.message, 'affiliate-products-importer-for-woocommerce') : action.error?.message ? __(action.error.message, 'affiliate-products-importer-for-woocommerce') : __('An unknown error occurred', 'affiliate-products-importer-for-woocommerce')
+				};
+			});
 	}
 })
 
 // Action creators are generated for each case reducer function
-export const { setDuplicateAsinCodes, setSelectedCategories, setAsinValue, setAsinCodes, setInvalidAsinCodes, setImportType, setImportQueue, setDisplayImportFetchCounter, setImportFetchItems, setImportFetchErrors, setImportableFetchItems, setImportCancelledFetchItems, setIsImportInProgress, setImportQueuedFetchItems, setImportSuccessfulFetchItems, setDisplayImportCounter, setDisplayImportSuccessMessage, setImportQueueDeletable, setImportFetchProgress } = importCopyPasteSlice.actions
+export const { setSelectedCategories, setAsinValue, setAsinCodes, setInvalidAsinCodes, setDuplicateAsinCodes, setDisplayImportFetchCounter, setImportFetchProgress, setImportFetchItems, setImportFetchErrors, setImportableItems, setDeletedAsins, resetState } = importCopyPasteSlice.actions
 
 export default importCopyPasteSlice.reducer

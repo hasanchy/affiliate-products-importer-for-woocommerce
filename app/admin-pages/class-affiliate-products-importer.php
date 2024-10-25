@@ -23,7 +23,7 @@ class AffiliateProductsImporter extends Base {
 	 *
 	 * @var string
 	 */
-	private $page_slug = 'affiliate-products-importer-admin';
+	private $page_slug = 'affiliate-products-importer-for-woocommerce-admin';
 
 	/**
 	 * Page Assets.
@@ -55,7 +55,7 @@ class AffiliateProductsImporter extends Base {
 	 */
 	public function init() {
 		if ( is_admin() ) {
-			$this->page_title     = __( 'Affiliate Products Importer', 'affiliate-products-importer' );
+			$this->page_title     = __( 'Affiliate Products Importer', 'affiliate-products-importer-for-woocommerce' );
 			$this->assets_version = ! empty( $this->script_data( 'version' ) ) ? $this->script_data( 'version' ) : AFFPRODIMP_VERSION;
 			$this->unique_id      = "affprodimp_affiliateimporter_main_wrap-{$this->assets_version}";
 
@@ -73,7 +73,7 @@ class AffiliateProductsImporter extends Base {
 	 */
 	public function add_action_links( $links ) {
 		$new_links = array(
-			'<a href="' . admin_url( 'admin.php?page=' . $this->page_slug ) . '">' . __( 'Import', 'affiliate-products-importer' ) . '</a>',
+			'<a href="' . admin_url( 'admin.php?page=' . $this->page_slug ) . '">' . __( 'Import Products', 'affiliate-products-importer-for-woocommerce' ) . '</a>',
 		);
 		return array_merge( $new_links, $links );
 	}
@@ -96,7 +96,7 @@ class AffiliateProductsImporter extends Base {
 	public function register_admin_page() {
 		$page = add_menu_page(
 			$this->page_title,
-			__( 'Affiliate Products Importer', 'affiliate-products-importer' ),
+			__( 'Affiliate Products Importer', 'affiliate-products-importer-for-woocommerce' ),
 			'manage_options',
 			$this->page_slug,
 			array( $this, 'callback' ),
@@ -148,13 +148,14 @@ class AffiliateProductsImporter extends Base {
 			'localize'  => array(
 				'dom_element_id' => $this->unique_id,
 				'restEndpoint'   => array(
-					'amazonAPIConnection' => rest_url() . 'affiliate-products-importer/v1/amazon-api-connection',
-					'products'            => rest_url() . 'affiliate-products-importer/v1/products',
-					'categories'          => rest_url() . 'affiliate-products-importer/v1/categories',
-					'asinVerification'    => rest_url() . 'affiliate-products-importer/v1/asin-verification',
-					'import'              => rest_url() . 'affiliate-products-importer/v1/import',
-					'amazonApiSettings'   => rest_url() . 'affiliate-products-importer/v1/amazon-api-settings',
-					'importSettings'      => rest_url() . 'affiliate-products-importer/v1/import-settings',
+					'amazonAPIConnection' => rest_url() . 'affiliate-products-importer-for-woocommerce/v1/amazon-api-connection',
+					'product'             => rest_url() . 'affiliate-products-importer-for-woocommerce/v1/product',
+					'products'            => rest_url() . 'affiliate-products-importer-for-woocommerce/v1/products',
+					'categories'          => rest_url() . 'affiliate-products-importer-for-woocommerce/v1/categories',
+					'asinVerification'    => rest_url() . 'affiliate-products-importer-for-woocommerce/v1/asin-verification',
+					'import'              => rest_url() . 'affiliate-products-importer-for-woocommerce/v1/import',
+					'amazonApiSettings'   => rest_url() . 'affiliate-products-importer-for-woocommerce/v1/amazon-api-settings',
+					'importSettings'      => rest_url() . 'affiliate-products-importer-for-woocommerce/v1/import-settings',
 				),
 				'restNonce'      => wp_create_nonce( 'wp_rest' ),
 			),
@@ -215,7 +216,7 @@ class AffiliateProductsImporter extends Base {
 					wp_enqueue_style( $handle, $page_script['style_src'], array(), $this->assets_version );
 				}
 
-				wp_set_script_translations( $handle, 'affiliate-products-importer', AFFPRODIMP_LANGUAGES_DIR );
+				wp_set_script_translations( $handle, 'affiliate-products-importer-for-woocommerce', AFFPRODIMP_LANGUAGES_DIR );
 			}
 		}
 	}

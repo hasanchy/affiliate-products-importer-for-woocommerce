@@ -9,6 +9,9 @@ import settingsSlice from '../features/settings/settingsSlice';
 import amazonApiSettingsSlice from '../features/settings/amazon-api-settings/amazonApiSettingsSlice';
 import importSettingsSlice from '../features/settings/import-settings/importSettingsSlice';
 import amazonApiConnectionSlice from '../components/amazon-api-connection/amazonApiConnectionSlice';
+import productTableSlice from '../features/products/product-table/productTableSlice';
+import productAddSlice from '../features/products/product-add/productAddSlice';
+import importBulkSlice from '../features/import/import-bulk/importBulkSlice';
 
 const store = configureStore({
 	reducer: {
@@ -16,8 +19,11 @@ const store = configureStore({
 		dashboard: dashboardReducer,
 		categories: categoriesSlice,
 		products: productsSlice,
+		productTable: productTableSlice,
+		productAdd: productAddSlice,
 		import: importSlice,
 		importCopyPaste: importCopyPasteSlice,
+		importBulk: importBulkSlice,
 		settings: settingsSlice,
 		amazonApiSettings: amazonApiSettingsSlice,
 		importSettings: importSettingsSlice,

@@ -138,7 +138,7 @@ class Settings {
 			'post_status' => 'publish',
 			'meta_query'  => array(
 				array(
-					'key'     => 'affprodimp_amz_asin',
+					'key'     => 'affprodimp_product_asin',
 					'value'   => $asin,
 					'compare' => '=',
 				),
@@ -178,5 +178,13 @@ class Settings {
 	 */
 	public static function get_amazon_region( $country_code ) {
 		return self::AMAZON_MARKETPLACES[ $country_code ]['region'] ?? '';
+	}
+
+	/**
+	 *
+	 */
+	public static function get_product_url( $country_code, $affiliate_id, $asin ) {
+		$marketplace = self::get_amazon_marketplace( $country_code );
+		return esc_url( 'https://' . $marketplace . '/dp/' . $asin . '/?tag=' . $affiliate_id );
 	}
 }

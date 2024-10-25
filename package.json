@@ -1,6 +1,6 @@
 {
-	"name": "affiliate-products-importer",
-	"version": "1.0.2",
+	"name": "affiliate-products-importer-for-woocommerce",
+	"version": "1.1.0",
 	"description": "Easily import Amazon affiliate products into your WooCommerce store.",
 	"main": "index.js",
 	"scripts": {
@@ -8,19 +8,19 @@
 		"composer-update-no-dev": "composer update --no-dev",
 		"start": "cross-env NODE_ENV=development wp-scripts start src/affiliateimporter-page/main.jsx --hot",
 		"compile": "cross-env NODE_ENV=production wp-scripts build src/affiliateimporter-page/main.jsx",
-		"build": "npm run composer-update-no-dev && grunt preBuildClean && npm run compile && grunt build:pro && grunt finish && npm run composer-update"
+		"build": "grunt vendorClean && npm run composer-update-no-dev && grunt preBuildClean && npm run compile && grunt build:pro && grunt finish && npm run composer-update"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://hasanchy@github.com/hasanchy/affiliate-products-importer.git"
+		"url": "git+https://hasanchy@github.com/hasanchy/affiliate-products-importer-for-woocommerce.git"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/hasanchy/affiliate-products-importer/issues"
+		"url": "https://github.com/hasanchy/affiliate-products-importer-for-woocommerce/issues"
 	},
-	"homepage": "https://github.com/hasanchy/affiliate-products-importer#readme",
+	"homepage": "https://github.com/hasanchy/affiliate-products-importer-for-woocommerce#readme",
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.9.5",
 		"@wordpress/i18n": "^5.1.0",

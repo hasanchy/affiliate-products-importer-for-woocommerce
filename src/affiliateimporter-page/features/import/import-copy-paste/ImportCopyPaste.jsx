@@ -1,14 +1,32 @@
 import React from 'react';
 import { Space } from 'antd';
 import ImportCopyPasteForm from './ImportCopyPasteForm';
-import ImportFetchResult from './ImportFetchResult';
-import ImportCopyPasteFinal from './ImportCopyPasteFinal';
-import ImportProductQueue from './ImportProductQueue';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import ProductList from '../../../components/product-list/ProductList';
+import ImportBulk from '../import-bulk/ImportBulk';
+import ImportCategories from '../import-categories/ImportCategories';
+import { setSelectedCategories, setDeletedAsins, resetState } from './importCopyPasteSlice';
+import { __ } from '@wordpress/i18n';
 
 const ImportCopyPaste = () => {
 
+    const dispatch = useDispatch();
     const { importStepIndex } = useSelector((state) => state.import);
+    const { selectedCategories, importFetchItems, importFetchErrors, importableItems, deletedAsins } = useSelector((state) => state.importCopyPaste);
+
+	let importFetchList = [...importFetchItems, ...importFetchErrors]
+
+    const handleCategoryChange = (values) => {
+        dispatch(setSelectedCategories(values));
+    }
+
+    const handleDeletedAsinsChange = ( newDeletedAsins ) => {
+		dispatch(setDeletedAsins(newDeletedAsins));
+    }
+
+    const handleImportComplete = () => {
+        dispatch(resetState());
+    }
 
     return (
 		<React.Fragment>
@@ -19,13 +37,17 @@ const ImportCopyPaste = () => {
                 {importStepIndex===1 && (
                     <>
                         <ImportCopyPasteForm />
-                        <ImportFetchResult />
+                        <ProductList data={importFetchList} title={__('ASIN Verification Result', 'affiliate-products-importer-for-woocommerce')} />
                     </>
                 )}
                 {importStepIndex===2 && (
                     <>
-                        <ImportCopyPasteFinal />
-                        <ImportProductQueue />
+                        <ImportCategories selectedCategories={selectedCategories} onChange={handleCategoryChange}/>
+                    </>
+                )}
+                {importStepIndex===3 && (
+                    <>
+                        <ImportBulk selectedCategories={selectedCategories} importableItems={importableItems} deletedAsins={deletedAsins} onDeletedAsinsChange={handleDeletedAsinsChange} onImportComplete={handleImportComplete}/>
                     </>
                 )}
 			</Space>

@@ -16,13 +16,13 @@ const Settings = () => {
 	const settingsTabItems = [
 		{
 			key: 'amazonApiSettings',
-			label: __( 'Amazon API Settings', 'affiliate-products-importer' ),
+			label: __( 'Amazon API Settings', 'affiliate-products-importer-for-woocommerce' ),
 			children: <AmazonApiSettings />,
 			icon: <AmazonOutlined/>
 		},
 		{
 			key: 'importSettings',
-			label: __( 'Import Settings', 'affiliate-products-importer' ),
+			label: __( 'Import Settings', 'affiliate-products-importer-for-woocommerce' ),
 			children: <ImportSettings />,
 			icon: <DownloadOutlined/>
 		}

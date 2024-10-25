@@ -7,7 +7,7 @@ module.exports = function (grunt) {
 		'core/**',
 		'languages/**',
 		'uninstall.php',
-		'affiliate-products-importer.php',
+		'affiliate-products-importer-for-woocommerce.php',
 		'composer.json',
 		'readme.txt',
 		'vendor/**',
@@ -27,6 +27,7 @@ module.exports = function (grunt) {
 
 		// Clean temp folders and release copies.
 		clean: {
+			vendor: ['vendor/**'],
 			temp: {
 				src: ['**/*.tmp', '**/.afpDeleted*', '**/.DS_Store'],
 				dot: true,
@@ -39,7 +40,7 @@ module.exports = function (grunt) {
 
 		checktextdomain: {
 			options: {
-				text_domain: 'affiliate-products-importer',
+				text_domain: 'affiliate-products-importer-for-woocommerce',
 				keywords: [
 					'__:1,2d',
 					'_e:1,2d',
@@ -106,6 +107,10 @@ module.exports = function (grunt) {
 		'copy:pro',
 		'compress:pro',
 		'clean:unzipped_folder'
+	])
+
+	grunt.registerTask('vendorClean', [
+		'clean:vendor'
 	])
 
 	grunt.registerTask('preBuildClean', [
