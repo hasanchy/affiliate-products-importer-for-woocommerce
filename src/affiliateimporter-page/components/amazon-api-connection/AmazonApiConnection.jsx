@@ -5,7 +5,7 @@ import { SyncOutlined } from '@ant-design/icons';
 import { __ } from '@wordpress/i18n';
 import { setActiveTab } from '../../components/menu-tabs/manuTabsSlice';
 import { setSettingsActiveTab } from '../../features/settings/settingsSlice';
-import { setImportType } from '../../features/import/importSlice';
+import { setImportType, setImportStepIndex } from '../../features/import/importSlice';
 
 const { Link } = Typography;
 
