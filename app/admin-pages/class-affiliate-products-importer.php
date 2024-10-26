@@ -96,7 +96,7 @@ class AffiliateProductsImporter extends Base {
 	public function register_admin_page() {
 		$page = add_menu_page(
 			$this->page_title,
-			__( 'Affiliate Products Importer', 'affiliate-products-importer-for-woocommerce' ),
+			__( 'Amazon Products Importer (Lite)', 'affiliate-products-importer-for-woocommerce' ),
 			'manage_options',
 			$this->page_slug,
 			array( $this, 'callback' ),

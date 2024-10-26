@@ -133,7 +133,7 @@ const ImportCopyPasteForm = () => {
 		}
 
 		return <div style={{ marginTop: '10px' }}>
-			{ __( 'Provide ASIN codes separated by commas, newlines, or spaces.', 'affiliate-products-importer-for-woocommerce' ) }
+			{ __( `Enter ASIN codes separated by commas, newlines, or spaces. Limit: ${asinLimit} ASINs per batch.`, 'affiliate-products-importer-for-woocommerce' ) }
 		</div>;
 	}
 

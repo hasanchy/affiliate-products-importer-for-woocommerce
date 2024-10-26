@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import { Card, Typography, Row, Col, Flex } from 'antd';
+import { Card, Typography, Row, Col, Flex, Badge } from 'antd';
 const {Title} = Typography;
 import { CheckCircleFilled } from '@ant-design/icons';
+import ProModal from '../../../components/modal/ProModal';
+import { __ } from '@wordpress/i18n';
 
 const ImportTypeCard = (props) => {
     let iconColor = props.selected ? 'rgba(0,0,0, 0.75)' : 'rgba(0, 0, 0, 0.55)';
     let boxShadow = props.selected ? '0 1px 2px -2px rgba(0, 0, 0, 0.16),0 3px 6px 0 rgba(0, 0, 0, 0.12),0 5px 12px 4px rgba(0, 0, 0, 0.09)' : '';
+
     return (
         <div onClick={props.onClick}>
             <Card
@@ -39,6 +42,8 @@ const ImportTypeCard = (props) => {
 
 const ImportTypeCards = (props) => {
     const [selectedCard, setSelectedCard] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    
     useEffect(()=>{
         if(props.defaultSelectedKey){
             setSelectedCard(props.defaultSelectedKey);
@@ -50,15 +55,39 @@ const ImportTypeCards = (props) => {
         setSelectedCard(key);
     }
 
+    const openProPopUp = () => {
+        setIsModalOpen(true);
+    }
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    }
+
+    const renderProModal = () => {
+        if(isModalOpen){
+            return <ProModal onCancel={handleCancel}/>
+        }
+        return null;
+    }
+
     const renderCards = () => {
         let items = props.items ?? [];
         
         let cards = [];
         for(let i in items){
             let isSelected = selectedCard === items[i].key;
-            cards.push(
-                <ImportTypeCard key={items[i].key} type={items[i].key} selected={isSelected} label={items[i].label} icon={items[i].icon} onClick={handleCardSelect.bind(this, items[i].key)}/>
-            );
+            if(items[i].isPro){
+                cards.push(
+                    <Badge.Ribbon text={ __( 'Pro' ) } display={true} color='blue'>
+                        <ImportTypeCard key={items[i].key} type={items[i].key} selected={isSelected} label={items[i].label} icon={items[i].icon} onClick={openProPopUp}/>
+                    </Badge.Ribbon>
+                );
+            }else{
+                cards.push(
+                    <ImportTypeCard key={items[i].key} type={items[i].key} selected={isSelected} label={items[i].label} icon={items[i].icon} onClick={handleCardSelect.bind(this, items[i].key)}/>
+                );
+            }
+            
         }
 
         return cards;
@@ -67,6 +96,7 @@ const ImportTypeCards = (props) => {
     return (
         <Flex wrap="wrap" gap={100} justify='center'>
             {renderCards()}
+            {renderProModal()}
         </Flex>
     )
 }
