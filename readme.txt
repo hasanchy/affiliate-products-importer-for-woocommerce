@@ -1,6 +1,6 @@
 === Affiliate Products Importer for WooCommerce ===
 Contributors: hasanchowdhury, themedyno
-Tags: Amazon Affiliate, Products Importer for WooCommerce
+Tags: amazon affiliate, products importer, monetize, amazon associates
 Requires at least: 5.2
 Tested up to: 6.6.2
 Requires PHP: 7.2.0
@@ -39,8 +39,9 @@ The full source code, including the non-compiled versions of JavaScript and CSS 
 2. Navigate to "Plugins" > "Add New"
 3. Search for "Affiliate Products Importer by ThemeDyno"
 4. Install and activate the plugin
-5. Navigate to "Affiliate Products Importer"
+5. Navigate to "Amazon Products Importer"
 
 == Changelog ==
+1.1.1 (2024-10-27)
 1.0.0 (2024-07-31)
 Initial Release
