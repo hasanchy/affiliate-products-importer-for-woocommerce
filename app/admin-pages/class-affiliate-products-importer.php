@@ -55,7 +55,7 @@ class AffiliateProductsImporter extends Base {
 	 */
 	public function init() {
 		if ( is_admin() ) {
-			$this->page_title     = __( 'Affiliate Products Importer', 'affiliate-products-importer-for-woocommerce' );
+			$this->page_title     = __( 'AmazSync (Lite) - Amazon Affiliate Products Importer', 'affiliate-products-importer-for-woocommerce' );
 			$this->assets_version = ! empty( $this->script_data( 'version' ) ) ? $this->script_data( 'version' ) : AFFPRODIMP_VERSION;
 			$this->unique_id      = "affprodimp_affiliateimporter_main_wrap-{$this->assets_version}";
 
@@ -96,7 +96,7 @@ class AffiliateProductsImporter extends Base {
 	public function register_admin_page() {
 		$page = add_menu_page(
 			$this->page_title,
-			__( 'Amazon Products Importer (Lite)', 'affiliate-products-importer-for-woocommerce' ),
+			__( 'AmazSync (Lite)', 'affiliate-products-importer-for-woocommerce' ),
 			'manage_options',
 			$this->page_slug,
 			array( $this, 'callback' ),

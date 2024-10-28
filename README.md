@@ -1,4 +1,4 @@
-# Amazon Affiliate Products Importer for WooCommerce
+# AmazSync - Amazon Affiliate Products Importer for WooCommerce
 Elevate your WooCommerce store by seamlessly importing Amazon affiliate products with ease using the Amazon Affiliate Products Importer for WooCommerce plugin. Whether you're a seasoned affiliate marketer or just starting out, this plugin offers a robust set of features designed to streamline your product import process and boost your sales potential.
 
 ### Key Features:
