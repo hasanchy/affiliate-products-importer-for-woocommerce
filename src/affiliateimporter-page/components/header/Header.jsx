@@ -30,7 +30,7 @@ const Header = () => {
             <Drawer
                 title={__('Feedback & Help', 'affiliate-products-importer-for-woocommerce')}
                 placement="right"
-                width={500}
+                width={600}
                 onClose={onClose}
                 open={open}
                 style={{ 

@@ -94,5 +94,6 @@ final class Loader extends Base {
 		App\Endpoints\V1\Products::instance();
 		App\Endpoints\V1\AsinVerification::instance();
 		App\Endpoints\V1\Categories::instance();
+		App\Endpoints\V1\SupportMessage::instance();
 	}
 }

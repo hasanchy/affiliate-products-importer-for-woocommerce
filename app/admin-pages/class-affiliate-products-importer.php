@@ -156,6 +156,7 @@ class AffiliateProductsImporter extends Base {
 					'import'              => rest_url() . 'affiliate-products-importer-for-woocommerce/v1/import',
 					'amazonApiSettings'   => rest_url() . 'affiliate-products-importer-for-woocommerce/v1/amazon-api-settings',
 					'importSettings'      => rest_url() . 'affiliate-products-importer-for-woocommerce/v1/import-settings',
+					'supportMessage'      => rest_url() . 'affiliate-products-importer-for-woocommerce/v1/support-message',
 				),
 				'restNonce'      => wp_create_nonce( 'wp_rest' ),
 			),

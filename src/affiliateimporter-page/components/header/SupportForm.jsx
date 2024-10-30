@@ -1,16 +1,32 @@
 import { __ } from '@wordpress/i18n';
 import { Button, Form, Input, Typography } from 'antd';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { sendSupportMessage } from '../../services/apiService'; // Import the new API request
+import { useSelector } from 'react-redux';
+
 const { TextArea } = Input;
 
 const SupportForm = () => {
     const [form] = Form.useForm();
     const [message, setMessage] = useState('');
+    const dispatch = useDispatch();
 
-    const onFinish = (values) => {
-        console.log('Received values:', values);
-        // setMessage(__('Your message has been sent!', 'affiliate-products-importer-for-woocommerce'));
-        // form.resetFields(); // Optionally reset the form fields after submission
+    const onFinish = async (values) => {
+        try {
+            const response = await dispatch(sendSupportMessage({
+                email: values.email,
+                message: values.message,
+            }));
+            if (sendSupportMessage.fulfilled.match(response)) {
+                setMessage(__('Your message has been sent!', 'affiliate-products-importer-for-woocommerce'));
+                form.resetFields(); // Reset the form fields after submission
+            } else {
+                setMessage(__('Failed to send the message. Please try again later.', 'affiliate-products-importer-for-woocommerce'));
+            }
+        } catch (error) {
+            setMessage(__('Failed to send the message. Please try again later.', 'affiliate-products-importer-for-woocommerce'));
+        }
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -56,7 +72,7 @@ const SupportForm = () => {
                         },
                     ]}
                 >
-                    <TextArea placeholder="Enter your message here." />
+                    <TextArea placeholder="Enter your message here." rows={8} />
                 </Form.Item>
                 <Form.Item>
                     <Button type="primary" htmlType="submit">
