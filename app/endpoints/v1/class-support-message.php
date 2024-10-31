@@ -61,7 +61,7 @@ class SupportMessage extends Endpoint {
         $body = $message;
         $headers = array(
             'Content-Type: text/plain; charset=UTF-8',
-            'From: ' . $email
+            'From: <' . $email .'>'
         );
 
         if ( wp_mail( $to, $subject, $body, $headers ) ) {

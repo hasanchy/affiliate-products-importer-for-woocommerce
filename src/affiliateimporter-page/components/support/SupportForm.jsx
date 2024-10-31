@@ -9,9 +9,11 @@ const { TextArea } = Input;
 const SupportForm = () => {
     const [form] = Form.useForm();
     const [message, setMessage] = useState({type: '', content: ''});
+    const [loading, setLoading] = useState(false); // New loading state
     const dispatch = useDispatch();
 
     const onFinish = async (values) => {
+        setLoading(true); // Set loading to true when sending the message
         try {
             const response = await dispatch(sendSupportMessage({
                 email: values.email,
@@ -25,6 +27,8 @@ const SupportForm = () => {
             }
         } catch (error) {
             setMessage({type: 'error', content: __('Failed to send the message. Please try again later.', 'affiliate-products-importer-for-woocommerce')});
+        } finally {
+            setLoading(false); // Reset loading state after the operation
         }
     };
 
@@ -74,7 +78,7 @@ const SupportForm = () => {
                     <TextArea placeholder="Enter your message here." rows={8} />
                 </Form.Item>
                 <Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" loading={loading}> {/* Disable button while loading */}
                         {__('Submit', 'affiliate-products-importer-for-woocommerce')}
                     </Button>
                 </Form.Item>
