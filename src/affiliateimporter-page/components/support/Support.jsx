@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { useState } from 'react';
-import { Drawer, Button, Typography, Row, Col } from 'antd';
+import { Drawer, Button, Typography, Row, Col, Space } from 'antd';
 import { CustomerServiceOutlined } from '@ant-design/icons';
 import SupportForm from './SupportForm';
 
@@ -15,13 +15,14 @@ const Support = ({ ratingUrl }) => {
 
     return (
         <>
-            <Button 
-                type="default" 
-                icon={<CustomerServiceOutlined />} 
-                style={{ float: 'right', marginTop: '-40px' }} 
-                onClick={showDrawer}
-            >
-            </Button>
+            <Space style={{ height: '100%', alignItems: 'center' }}>
+                <Button 
+                    type="default" 
+                    icon={<CustomerServiceOutlined />}
+                    onClick={showDrawer}
+                >
+                </Button>
+            </Space>
             <Drawer
                 title={__('Feedback & Help', 'affiliate-products-importer-for-woocommerce')}
                 placement="right"
