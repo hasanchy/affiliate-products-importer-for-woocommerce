@@ -56,10 +56,13 @@ class SupportMessage extends Endpoint {
             return new WP_Error( 'rest_support_message_incomplete', __( 'Email and message are required.', 'affiliate-products-importer-for-woocommerce' ), array( 'status' => 400 ) );
         }
 
-        $to = 'info@themedyno.com';
-        $subject = __( 'AmazSync (Lite) - Support Message from User', 'affiliate-products-importer-for-woocommerce' );
-        $body = sprintf( "Email: %s\n\nMessage:\n%s", $email, $message );
-        $headers = array('Content-Type: text/plain; charset=UTF-8');
+        $to = 'support@themedyno.com';
+        $subject = sprintf( __( 'AmazSync (Lite): Message from %s', 'affiliate-products-importer-for-woocommerce' ), $email );
+        $body = $message;
+        $headers = array(
+            'Content-Type: text/plain; charset=UTF-8',
+            'From: ' . $email
+        );
 
         if ( wp_mail( $to, $subject, $body, $headers ) ) {
             return new WP_REST_Response( array( 'status' => 'success', 'message' => __( 'Your message has been sent successfully!', 'affiliate-products-importer-for-woocommerce' ) ), 200 );
