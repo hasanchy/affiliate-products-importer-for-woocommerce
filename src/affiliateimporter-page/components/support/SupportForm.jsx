@@ -1,15 +1,14 @@
+import { useState } from 'react';
 import { __ } from '@wordpress/i18n';
-import { Button, Form, Input, Typography } from 'antd';
-import React, { useState } from 'react';
+import { Alert, Button, Form, Input, Typography } from 'antd';
 import { useDispatch } from 'react-redux';
 import { sendSupportMessage } from '../../services/apiService'; // Import the new API request
-import { useSelector } from 'react-redux';
 
 const { TextArea } = Input;
 
 const SupportForm = () => {
     const [form] = Form.useForm();
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState({type: '', content: ''});
     const dispatch = useDispatch();
 
     const onFinish = async (values) => {
@@ -19,13 +18,13 @@ const SupportForm = () => {
                 message: values.message,
             }));
             if (sendSupportMessage.fulfilled.match(response)) {
-                setMessage(__('Your message has been sent!', 'affiliate-products-importer-for-woocommerce'));
+                setMessage({type: 'success', content: __('Your message has been sent!', 'affiliate-products-importer-for-woocommerce')});
                 form.resetFields(); // Reset the form fields after submission
             } else {
-                setMessage(__('Failed to send the message. Please try again later.', 'affiliate-products-importer-for-woocommerce'));
+                setMessage({type: 'error', content: __('Failed to send the message. Please try again later.', 'affiliate-products-importer-for-woocommerce')});
             }
         } catch (error) {
-            setMessage(__('Failed to send the message. Please try again later.', 'affiliate-products-importer-for-woocommerce'));
+            setMessage({type: 'error', content: __('Failed to send the message. Please try again later.', 'affiliate-products-importer-for-woocommerce')});
         }
     };
 
@@ -80,7 +79,7 @@ const SupportForm = () => {
                     </Button>
                 </Form.Item>
             </Form>
-            {message && <p style={{ color: 'green' }}>{message}</p>} {/* Display success or error message here */}
+            {message.content && <Alert message={message.content} type={message.type} />} {/* Display success or error message here */}
         </>
     );
 };

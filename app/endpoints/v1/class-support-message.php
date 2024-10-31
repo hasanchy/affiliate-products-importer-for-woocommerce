@@ -57,7 +57,7 @@ class SupportMessage extends Endpoint {
         }
 
         $to = 'info@themedyno.com';
-        $subject = __( 'Support Message from User', 'affiliate-products-importer-for-woocommerce' );
+        $subject = __( 'AmazSync (Lite) - Support Message from User', 'affiliate-products-importer-for-woocommerce' );
         $body = sprintf( "Email: %s\n\nMessage:\n%s", $email, $message );
         $headers = array('Content-Type: text/plain; charset=UTF-8');
 
