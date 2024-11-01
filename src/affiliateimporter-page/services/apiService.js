@@ -186,3 +186,17 @@ export const createCategory = async (categoryData) => {
 		throw new Error('Failed to create category');
 	}
 };
+
+export const sendSupportMessage = createAsyncThunk('support/sendMessage', async (data, { rejectWithValue }) => {
+	try {
+		const res = await axios.post(affprodimpAffiliateImporter.restEndpoint.supportMessage, data, {
+			headers: {
+				'content-type': 'application/json',
+				'X-WP-NONCE': affprodimpAffiliateImporter.restNonce
+			}
+		});
+		return res.data;
+	} catch (error) {
+		return rejectWithValue(error.response.data);
+	}
+});

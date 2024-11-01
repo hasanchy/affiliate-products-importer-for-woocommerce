@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Card, Space, Table, Tooltip, Image, Row, Col } from 'antd';
-import { ReloadOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import { ReloadOutlined, EditOutlined, SyncOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../../../services/apiService';
 import { setSearchKeyword } from './productTableSlice';
 import { __ } from '@wordpress/i18n';
-import { setProductsScreen } from '../productsSlice';
+import ProModal from '../../../components/modal/ProModal';
 
 const ProductTable = () => {
     const { isProductsLoading, productList, totalProducts  } = useSelector((state) => state.productTable);
     const dispatch = useDispatch();
+	const [selectedProductIds, setSelectedProductIds] = useState([]);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
     const reloadProductList = () => {
 		dispatch(setSearchKeyword(''))
@@ -30,9 +32,24 @@ const ProductTable = () => {
 		return decodedString;
 	}
 
-	const handleAddNewProductClick = () => {
-		dispatch(setProductsScreen('add-new-product'))
+	const onSelectChange = (selectedProductIds, obj) => {
+		setSelectedProductIds(selectedProductIds);
+	};
+
+	const handleSyncAllClick = () => {
+		setIsModalOpen(true);
 	}
+
+	const handleCancel = () => {
+        setIsModalOpen(false);
+    }
+
+	const renderProModal = () => {
+        if(isModalOpen){
+            return <ProModal onCancel={handleCancel}/>
+        }
+        return null;
+    }
 
     const columns = [
 		{
@@ -58,10 +75,19 @@ const ProductTable = () => {
 		{
 			title: __( 'Date Imported', 'affiliate-products-importer-for-woocommerce' ),
 			dataIndex: 'product_import_date',
-			key: 'sync',
+			key: 'import',
 			width: 150,
 			render: (importDate, productObj) => (
 				<>{renderImportDate(importDate, productObj)}</>
+			)
+		},
+		{
+			title: __('Last Synced', 'affiliate-products-importer-for-woocommerce'),
+			dataIndex: 'sync_date',
+			key: 'sync',
+			width: 150,
+			render: (syncDate) => (
+				<></>
 			)
 		},
 		{
@@ -77,21 +103,36 @@ const ProductTable = () => {
 		}
 	];
 
+	const renderSyncAllButton = () => {
+		if(selectedProductIds.length){
+
+			let productText = (selectedProductIds.length > 1) ? __('Products', 'affiliate-products-importer-for-woocommerce') : __('Product', 'affiliate-products-importer-for-woocommerce');
+			return <Button type="primary" icon={<SyncOutlined/>} onClick={handleSyncAllClick}>
+				{__('Sync', 'affiliate-products-importer-for-woocommerce')} {selectedProductIds.length} {__('Selected', 'affiliate-products-importer-for-woocommerce')} {productText} ({__('Pro', 'affiliate-products-importer-for-woocommerce')})
+			</Button>
+		}else{
+			return null;
+		}
+	}
+
 	return (
 		<Card title={`${ __( 'Total Products', 'affiliate-products-importer-for-woocommerce' ) }: ${totalProducts}`} extra={<Tooltip placement="topLeft" title={ __( 'Reload Products List', 'affiliate-products-importer-for-woocommerce' ) } color={'purple'} key={'blue'}><Button type="default" icon={<ReloadOutlined/>} onClick={reloadProductList}></Button></Tooltip>}>
             <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
 				<Row>
 					<Col span={12}>
+						{renderProModal()}
+						{renderSyncAllButton()}
 					</Col>
 					<Col span={12}>
-						<Space direction="horizontal" style={{width: '100%', justifyContent: 'right'}}>
-							<Button type="default" icon={<PlusOutlined/>} onClick={handleAddNewProductClick}>Add New Product</Button>
-						</Space>
 					</Col>
 				</Row>
 				<Row>
 					<Col span={24}>
 						<Table
+							rowSelection={{
+								selectedRowKeys: selectedProductIds,
+								onChange: onSelectChange
+							}}
 							loading={isProductsLoading}
 							dataSource={productList}
 							columns={columns}

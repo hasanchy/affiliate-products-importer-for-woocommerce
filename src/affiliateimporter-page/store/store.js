@@ -10,8 +10,8 @@ import amazonApiSettingsSlice from '../features/settings/amazon-api-settings/ama
 import importSettingsSlice from '../features/settings/import-settings/importSettingsSlice';
 import amazonApiConnectionSlice from '../components/amazon-api-connection/amazonApiConnectionSlice';
 import productTableSlice from '../features/products/product-table/productTableSlice';
-import productAddSlice from '../features/products/product-add/productAddSlice';
 import importBulkSlice from '../features/import/import-bulk/importBulkSlice';
+import importManualEntrySlice from '../features/import/import-manual-entry/importManualEntrySlice';
 
 const store = configureStore({
 	reducer: {
@@ -20,14 +20,14 @@ const store = configureStore({
 		categories: categoriesSlice,
 		products: productsSlice,
 		productTable: productTableSlice,
-		productAdd: productAddSlice,
 		import: importSlice,
 		importCopyPaste: importCopyPasteSlice,
 		importBulk: importBulkSlice,
 		settings: settingsSlice,
 		amazonApiSettings: amazonApiSettingsSlice,
 		importSettings: importSettingsSlice,
-		amazonApiConnection: amazonApiConnectionSlice
+		amazonApiConnection: amazonApiConnectionSlice,
+		importManualEntry: importManualEntrySlice
 	},
 })
 

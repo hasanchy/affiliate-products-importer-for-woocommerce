@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Row, Col, Flex, Button, Space } from 'antd';
 import ImportTypeCards from './ImportTypeCards';
-import { CopyOutlined, FileSearchOutlined } from '@ant-design/icons';
+import { FileSearchOutlined, CopyOutlined, FormOutlined } from '@ant-design/icons';
 
 import { setImportType, setImportStepNext } from '../importSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -35,9 +35,20 @@ const ImportTypeSelect = () => {
                         defaultSelectedKey={importType}
                         items={[
                             {
+                                key: 'search-keyword',
+                                label: __( 'Import via Product Search', 'affiliate-products-importer-for-woocommerce' ),
+                                icon: <FileSearchOutlined/>,
+                                isPro: true
+                            },
+                            {
                                 key: 'copy-paste',
-                                label: __( 'Copy/Paste Import', 'affiliate-products-importer-for-woocommerce' ),
+                                label: __( 'Import via ASIN', 'affiliate-products-importer-for-woocommerce' ),
                                 icon: <CopyOutlined/>
+                            },
+                            {
+                                key: 'manual-entry',
+                                label: __( 'Manual Product Entry', 'affiliate-products-importer-for-woocommerce' ),
+                                icon: <FormOutlined/>
                             }
                         ]}
                         onClick={handleImportTypeSelect}

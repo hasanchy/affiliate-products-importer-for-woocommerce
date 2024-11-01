@@ -1,18 +1,19 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { Input, Col, Row, Image, Button, Card, Form, InputNumber, Result, Alert } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { setProductUrl, setAsinNumber, setProductTitle, setProductDescription, setRegularPrice, setSalePrice, setPrimaryImageUrl, resetState, setProductAddSuccessful, setProductCategories } from './productAddSlice';
+import { setProductUrl, setAsinNumber, setProductTitle, setProductDescription, setRegularPrice, setSalePrice, setPrimaryImageUrl, resetState, setProductAddSuccessful, setProductCategories } from './importManualEntrySlice';
 import Link from 'antd/es/typography/Link';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, fetchProducts } from '../../../services/apiService';
 import CategoriesCheckbox from '../../../components/categories/CategoriesCheckbox';
-import { setProductsScreen } from '../productsSlice';
+import { setImportStepBack } from '../importSlice';
+import { setActiveTab } from '../../../components/menu-tabs/manuTabsSlice';
 
 const { TextArea } = Input;
 
-const ProductAdd = () => {
+const ImportManualEntry = () => {
 	const dispatch = useDispatch();
-	const { productUrl, asinNumber, productTitle, productDescription, regularPrice, salePrice, primaryImageUrl, productCategories, productAddSuccessful, isProductAdding, lastSavedProduct, error } = useSelector((state) => state.productAdd);
+	const { productUrl, asinNumber, productTitle, productDescription, regularPrice, salePrice, primaryImageUrl, productCategories, productAddSuccessful, isProductAdding, lastSavedProduct, error } = useSelector((state) => state.importManualEntry);
 
     const [form] = Form.useForm();
 
@@ -27,7 +28,7 @@ const ProductAdd = () => {
     });
 
     const handleBack = () => {
-        dispatch(setProductsScreen('default'))
+        dispatch(setImportStepBack());
     }
 
     const onFieldsChange = () => {
@@ -102,9 +103,7 @@ const ProductAdd = () => {
     }
 
     const handleViewProducts = () => {
-        dispatch(resetState())
-        dispatch(setProductAddSuccessful(null))
-        dispatch(setProductsScreen('default'))
+        dispatch(setActiveTab('products'));
     }
 
     const handleCategoriesChange = (value) => {
@@ -340,7 +339,7 @@ const ProductAdd = () => {
     }
 
 	return <>
-        <Card title='Add New Product'>
+        <Card>
             <Button type="default" icon={<ArrowLeftOutlined />} onClick={handleBack}>Back</Button>
             {displayForm()}
             {displayResult()}
@@ -349,4 +348,4 @@ const ProductAdd = () => {
 	</>
 }
 
-export default ProductAdd;
+export default ImportManualEntry;

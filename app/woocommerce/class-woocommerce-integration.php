@@ -28,7 +28,7 @@ class WooCommerceIntegration extends Base {
 
 		add_filter( 'woocommerce_product_get_gallery_image_ids', array( $this, 'affprodimp_set_customized_gallary_ids' ), 99, 2 );
 		add_filter( 'woocommerce_product_get_image_id', array( $this, 'affprodimp_woocommerce_product_get_image_id_support' ), 99, 2 );
-	
+
 		add_action( 'wp', array( $this, 'remove_woo_image_effects' ) );
 	}
 

@@ -17,6 +17,7 @@ const ImportCopyPasteForm = () => {
 	const dispatch = useDispatch();
 	const { displayImportFetchCounter, importFetchItems, importFetchAlert, asinCodes, invalidAsinCodes, duplicateAsinCodes, asinValue, asinValueFetched, isImportFetchInProgress, importableItems, importFetchProgress } = useSelector((state) => state.importCopyPaste);
 	const { amazonApiConnectionStatus } = useSelector((state) => state.amazonApiConnection);
+	const asinLimit = 100;
 
 	const findDuplicates = (arr) => {
 		
@@ -116,6 +117,11 @@ const ImportCopyPasteForm = () => {
 			return <div style={{ marginTop: '10px' }}>
 				<Alert type='error' message={errorMessage}/>
 			</div>
+		}else if(asinCodes.length > asinLimit) {
+			let errorMessage = `${asinCodes.length} ASINs detected. Maximum import limit is ${asinLimit} ASINs per batch.`;
+			return <div style={{ marginTop: '10px' }}>
+				<Alert type='error' message={errorMessage}/>
+			</div>
 		}else if(duplicateAsinCodes.length > 0) {
 			let codeTxt = duplicateAsinCodes.length === 1 ? __('code', 'affiliate-products-importer-for-woocommerce') : __('codes', 'affiliate-products-importer-for-woocommerce');
 			let wasTxt = duplicateAsinCodes.length === 1 ? __('was', 'affiliate-products-importer-for-woocommerce') : __('were', 'affiliate-products-importer-for-woocommerce');
@@ -127,14 +133,14 @@ const ImportCopyPasteForm = () => {
 		}
 
 		return <div style={{ marginTop: '10px' }}>
-			{ __( 'Provide ASIN codes separated by commas, newlines, or spaces.', 'affiliate-products-importer-for-woocommerce' ) }
+			{ __( `Enter ASIN codes separated by commas, newlines, or spaces. Limit: ${asinLimit} ASINs per batch.`, 'affiliate-products-importer-for-woocommerce' ) }
 		</div>;
 	}
 
 	const renderAmazonTabContent = () => {
 		let codeTxt = asinCodes.length === 1 ? __('code', 'affiliate-products-importer-for-woocommerce') : __('codes', 'affiliate-products-importer-for-woocommerce');
 		let fetchButtonTxt = (asinCodes.length > 0) ? `${__('Verify', 'affiliate-products-importer-for-woocommerce')} ${asinCodes.length} ASIN ${codeTxt}` : __('Verify', 'affiliate-products-importer-for-woocommerce');
-		let isFetchButtonDisabled = (asinCodes.length < 1 || invalidAsinCodes.length > 0 || asinValue === asinValueFetched || amazonApiConnectionStatus !== 'success') ? true : false;
+		let isFetchButtonDisabled = (asinCodes.length < 1 || asinCodes.length > asinLimit || invalidAsinCodes.length > 0 || amazonApiConnectionStatus !== 'success') ? true : false;
 
 		return<>
 				<Row gutter={20}>
@@ -168,7 +174,7 @@ const ImportCopyPasteForm = () => {
             let productText = importableItems.length > 1 ? 'products' : 'product'
             alert={
                 type:'success',
-                message: <>A total of <b>{importableItems.length}</b> importable {productText} were found from this list.</>
+                message: <><b>{importableItems.length}</b> importable {productText} found. Proceed to the next step to select product categories.</>
             }
         }else if(!isImportFetchInProgress && importFetchItems.length && !importableItems.length){
             alert={
@@ -181,7 +187,7 @@ const ImportCopyPasteForm = () => {
             return <>
 				<Row gutter={20}>
 					<Col span={4}></Col>
-					<Col span={10}>
+					<Col span={20}>
 						<Alert type={alert.type} message={alert.message}/>
 					</Col>
 				</Row>
