@@ -12,7 +12,7 @@ const AddCategoryPopup = ({ isOpen, onCancel, onSuccess }) => {
     const formatCategories = (categories, prefix = '') => {
         return categories.map(category => ({
         value: category.term_id,
-        label: prefix + category.name,
+        label: prefix + category.name?.replace(/&amp;/g, "&"),
         children: category.children && category.children.length > 0
             ? formatCategories(category.children, prefix + '-- ')
             : undefined
