@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Card, Space, Table, Tooltip, Image, Row, Col } from 'antd';
-import { ReloadOutlined, EditOutlined, SyncOutlined } from '@ant-design/icons';
+import { ReloadOutlined, EyeOutlined, AmazonOutlined, EditOutlined, SyncOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../../../services/apiService';
 import { setSearchKeyword } from './productTableSlice';
@@ -22,8 +22,14 @@ const ProductTable = () => {
 		return <span>{importDate}</span>
 	}
 
-    const renderActionButtons = (productId) => {
-		return <Button type="default"  href={`post.php?post=${productId}&action=edit`} target='_blank'><EditOutlined /></Button>
+    const renderActionButtons = (productId, productObj) => {
+		return (
+			<>
+				<Button type="default"  href={productObj.product_url} target='_blank'><EyeOutlined /></Button>
+				{productObj.amazon_product_url && <Button type="default"  href={productObj.amazon_product_url} target='_blank'><AmazonOutlined /></Button>}    
+				<Button type="default"  href={`post.php?post=${productId}&action=edit`} target='_blank'><EditOutlined /></Button>
+			</>
+		)
 	}
 
 	const decodeString = ( rawString ) => {
@@ -70,6 +76,17 @@ const ProductTable = () => {
 			key: 'title',
 			render: (title, productObj) => (
 				<a href={productObj.product_url} target='_blank'>{decodeString(title)}</a>
+			)
+		},
+		{
+			title: __( 'Price', 'affiliate-products-importer-for-woocommerce' ),
+			dataIndex: 'price_html',
+			key: 'price',
+			render: (price_html, productObj) => (
+				<div 
+					className="price-html"
+					dangerouslySetInnerHTML={{ __html: decodeString(price_html) }}
+				/>
 			)
 		},
 		{

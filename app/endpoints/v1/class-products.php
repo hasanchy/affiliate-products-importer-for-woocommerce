@@ -111,13 +111,22 @@ class Products extends Endpoint {
 				$product    = array();
 				$product_id = get_the_ID();
 
+				$product_wc   = wc_get_product( $product_id );
+				$product_type = $product_wc->get_type();
+
 				// Populate product data
 				$product['product_id']          = $product_id;
 				$product['product_url']         = esc_url( get_permalink( $product_id ) );
+				$amazon_product_url             = get_post_meta( $product_id, '_product_url', true );
+				$product['amazon_product_url']  = esc_url( $amazon_product_url ? $amazon_product_url : '' );
 				$product['product_title']       = esc_html( get_the_title( $product_id ) );
 				$product['product_import_date'] = esc_html( get_the_date( '', $product_id ) );
 				$product['product_asin']        = esc_html( get_post_meta( $product_id, 'affprodimp_product_asin', true ) );
 				$product['key']                 = $product_id;
+				$product['product_type']        = $product_type;
+				$product['regular_price']       = esc_html( $product_wc->get_regular_price() );
+				$product['sale_price']          = esc_html( $product_wc->get_sale_price() );
+				$product['price_html']          = esc_html( $product_wc->get_price_html() );
 
 				// Get product image
 				$thumbnail_id             = get_post_thumbnail_id( $product_id ) ? get_post_thumbnail_id( $product_id ) : $product_id;
