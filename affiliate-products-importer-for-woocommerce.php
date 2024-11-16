@@ -3,11 +3,11 @@
  * Main file for WordPress.
  *
  * @wordpress-plugin
- * Plugin Name:     AmazSync - Affiliate Products Importer for WooCommerce
+ * Plugin Name:     AmazSync - Amazon Product Importer & Affiliate for WooCommerce
  * Description:     Easily import Amazon affiliate products into your WooCommerce store.
  * Author:          ThemeDyno
  * Author URI:      https://themedyno.com/
- * Version:         1.1.2
+ * Version:         1.2.0
  * Text Domain:     affiliate-products-importer-for-woocommerce
  * Domain Path:     /languages
  *

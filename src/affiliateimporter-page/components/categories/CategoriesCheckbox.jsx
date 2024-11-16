@@ -96,7 +96,7 @@ const CategoriesCheckbox = ({ value, onChange, disabled, displayError }) => {
 					disabled={disabled || isLoading}
 					checked={selectedCategories.some(sc => sc.id === category.term_id)}
 				>
-					{highlightText(category.name.replace(/&amp;/g, "&").replace(/&amp;/g, "&"), searchKeyword)}
+					{highlightText(category.name.replace(/&amp;/g, "&"), searchKeyword)}
 				</Checkbox>
 			),
 			key: category.term_id,
