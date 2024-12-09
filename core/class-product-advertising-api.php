@@ -34,7 +34,7 @@ class ProductAdvertisingApi {
 	private $xAmzDate        = null;
 	private $currentDate     = null;
 
-	const PAYLOAD_RESOURCES = array(
+	const PAYLOAD_RESOURCES_GETITEMS = array(
 		'Images.Primary.Large',
 		'Images.Variants.Large',
 		'ItemInfo.ByLineInfo',
@@ -55,6 +55,37 @@ class ProductAdvertisingApi {
 		'Offers.Listings.MerchantInfo',
 		'Offers.Listings.Price',
 		'Offers.Listings.SavingBasis',
+		'OffersV2.Listings.Availability',
+		'OffersV2.Listings.Condition',
+		'OffersV2.Listings.DealDetails',
+		'OffersV2.Listings.IsBuyBoxWinner',
+		'OffersV2.Listings.LoyaltyPoints',
+		'OffersV2.Listings.MerchantInfo',
+		'OffersV2.Listings.Price',
+		'OffersV2.Listings.Type'
+	);
+
+	const PAYLOAD_RESOURCES_SEARCHITEMS = array(
+		'Images.Primary.Large',
+		'Images.Variants.Large',
+		'ItemInfo.ByLineInfo',
+		'ItemInfo.ContentInfo',
+		'ItemInfo.ContentRating',
+		'ItemInfo.Classifications',
+		'ItemInfo.ExternalIds',
+		'ItemInfo.Features',
+		'ItemInfo.ManufactureInfo',
+		'ItemInfo.ProductInfo',
+		'ItemInfo.TechnicalInfo',
+		'ItemInfo.Title',
+		'ItemInfo.TradeInInfo',
+		'Offers.Listings.Availability.Message',
+		'Offers.Listings.Availability.Type',
+		'Offers.Listings.Condition',
+		'Offers.Listings.DeliveryInfo.IsFreeShippingEligible',
+		'Offers.Listings.MerchantInfo',
+		'Offers.Listings.Price',
+		'Offers.Listings.SavingBasis'
 	);
 
 	public function __construct( $accessKey, $secretKey, $marketplace, $partnerTag, $host, $region ) {
@@ -202,7 +233,7 @@ class ProductAdvertisingApi {
 	public function fetchProductsByItemIds( $itemIds ) {
 		$payload                = array();
 		$payload['ItemIds']     = $itemIds;
-		$payload['Resources']   = self::PAYLOAD_RESOURCES;
+		$payload['Resources']   = self::PAYLOAD_RESOURCES_GETITEMS;
 		$payload['PartnerTag']  = $this->partnerTag;
 		$payload['PartnerType'] = 'Associates';
 		$payload['Marketplace'] = $this->marketplace;
@@ -240,7 +271,7 @@ class ProductAdvertisingApi {
 	public function fetchProductsByKeywords( $keyword, $limit = 10, $page = 1, $order = '' ) {
 		$payload                = array();
 		$payload['Keywords']    = $keyword;
-		$payload['Resources']   = self::PAYLOAD_RESOURCES;
+		$payload['Resources']   = self::PAYLOAD_RESOURCES_SEARCHITEMS;
 		$payload['ItemCount']   = $limit;
 		$payload['ItemPage']    = $page;
 		$payload['SortBy']      = $this->getSortBy( $order ); // "AvgCustomerReviews", "Featured", "NewestArrivals", "Price:HighToLow", "Price:LowToHigh"
@@ -248,6 +279,7 @@ class ProductAdvertisingApi {
 		$payload['PartnerType'] = 'Associates';
 		$payload['Marketplace'] = $this->marketplace;
 		$payload['Operation']   = 'SearchItems';
+		$payload['Availability']   = 'Available';
 
 		$payload_content = wp_json_encode( $payload );
 

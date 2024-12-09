@@ -35,13 +35,20 @@ class ProductDataHandler {
 			$fetch_result[$index]['image_variants'] = $image_variants;
 
 			if ( isset( $item->Offers->Listings[0]->SavingBasis->Amount ) ) {
-				$fetch_result[ $index ]['regular_price'] = number_format( floatval( $item->Offers->Listings[0]->SavingBasis->Amount ), 2 );
-				$fetch_result[ $index ]['sale_price']    = number_format( floatval( $item->Offers->Listings[0]->Price->Amount ), 2 );
+				$fetch_result[ $index ]['regular_price'] = number_format( floatval( $item->Offers->Listings[0]->SavingBasis->Amount ), 2, '.', '' );
+				$fetch_result[ $index ]['sale_price']    = number_format( floatval( $item->Offers->Listings[0]->Price->Amount ), 2, '.', '' );
 			} elseif ( isset( $item->Offers->Listings[0]->Price->Amount ) ) {
-					$fetch_result[ $index ]['regular_price'] = number_format( floatval( $item->Offers->Listings[0]->Price->Amount ), 2, '.', '' );
-			} else {
+				$fetch_result[ $index ]['regular_price'] = number_format( floatval( $item->Offers->Listings[0]->Price->Amount ), 2, '.', '' );
+			} else if( isset( $item->OffersV2->Listings[0]->SavingBasis->Money->Amount ) ){
+				$fetch_result[ $index ]['regular_price'] = number_format( floatval( $item->OffersV2->Listings[0]->SavingBasis->Money->Amount ), 2, '.', '' );
+				$fetch_result[ $index ]['sale_price']    = number_format( floatval( $item->OffersV2->Listings[0]->Price->Money->Amount ), 2, '.', '' );
+			} elseif ( isset( $item->OffersV2->Listings[0]->Price->Money->Amount ) ) {
+				$fetch_result[ $index ]['regular_price'] = number_format( floatval( $item->Offers->Listings[0]->Price->Money->Amount ), 2, '.', '' );
+			}else {
 				$fetch_result[ $index ]['regular_price'] = '';
 			}
+
+			$fetch_result[ $index ]['stock_status'] = ( ( isset( $item->Offers->Listings[0]->Availability->Message ) &&  stristr( $item->Offers->Listings[0]->Availability->Message, 'out of stock' ) ) || ( isset( $item->OffersV2->Listings[0]->Availability->Type ) && $item->OffersV2->Listings[0]->Availability->Type === 'OUT_OF_STOCK' ) ) ? 'outofstock' : 'instock';
 
 			$fetch_result[ $index ]['product_url'] = Settings::get_product_url( $country_code, $affiliate_id, $asin );
 			$fetch_result[ $index ]['attributes'] = self::process_attribute( $item );

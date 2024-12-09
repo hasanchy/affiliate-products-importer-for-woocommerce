@@ -66,7 +66,7 @@ export const importCopyPasteSlice = createSlice({
 			.addCase(asinVerification.fulfilled, (state, action) => {
 				state.isImportFetchInProgress = false;
 				if(action.payload?.fetch_result){
-					let newImportableItems = action.payload.fetch_result.filter(item => !item.is_already_imported);
+					let newImportableItems = action.payload.fetch_result.filter(item => !item.is_already_imported && item.stock_status !== 'outofstock');
 					state.importFetchItems = [ ...state.importFetchItems, ...action.payload.fetch_result];
 					state.importFetchErrors = [ ...state.importFetchErrors, ...action.payload.fetch_errors];
 					state.importableItems = [ ...state.importableItems, ...newImportableItems];

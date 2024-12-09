@@ -134,8 +134,8 @@ class Products extends Endpoint {
 				$product['image_primary'] = esc_url( $image_primary[0] );
 
 				// Get sync last date
-				$sync_last_date            = get_post_meta( $product_id, 'affprodimp_sync_last_date', true );
-				$product['sync_last_date'] = $sync_last_date ? $this->time_ago( $sync_last_date ) : $this->time_ago( strtotime( $product['product_import_date'] ) );
+				$sync_date            = get_post_meta( $product_id, 'affprodimp_sync_date', true );
+				$product['sync_date'] = $sync_date ? $this->time_ago( $sync_date ) : '';
 
 				$products[] = $product;
 			}
@@ -231,7 +231,7 @@ class Products extends Endpoint {
 			$post_content   = isset( $product['post_content'] ) ? wp_kses_post( $product['post_content'] ) : '';
 			$image_primary  = isset( $product['image_primary'] ) ? esc_url_raw( $product['image_primary'] ) : '';
 			$image_variants = ( isset( $product['image_variants'] ) && is_array( $product['image_variants'] ) ) ? array_map( 'esc_url_raw', $product['image_variants'] ) : array();
-			$regular_price  = isset( $product['regular_price'] ) ? floatval( $product['regular_price'] ) : 0;
+			$regular_price  = isset( $product['regular_price'] ) ? floatval( $product['regular_price'] ) : '';
 			$sale_price     = isset( $product['sale_price'] ) ? floatval( $product['sale_price'] ) : '';
 			$product_url    = isset( $product['product_url'] ) ? esc_url_raw( $product['product_url'] ) : '';
 			$attributes     = isset( $product['attributes'] ) ? $product['attributes'] : array();
@@ -261,7 +261,10 @@ class Products extends Endpoint {
 			}
 
 			/*===================Update product type=======================*/
-			wp_set_object_terms( $post_id, 'external', 'product_type' );
+			$product_type_option = get_option( 'affprodimp_settings_product_type' );
+			$product_type = ( 'simple' === $product_type_option ) ? 'simple' : 'external';
+
+			wp_set_object_terms( $post_id, $product_type, 'product_type' );
 
 			/*===================Update product Images=======================*/
 			$remote_image = get_option( 'affprodimp_settings_remote_image' );
@@ -296,7 +299,7 @@ class Products extends Endpoint {
 			update_post_meta( $post_id, 'affprodimp_product_asin', $asin );
 
 			/*===================Update product price=======================*/
-			if ( 'no' !== $product_price_setting ) {
+			if ( 'no' !== $product_price_setting && !empty( $regular_price )  ) {
 				$price = ! empty( $sale_price ) ? $sale_price : $regular_price;
 				update_post_meta( $post_id, '_price', $price );
 				update_post_meta( $post_id, '_regular_price', $regular_price );
