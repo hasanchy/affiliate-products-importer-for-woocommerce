@@ -46,11 +46,20 @@ const ProductList = memo((props) => {
 				key: 'status',
 				render: (isAlreadyImported, productObj) => {
 
-					let ribbonText = isAlreadyImported ? 'Previously Imported' : 'Importable';
+					let ribbonText = isAlreadyImported ? __( 'Previously Imported', 'affiliate-products-importer-for-woocommerce' ) : __( 'Importable', 'affiliate-products-importer-for-woocommerce' );
 					let ribbonColor = isAlreadyImported ? 'orange' : 'blue';
 					if(productObj.Code){
 						ribbonText = __( 'Invalid ASIN', 'affiliate-products-importer-for-woocommerce' );
 						ribbonColor = 'red';
+					}else if( isAlreadyImported ){
+						ribbonText = __( 'Previously Imported', 'affiliate-products-importer-for-woocommerce' );
+						ribbonColor = 'orange';
+					}else if( productObj.stock_status === 'outofstock' ){
+						ribbonText = __( 'Out of stock', 'affiliate-products-importer-for-woocommerce' );
+						ribbonColor = 'pink';
+					}else{
+						ribbonText = __( 'Importable', 'affiliate-products-importer-for-woocommerce' );
+						ribbonColor = 'blue';
 					}
 
 					return <Tag color={ribbonColor}>

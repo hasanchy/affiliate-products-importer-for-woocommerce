@@ -151,7 +151,7 @@ class AmazonAPIConnection extends Endpoint {
 				return new WP_REST_Response( $response_data, 200 );
 			} catch ( \Exception $e ) {
 				$error_message = $e->getMessage();
-				$error_message = stristr( $error_message, 'The request has not been correctly signed' ) ? 'The Secret Key is incorrect or not paired with the access key. Please verify both keys in your Amazon Affiliate account settings and ensure they are correctly copied.' : $error_message;
+				$error_message = stristr( $error_message, 'The request has not been correctly signed' ) ? 'The Secret Key is incorrect or not paired with the Access Key. Please verify both keys in your Amazon Affiliate account settings and ensure they are correctly copied.' : $error_message;
 				return new WP_Error( 'rest_affprodimp_amazon_api_status', esc_html( $error_message ), array( 'status' => $e->getCode() ? $e->getCode() : 500 ) );
 			}
 		} else {

@@ -3,6 +3,7 @@ import { fetchAmazonApiSettings, fetchImportSettings, saveAmazonApiSettings, sav
 
 const initialState = {
 	importRemoteAmazonImage: true,
+	importProductType: 'external',
 	importGalleryImages: true,
 	importProductPrice: true,
 	importProductAttributes: true,
@@ -24,6 +25,9 @@ export const importSettingsSlice = createSlice({
 		setRemoteAmazonImage: (state, action) => {
 			state.importRemoteAmazonImage = action.payload;
 		},
+		setImportProductType: (state, action) => {
+			state.importProductType = action.payload;
+		},
 		setSettingsGalleryImages:(state, action) => {
 			state.importGalleryImages = action.payload;
 		},
@@ -41,6 +45,7 @@ export const importSettingsSlice = createSlice({
 		builder.addCase(fetchImportSettings.fulfilled, (state, action) => {
 			state.isImportSettingsLoading = false;
 			state.importRemoteAmazonImage = action.payload.remote_image === 'yes' ? true: false;
+			state.importProductType = action.payload.product_type === 'simple' ? 'simple': 'external';
 			state.importGalleryImages = action.payload.gallery_images === 'yes' ? true: false;
 			state.importProductPrice = action.payload.product_price === 'yes' ? true: false;
 			state.importProductDescription = action.payload.product_description === 'yes' ? true: false;
@@ -66,5 +71,5 @@ export const importSettingsSlice = createSlice({
 	}
 })
 
-export const { setSettingsToastMessage, setRemoteAmazonImage, setSettingsGalleryImages, setSettingsProductPrice, setSettingsProductAttributes } = importSettingsSlice.actions
+export const { setSettingsToastMessage, setRemoteAmazonImage, setImportProductType, setSettingsGalleryImages, setSettingsProductPrice, setSettingsProductAttributes } = importSettingsSlice.actions
 export default importSettingsSlice.reducer;

@@ -1,13 +1,13 @@
-import { Button, Checkbox, Form, message, Space, Switch } from 'antd';
+import { Button, Checkbox, Form, message, Space, Switch, Select } from 'antd';
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setRemoteAmazonImage, setSettingsGalleryImages, setSettingsProductAttributes, setSettingsProductPrice, setSettingsToastMessage } from './importSettingsSlice';
+import { setRemoteAmazonImage, setImportProductType, setSettingsGalleryImages, setSettingsProductAttributes, setSettingsProductPrice, setSettingsToastMessage } from './importSettingsSlice';
 import { saveImportSettings } from '../../../services/apiService';
 import { __ } from '@wordpress/i18n';
 
 const ImportSettings = () => {
 	const dispatch = useDispatch();
-	const { importRemoteAmazonImage, importGalleryImages, importProductPrice, importProductDescription, importProductAttributes, isImportSettingsSaving, isImportSettingsLoading, settingsToastMessage } = useSelector((state) => state.importSettings);
+	const { importRemoteAmazonImage, importProductType, importGalleryImages, importProductPrice, importProductDescription, importProductAttributes, isImportSettingsSaving, isImportSettingsLoading, settingsToastMessage } = useSelector((state) => state.importSettings);
 
 	const [form] = Form.useForm();
 
@@ -23,12 +23,14 @@ const ImportSettings = () => {
 	}, [settingsToastMessage])
 
     form.setFieldsValue({ 
-        importRemoteAmazonImage
+        importRemoteAmazonImage,
+        importProductType
     });
 
     const onFinish = () => {
         const data = {
             'remote_image': importRemoteAmazonImage ? 'yes' : 'no',
+            'product_type': importProductType,
             'gallery_images': importGalleryImages ? 'yes' : 'no',
             'product_price': importProductPrice ? 'yes' : 'no',
             'product_description': importProductDescription ? 'yes' : 'no',
@@ -39,6 +41,10 @@ const ImportSettings = () => {
 
     const handleRemoteAmazonImage = (value) => {
         dispatch(setRemoteAmazonImage(value));
+    }
+
+    const handleImportProductType = (value) => {
+        dispatch(setImportProductType(value));
     }
 
     const handleGalleryImages = (e) => {
@@ -86,6 +92,22 @@ const ImportSettings = () => {
                     defaultChecked={importRemoteAmazonImage}
                     onChange={handleRemoteAmazonImage}
                 />
+            </Form.Item>
+
+            <Form.Item
+                name="importProductType"
+                label={ __( 'Product Type', 'affiliate-products-importer-for-woocommerce' ) }
+            >
+                <Select
+                    onChange={handleImportProductType}
+                >
+                    <Select.Option key='external' value='external'> 
+                        {__( 'External/Affiliate Product', 'affiliate-products-importer-for-woocommerce' ) }
+                    </Select.Option>
+                    <Select.Option key='simple' value='simple'> 
+                        {__( 'Simple Product', 'affiliate-products-importer-for-woocommerce' ) }
+                    </Select.Option>
+                </Select>
             </Form.Item>
 
             <Form.Item

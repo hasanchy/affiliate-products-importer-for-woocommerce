@@ -57,6 +57,10 @@ class ImportSettings extends Endpoint {
 							'required' => true,
 							'type'     => 'string',
 						),
+						'product_type'       => array(
+							'required' => true,
+							'type'     => 'string',
+						),
 						'gallery_images'     => array(
 							'required' => true,
 							'type'     => 'string',
@@ -96,12 +100,14 @@ class ImportSettings extends Endpoint {
 		}
 
 		$affprodimp_settings_remote_image       = get_option( 'affprodimp_settings_remote_image' );
+		$affprodimp_settings_product_type       = get_option( 'affprodimp_settings_product_type' );
 		$affprodimp_settings_gallery_images     = get_option( 'affprodimp_settings_gallery_images' );
 		$affprodimp_settings_product_price      = get_option( 'affprodimp_settings_product_price' );
 		$affprodimp_settings_product_attributes = get_option( 'affprodimp_settings_product_attributes' );
 
 		$response_data = array(
 			'remote_image'       => $affprodimp_settings_remote_image ? esc_html( $affprodimp_settings_remote_image ) : 'yes',
+			'product_type'       => $affprodimp_settings_product_type ? esc_html( $affprodimp_settings_product_type ) : 'external',
 			'gallery_images'     => $affprodimp_settings_gallery_images ? esc_html( $affprodimp_settings_gallery_images ) : 'yes',
 			'product_price'      => $affprodimp_settings_product_price ? esc_html( $affprodimp_settings_product_price ) : 'yes',
 			'product_attributes' => $affprodimp_settings_product_attributes ? esc_html( $affprodimp_settings_product_attributes ) : 'yes',
@@ -124,12 +130,14 @@ class ImportSettings extends Endpoint {
 		}
 
 		$remote_image       = sanitize_text_field( $request['remote_image'] );
+		$product_type       = sanitize_text_field( $request['product_type'] );
 		$gallery_images     = sanitize_text_field( $request['gallery_images'] );
 		$product_price      = sanitize_text_field( $request['product_price'] );
 		$product_attributes = sanitize_text_field( $request['product_attributes'] );
 
 		try {
 			update_option( 'affprodimp_settings_remote_image', $remote_image );
+			update_option( 'affprodimp_settings_product_type', $product_type );
 			update_option( 'affprodimp_settings_gallery_images', $gallery_images );
 			update_option( 'affprodimp_settings_product_price', $product_price );
 			update_option( 'affprodimp_settings_product_attributes', $product_attributes );
