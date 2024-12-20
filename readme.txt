@@ -37,7 +37,7 @@ Discover the powerful features of AmazSync by exploring our live demo. Get hands
 **Username:** demo
 **Password:** demo123!
 
-Ready to supercharge your affiliate marketing? [Buy AmazSync Premium on CodeCanyon](https://codecanyon.net/item/amazon-affiliates-woocommerce-wordpress-plugin/54951322) and take your WooCommerce store to the next level!
+Ready to supercharge your affiliate marketing? **[Buy AmazSync Premium on CodeCanyon](https://1.envato.market/vPDEKj)** and take your WooCommerce store to the next level!
 
 == 3rd Party or External Service ==
 This plugin utilizes the Amazon Product Advertising API (PA API) to fetch products from Amazon into your WooCommerce store. To fully benefit from this plugin's features, you will need access to the Product Advertising API 5.0.
