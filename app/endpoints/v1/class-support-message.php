@@ -57,7 +57,7 @@ class SupportMessage extends Endpoint {
 		}
 
 		$to      = 'support@themedyno.com';
-		$subject = 'AmazSync (Lite): Message from ' . $email;
+		$subject = 'AmaSync (Lite): Message from ' . $email;
 		$body    = $message;
 		$headers = array(
 			'Content-Type: text/plain; charset=UTF-8',
