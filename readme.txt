@@ -2,7 +2,7 @@
 Contributors: hasanchowdhury, themedyno
 Tags: amazon affiliate, products importer, monetize, amazon associates
 Requires at least: 5.2
-Tested up to: 6.7
+Tested up to: 6.9
 Requires PHP: 7.2.0
 Stable tag: 1.3.1
 License: GPLv2 or later
