@@ -1,6 +1,6 @@
 {
 	"name": "affiliate-products-importer-for-woocommerce",
-	"version": "1.3.1",
+	"version": "1.3.2",
 	"description": "Easily import Amazon affiliate products into your WooCommerce store.",
 	"main": "index.js",
 	"scripts": {
