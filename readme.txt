@@ -30,10 +30,10 @@ AmaSync is a streamlined WordPress plugin designed to simplify the process of im
 == Upgrade to Premium for Even More Power: ==
 Unlock the full potential of AmaSync by upgrading to the Premium version, which includes advanced features such as **import by search** and **product synchronization** to keep your WooCommerce store always up-to-date.
 
-**Experience AmaSync in Action – [Live Demo](https://www.themedyno.com/amazsync-demo/)**
+**Experience AmaSync in Action – [Live Demo](https://www.themedyno.com/amasync-demo/)**
 Discover the powerful features of AmaSync by exploring our live demo. Get hands-on with its functionality and see how it can streamline your workflow.
 
-**Access Live Demo:** [https://www.themedyno.com/amazsync-demo/](https://www.themedyno.com/amazsync-demo/)
+**Access Live Demo:** [https://www.themedyno.com/amasync-demo/](https://www.themedyno.com/amasync-demo/)
 **Username:** demo
 **Password:** demo123!
 
