@@ -2,9 +2,9 @@
 Contributors: hasanchowdhury, themedyno
 Tags: amazon affiliate, products importer, monetize, amazon associates
 Requires at least: 5.2
-Tested up to: 6.7
+Tested up to: 6.9
 Requires PHP: 7.2.0
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.en.html
 
@@ -30,10 +30,10 @@ AmaSync is a streamlined WordPress plugin designed to simplify the process of im
 == Upgrade to Premium for Even More Power: ==
 Unlock the full potential of AmaSync by upgrading to the Premium version, which includes advanced features such as **import by search** and **product synchronization** to keep your WooCommerce store always up-to-date.
 
-**Experience AmaSync in Action – [Live Demo](https://www.themedyno.com/amazsync-demo/)**
+**Experience AmaSync in Action – [Live Demo](https://www.themedyno.com/amasync-demo/)**
 Discover the powerful features of AmaSync by exploring our live demo. Get hands-on with its functionality and see how it can streamline your workflow.
 
-**Access Live Demo:** [https://www.themedyno.com/amazsync-demo/](https://www.themedyno.com/amazsync-demo/)
+**Access Live Demo:** [https://www.themedyno.com/amasync-demo/](https://www.themedyno.com/amasync-demo/)
 **Username:** demo
 **Password:** demo123!
 
@@ -62,7 +62,12 @@ The full source code, including the non-compiled versions of JavaScript and CSS 
 5. Navigate to "Amazon Products Importer"
 
 == Changelog ==
+1.3.2 (2026-01-29)
+Migrate Offers v1 to v2 for compliance with upcoming Amazon PA API 5.0 changes
+
 1.1.2 (2024-10-31)
+
 1.1.1 (2024-10-27)
+
 1.0.0 (2024-07-31)
 Initial Release

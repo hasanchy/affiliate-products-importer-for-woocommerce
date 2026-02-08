@@ -7,7 +7,7 @@
  * Description:     Easily import Amazon affiliate products into your WooCommerce store.
  * Author:          ThemeDyno
  * Author URI:      https://themedyno.com/
- * Version:         1.3.1
+ * Version:         1.3.2
  * Text Domain:     affiliate-products-importer-for-woocommerce
  * Domain Path:     /languages
  *
@@ -88,9 +88,25 @@ class AFFPRODIMP_AffiliateImporter {
 	 * Class constructor.
 	 */
 	private function __construct() {
+		add_action( 'plugins_loaded', array( $this, 'check_woocommerce' ), 5 ); // Run early to check WooCommerce
 		add_action( 'plugins_loaded', array( $this, 'load' ) );
 		register_activation_hook( __FILE__, array( $this, 'activate' ) );
 		add_action( 'admin_init', array( $this, 'redirect_after_activation' ) );
+	}
+
+	/**
+	 * Check if WooCommerce is active.
+	 */
+	public function check_woocommerce() {
+		if ( ! class_exists( 'WooCommerce' ) ) {
+			add_action(
+				'admin_notices',
+				function () {
+					echo '<div class="error"><p>' . esc_html__( 'AmaSync - Amazon Product Importer & Affiliate for WooCommerce requires WooCommerce to be installed and activated.', 'affiliate-products-importer-for-woocommerce' ) . '</p></div>';
+				}
+			);
+			return;
+		}
 	}
 
 	/**

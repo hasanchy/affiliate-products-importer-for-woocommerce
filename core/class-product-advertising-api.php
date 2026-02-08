@@ -48,13 +48,6 @@ class ProductAdvertisingApi {
 		'ItemInfo.TechnicalInfo',
 		'ItemInfo.Title',
 		'ItemInfo.TradeInInfo',
-		'Offers.Listings.Availability.Message',
-		'Offers.Listings.Availability.Type',
-		'Offers.Listings.Condition',
-		'Offers.Listings.DeliveryInfo.IsFreeShippingEligible',
-		'Offers.Listings.MerchantInfo',
-		'Offers.Listings.Price',
-		'Offers.Listings.SavingBasis',
 		'OffersV2.Listings.Availability',
 		'OffersV2.Listings.Condition',
 		'OffersV2.Listings.DealDetails',
@@ -79,13 +72,14 @@ class ProductAdvertisingApi {
 		'ItemInfo.TechnicalInfo',
 		'ItemInfo.Title',
 		'ItemInfo.TradeInInfo',
-		'Offers.Listings.Availability.Message',
-		'Offers.Listings.Availability.Type',
-		'Offers.Listings.Condition',
-		'Offers.Listings.DeliveryInfo.IsFreeShippingEligible',
-		'Offers.Listings.MerchantInfo',
-		'Offers.Listings.Price',
-		'Offers.Listings.SavingBasis'
+		'OffersV2.Listings.Availability',
+		'OffersV2.Listings.Condition',
+		'OffersV2.Listings.DealDetails',
+		'OffersV2.Listings.IsBuyBoxWinner',
+		'OffersV2.Listings.LoyaltyPoints',
+		'OffersV2.Listings.MerchantInfo',
+		'OffersV2.Listings.Price',
+		'OffersV2.Listings.Type'
 	);
 
 	public function __construct( $accessKey, $secretKey, $marketplace, $partnerTag, $host, $region ) {
