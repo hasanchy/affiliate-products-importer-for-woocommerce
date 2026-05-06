@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { fetchAmazonApiSettings, saveAmazonApiSettings, verifyAmazonApiSettings } from '../../../services/apiService';
 
 const initialState = {
+	amazonApiType: 'creators_api',
 	amazonAccessKey: '',
 	amazonSecretKey: '',
 	amazonCountryCode: 'us',
@@ -20,6 +21,9 @@ export const amazonApiSettingsSlice = createSlice({
 	name: 'amazonApiSettings',
 	initialState,
 	reducers: {
+		setAmazonApiType: (state, action) => {
+			state.amazonApiType = action.payload;
+		},
 		setAmazonAccessKey: (state, action) => {
 			state.amazonAccessKey = action.payload;
 		},
@@ -78,5 +82,5 @@ export const amazonApiSettingsSlice = createSlice({
 	}
 })
 
-export const { setSettingsActiveTab, setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId, setSettingsToastMessage } = amazonApiSettingsSlice.actions
+export const { setSettingsActiveTab, setAmazonApiType, setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId, setSettingsToastMessage } = amazonApiSettingsSlice.actions
 export default amazonApiSettingsSlice.reducer;

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { Alert, Button, Form, Input, message, Select } from 'antd';
+import { Alert, Button, Form, Input, message, Radio, Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { AU, BE, BR, CA, CN, EG, FR, DE, IN, IT, JP, MX, NL, PL, SA, SG, ES, SE, TR, AE, US, GB } from 'country-flag-icons/react/3x2'
 import { setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId, setSettingsToastMessage } from './amazonApiSettingsSlice';
@@ -35,7 +35,7 @@ const affiliateCountries = [
 const AmazonApiSettings = () => {
 
 	const dispatch = useDispatch();
-	const { amazonAccessKey, amazonSecretKey, amazonCountryCode, amazonAffiliateId, isAmazonAPISettingsSaving, isAmazonApiSettingsVerifying, error, settingsToastMessage } = useSelector((state) => state.amazonApiSettings);
+	const { amazonApiType, amazonAccessKey, amazonSecretKey, amazonCountryCode, amazonAffiliateId, isAmazonAPISettingsSaving, isAmazonApiSettingsVerifying, error, settingsToastMessage } = useSelector((state) => state.amazonApiSettings);
 
     const [form] = Form.useForm();
 
@@ -51,6 +51,7 @@ const AmazonApiSettings = () => {
 	}, [settingsToastMessage])
 
     form.setFieldsValue({ 
+        amazonApiType,
         amazonAccessKey,
         amazonSecretKey,
         amazonAffiliateId,
@@ -59,6 +60,7 @@ const AmazonApiSettings = () => {
 
     const handleVerifyAmazonAPISettings = async () => {
         let data = {
+			api_type: amazonApiType,
 			access_key: amazonAccessKey,
 			secret_key: amazonSecretKey,
 			country_code: amazonCountryCode,
@@ -84,6 +86,8 @@ const AmazonApiSettings = () => {
             dispatch(setAmazonAffiliateId(fieldValue));
         }else if(fieldName == 'amazonCountryCode'){
             dispatch(setAmazonCountryCode(fieldValue));
+        }else if(fieldName == 'amazonApiType'){
+            dispatch(setAmazonApiType(fieldValue));
         }
     }
 
@@ -101,6 +105,17 @@ const AmazonApiSettings = () => {
             {buttonText}
         </Button>
     }
+
+    const options = [
+        {
+            label: <>{__( 'Creators API', 'affiliate-products-importer-for-woocommerce' )}</>,
+            value: 'creators_api',
+        },
+        {
+            label: <>{__( 'Product Advertising API', 'affiliate-products-importer-for-woocommerce' )}</>,
+            value: 'pa_api',
+        }
+    ];
 
 	return (
         <>
@@ -127,7 +142,19 @@ const AmazonApiSettings = () => {
                 autoComplete="off"
             >
                 <Form.Item
-                    label={ __( 'Amazon AWS Access Key', 'affiliate-products-importer-for-woocommerce' ) }
+                    name="apiType"
+                    label={ __( 'Amazon API Type', 'affiliate-products-importer-for-woocommerce' ) }
+                >
+                    <Radio.Group
+                        options={options}
+                        defaultValue={amazonApiType}
+                        optionType="button"
+                        buttonStyle="solid"
+                        // onChange={(e) => dispatch(setCheckoutOn(e.target.value))}
+                    />
+                </Form.Item>
+                <Form.Item
+                    label={ __( 'PA API Access Key', 'affiliate-products-importer-for-woocommerce' ) }
                     name="amazonAccessKey"
                     rules={[
                         {
@@ -140,7 +167,7 @@ const AmazonApiSettings = () => {
                 </Form.Item>
 
                 <Form.Item
-                    label={__( 'Amazon AWS Secret Key', 'affiliate-products-importer-for-woocommerce' ) }
+                    label={__( 'PA API Secret Key', 'affiliate-products-importer-for-woocommerce' ) }
                     name="amazonSecretKey"
                     rules={[
                         {
