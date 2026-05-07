@@ -3,10 +3,13 @@ import { fetchAmazonApiSettings, saveAmazonApiSettings, verifyAmazonApiSettings 
 
 const initialState = {
 	amazonApiType: 'creators_api',
+	amazonClientId: '',
+	amazonClientSecret: '',
 	amazonAccessKey: '',
 	amazonSecretKey: '',
 	amazonCountryCode: 'us',
 	amazonAffiliateId: '',
+	amazonApiVersion: null,
 
 	isSettingsLoading: false,
 	isAmazonAPISettingsSaving: false,
@@ -23,6 +26,15 @@ export const amazonApiSettingsSlice = createSlice({
 	reducers: {
 		setAmazonApiType: (state, action) => {
 			state.amazonApiType = action.payload;
+		},
+		setAmazonClientId: (state, action) => {
+			state.amazonClientId = action.payload;
+		},
+		setAmazonClientSecret: (state, action) => {
+			state.amazonClientSecret = action.payload;
+		},
+		setAmazonApiVersion: (state, action) => {
+			state.amazonApiVersion = action.payload;
 		},
 		setAmazonAccessKey: (state, action) => {
 			state.amazonAccessKey = action.payload;
@@ -51,6 +63,9 @@ export const amazonApiSettingsSlice = createSlice({
 			state.amazonSecretKey = action.payload.secret_key;
 			state.amazonCountryCode = action.payload.country_code;
 			state.amazonAffiliateId = action.payload.affiliate_id;
+			state.amazonClientId = action.payload.client_id;
+			state.amazonClientSecret = action.payload.client_secret;
+			state.amazonApiVersion = action.payload.api_version;
 		}),
 		builder.addCase(fetchAmazonApiSettings.rejected, (state, action) => {
 			state.isSettingsLoading = false;
@@ -82,5 +97,5 @@ export const amazonApiSettingsSlice = createSlice({
 	}
 })
 
-export const { setSettingsActiveTab, setAmazonApiType, setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId, setSettingsToastMessage } = amazonApiSettingsSlice.actions
+export const { setSettingsActiveTab, setAmazonApiType, setAmazonClientId, setAmazonClientSecret, setAmazonApiVersion, setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId, setSettingsToastMessage } = amazonApiSettingsSlice.actions
 export default amazonApiSettingsSlice.reducer;

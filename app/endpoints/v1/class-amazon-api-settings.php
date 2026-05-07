@@ -9,6 +9,7 @@ namespace AFFPRODIMP\App\Endpoints\V1;
 defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
 use AFFPRODIMP\Core\Endpoint;
+use AFFPRODIMP\Core\Settings;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -53,13 +54,28 @@ class AmazonApiSettings extends Endpoint {
 				array(
 					'methods'             => 'POST',
 					'args'                => array(
+						'client_id'   => array(
+							'required'    => false,
+							'description' => \esc_html__( 'Amazon Client ID is required.', 'affiliate-products-importer-for-woocommerce' ),
+							'type'        => 'string',
+						),
+						'client_secret'   => array(
+							'required'    => false,
+							'description' => \esc_html__( 'Amazon Client Secret is required.', 'affiliate-products-importer-for-woocommerce' ),
+							'type'        => 'string',
+						),
+						'api_version' => array(
+							'required'    => false,
+							'description' => \esc_html__( 'Creators API Version is required.', 'affiliate-products-importer-for-woocommerce' ),
+							'type'        => 'string',
+						),
 						'access_key'   => array(
-							'required'    => true,
+							'required'    => false,
 							'description' => __( 'Amazon Access Key is required.', 'affiliate-products-importer-for-woocommerce' ),
 							'type'        => 'string',
 						),
 						'secret_key'   => array(
-							'required'    => true,
+							'required'    => false,
 							'description' => __( 'Amazon AWS Secret Key is required.', 'affiliate-products-importer-for-woocommerce' ),
 							'type'        => 'string',
 						),
@@ -70,7 +86,7 @@ class AmazonApiSettings extends Endpoint {
 						),
 						'affiliate_id' => array(
 							'required'    => true,
-							'description' => __( 'Amazon Affiliate ID is required.', 'affiliate-products-importer-for-woocommerce' ),
+							'description' => __( 'Amazon Tracking ID is required.', 'affiliate-products-importer-for-woocommerce' ),
 							'type'        => 'string',
 						),
 					),
@@ -93,15 +109,24 @@ class AmazonApiSettings extends Endpoint {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
-		$affprodimp_amazon_access_key   = get_option( 'affprodimp_amazon_access_key' );
-		$affprodimp_amazon_secret_key   = get_option( 'affprodimp_amazon_secret_key' );
-		$affprodimp_amazon_country_code = get_option( 'affprodimp_amazon_country_code' );
-		$affprodimp_amazon_affiliate_id = get_option( 'affprodimp_amazon_affiliate_id' );
+		$affprodimp_amazon_client_id     = get_option( 'affprodimp_amazon_client_id' );
+		$affprodimp_amazon_client_secret = get_option( 'affprodimp_amazon_client_secret' );
+		$affprodimp_amazon_access_key    = get_option( 'affprodimp_amazon_access_key' );
+		$affprodimp_amazon_secret_key    = get_option( 'affprodimp_amazon_secret_key' );
+		$affprodimp_amazon_affiliate_id  = get_option( 'affprodimp_amazon_affiliate_id' );
+
+		$affprodimp_amazon_country_code  = get_option( 'affprodimp_amazon_country_code', 'us' );
+		$country_code = 'gb' === $affprodimp_amazon_country_code ? 'uk' : $affprodimp_amazon_country_code;
+
+		$affprodimp_amazon_api_version = get_option( 'affprodimp_amazon_api_version', Settings::get_amazon_default_credential_version( $country_code ) );
 
 		$response_data = array(
+			'client_id'     => $affprodimp_amazon_client_id ? \esc_html( $affprodimp_amazon_client_id ) : '',
+			'client_secret' => $affprodimp_amazon_client_secret ? \esc_html( $affprodimp_amazon_client_secret ) : '',
+			'api_version' => \esc_html( $affprodimp_amazon_api_version ),
 			'access_key'   => $affprodimp_amazon_access_key ? esc_html( $affprodimp_amazon_access_key ) : '',
 			'secret_key'   => $affprodimp_amazon_secret_key ? esc_html( $affprodimp_amazon_secret_key ) : '',
-			'country_code' => $affprodimp_amazon_country_code ? esc_html( $affprodimp_amazon_country_code ) : 'us',
+			'country_code' => $country_code ? esc_html( $country_code ) : '',
 			'affiliate_id' => $affprodimp_amazon_affiliate_id ? esc_html( $affprodimp_amazon_affiliate_id ) : '',
 		);
 
@@ -121,15 +146,29 @@ class AmazonApiSettings extends Endpoint {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
+		$api_type     = \sanitize_text_field( $request['api_type'] );
+		$client_id     = \sanitize_text_field( $request['client_id'] );
+		$client_secret = \sanitize_text_field( $request['client_secret'] );
+		$api_version = \sanitize_text_field( $request['api_version'] );
 		$access_key   = sanitize_text_field( $request['access_key'] );
 		$secret_key   = sanitize_text_field( $request['secret_key'] );
 		$country_code = sanitize_text_field( $request['country_code'] );
 		$affiliate_id = sanitize_text_field( $request['affiliate_id'] );
 
-		if ( ! empty( $access_key ) && ! empty( $secret_key ) && ! empty( $country_code ) && ! empty( $affiliate_id ) ) {
+		if ( ! empty( $country_code ) && ! empty( $affiliate_id ) ) {
 			try {
-				update_option( 'affprodimp_amazon_access_key', $access_key );
-				update_option( 'affprodimp_amazon_secret_key', $secret_key );
+				
+				update_option( 'affprodimp_amazon_api_type', $api_type );
+
+				if( $api_type == 'creators_api' ){
+					\update_option( 'affprodimp_amazon_client_id', $client_id );
+					\update_option( 'affprodimp_amazon_client_secret', $client_secret );
+					\update_option( 'affprodimp_amazon_api_version', $api_version );
+				}else{
+					update_option( 'affprodimp_amazon_access_key', $access_key );
+					update_option( 'affprodimp_amazon_secret_key', $secret_key );
+				}
+				
 				update_option( 'affprodimp_amazon_country_code', $country_code );
 				update_option( 'affprodimp_amazon_affiliate_id', $affiliate_id );
 

@@ -17,114 +17,190 @@ class Settings {
 		'au' => array(
 			'marketplace' => 'www.amazon.com.au',
 			'host'        => 'webservices.amazon.com.au',
-			'region'      => 'us-west-2',
+			'pa_api_region'      => 'us-west-2',
+			'region'      => 'FE',
 		),
 		'be' => array(
 			'marketplace' => 'www.amazon.com.be',
 			'host'        => 'webservices.amazon.com.be',
-			'region'      => 'eu-west-1',
+			'pa_api_region'      => 'eu-west-1',
+			'region'      => 'EU',
 		),
 		'br' => array(
 			'marketplace' => 'www.amazon.com.br',
 			'host'        => 'webservices.amazon.com.br',
-			'region'      => 'us-east-1',
+			'pa_api_region'      => 'us-east-1',
+			'region'      => 'NA',
 		),
 		'ca' => array(
 			'marketplace' => 'www.amazon.ca',
 			'host'        => 'webservices.amazon.ca',
-			'region'      => 'us-east-1',
-		),
-		'cn' => array(
-			'marketplace' => 'www.amazon.cn',
-			'host'        => 'webservices.amazon.cn',
-			'region'      => 'us-west-2',
+			'pa_api_region'      => 'us-east-1',
+			'region'      => 'NA',
 		),
 		'eg' => array(
 			'marketplace' => 'www.amazon.eg',
 			'host'        => 'webservices.amazon.eg',
-			'region'      => 'eu-west-1',
+			'pa_api_region'      => 'eu-west-1',
+			'region'      => 'EU',
 		),
 		'fr' => array(
 			'marketplace' => 'www.amazon.fr',
 			'host'        => 'webservices.amazon.fr',
-			'region'      => 'eu-west-1',
+			'pa_api_region'      => 'eu-west-1',
+			'region'      => 'EU',
 		),
 		'de' => array(
 			'marketplace' => 'www.amazon.de',
 			'host'        => 'webservices.amazon.de',
-			'region'      => 'eu-west-1',
+			'pa_api_region'      => 'eu-west-1',
+			'region'      => 'EU',
 		),
 		'in' => array(
 			'marketplace' => 'www.amazon.in',
 			'host'        => 'webservices.amazon.in',
-			'region'      => 'eu-west-1',
+			'pa_api_region'      => 'eu-west-1',
+			'region'      => 'EU',
 		),
 		'it' => array(
 			'marketplace' => 'www.amazon.it',
 			'host'        => 'webservices.amazon.it',
-			'region'      => 'eu-west-1',
+			'pa_api_region'      => 'eu-west-1',
+			'region'      => 'EU',
 		),
 		'jp' => array(
 			'marketplace' => 'www.amazon.co.jp',
 			'host'        => 'webservices.amazon.co.jp',
-			'region'      => 'us-west-2',
+			'pa_api_region'      => 'us-west-2',
+			'region'      => 'FE',
 		),
 		'mx' => array(
 			'marketplace' => 'www.amazon.com.mx',
 			'host'        => 'webservices.amazon.com.mx',
-			'region'      => 'us-east-1',
+			'pa_api_region'      => 'us-east-1',
+			'region'      => 'NA',
 		),
 		'nl' => array(
 			'marketplace' => 'www.amazon.nl',
 			'host'        => 'webservices.amazon.nl',
-			'region'      => 'eu-west-1',
+			'pa_api_region'      => 'eu-west-1',
+			'region'      => 'EU',
 		),
 		'pl' => array(
 			'marketplace' => 'www.amazon.pl',
 			'host'        => 'webservices.amazon.pl',
-			'region'      => 'eu-west-1',
+			'pa_api_region'      => 'eu-west-1',
+			'region'      => 'EU',
 		),
 		'sa' => array(
 			'marketplace' => 'www.amazon.sa',
 			'host'        => 'webservices.amazon.sa',
-			'region'      => 'eu-west-1',
+			'pa_api_region'      => 'eu-west-1',
+			'region'      => 'EU',
 		),
 		'sg' => array(
 			'marketplace' => 'www.amazon.sg',
 			'host'        => 'webservices.amazon.sg',
-			'region'      => 'us-west-2',
+			'pa_api_region'      => 'us-west-2',
+			'region'      => 'FE',
 		),
 		'es' => array(
 			'marketplace' => 'www.amazon.es',
 			'host'        => 'webservices.amazon.es',
-			'region'      => 'eu-west-1',
+			'pa_api_region'      => 'eu-west-1',
+			'region'      => 'EU',
 		),
 		'se' => array(
 			'marketplace' => 'www.amazon.se',
 			'host'        => 'webservices.amazon.se',
-			'region'      => 'eu-west-1',
+			'pa_api_region'      => 'eu-west-1',
+			'region'      => 'EU',
 		),
 		'tr' => array(
 			'marketplace' => 'www.amazon.com.tr',
 			'host'        => 'webservices.amazon.com.tr',
-			'region'      => 'eu-west-1',
+			'pa_api_region'      => 'eu-west-1',
+			'region'      => 'EU',
 		),
 		'ae' => array(
 			'marketplace' => 'www.amazon.ae',
 			'host'        => 'webservices.amazon.ae',
-			'region'      => 'eu-west-1',
+			'pa_api_region'      => 'eu-west-1',
+			'region'      => 'EU',
+		),
+		'uk' => array(
+			'marketplace' => 'www.amazon.co.uk',
+			'host'        => 'webservices.amazon.co.uk',
+			'pa_api_region'      => 'eu-west-1',
+			'region'      => 'EU',
 		),
 		'us' => array(
 			'marketplace' => 'www.amazon.com',
 			'host'        => 'webservices.amazon.com',
-			'region'      => 'us-east-1',
-		),
-		'gb' => array(
-			'marketplace' => 'www.amazon.co.uk',
-			'host'        => 'webservices.amazon.co.uk',
-			'region'      => 'eu-west-1',
+			'pa_api_region'      => 'us-east-1',
+			'region'      => 'NA',
 		),
 	);
+
+	const AMAZON_CREDENTIAL_VERSIONs = array(
+		'2.1' => array(
+			'region'      => 'NA',
+			'token_endpoint' => 'https://creatorsapi.auth.us-east-1.amazoncognito.com/oauth2/token',
+		),
+		'2.2' => array(
+			'region'      => 'EU',
+			'token_endpoint' => 'https://creatorsapi.auth.eu-south-2.amazoncognito.com/oauth2/token',
+		),
+		'2.3' => array(
+			'region'      => 'FE',
+			'token_endpoint' => 'https://creatorsapi.auth.us-west-2.amazoncognito.com/oauth2/token',
+		),
+		'3.1' => array(
+			'region'      => 'NA',
+			'token_endpoint' => 'https://api.amazon.com/auth/o2/token',
+		),
+		'3.2' => array(
+			'region'      => 'EU',
+			'token_endpoint' => 'https://api.amazon.co.uk/auth/o2/token',
+		),
+		'3.3' => array(
+			'region'      => 'FE',
+			'token_endpoint' => 'https://api.amazon.co.jp/auth/o2/token',
+		),
+	);
+
+	/**
+	 * Get the Amazon credential version for a given country code.
+	 *
+	 * @param string $country_code The country code.
+	 * @return string The Amazon credential version.
+	 */
+	public static function get_amazon_default_credential_version( $country_code ) {
+		$region = self::AMAZON_MARKETPLACES[ $country_code ]['region'] ?? '';
+
+		foreach ( self::AMAZON_CREDENTIAL_VERSIONs as $version => $info ) {
+			if ( $info['region'] === $region ) {
+				return $version;
+			}
+		}
+
+		return '';
+	}
+
+	/**
+	 * Get the Amazon token endpoint for a given country code.
+	 *
+	 * @param string $country_code The country code.
+	 * @return string The Amazon token endpoint.
+	 */
+	public static function get_amazon_token_endpoint( $credential_version ) {
+		if ( $credential_version && isset( self::AMAZON_CREDENTIAL_VERSIONs[ $credential_version ] ) ) {
+			return self::AMAZON_CREDENTIAL_VERSIONs[ $credential_version ]['token_endpoint'];
+		}
+
+		return '';
+		
+	}
 
 	/**
 	 * Check if the product is already imported by ASIN.
@@ -177,7 +253,7 @@ class Settings {
 	 * @return string The Amazon region.
 	 */
 	public static function get_amazon_region( $country_code ) {
-		return self::AMAZON_MARKETPLACES[ $country_code ]['region'] ?? '';
+		return self::AMAZON_MARKETPLACES[ $country_code ]['pa_api_region'] ?? '';
 	}
 
 	/**

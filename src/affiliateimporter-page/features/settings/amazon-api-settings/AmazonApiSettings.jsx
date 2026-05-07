@@ -1,41 +1,40 @@
 import React, {useEffect} from 'react';
-import { Alert, Button, Form, Input, message, Radio, Select } from 'antd';
+import { Alert, Button, Form, Input, message, Radio, Select, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { AU, BE, BR, CA, CN, EG, FR, DE, IN, IT, JP, MX, NL, PL, SA, SG, ES, SE, TR, AE, US, GB } from 'country-flag-icons/react/3x2'
-import { setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId, setSettingsToastMessage } from './amazonApiSettingsSlice';
+import { setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId, setSettingsToastMessage, setAmazonApiType, setAmazonClientId, setAmazonClientSecret, setAmazonApiVersion } from './amazonApiSettingsSlice';
 import { saveAmazonApiSettings, verifyAmazonApiSettings } from '../../../services/apiService';
 import { __ } from '@wordpress/i18n';
 import { setAmazonApiConnectionStatus } from '../../../components/amazon-api-connection/amazonApiConnectionSlice';
 
 const affiliateCountries = [
-    { 'flag': <AU style={{width:'20px'}}/>,'code': 'au', 'name': 'Australia' }, 
-    { 'flag': <BE style={{width:'20px'}}/>,'code': 'be', 'name': 'Belgium' }, 
-    { 'flag': <BR style={{width:'20px'}}/>,'code': 'br', 'name': 'Brazil' },
-    { 'flag': <CA style={{width:'20px'}}/>,'code': 'ca', 'name': 'Canada' },
-    { 'flag': <CN style={{width:'20px'}}/>,'code': 'cn', 'name': 'China' }, 
-    { 'flag': <EG style={{width:'20px'}}/>,'code': 'eg', 'name': 'Egypt' }, 
-    { 'flag': <FR style={{width:'20px'}}/>,'code': 'fr', 'name': 'France' }, 
-    { 'flag': <DE style={{width:'20px'}}/>,'code': 'de', 'name': 'Germany' }, 
-    { 'flag': <IN style={{width:'20px'}}/>,'code': 'in', 'name': 'India' }, 
-    { 'flag': <IT style={{width:'20px'}}/>,'code': 'it', 'name': 'Italy' }, 
-    { 'flag': <JP style={{width:'20px'}}/>,'code': 'jp', 'name': 'Japan' }, 
-    { 'flag': <MX style={{width:'20px'}}/>,'code': 'mx', 'name': 'Mexico' }, 
-    { 'flag': <NL style={{width:'20px'}}/>,'code': 'nl', 'name': 'Netherlands' }, 
-    { 'flag': <PL style={{width:'20px'}}/>,'code': 'pl', 'name': 'Poland' }, 
-    { 'flag': <SA style={{width:'20px'}}/>,'code': 'sa', 'name': 'Saudi Arabia' }, 
-    { 'flag': <SG style={{width:'20px'}}/>,'code': 'sg', 'name': 'Singapore' }, 
-    { 'flag': <ES style={{width:'20px'}}/>,'code': 'es', 'name': 'Spain' }, 
-    { 'flag': <SE style={{width:'20px'}}/>,'code': 'se', 'name': 'Sweden' }, 
-    { 'flag': <TR style={{width:'20px'}}/>,'code': 'tr', 'name': 'Turkey' },
-    { 'flag': <AE style={{width:'20px'}}/>,'code': 'ae', 'name': 'United Arab Emirates' }, 
-    { 'flag': <US style={{width:'20px'}}/>,'code': 'us', 'name': 'United States' }, 
-    { 'flag': <GB style={{width:'20px'}}/>,'code': 'gb', 'name': 'United Kingdom' }
+    { 'flag': <AU style={{width:'20px'}}/>,'code': 'au', 'name': 'Australia', 'apiVersions': ['2.3', '3.3'] }, 
+    { 'flag': <BE style={{width:'20px'}}/>,'code': 'be', 'name': 'Belgium', 'apiVersions': ['2.2', '3.2'] }, 
+    { 'flag': <BR style={{width:'20px'}}/>,'code': 'br', 'name': 'Brazil', 'apiVersions': ['2.1', '3.1'] },
+    { 'flag': <CA style={{width:'20px'}}/>,'code': 'ca', 'name': 'Canada', 'apiVersions': ['2.1', '3.1'] },
+    { 'flag': <EG style={{width:'20px'}}/>,'code': 'eg', 'name': 'Egypt', 'apiVersions': ['2.2', '3.2'] }, 
+    { 'flag': <FR style={{width:'20px'}}/>,'code': 'fr', 'name': 'France', 'apiVersions': ['2.2', '3.2'] }, 
+    { 'flag': <DE style={{width:'20px'}}/>,'code': 'de', 'name': 'Germany', 'apiVersions': ['2.2', '3.2'] }, 
+    { 'flag': <IN style={{width:'20px'}}/>,'code': 'in', 'name': 'India', 'apiVersions': ['2.2', '3.2'] }, 
+    { 'flag': <IT style={{width:'20px'}}/>,'code': 'it', 'name': 'Italy', 'apiVersions': ['2.2', '3.2'] }, 
+    { 'flag': <JP style={{width:'20px'}}/>,'code': 'jp', 'name': 'Japan', 'apiVersions': ['2.3', '3.3'] }, 
+    { 'flag': <MX style={{width:'20px'}}/>,'code': 'mx', 'name': 'Mexico', 'apiVersions': ['2.1', '3.1'] }, 
+    { 'flag': <NL style={{width:'20px'}}/>,'code': 'nl', 'name': 'Netherlands', 'apiVersions': ['2.2', '3.2'] }, 
+    { 'flag': <PL style={{width:'20px'}}/>,'code': 'pl', 'name': 'Poland', 'apiVersions': ['2.2', '3.2'] }, 
+    { 'flag': <SA style={{width:'20px'}}/>,'code': 'sa', 'name': 'Saudi Arabia', 'apiVersions': ['2.2', '3.2'] }, 
+    { 'flag': <SG style={{width:'20px'}}/>,'code': 'sg', 'name': 'Singapore', 'apiVersions': ['2.3', '3.3'] }, 
+    { 'flag': <ES style={{width:'20px'}}/>,'code': 'es', 'name': 'Spain', 'apiVersions': ['2.2', '3.2'] }, 
+    { 'flag': <SE style={{width:'20px'}}/>,'code': 'se', 'name': 'Sweden', 'apiVersions': ['2.2', '3.2'] }, 
+    { 'flag': <TR style={{width:'20px'}}/>,'code': 'tr', 'name': 'Turkey', 'apiVersions': ['2.2', '3.2'] },
+    { 'flag': <AE style={{width:'20px'}}/>,'code': 'ae', 'name': 'United Arab Emirates', 'apiVersions': ['2.2', '3.2'] }, 
+    { 'flag': <GB style={{width:'20px'}}/>,'code': 'uk', 'name': 'United Kingdom', 'apiVersions': ['2.2', '3.2'] },
+    { 'flag': <US style={{width:'20px'}}/>,'code': 'us', 'name': 'United States', 'apiVersions': ['2.1', '3.1'] }, 
 ];
 
 const AmazonApiSettings = () => {
 
 	const dispatch = useDispatch();
-	const { amazonApiType, amazonAccessKey, amazonSecretKey, amazonCountryCode, amazonAffiliateId, isAmazonAPISettingsSaving, isAmazonApiSettingsVerifying, error, settingsToastMessage } = useSelector((state) => state.amazonApiSettings);
+	const { amazonApiType, amazonClientId, amazonClientSecret, amazonApiVersion, amazonAccessKey, amazonSecretKey, amazonCountryCode, amazonAffiliateId, isAmazonAPISettingsSaving, isAmazonApiSettingsVerifying, error, settingsToastMessage } = useSelector((state) => state.amazonApiSettings);
 
     const [form] = Form.useForm();
 
@@ -52,6 +51,9 @@ const AmazonApiSettings = () => {
 
     form.setFieldsValue({ 
         amazonApiType,
+        amazonClientId,
+        amazonClientSecret,
+        amazonApiVersion,
         amazonAccessKey,
         amazonSecretKey,
         amazonAffiliateId,
@@ -61,6 +63,9 @@ const AmazonApiSettings = () => {
     const handleVerifyAmazonAPISettings = async () => {
         let data = {
 			api_type: amazonApiType,
+            client_id: amazonClientId,
+            client_secret: amazonClientSecret,
+            api_version: amazonApiVersion,
 			access_key: amazonAccessKey,
 			secret_key: amazonSecretKey,
 			country_code: amazonCountryCode,
@@ -78,6 +83,7 @@ const AmazonApiSettings = () => {
     const onFieldsChange = (values) => {
         let fieldName = values[0].name[0];
         let fieldValue = values[0].value;
+
         if(fieldName == 'amazonAccessKey'){
             dispatch(setAmazonAccessKey(fieldValue));
         }else if(fieldName == 'amazonSecretKey'){
@@ -86,8 +92,15 @@ const AmazonApiSettings = () => {
             dispatch(setAmazonAffiliateId(fieldValue));
         }else if(fieldName == 'amazonCountryCode'){
             dispatch(setAmazonCountryCode(fieldValue));
+            dispatch(setAmazonApiVersion(null));
         }else if(fieldName == 'amazonApiType'){
             dispatch(setAmazonApiType(fieldValue));
+        }else if(fieldName == 'amazonClientId'){
+            dispatch(setAmazonClientId(fieldValue));
+        }else if(fieldName == 'amazonClientSecret'){
+            dispatch(setAmazonClientSecret(fieldValue));
+        }else if(fieldName == 'amazonApiVersion'){
+            dispatch(setAmazonApiVersion(fieldValue));
         }
     }
 
@@ -101,7 +114,7 @@ const AmazonApiSettings = () => {
             buttonText = __( 'Verify & Save', 'affiliate-products-importer-for-woocommerce' )
         }
 
-        return <Button type="primary" disabled={amazonAccessKey=='' || amazonSecretKey=='' || amazonAffiliateId==''} onClick={handleVerifyAmazonAPISettings} loading={isAmazonApiSettingsVerifying || isAmazonAPISettingsSaving}>
+        return <Button type="primary" disabled={ (amazonApiType=='creators_api' && ( amazonClientId=='' || amazonClientSecret=='' || amazonApiVersion==null ) ) || (amazonApiType=='pa_api' && ( amazonAccessKey=='' || amazonSecretKey=='' ) ) || amazonAffiliateId==''} onClick={handleVerifyAmazonAPISettings} loading={isAmazonApiSettingsVerifying || isAmazonAPISettingsSaving}>
             {buttonText}
         </Button>
     }
@@ -116,6 +129,89 @@ const AmazonApiSettings = () => {
             value: 'pa_api',
         }
     ];
+
+    const renderAmazonApiCredentialInputFields = () => {
+        
+        if(amazonApiType == 'pa_api'){
+            return (
+                <>
+                    <Form.Item
+                    label={ __( 'PA API Access Key', 'affiliate-products-importer-for-woocommerce' ) }
+                    name="amazonAccessKey"
+                    rules={[
+                        {
+                            required: true,
+                            message: __( 'Please input Access Key!', 'affiliate-products-importer-for-woocommerce' ),
+                        },
+                    ]}
+                >
+                    <Input value={amazonAccessKey}/>
+                </Form.Item>
+
+                <Form.Item
+                    label={__( 'PA API Secret Key', 'affiliate-products-importer-for-woocommerce' ) }
+                    name="amazonSecretKey"
+                    rules={[
+                        {
+                            required: true,
+                            message: __( 'Please input Secret Key!', 'affiliate-products-importer-for-woocommerce' ),
+                        },
+                    ]}
+                >
+                    <Input.Password />
+                </Form.Item>
+                </>
+            );
+        }else if(amazonApiType == 'creators_api'){
+            return (
+                <>
+                    <Form.Item
+                        label={__('Creators API Client ID', 'affiliate-products-importer-for-woocommerce')}
+                        name="amazonClientId"
+                        rules={[
+                            {
+                                required: true,
+                                message: __('Please input Amazon Creators API Client ID!', 'affiliate-products-importer-for-woocommerce'),
+                            }
+                        ]}
+                    >
+                        <Input value={amazonClientId} />
+                    </Form.Item>
+                    <Form.Item
+                        label={__('Creators API Client Secret', 'affiliate-products-importer-for-woocommerce')}
+                        name="amazonClientSecret"
+                        rules={[
+                            {
+                                required: true,
+                                message: __('Please input Amazon Creators API Client Secret!', 'affiliate-products-importer-for-woocommerce'),
+                            }
+                        ]}
+                    >
+                        <Input.Password visibilityToggle={true} />
+                    </Form.Item>
+
+                    <Form.Item
+                        name="amazonApiVersion"
+                        label={__('Creators API Version', 'affiliate-products-importer-for-woocommerce')}
+                        rules={[
+                            {
+                                required: true,
+                                message: __('Please select Creators API Version!', 'affiliate-products-importer-for-woocommerce'),
+                            }
+                        ]}
+                    >
+                        <Select placeholder={__('Select Creators API Version', 'affiliate-products-importer-for-woocommerce')}>
+                            {affiliateCountries.find(country => country.code === amazonCountryCode)?.apiVersions.map(apiVersion => {
+                                return <Select.Option key={apiVersion} value={apiVersion}>
+                                    {apiVersion}
+                                </Select.Option>
+                            })}
+                        </Select>
+                    </Form.Item>
+                </>
+            );
+        }
+    }
 
 	return (
         <>
@@ -142,7 +238,7 @@ const AmazonApiSettings = () => {
                 autoComplete="off"
             >
                 <Form.Item
-                    name="apiType"
+                    name="amazonApiType"
                     label={ __( 'Amazon API Type', 'affiliate-products-importer-for-woocommerce' ) }
                 >
                     <Radio.Group
@@ -150,42 +246,18 @@ const AmazonApiSettings = () => {
                         defaultValue={amazonApiType}
                         optionType="button"
                         buttonStyle="solid"
-                        // onChange={(e) => dispatch(setCheckoutOn(e.target.value))}
                     />
                 </Form.Item>
-                <Form.Item
-                    label={ __( 'PA API Access Key', 'affiliate-products-importer-for-woocommerce' ) }
-                    name="amazonAccessKey"
-                    rules={[
-                        {
-                            required: true,
-                            message: __( 'Please input Access Key!', 'affiliate-products-importer-for-woocommerce' ),
-                        },
-                    ]}
-                >
-                    <Input value={amazonAccessKey}/>
-                </Form.Item>
+                
+                {renderAmazonApiCredentialInputFields()}
 
                 <Form.Item
-                    label={__( 'PA API Secret Key', 'affiliate-products-importer-for-woocommerce' ) }
-                    name="amazonSecretKey"
-                    rules={[
-                        {
-                            required: true,
-                            message: __( 'Please input Secret Key!', 'affiliate-products-importer-for-woocommerce' ),
-                        },
-                    ]}
-                >
-                    <Input.Password />
-                </Form.Item>
-
-                <Form.Item
-                    label={ __( 'Amazon Affiliate ID', 'affiliate-products-importer-for-woocommerce' ) }
+                    label={ __( 'Amazon Tracking ID', 'affiliate-products-importer-for-woocommerce' ) }
                     name="amazonAffiliateId"
                     rules={[
                         {
                             required: true,
-                            message: __( 'Please input your affiliate ID!', 'affiliate-products-importer-for-woocommerce' ),
+                            message: __( 'Please input your tracking ID!', 'affiliate-products-importer-for-woocommerce' ),
                         },
                     ]}
                 >
@@ -219,6 +291,14 @@ const AmazonApiSettings = () => {
                     }}
                 >
                 {renderSaveButton()}
+                </Form.Item>
+                <Form.Item
+                            wrapperCol={{
+                        offset: 8,
+                        span: 16,
+                    }}
+                >
+                    {amazonApiType === 'creators_api' && amazonApiVersion == null && <Typography.Text type='danger'>{__('Please select Creators API Version!', 'affiliate-products-importer-for-woocommerce')}</Typography.Text>}
                 </Form.Item>
             </Form>
         </>
