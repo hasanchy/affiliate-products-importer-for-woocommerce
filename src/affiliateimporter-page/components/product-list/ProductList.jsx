@@ -48,7 +48,7 @@ const ProductList = memo((props) => {
 
 					let ribbonText = isAlreadyImported ? __( 'Previously Imported', 'affiliate-products-importer-for-woocommerce' ) : __( 'Importable', 'affiliate-products-importer-for-woocommerce' );
 					let ribbonColor = isAlreadyImported ? 'orange' : 'blue';
-					if(productObj.Code){
+					if(productObj.Code || productObj.code){
 						ribbonText = __( 'Invalid ASIN', 'affiliate-products-importer-for-woocommerce' );
 						ribbonColor = 'red';
 					}else if( isAlreadyImported ){
