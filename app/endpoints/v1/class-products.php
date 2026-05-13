@@ -224,106 +224,119 @@ class Products extends Endpoint {
 
 		$product_ids   = array();
 		$product_asins = array();
+		$unsuccessful_items  = array();
+		
 		foreach ( $products as $product ) {
-			$asin           = isset( $product['asin'] ) ? sanitize_text_field( $product['asin'] ) : '';
-			$post_title     = isset( $product['post_title'] ) ? sanitize_text_field( $product['post_title'] ) : '';
-			$post_name      = isset( $product['post_name'] ) ? sanitize_title( $product['post_name'] ) : '';
-			$post_content   = isset( $product['post_content'] ) ? wp_kses_post( $product['post_content'] ) : '';
-			$image_primary  = isset( $product['image_primary'] ) ? esc_url_raw( $product['image_primary'] ) : '';
-			$image_variants = ( isset( $product['image_variants'] ) && is_array( $product['image_variants'] ) ) ? array_map( 'esc_url_raw', $product['image_variants'] ) : array();
-			$regular_price  = isset( $product['regular_price'] ) ? floatval( $product['regular_price'] ) : '';
-			$sale_price     = isset( $product['sale_price'] ) ? floatval( $product['sale_price'] ) : '';
-			$product_url    = isset( $product['product_url'] ) ? esc_url_raw( $product['product_url'] ) : '';
-			$attributes     = isset( $product['attributes'] ) ? $product['attributes'] : array();
+			try {
+				$asin           = isset( $product['asin'] ) ? sanitize_text_field( $product['asin'] ) : '';
+				$post_title     = isset( $product['post_title'] ) ? sanitize_text_field( $product['post_title'] ) : '';
+				$post_name      = isset( $product['post_name'] ) ? sanitize_title( $product['post_name'] ) : '';
+				$post_content   = isset( $product['post_content'] ) ? wp_kses_post( $product['post_content'] ) : '';
+				$image_primary  = isset( $product['image_primary'] ) ? esc_url_raw( $product['image_primary'] ) : '';
+				$image_variants = ( isset( $product['image_variants'] ) && is_array( $product['image_variants'] ) ) ? array_map( 'esc_url_raw', $product['image_variants'] ) : array();
+				$regular_price  = isset( $product['regular_price'] ) ? floatval( $product['regular_price'] ) : '';
+				$sale_price     = isset( $product['sale_price'] ) ? floatval( $product['sale_price'] ) : '';
+				$product_url    = isset( $product['product_url'] ) ? esc_url_raw( $product['product_url'] ) : '';
+				$attributes     = isset( $product['attributes'] ) ? $product['attributes'] : array();
 
-			// Ensure essential fields are present
-			if ( empty( $asin ) || empty( $post_title ) || empty( $post_name ) ) {
-				continue; // Skip this product if essential data is missing
-			}
-
-			$new_post = array(
-				'post_title'   => $post_title,
-				'post_content' => $post_content,
-				'post_status'  => 'publish',
-				'post_date'    => current_time( 'mysql' ),
-				'post_author'  => get_current_user_id(),
-				'post_type'    => 'product',
-				'post_name'    => $post_name,
-			);
-
-			$post_id         = wp_insert_post( $new_post );
-			$product_ids[]   = $post_id;
-			$product_asins[] = $asin;
-
-			/*===================Update product categories=======================*/
-			if ( ! empty( $categories ) ) {
-				wp_set_post_terms( $post_id, $categories, 'product_cat' );
-			}
-
-			/*===================Update product type=======================*/
-			$product_type_option = get_option( 'affprodimp_settings_product_type' );
-			$product_type = ( 'simple' === $product_type_option ) ? 'simple' : 'external';
-
-			wp_set_object_terms( $post_id, $product_type, 'product_type' );
-
-			/*===================Update product Images=======================*/
-			$remote_image = get_option( 'affprodimp_settings_remote_image' );
-
-			if ( 'no' === $remote_image ) {
-				if ( ! function_exists( 'media_sideload_image' ) ) {
-					require_once ABSPATH . 'wp-admin/includes/media.php';
-					require_once ABSPATH . 'wp-admin/includes/file.php';
-					require_once ABSPATH . 'wp-admin/includes/image.php';
+				// Ensure essential fields are present
+				if ( empty( $asin ) || empty( $post_title ) || empty( $post_name ) ) {
+					continue; // Skip this product if essential data is missing
 				}
-				$thumbnail_image_id = \media_sideload_image( $image_primary, $post_id, $post_title, 'id' );
-				set_post_thumbnail( $post_id, $thumbnail_image_id );
 
-				if ( 'no' !== $gallery_images_setting && ! empty( $image_variants ) ) {
-					$image_variant_ids = array();
-					foreach ( $image_variants as $image_variant ) {
-						$image_variant_ids[] = \media_sideload_image( $image_variant, $post_id, $post_title, 'id' );
+				$new_post = array(
+					'post_title'   => $post_title,
+					'post_content' => $post_content,
+					'post_status'  => 'publish',
+					'post_date'    => current_time( 'mysql' ),
+					'post_author'  => get_current_user_id(),
+					'post_type'    => 'product',
+					'post_name'    => $post_name,
+				);
+
+				$post_id         = wp_insert_post( $new_post );
+				$product_ids[]   = $post_id;
+				$product_asins[] = $asin;
+
+				/*===================Update product categories=======================*/
+				if ( ! empty( $categories ) ) {
+					@wp_set_post_terms( $post_id, $categories, 'product_cat' );
+				}
+
+				/*===================Update product type=======================*/
+				$product_type_option = get_option( 'affprodimp_settings_product_type' );
+				$product_type = ( 'simple' === $product_type_option ) ? 'simple' : 'external';
+
+				@wp_set_object_terms( $post_id, $product_type, 'product_type' );
+				@update_post_meta( $post_id, '_product_type', $product_type ); // Ensure WooCommerce recognizes the type
+
+				/*===================Update product Images=======================*/
+				$remote_image = get_option( 'affprodimp_settings_remote_image' );
+
+				if ( 'no' === $remote_image ) {
+					if ( ! function_exists( 'media_sideload_image' ) ) {
+						require_once ABSPATH . 'wp-admin/includes/media.php';
+						require_once ABSPATH . 'wp-admin/includes/file.php';
+						require_once ABSPATH . 'wp-admin/includes/image.php';
 					}
+					$thumbnail_image_id = \media_sideload_image( $image_primary, $post_id, $post_title, 'id' );
+					@set_post_thumbnail( $post_id, $thumbnail_image_id );
 
-					if ( count( $image_variant_ids ) > 1 ) {
-						update_post_meta( $post_id, '_product_image_gallery', implode( ',', $image_variant_ids ) );
+					if ( 'no' !== $gallery_images_setting && ! empty( $image_variants ) ) {
+						$image_variant_ids = array();
+						foreach ( $image_variants as $image_variant ) {
+							$image_variant_ids[] = \media_sideload_image( $image_variant, $post_id, $post_title, 'id' );
+						}
+
+						if ( count( $image_variant_ids ) > 1 ) {
+							@update_post_meta( $post_id, '_product_image_gallery', implode( ',', $image_variant_ids ) );
+						}
+					}
+				} else {
+					@update_post_meta( $post_id, 'affprodimp_product_img_url', $image_primary );
+					if ( 'no' !== $gallery_images_setting && ! empty( $image_variants ) ) {
+						@update_post_meta( $post_id, 'affprodimp_product_gallery_url', $image_variants );
 					}
 				}
-			} else {
-				update_post_meta( $post_id, 'affprodimp_product_img_url', $image_primary );
-				if ( 'no' !== $gallery_images_setting && ! empty( $image_variants ) ) {
-					update_post_meta( $post_id, 'affprodimp_product_gallery_url', $image_variants );
+
+				/*===================Update product ASIN=======================*/
+				@update_post_meta( $post_id, 'affprodimp_product_asin', $asin );
+
+				/*===================Update product price=======================*/
+				if ( 'no' !== $product_price_setting && !empty( $regular_price )  ) {
+					$price = ! empty( $sale_price ) ? $sale_price : $regular_price;
+					@update_post_meta( $post_id, '_price', $price );
+					@update_post_meta( $post_id, '_regular_price', $regular_price );
+
+					if ( ! empty( $sale_price ) ) {
+						@update_post_meta( $post_id, '_sale_price', $sale_price );
+					}
 				}
-			}
 
-			/*===================Update product ASIN=======================*/
-			update_post_meta( $post_id, 'affprodimp_product_asin', $asin );
+				/*===================Update product url=======================*/
+				@update_post_meta( $post_id, '_product_url', $product_url );
 
-			/*===================Update product price=======================*/
-			if ( 'no' !== $product_price_setting && !empty( $regular_price )  ) {
-				$price = ! empty( $sale_price ) ? $sale_price : $regular_price;
-				update_post_meta( $post_id, '_price', $price );
-				update_post_meta( $post_id, '_regular_price', $regular_price );
+				/*===================Update stock status=======================*/
+				@update_post_meta( $post_id, '_stock_status', 'instock' );
 
-				if ( ! empty( $sale_price ) ) {
-					update_post_meta( $post_id, '_sale_price', $sale_price );
+				/*===================Update product url=======================*/
+				if ( 'no' !== $product_attributes_setting && ! empty( $attributes ) ) {
+					$this->add_product_attribute( $post_id, $attributes );
 				}
-			}
-
-			/*===================Update product url=======================*/
-			update_post_meta( $post_id, '_product_url', $product_url );
-
-			/*===================Update stock status=======================*/
-			update_post_meta( $post_id, '_stock_status', 'instock' );
-
-			/*===================Update product url=======================*/
-			if ( 'no' !== $product_attributes_setting && ! empty( $attributes ) ) {
-				$this->add_product_attribute( $post_id, $attributes );
+			} catch ( \Throwable $e ) {
+				$unsuccessful_items[] = array(
+					'id'      => '',
+					'asin'    => isset( $product['asin'] ) ? sanitize_text_field( $product['asin'] ) : '',
+					'message' => 'Exception: ' . $e->getMessage(),
+				);
+				continue;
 			}
 		}
 
 		$return = array(
 			'product_ids'   => array_map( 'intval', $product_ids ),
 			'product_asins' => array_map( 'sanitize_text_field', $product_asins ),
+			'unsuccessful_items' => $unsuccessful_items,
 		);
 
 		return new WP_REST_Response( $return );

@@ -43,29 +43,7 @@ class CreatorsApi {
 	);
 
 	const PAYLOAD_RESOURCES_SEARCHITEMS = array(
-		'images.primary.highRes',
-		'images.primary.large',
-		'images.variants.highRes',
-		'images.variants.large',
-        'itemInfo.byLineInfo',
-        'itemInfo.classifications',
-		'itemInfo.contentInfo',
-		'itemInfo.contentRating',
-		'itemInfo.externalIds',
-		'itemInfo.features',
-		'itemInfo.manufactureInfo',
-		'itemInfo.productInfo',
-		'itemInfo.technicalInfo',
 		'itemInfo.title',
-		'itemInfo.tradeInInfo',
-        'offersV2.listings.availability',
-		'offersV2.listings.condition',
-		'offersV2.listings.dealDetails',
-		'offersV2.listings.isBuyBoxWinner',
-		'offersV2.listings.loyaltyPoints',
-		'offersV2.listings.merchantInfo',
-		'offersV2.listings.price',
-		'offersV2.listings.type',
 	);
 
     const BASE_API_URL = 'https://creatorsapi.amazon';
@@ -229,38 +207,9 @@ class CreatorsApi {
             'marketplace'   => $this->marketplace,
             'partnerTag'    => $this->partnerTag, // replace with your tag
             'itemCount'     => $params['itemCount'] ?? 10,
-            'itemPage'      => $params['itemPage'] ?? 1,
-            'sortBy'        => $this->getSortBy($params['sortBy'] ?? 'relevance'),
-            'condition'    => $params['condition'] ?? 'Any',
             'resources'     => self::PAYLOAD_RESOURCES_SEARCHITEMS,
         );
 
         return $this->post('/catalog/v1/searchItems', $payload, $forceRefreshToken);
     }
-
-    public function getSortBy( $order ) {
-		$sortBy = '';
-		switch ( $order ) {
-			case 'avg_customer_reviews':
-				$sortBy = 'AvgCustomerReviews';
-				break;
-			case 'featured':
-				$sortBy = 'Featured';
-				break;
-			case 'newest_arrivals':
-				$sortBy = 'NewestArrivals';
-				break;
-			case 'price_high_to_low':
-				$sortBy = 'Price:HighToLow';
-				break;
-			case 'price_low_to_high':
-				$sortBy = 'Price:LowToHigh';
-				break;
-			default:
-				$sortBy = 'Relevance';
-				break;
-		}
-
-		return $sortBy;
-	}
 }
