@@ -102,9 +102,7 @@ class ProductDataHandler {
 				'name'=> esc_html__( 'Brand', 'affiliate-products-importer-for-woocommerce' ),
 				'value'=> esc_html( $byLineInfo->brand->displayValue )
 			);
-		}
-		
-		if( isset($byLineInfo->manufacturer) ){
+		}else if( isset($byLineInfo->manufacturer) ){
 			$attributes[] = array(
 				'name'=> esc_html__( 'Manufacturer', 'affiliate-products-importer-for-woocommerce' ),
 				'value'=> esc_html( $byLineInfo->manufacturer->displayValue )
@@ -169,9 +167,7 @@ class ProductDataHandler {
 				'name'=> 'Brand',
 				'value'=> esc_html( $ByLineInfo->Brand->DisplayValue )
 			);
-		}
-
-		if( isset($ByLineInfo->Manufacturer) ){
+		}else if( isset($ByLineInfo->Manufacturer) ){
 			$attributes[] = array(
 				'name'=> 'Manufacturer',
 				'value'=> esc_html( $ByLineInfo->Manufacturer->DisplayValue )
