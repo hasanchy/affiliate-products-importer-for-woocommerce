@@ -4,7 +4,7 @@ Tags: amazon affiliate, products importer, monetize, amazon associates
 Requires at least: 5.2
 Tested up to: 6.9
 Requires PHP: 7.2.0
-Stable tag: 1.3.2
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.en.html
 
@@ -62,6 +62,9 @@ The full source code, including the non-compiled versions of JavaScript and CSS 
 5. Navigate to "Amazon Products Importer"
 
 == Changelog ==
+2.0.0 (2026-05-14)
+Added integration with the Amazon Creators API, a new-generation data source for working with Amazon products.
+
 1.3.2 (2026-01-29)
 Migrate Offers v1 to v2 for compliance with upcoming Amazon PA API 5.0 changes
 

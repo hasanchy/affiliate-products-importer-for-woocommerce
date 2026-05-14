@@ -286,6 +286,7 @@ class Products extends Endpoint {
 						$image_variant_ids = array();
 						foreach ( $image_variants as $image_variant ) {
 							$image_variant_ids[] = \media_sideload_image( $image_variant, $post_id, $post_title, 'id' );
+							break;
 						}
 
 						if ( count( $image_variant_ids ) > 1 ) {
@@ -295,7 +296,7 @@ class Products extends Endpoint {
 				} else {
 					@update_post_meta( $post_id, 'affprodimp_product_img_url', $image_primary );
 					if ( 'no' !== $gallery_images_setting && ! empty( $image_variants ) ) {
-						@update_post_meta( $post_id, 'affprodimp_product_gallery_url', $image_variants );
+						@update_post_meta( $post_id, 'affprodimp_product_gallery_url', array( $image_variants[0] ) );
 					}
 				}
 
