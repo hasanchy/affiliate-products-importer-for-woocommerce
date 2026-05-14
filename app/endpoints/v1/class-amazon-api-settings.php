@@ -109,6 +109,7 @@ class AmazonApiSettings extends Endpoint {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
+		$affprodimp_amazon_api_type     = get_option( 'affprodimp_amazon_api_type' );
 		$affprodimp_amazon_client_id     = get_option( 'affprodimp_amazon_client_id' );
 		$affprodimp_amazon_client_secret = get_option( 'affprodimp_amazon_client_secret' );
 		$affprodimp_amazon_access_key    = get_option( 'affprodimp_amazon_access_key' );
@@ -121,6 +122,7 @@ class AmazonApiSettings extends Endpoint {
 		$affprodimp_amazon_api_version = get_option( 'affprodimp_amazon_api_version', Settings::get_amazon_default_credential_version( $country_code ) );
 
 		$response_data = array(
+			'api_type'      => $affprodimp_amazon_api_type ? \esc_html( $affprodimp_amazon_api_type ) : 'pa_api',
 			'client_id'     => $affprodimp_amazon_client_id ? \esc_html( $affprodimp_amazon_client_id ) : '',
 			'client_secret' => $affprodimp_amazon_client_secret ? \esc_html( $affprodimp_amazon_client_secret ) : '',
 			'api_version' => \esc_html( $affprodimp_amazon_api_version ),

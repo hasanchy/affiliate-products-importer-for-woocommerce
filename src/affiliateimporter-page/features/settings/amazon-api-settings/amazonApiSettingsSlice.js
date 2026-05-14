@@ -59,6 +59,7 @@ export const amazonApiSettingsSlice = createSlice({
 		builder.addCase(fetchAmazonApiSettings.fulfilled, (state, action) => {
 			state.isSettingsLoading = false;
 			state.error = null;
+			state.amazonApiType = action.payload.api_type;
 			state.amazonAccessKey = action.payload.access_key;
 			state.amazonSecretKey = action.payload.secret_key;
 			state.amazonCountryCode = action.payload.country_code;

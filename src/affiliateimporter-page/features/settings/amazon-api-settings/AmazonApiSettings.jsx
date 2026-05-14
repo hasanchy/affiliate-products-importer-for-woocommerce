@@ -61,16 +61,28 @@ const AmazonApiSettings = () => {
     });
 
     const handleVerifyAmazonAPISettings = async () => {
-        let data = {
-			api_type: amazonApiType,
-            client_id: amazonClientId,
-            client_secret: amazonClientSecret,
-            api_version: amazonApiVersion,
-			access_key: amazonAccessKey,
-			secret_key: amazonSecretKey,
-			country_code: amazonCountryCode,
-			affiliate_id: amazonAffiliateId
-		}
+
+        let data;
+
+        if(amazonApiType === 'pa_api'){
+            data = {
+                api_type: amazonApiType,
+                access_key: amazonAccessKey,
+                secret_key: amazonSecretKey,
+                country_code: amazonCountryCode,
+                affiliate_id: amazonAffiliateId
+            }
+        }else{
+            data = {
+                api_type: amazonApiType,
+                client_id: amazonClientId,
+                client_secret: amazonClientSecret,
+                api_version: amazonApiVersion,
+                country_code: amazonCountryCode,
+                affiliate_id: amazonAffiliateId
+            }
+        }
+        
 
         let response = await dispatch(verifyAmazonApiSettings(data));
 
