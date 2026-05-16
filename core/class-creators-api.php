@@ -3,16 +3,58 @@
  * Class to handle Amazon Creators API
  */
 
-namespace AFFPRODIMPPRO\Core;
+namespace AFFPRODIMP\Core;
 
 defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
 class CreatorsApi {
 
+    /**
+     * OAuth2 client ID
+     *
+     * @var string
+     */
     private $clientId;
+
+    /**
+     * OAuth2 client secret
+     *
+     * @var string
+     */
     private $clientSecret;
-    private $version;         // e.g., 2.1, 2.2, 2.3
-    private $tokenEndpoint;
+
+    /**
+     * credential version
+     *
+     * @var string
+     */
+    private $version;
+
+    /**
+     * Authentication endpoint
+     *
+     * @var string|null
+     */
+    private $authEndpoint;
+
+
+    /**
+     * Grant type for OAuth2
+     *
+     * @var string
+     */
+    private $grantType = 'client_credentials';
+
+        /**
+     * OAuth2 scope for Cognito (v2.x)
+     */
+    private const COGNITO_SCOPE = 'creatorsapi/default';
+
+    /**
+     * OAuth2 scope for LWA (v3.x)
+     */
+    private const LWA_SCOPE = 'creatorsapi::default';
+
     private $marketplace;     // e.g., www.amazon.com
     private $partnerTag;
 
@@ -48,13 +90,109 @@ class CreatorsApi {
 
     const BASE_API_URL = 'https://creatorsapi.amazon';
 
-    public function __construct( $clientId, $clientSecret, $marketplace, $partnerTag, $version, $tokenEndpoint ) {
+    public function __construct( $clientId, $clientSecret, $marketplace, $partnerTag, $version, $authEndpoint = null ) {
         $this->clientId     = trim($clientId);
         $this->clientSecret = trim($clientSecret);
         $this->marketplace  = trim($marketplace);
         $this->partnerTag   = trim( $partnerTag );
         $this->version      = trim($version);
-        $this->tokenEndpoint= trim($tokenEndpoint);
+
+        if ($authEndpoint !== null) {
+            $this->authEndpoint = trim($authEndpoint);
+        }
+    }
+
+    /**
+     * Gets the OAuth2 client ID
+     *
+     * @return string OAuth2 client ID
+     */
+    public function getClientId()
+    {
+        return $this->clientId;
+    }
+
+    /**
+     * Gets the OAuth2 client secret
+     *
+     * @return string OAuth2 client secret
+     */
+    public function getClientSecret()
+    {
+        return $this->clientSecret;
+    }
+
+    /**
+     * Gets the credential version
+     *
+     * @return string credential version
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    /**
+     * Gets the OAuth2 grant type
+     *
+     * @return string Grant type
+     */
+    public function getGrantType()
+    {
+        return $this->grantType;
+    }
+
+    /**
+     * Gets the OAuth2 scope
+     *
+     * @return string OAuth2 scope
+     */
+    public function getScope()
+    {
+        return $this->isLwa() ? self::LWA_SCOPE : self::COGNITO_SCOPE;
+    }
+
+    /**
+     * Gets the appropriate OAuth2 token endpoint based on the credential version
+     *
+     * @return string Token endpoint URL
+     * @throws \InvalidArgumentException If the version is not supported
+     */
+    public function getTokenEndpoint()
+    {
+        // Custom authEndpoint used for testing
+        if ($this->authEndpoint !== null && trim($this->authEndpoint) !== '') {
+            return $this->authEndpoint;
+        }
+        
+        switch ($this->version) {
+            // Cognito endpoints (v2.x)
+            case "2.1":
+                return "https://creatorsapi.auth.us-east-1.amazoncognito.com/oauth2/token";
+            case "2.2":
+                return "https://creatorsapi.auth.eu-south-2.amazoncognito.com/oauth2/token";
+            case "2.3":
+                return "https://creatorsapi.auth.us-west-2.amazoncognito.com/oauth2/token";
+            // LWA endpoints (v3.x)
+            case "3.1":
+                return "https://api.amazon.com/auth/o2/token";
+            case "3.2":
+                return "https://api.amazon.co.uk/auth/o2/token";
+            case "3.3":
+                return "https://api.amazon.co.jp/auth/o2/token";
+            default:
+                throw new \InvalidArgumentException("Unsupported version: {$this->version}. Supported versions are: 2.1, 2.2, 2.3, 3.1, 3.2, 3.3");
+        }
+    }
+
+    /**
+     * Checks if this is an LWA (v3.x) configuration
+     *
+     * @return bool True if using LWA authentication
+     */
+    public function isLwa()
+    {
+        return str_starts_with($this->version, "3.");
     }
 
     /**
@@ -79,7 +217,7 @@ class CreatorsApi {
             return $cached['access_token'];
         }
 
-        $endpoint = $this->tokenEndpoint;
+        $endpoint = $this->getTokenEndpoint();
         if ( ! $endpoint ) {
             throw new \Exception( 'Invalid Creators API version.' );
         }
@@ -89,10 +227,10 @@ class CreatorsApi {
                 'Content-Type' => 'application/x-www-form-urlencoded',
             ],
             'body' => http_build_query( [
-                'grant_type'    => 'client_credentials',
-                'client_id'     => $this->clientId,
-                'client_secret' => $this->clientSecret,
-                'scope'         => 'creatorsapi/default',
+                'grant_type'    => $this->getGrantType(),
+                'client_id'     => $this->getClientId(),
+                'client_secret' => $this->getClientSecret(),
+                'scope'         => $this->getScope(),
             ] ),
             'timeout' => 30,
         ] );
@@ -109,18 +247,18 @@ class CreatorsApi {
             if( isset( $body['error_description'] ) ) {
 
                 if( strpos( $body['error_description'], 'invalid_client_secret' ) !== false ){
-                    $message = \esc_html__( 'Invalid Client Secret provided', 'affiliate-products-importer-for-woocommerce' );
+                    $message = \esc_html__( 'Invalid Client Secret provided', 'affiliate-products-importer-pro' );
                 }else if( strpos( $body['error'], 'invalid_client' ) !== false ){
-                    $message = \esc_html__( 'The Client ID is invalid, or the selected Creators API version does not match your credentials.', 'affiliate-products-importer-for-woocommerce' );
+                    $message = \esc_html__( 'The Client ID is invalid, or the selected Creators API version does not match your credentials.', 'affiliate-products-importer-pro' );
                 }else{
                     $message = \esc_html( $body['error_description'] );
                 }
 
             }else if( isset( $body['error'] ) && strpos( $body['error'], 'invalid_client' ) !== false ) {
                 
-                $message = \esc_html__( 'The Client ID is invalid, or the selected Amazon country does not match your API credentials.', 'affiliate-products-importer-for-woocommerce' );
+                $message = \esc_html__( 'The Client ID is invalid, or the selected Amazon country does not match your API credentials.', 'affiliate-products-importer-pro' );
             } else {
-                $message = isset( $body['error'] ) ? \esc_html( $body['error'] ) : \esc_html__( 'An error occurred while fetching access token', 'affiliate-products-importer-for-woocommerce' );
+                $message = isset( $body['error'] ) ? \esc_html( $body['error'] ) : \esc_html__( 'An error occurred while fetching access token', 'affiliate-products-importer-pro' );
 
             }
 
@@ -162,7 +300,7 @@ class CreatorsApi {
             $error_message = $response->get_error_message();
 
             if ( stripos( $error_message, 'Operation timed out' ) !== false ) {
-                $error_message = \esc_html__( 'The Creators API request timed out before a response was received. This usually happens due to a slow network connection, temporary server issues, or high response time from the API provider. Please try again in a moment.', 'affiliate-products-importer-for-woocommerce' );
+                $error_message = \esc_html__( 'The Creators API request timed out before a response was received. This usually happens due to a slow network connection, temporary server issues, or high response time from the API provider. Please try again in a moment.', 'affiliate-products-importer-pro' );
             }
 
             throw new \Exception( 'Creators API request failed: ' . $error_message );
@@ -174,7 +312,7 @@ class CreatorsApi {
 
         if ( $response_code !== 200 ) {
 
-            $message = isset( $data->message ) ? \esc_html( $data->message ) : \esc_html__( 'Failed to fetch product data from Amazon Creators API.', 'affiliate-products-importer-for-woocommerce' );
+            $message = isset( $data->message ) ? \esc_html( $data->message ) : \esc_html__( 'Failed to fetch product data from Amazon Creators API.', 'affiliate-products-importer-pro' );
             
             throw new \Exception( $message, $response_code );
         }

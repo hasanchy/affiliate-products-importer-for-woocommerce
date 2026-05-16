@@ -188,21 +188,6 @@ class Settings {
 	}
 
 	/**
-	 * Get the Amazon token endpoint for a given country code.
-	 *
-	 * @param string $country_code The country code.
-	 * @return string The Amazon token endpoint.
-	 */
-	public static function get_amazon_token_endpoint( $credential_version ) {
-		if ( $credential_version && isset( self::AMAZON_CREDENTIAL_VERSIONs[ $credential_version ] ) ) {
-			return self::AMAZON_CREDENTIAL_VERSIONs[ $credential_version ]['token_endpoint'];
-		}
-
-		return '';
-		
-	}
-
-	/**
 	 * Check if the product is already imported by ASIN.
 	 *
 	 * @param string $asin The ASIN of the product.

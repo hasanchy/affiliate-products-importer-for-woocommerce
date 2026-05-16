@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 use AFFPRODIMP\Core\Endpoint;
 use AFFPRODIMP\Core\ProductAdvertisingApi;
 use AFFPRODIMP\Core\Settings;
-use AFFPRODIMPPRO\Core\CreatorsApi;
+use AFFPRODIMP\Core\CreatorsApi;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -123,15 +123,13 @@ class AmazonAPIConnection extends Endpoint {
 			try {
 				
 				if( $api_type == 'creators_api' ){
-					$token_endpoint = Settings::get_amazon_token_endpoint( $api_version );
 
 					$api = new CreatorsApi( 
 						$client_id, 
 						$client_secret, 
 						$marketplace, 
 						$affiliate_id, 
-						$api_version, 
-						$token_endpoint 
+						$api_version
 					);
 
 					$api->searchItems(
@@ -206,15 +204,13 @@ class AmazonAPIConnection extends Endpoint {
 			try {
 				
 				if( $api_type == 'creators_api' ){
-					$token_endpoint = Settings::get_amazon_token_endpoint( $api_version );
 
 					$api = new CreatorsApi( 
 						$client_id, 
 						$client_secret, 
 						$marketplace, 
 						$affiliate_id, 
-						$api_version, 
-						$token_endpoint 
+						$api_version
 					);
 					$api->searchItems(
 						'Pet Food',
