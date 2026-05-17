@@ -26,9 +26,9 @@ const Dashboard = () => {
                     showIcon
                 />
             );
-        }else{
-            return <AmazonApiConnection />;
         }
+
+        return null;
     };
 
     return (
@@ -38,6 +38,7 @@ const Dashboard = () => {
                     <Card title={ __( 'Amazon API Connection', 'affiliate-products-importer-for-woocommerce' )}>
                         <Space direction="vertical" size="large" style={{ display: 'flex' }}>
                             {renderAmazonApiConnectionAlert()}
+                            <AmazonApiConnection />
                         </Space>
                     </Card>
 				</Col>
