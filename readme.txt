@@ -18,9 +18,9 @@ AmaSync is a streamlined WordPress plugin designed to simplify the process of im
 == Key Features: ==
 
 * **Multiple Import Methods:** AmaSync supports ASIN code lists and manual input through a user-friendly form, offering flexibility for users to build their product catalog their way.
-* **API-Driven Automation:** Utilize Amazon Affiliate API keys to automate the import process. Retrieve accurate product data, including descriptions, images, prices, and availability, directly from Amazon’s database.
+* **API-Driven Automation:** Utilize Amazon Creators API keys to automate the import process. Retrieve accurate product data, including descriptions, images, prices, and availability, directly from Amazon’s database.
 * **User-Friendly Interface:** Navigate an intuitive interface designed for simplicity. Manage single or bulk product imports with ease.
-* **Support for 22 Amazon Marketplaces:** AmaSync enables you to import products from 22 Amazon marketplaces worldwide, including: Australia, Belgium, Brazil, Canada, China, Egypt, France, Germany, India, Italy, Japan, Mexico, Netherlands, Poland, Saudi Arabia, Singapore, Spain, Sweden, Turkey, United Arab Emirates, United Kingdom, and the United States.
+* **Support for 22 Amazon Marketplaces:** AmaSync enables you to import products from 22 Amazon marketplaces worldwide, including: Australia, Belgium, Brazil, Canada, Egypt, France, Germany, Ireland, India, Italy, Japan, Mexico, Netherlands, Poland, Saudi Arabia, Singapore, Spain, Sweden, Turkey, United Arab Emirates, United Kingdom, and the United States.
 
 == Benefits of AmaSync: ==
 * **Save Time:** Automate product entry to reduce effort and focus on growing your business.
@@ -40,14 +40,14 @@ Discover the powerful features of AmaSync by exploring our live demo. Get hands-
 Ready to supercharge your affiliate marketing? **[Buy AmaSync Premium on CodeCanyon](https://1.envato.market/vPDEKj)** and take your WooCommerce store to the next level!
 
 == 3rd Party or External Service ==
-This plugin utilizes the Amazon Product Advertising API (PA API) to fetch products from Amazon into your WooCommerce store. To fully benefit from this plugin's features, you will need access to the Product Advertising API 5.0.
+This plugin utilizes the Amazon Creators API to fetch products from Amazon into your WooCommerce store. To fully benefit from this plugin's features, you will need access to the Amazon Creatros API.
 
-When using this plugin, please be aware that it communicates with Amazon's external API service to retrieve product information. This may involve the transmission of certain data to Amazon's servers as part of the API interaction. For detailed information about how the Amazon Product Advertising API works, please refer to the official documentation: [Amazon Product Advertising API Documentation](https://webservices.amazon.com/paapi5/documentation/).
+When using this plugin, please be aware that it communicates with Amazon's external API service to retrieve product information. This may involve the transmission of certain data to Amazon's servers as part of the API interaction. For detailed information about how the Amazon Creators API works, please refer to the official documentation: [Amazon Creators API Documentation](https://affiliate-program.amazon.com/creatorsapi/docs/).
 
 **Important Links:**
 
-* Amazon Product Advertising API Documentation: [https://webservices.amazon.com/paapi5/documentation/](https://webservices.amazon.com/paapi5/documentation/)
-* Amazon Product Advertising API License Agreement: [https://webservices.amazon.com/paapi5/documentation/read-la.html](https://webservices.amazon.com/paapi5/documentation/read-la.html)
+* Amazon Creators API Documentation: [https://affiliate-program.amazon.com/creatorsapi/docs/](https://affiliate-program.amazon.com/creatorsapi/docs/)
+* Amazon Creators API License Agreement: [https://affiliate-program.amazon.com/creatorsapi/docs/en-us/license-agreement](https://affiliate-program.amazon.com/creatorsapi/docs/en-us/license-agreement)
 
 Please review the terms of use and privacy policies provided by Amazon to understand how they manage and process the data. This documentation is crucial for ensuring that you comply with all legal requirements related to data transmission when using this plugin.
 

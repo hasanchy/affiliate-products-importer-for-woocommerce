@@ -21,6 +21,7 @@ const Support = ({ ratingUrl }) => {
                     icon={<CustomerServiceOutlined />}
                     onClick={showDrawer}
                 >
+                    {__('Support', 'affiliate-products-importer-for-woocommerce')}
                 </Button>
             </Space>
             <Drawer

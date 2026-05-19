@@ -56,6 +56,10 @@ class Settings {
 			'pa_api_region'      => 'eu-west-1',
 			'region'      => 'EU',
 		),
+		'ie' => array(
+			'marketplace' => 'www.amazon.ie',
+			'region'      => 'EU',
+		),
 		'in' => array(
 			'marketplace' => 'www.amazon.in',
 			'host'        => 'webservices.amazon.in',

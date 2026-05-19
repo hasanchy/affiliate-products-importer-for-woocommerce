@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { Alert, Button, Form, Input, message, Radio, Select, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { AU, BE, BR, CA, CN, EG, FR, DE, IN, IT, JP, MX, NL, PL, SA, SG, ES, SE, TR, AE, US, GB } from 'country-flag-icons/react/3x2'
+import { AU, BE, BR, CA, CN, EG, FR, DE, IN, IT, JP, MX, NL, PL, SA, SG, ES, SE, TR, AE, US, GB, IE } from 'country-flag-icons/react/3x2'
 import { setAmazonAccessKey, setAmazonSecretKey, setAmazonCountryCode, setAmazonAffiliateId, setSettingsToastMessage, setAmazonApiType, setAmazonClientId, setAmazonClientSecret, setAmazonApiVersion } from './amazonApiSettingsSlice';
 import { saveAmazonApiSettings, verifyAmazonApiSettings } from '../../../services/apiService';
 import { __ } from '@wordpress/i18n';
@@ -15,6 +15,7 @@ const affiliateCountries = [
     { 'flag': <EG style={{width:'20px'}}/>,'code': 'eg', 'name': 'Egypt', 'apiVersions': ['2.2', '3.2'] }, 
     { 'flag': <FR style={{width:'20px'}}/>,'code': 'fr', 'name': 'France', 'apiVersions': ['2.2', '3.2'] }, 
     { 'flag': <DE style={{width:'20px'}}/>,'code': 'de', 'name': 'Germany', 'apiVersions': ['2.2', '3.2'] }, 
+    { 'flag': <IE style={{width:'20px'}}/>,'code': 'ie', 'name': 'Ireland', 'apiVersions': ['2.2', '3.2'] }, 
     { 'flag': <IN style={{width:'20px'}}/>,'code': 'in', 'name': 'India', 'apiVersions': ['2.2', '3.2'] }, 
     { 'flag': <IT style={{width:'20px'}}/>,'code': 'it', 'name': 'Italy', 'apiVersions': ['2.2', '3.2'] }, 
     { 'flag': <JP style={{width:'20px'}}/>,'code': 'jp', 'name': 'Japan', 'apiVersions': ['2.3', '3.3'] }, 
