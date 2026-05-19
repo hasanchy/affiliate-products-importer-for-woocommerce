@@ -247,18 +247,18 @@ class CreatorsApi {
             if( isset( $body['error_description'] ) ) {
 
                 if( strpos( $body['error_description'], 'invalid_client_secret' ) !== false ){
-                    $message = \esc_html__( 'Invalid Client Secret provided', 'affiliate-products-importer-pro' );
+                    $message = \esc_html__( 'Invalid Client Secret provided', 'affiliate-products-importer-for-woocommerce' );
                 }else if( strpos( $body['error'], 'invalid_client' ) !== false ){
-                    $message = \esc_html__( 'The Client ID is invalid, or the selected Creators API version does not match your credentials.', 'affiliate-products-importer-pro' );
+                    $message = \esc_html__( 'The Client ID is invalid, or the selected Creators API version does not match your credentials.', 'affiliate-products-importer-for-woocommerce' );
                 }else{
                     $message = \esc_html( $body['error_description'] );
                 }
 
             }else if( isset( $body['error'] ) && strpos( $body['error'], 'invalid_client' ) !== false ) {
                 
-                $message = \esc_html__( 'The Client ID is invalid, or the selected Amazon country does not match your API credentials.', 'affiliate-products-importer-pro' );
+                $message = \esc_html__( 'The Client ID is invalid, or the selected Amazon country does not match your API credentials.', 'affiliate-products-importer-for-woocommerce' );
             } else {
-                $message = isset( $body['error'] ) ? \esc_html( $body['error'] ) : \esc_html__( 'An error occurred while fetching access token', 'affiliate-products-importer-pro' );
+                $message = isset( $body['error'] ) ? \esc_html( $body['error'] ) : \esc_html__( 'An error occurred while fetching access token', 'affiliate-products-importer-for-woocommerce' );
 
             }
 
@@ -300,7 +300,7 @@ class CreatorsApi {
             $error_message = $response->get_error_message();
 
             if ( stripos( $error_message, 'Operation timed out' ) !== false ) {
-                $error_message = \esc_html__( 'The Creators API request timed out before a response was received. This usually happens due to a slow network connection, temporary server issues, or high response time from the API provider. Please try again in a moment.', 'affiliate-products-importer-pro' );
+                $error_message = \esc_html__( 'The Creators API request timed out before a response was received. This usually happens due to a slow network connection, temporary server issues, or high response time from the API provider. Please try again in a moment.', 'affiliate-products-importer-for-woocommerce' );
             }
 
             throw new \Exception( 'Creators API request failed: ' . $error_message );
@@ -312,7 +312,7 @@ class CreatorsApi {
 
         if ( $response_code !== 200 ) {
 
-            $message = isset( $data->message ) ? \esc_html( $data->message ) : \esc_html__( 'Failed to fetch product data from Amazon Creators API.', 'affiliate-products-importer-pro' );
+            $message = isset( $data->message ) ? \esc_html( $data->message ) : \esc_html__( 'Failed to fetch product data from Amazon Creators API.', 'affiliate-products-importer-for-woocommerce' );
             
             throw new \Exception( $message, $response_code );
         }

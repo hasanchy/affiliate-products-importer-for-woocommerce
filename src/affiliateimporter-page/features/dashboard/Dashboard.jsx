@@ -5,6 +5,7 @@ import { __ } from "@wordpress/i18n";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveTab } from '../../components/menu-tabs/manuTabsSlice';
 import { setSettingsActiveTab } from '../../features/settings/settingsSlice';
+import { setAmazonApiType } from '../../features/settings/amazon-api-settings/amazonApiSettingsSlice';
 
 const Dashboard = () => {
     
@@ -14,6 +15,7 @@ const Dashboard = () => {
     const handleAmazonApiSetup = () => {
         dispatch( setActiveTab( 'settings' ) );
         dispatch( setSettingsActiveTab ( 'amazonApiSettings' ) );
+        dispatch( setAmazonApiType( 'creators_api' ) );
     }
 
     const renderAmazonApiConnectionAlert = () => {
@@ -28,7 +30,7 @@ const Dashboard = () => {
             );
         }
 
-        return null;
+        return <AmazonApiConnection />;
     };
 
     return (
@@ -38,7 +40,6 @@ const Dashboard = () => {
                     <Card title={ __( 'Amazon API Connection', 'affiliate-products-importer-for-woocommerce' )}>
                         <Space direction="vertical" size="large" style={{ display: 'flex' }}>
                             {renderAmazonApiConnectionAlert()}
-                            <AmazonApiConnection />
                         </Space>
                     </Card>
 				</Col>
