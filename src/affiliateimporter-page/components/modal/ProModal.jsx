@@ -30,8 +30,9 @@ const ProModal = (props) => {
             footer={[
                 <Button
                     key="link"
-                    href="https://1.envato.market/vPDEKj"
+                    href="https://woocommerce.com/products/amazon-affiliate-product-importer/"
                     type="primary"
+                    target="_blank"
                 >
                     { __( 'Upgrade to Pro' ) }
                 </Button>

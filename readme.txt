@@ -13,8 +13,6 @@ Easily import Amazon affiliate products into your WooCommerce store.
 == Description ==
 AmaSync is a streamlined WordPress plugin designed to simplify the process of importing Amazon affiliate products into your WooCommerce store. Whether you're a beginner exploring affiliate marketing or an experienced marketer, AmaSync provides essential tools to help you build and manage your product catalog efficiently.
 
-[youtube https://www.youtube.com/watch?v=f1pePtsA7Fc]
-
 == Key Features: ==
 
 * **Multiple Import Methods:** AmaSync supports ASIN code lists and manual input through a user-friendly form, offering flexibility for users to build their product catalog their way.
@@ -30,6 +28,8 @@ AmaSync is a streamlined WordPress plugin designed to simplify the process of im
 == Upgrade to Premium for Even More Power: ==
 Unlock the full potential of AmaSync by upgrading to the Premium version, which includes advanced features such as **import by search** and **product synchronization** to keep your WooCommerce store always up-to-date.
 
+[youtube https://www.youtube.com/watch?v=JRqoHl5_r3c]
+
 **Experience AmaSync in Action – [Live Demo](https://www.themedyno.com/amasync-demo/)**
 Discover the powerful features of AmaSync by exploring our live demo. Get hands-on with its functionality and see how it can streamline your workflow.
 
@@ -37,7 +37,7 @@ Discover the powerful features of AmaSync by exploring our live demo. Get hands-
 **Username:** demo
 **Password:** demo123!
 
-Ready to supercharge your affiliate marketing? **[Buy AmaSync Premium on CodeCanyon](https://1.envato.market/vPDEKj)** and take your WooCommerce store to the next level!
+Ready to supercharge your affiliate marketing? **[Buy AmaSync Premium on WooCommerce.com](https://woocommerce.com/products/amazon-affiliate-product-importer/)** and take your WooCommerce store to the next level!
 
 == 3rd Party or External Service ==
 This plugin utilizes the Amazon Creators API to fetch products from Amazon into your WooCommerce store. To fully benefit from this plugin's features, you will need access to the Amazon Creatros API.
@@ -52,7 +52,7 @@ When using this plugin, please be aware that it communicates with Amazon's exter
 Please review the terms of use and privacy policies provided by Amazon to understand how they manage and process the data. This documentation is crucial for ensuring that you comply with all legal requirements related to data transmission when using this plugin.
 
 == Source Code ==
-The full source code, including the non-compiled versions of JavaScript and CSS files for this plugin, is available on GitHub. You can access it at the following URL: [https://github.com/hasanchy/affiliate-products-importer-for-woocommerce/](https://github.com/hasanchy/affiliate-products-importer-for-woocommerce/).
+The source code of this plugin is available in the [GitHub repository](https://github.com/hasanchy/affiliate-products-importer-for-woocommerce/).
 
 == Installation ==
 1. Go to your WordPress backend

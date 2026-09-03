@@ -17,7 +17,7 @@ const ImportCopyPasteForm = () => {
 	const dispatch = useDispatch();
 	const { displayImportFetchCounter, importFetchItems, importFetchAlert, asinCodes, invalidAsinCodes, duplicateAsinCodes, asinValue, asinValueFetched, isImportFetchInProgress, importableItems, importFetchProgress } = useSelector((state) => state.importCopyPaste);
 	const { amazonApiConnectionStatus } = useSelector((state) => state.amazonApiConnection);
-	const asinLimit = 100;
+	const asinLimit = 3;
 
 	const findDuplicates = (arr) => {
 		
@@ -133,7 +133,9 @@ const ImportCopyPasteForm = () => {
 		}
 
 		return <div style={{ marginTop: '10px' }}>
-			{ __( `Enter ASIN codes separated by commas, newlines, or spaces. Limit: ${asinLimit} ASINs per batch.`, 'affiliate-products-importer-for-woocommerce' ) }
+			{ __( `Enter ASIN codes separated by commas, newlines, or spaces. Limit: ${asinLimit} ASINs per batch. `, 'affiliate-products-importer-for-woocommerce' ) } 
+			<a href='https://woocommerce.com/products/amazon-affiliate-product-importer/' target='_blank'><b>{ __( 'Upgrade to Pro', 'affiliate-products-importer-for-woocommerce' ) }</b></a> 
+			{ __( ' to import up to 100 products per batch.', 'affiliate-products-importer-for-woocommerce' ) }
 		</div>;
 	}
 

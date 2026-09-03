@@ -16,8 +16,9 @@ const Header = () => {
             <Col span={12} style={{ textAlign: 'right', verticalAlign: 'middle' }}>
                 <Button
                     key="link"
-                    href="https://1.envato.market/vPDEKj"
+                    href="https://woocommerce.com/products/amazon-affiliate-product-importer/"
                     type="primary"
+                    target="_blank"
                     style={{ marginRight: '10px' }}
                 >
                     { __( 'Upgrade to Pro' ) }
