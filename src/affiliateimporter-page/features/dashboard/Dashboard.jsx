@@ -1,5 +1,5 @@
 import { Alert, Card, Col, Row, Space } from "antd";
-import RecentlyImportedProducts from "./widgets/RecentlyImportedProducts";
+import ProFeatures from "./widgets/ProFeatures";
 import AmazonApiConnection from "../../components/amazon-api-connection/AmazonApiConnection";
 import { __ } from "@wordpress/i18n";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,7 +46,7 @@ const Dashboard = () => {
             </Row>
             <Row gutter={12} style={{marginTop:'10px'}}>
 				<Col span={24}>
-                    <RecentlyImportedProducts />
+                    <ProFeatures />
 				</Col>
 			</Row>
         </>

@@ -158,6 +158,7 @@ class AffiliateProductsImporter extends Base {
 					'importSettings'      => rest_url() . 'affiliate-products-importer-for-woocommerce/v1/import-settings',
 					'supportMessage'      => rest_url() . 'affiliate-products-importer-for-woocommerce/v1/support-message',
 				),
+				'assetsUrl' => AFFPRODIMP_ASSETS_URL,
 				'restNonce'      => wp_create_nonce( 'wp_rest' ),
 			),
 		);
