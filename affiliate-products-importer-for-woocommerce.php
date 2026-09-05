@@ -7,7 +7,7 @@
  * Description:     Easily import Amazon affiliate products into your WooCommerce store.
  * Author:          ThemeDyno
  * Author URI:      https://themedyno.com/
- * Version:         2.0.0
+ * Version:         2.0.1
  * Text Domain:     affiliate-products-importer-for-woocommerce
  * Domain Path:     /languages
  *
@@ -25,7 +25,7 @@ if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 
 // Plugin version.
 if ( ! defined( 'AFFPRODIMP_VERSION' ) ) {
-	define( 'AFFPRODIMP_VERSION', '2.0.0' );
+	define( 'AFFPRODIMP_VERSION', '2.0.1' );
 }
 
 // Define AFFPRODIMP_PLUGIN_FILE.

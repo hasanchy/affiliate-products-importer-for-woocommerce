@@ -2,9 +2,9 @@
 Contributors: hasanchowdhury, themedyno
 Tags: amazon affiliate, products importer, monetize, amazon associates
 Requires at least: 5.2
-Tested up to: 6.9
+Tested up to: 7.1
 Requires PHP: 7.2.0
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.en.html
 
@@ -62,6 +62,9 @@ The source code of this plugin is available in the [GitHub repository](https://g
 5. Navigate to "Amazon Products Importer"
 
 == Changelog ==
+2.0.1 (2026-09-05)
+Updated compatibility with the latest WordPress release.
+
 2.0.0 (2026-05-14)
 Added integration with the Amazon Creators API, a new-generation data source for working with Amazon products.
 
