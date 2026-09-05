@@ -1,10 +1,11 @@
 import React from 'react';
 import { Tabs, Card } from 'antd';
-import { DownloadOutlined, AmazonOutlined } from '@ant-design/icons';
+import { DownloadOutlined, AmazonOutlined, SwapOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSettingsActiveTab } from './settingsSlice';
 import AmazonApiSettings from './amazon-api-settings/AmazonApiSettings';
 import ImportSettings from './import-settings/ImportSettings';
+import MigrationSettings from './migration-settings/MigrationSettings';
 import { __ } from '@wordpress/i18n';
 
 
@@ -25,6 +26,12 @@ const Settings = () => {
 			label: __( 'Import Settings', 'affiliate-products-importer-for-woocommerce' ),
 			children: <ImportSettings />,
 			icon: <DownloadOutlined/>
+		},
+		{
+			key: 'migrationSettings',
+			label: __( 'WZone Migration', 'affiliate-products-importer-for-woocommerce' ),
+			children: <MigrationSettings />,
+			icon: <SwapOutlined/>
 		}
 	];
 
