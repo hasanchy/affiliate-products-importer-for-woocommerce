@@ -21,7 +21,16 @@ const Header = () => {
                     target="_blank"
                     style={{ marginRight: '10px' }}
                 >
-                    { __( 'Upgrade to Pro' ) }
+                    { __( 'Upgrade to Pro', 'affiliate-products-importer-for-woocommerce' ) }
+                </Button>
+                <Button
+                    key="link"
+                    href="https://www.themedyno.com/amasync-demo/"
+                    type="default"
+                    target="_blank"
+                    style={{ marginRight: '10px' }}
+                >
+                    { __( 'View demo', 'affiliate-products-importer-for-woocommerce' ) }
                 </Button>
                 <Support ratingUrl='https://wordpress.org/support/plugin/affiliate-products-importer-for-woocommerce/reviews/?rate=5#new-post'/>
             </Col>

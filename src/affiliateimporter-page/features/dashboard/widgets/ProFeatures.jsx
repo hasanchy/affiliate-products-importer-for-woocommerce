@@ -6,7 +6,20 @@ import { __ } from "@wordpress/i18n";
 const ProFeatures = () => {
     
     return (
-        <Card title="Upgrade to Pro">
+        <Card 
+            title={__( 'Upgrade to Pro', 'affiliate-products-importer-for-woocommerce' )}
+            extra={
+                <Button
+                    key="link"
+                    href="https://www.themedyno.com/amasync-demo/"
+                    type="primary"
+                    target="_blank"
+                    style={{ marginRight: '10px' }}
+                >
+                    { __( 'View demo', 'affiliate-products-importer-for-woocommerce' ) }
+                </Button>
+            }
+        >
             <Space direction="vertical" size="large" style={{ display: 'flex' }}>
                 <Row gutter={20}>
                     <Col span={16} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
