@@ -4,10 +4,10 @@
  *
  * @wordpress-plugin
  * Plugin Name:     AmaSync - Amazon Product Importer & Affiliate for WooCommerce
- * Description:     Easily import Amazon affiliate products into your WooCommerce store.
+ * Description:     Build your Amazon affiliate store faster. Import products into WooCommerce, showcase them beautifully, and earn commissions from qualifying purchases.
  * Author:          ThemeDyno
  * Author URI:      https://themedyno.com/
- * Version:         2.0.1
+ * Version:         2.0.2
  * Text Domain:     affiliate-products-importer-for-woocommerce
  * Domain Path:     /languages
  *
@@ -25,7 +25,7 @@ if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 
 // Plugin version.
 if ( ! defined( 'AFFPRODIMP_VERSION' ) ) {
-	define( 'AFFPRODIMP_VERSION', '2.0.1' );
+	define( 'AFFPRODIMP_VERSION', '2.0.2' );
 }
 
 // Define AFFPRODIMP_PLUGIN_FILE.

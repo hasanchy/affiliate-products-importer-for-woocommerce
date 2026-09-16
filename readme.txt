@@ -4,11 +4,11 @@ Tags: amazon affiliate, products importer, monetize, amazon associates
 Requires at least: 5.2
 Tested up to: 7.1
 Requires PHP: 7.2.0
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.en.html
 
-Easily import Amazon affiliate products into your WooCommerce store.
+Build your Amazon affiliate store faster. Import products into WooCommerce, showcase them beautifully, and earn commissions from qualifying purchases.
 
 == Description ==
 AmaSync is a streamlined WordPress plugin designed to simplify the process of importing Amazon affiliate products into your WooCommerce store. Whether you're a beginner exploring affiliate marketing or an experienced marketer, AmaSync provides essential tools to help you build and manage your product catalog efficiently.
@@ -51,6 +51,19 @@ When using this plugin, please be aware that it communicates with Amazon's exter
 
 Please review the terms of use and privacy policies provided by Amazon to understand how they manage and process the data. This documentation is crucial for ensuring that you comply with all legal requirements related to data transmission when using this plugin.
 
+== Screenshots ==
+1. Dashboard tab – Displays the current status of your Amazon API connection.
+2. Import tab – Shows the available import types.
+3. Import via ASIN – Verify up to 3 ASINs per batch.
+4. ASIN verification results – Once ASINs are verified, they're listed below with an indicator showing whether each one is eligible for import.
+5. Category selection – After verifying your ASINs, choose an existing product category to import into, or create a new category on the spot — no need to leave the page and go to the category screen.
+6. Final import step – Import all selected products with a single click.
+7. Post-import options – Once products are imported, return to the ASIN verification step to import more, or head to the Products tab to view your imported products.
+8. Products tab – Displays a list of all products imported via AmaSync.
+9. Amazon API Settings – Set your Amazon Creators API credentials here to enable bulk product imports.
+10. Import Settings – Choose the WooCommerce product type — External/Affiliate or Simple — and select which optional data to import: product price, gallery images, and/or product attributes.
+11. AmaSync Pro – Migrate products previously imported via WZone into AmaSync in just a few clicks.
+
 == Source Code ==
 The source code of this plugin is available in the [GitHub repository](https://github.com/hasanchy/affiliate-products-importer-for-woocommerce/).
 
@@ -59,9 +72,12 @@ The source code of this plugin is available in the [GitHub repository](https://g
 2. Navigate to "Plugins" > "Add New"
 3. Search for "AmaSync"
 4. Install and activate the plugin
-5. Navigate to "Amazon Products Importer"
+5. Navigate to "AmaSync (Lite)"
 
 == Changelog ==
+2.0.2 (2026-09-15)
+Added "View demo" buttons to the UI.
+
 2.0.1 (2026-09-05)
 Updated compatibility with the latest WordPress release.
 

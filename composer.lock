@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "16acfe69109dcce4158d9dc1bbb882f2",
+    "content-hash": "fedb1cdc4199fc994162cdd8d8922a5e",
     "packages": [],
     "packages-dev": [
         {
@@ -405,12 +405,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHPCSUtils.git",
-                "reference": "9cb28234cb75d4b09a5227fb591bb4b3e7bd39c5"
+                "reference": "68da2016f9163ff7d761a67c58e1d0c7b1fe53bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/9cb28234cb75d4b09a5227fb591bb4b3e7bd39c5",
-                "reference": "9cb28234cb75d4b09a5227fb591bb4b3e7bd39c5",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/68da2016f9163ff7d761a67c58e1d0c7b1fe53bd",
+                "reference": "68da2016f9163ff7d761a67c58e1d0c7b1fe53bd",
                 "shasum": ""
             },
             "require": {
@@ -491,7 +491,7 @@
                     "type": "thanks_dev"
                 }
             ],
-            "time": "2026-08-14T23:44:47+00:00"
+            "time": "2026-09-11T18:20:41+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
